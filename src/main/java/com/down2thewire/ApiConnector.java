@@ -15,6 +15,8 @@ public class ApiConnector {
     String url;
     String resultText;
 
+
+
     public ApiConnector(String origin, String destination, String mode){
         this.url = buildDirectionsUrl(origin, destination, mode, apiKey);
     }
