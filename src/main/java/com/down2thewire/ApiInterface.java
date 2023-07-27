@@ -11,7 +11,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 public class ApiInterface {
-    private String apiKey = "AIzaSyBOpkaRmOY382_oPW5cJlcFHc8d7pLdHfg";
+    private String apiKey = "AIzaSyATC2uTWW1dgBwu0nSkRGY6kOmBYyrsEDE";
     private String url;
     private String resultText;
 

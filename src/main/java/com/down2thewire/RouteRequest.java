@@ -12,6 +12,9 @@ public class RouteRequest {
     int[] modePref = {2,2,2,2,2,2,2,2,0,0};
     String origin;
     String destination;
+    WeightedGraph.Vertex originVertex;
+    WeightedGraph.Vertex destinationVertex;
+
     String priority;  //QUICK, CHEAP, FREE, COMFORTABLE, PERSONALIZED, EASY, EXERCISE
     public RouteRequest() {
     }
@@ -77,6 +80,11 @@ public class RouteRequest {
     public void setBusPref(int p) {
         this.modePref[7] = p;
     }
+    public void setOriginVertex (WeightedGraph.Vertex v) {this.originVertex = v;}
+    public WeightedGraph.Vertex getOriginVertex() {return this.originVertex;}
+    public void setDestinationVertex (WeightedGraph.Vertex v) {this.destinationVertex = v;}
+    public WeightedGraph.Vertex getDestinationVertex() {return this.destinationVertex;}
+
     public LinkedList<String> getModePrefAsList(){
 
         LinkedList<String> preferredModes = new LinkedList<>();

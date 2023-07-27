@@ -23,8 +23,10 @@ public class GeoModel {
         String destination = modelRouteRequest.getDestination();
         List<String> modes = modelRouteRequest.getModePrefAsList();
         RouteRequest tempRequest = new RouteRequest();
-        WeightedGraph coreRoute = removeAdjacentSameModeEdges
-                (tempRequest.getAPIWeightedGraph(origin, destination, "transit"));
+        WeightedGraph coreRoute = tempRequest.getAPIWeightedGraph(origin, destination, "transit");
+        modelRouteRequest.originVertex = coreRoute.vertexList.getFirst();
+        modelRouteRequest.destinationVertex = coreRoute.vertexList.getLast();
+        coreRoute = removeAdjacentSameModeEdges(coreRoute);
         this.originVert = coreRoute.vertexList.getFirst();
         this.destinationVert = coreRoute.vertexList.getLast();
         this.routeList.add(coreRoute);

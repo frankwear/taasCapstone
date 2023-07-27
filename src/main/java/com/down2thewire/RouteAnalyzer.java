@@ -112,7 +112,7 @@ public class RouteAnalyzer {
         WeightedGraph.Vertex startVertex = routeModel.vertexList.get(0);  //FixMe correct to vertex from UserRequest if possible
 
         WeightedGraph.Vertex endVertex;
-        endVertex = routeModel.vertexList.get(routeModel.vertexList.size()-1);
+        endVertex = routeModel.vertexList.get(routeModel.vertexList.size()-1);  //Fixme - The destination may not be the last vertex in a geomodel
 
 
         allPaths = getAllPathsFromHere(startVertex, endVertex, allowableModes, new WeightedGraph(), visited, allPaths);

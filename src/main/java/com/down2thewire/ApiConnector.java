@@ -11,7 +11,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 public class ApiConnector {
-    String apiKey = "AIzaSyBOpkaRmOY382_oPW5cJlcFHc8d7pLdHfg";
+    String apiKey = "AIzaSyATC2uTWW1dgBwu0nSkRGY6kOmBYyrsEDE";
     String url;
     String resultText;
 
