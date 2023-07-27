@@ -30,9 +30,11 @@ target/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+/src/main/java/com/down2thewire/ApiKeys.java
 
 ### VS Code ###
 .vscode/
 
 ### Mac OS ###
 .DS_Store
+/src/main/java/com/down2thewire/ApiKeys.java
