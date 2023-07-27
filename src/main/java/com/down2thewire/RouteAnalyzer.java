@@ -97,6 +97,11 @@ public class RouteAnalyzer {
     }
     public LinkedList<WeightedGraph> getAllPaths(int[] modePref, String origin, String destination) {
         List<String> allowableModes = new ArrayList<>();
+        LinkedList<WeightedGraph.Vertex> visited = new LinkedList<>();
+        LinkedList<WeightedGraph> allPaths = new LinkedList<>();
+        WeightedGraph.Vertex startVertex = userRequest.originVertex;
+        WeightedGraph.Vertex endVertex = userRequest.destinationVertex;
+
 
         // Map the mode preferences to the corresponding modes
         for (int i = 0; i < modePref.length; i++) {
@@ -106,15 +111,7 @@ public class RouteAnalyzer {
             }
         }
 
-
-        LinkedList<WeightedGraph.Vertex> visited = new LinkedList<>();
-        LinkedList<WeightedGraph> allPaths = new LinkedList<>();
-        WeightedGraph.Vertex startVertex = routeModel.vertexList.get(0);  //FixMe correct to vertex from UserRequest if possible
-
-        WeightedGraph.Vertex endVertex;
-        endVertex = routeModel.vertexList.get(routeModel.vertexList.size()-1);  //Fixme - The destination may not be the last vertex in a geomodel
-
-
+        // Initialize Recursive search for all available routes
         allPaths = getAllPathsFromHere(startVertex, endVertex, allowableModes, new WeightedGraph(), visited, allPaths);
 
         return allPaths;
