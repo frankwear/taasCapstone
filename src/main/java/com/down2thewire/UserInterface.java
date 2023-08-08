@@ -8,6 +8,7 @@ public class UserInterface {
 
     public UserInterface(){
 
+        
     }
     public RouteRequest getRequest() {
         RouteRequest sessionRequest = new RouteRequest();
