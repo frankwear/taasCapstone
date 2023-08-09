@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 public class ApiConnector {
     String apiKey = ApiKeys.getGoogleKey();
     String url;
-    String resultText;
+
 
 
 
@@ -30,9 +30,9 @@ public class ApiConnector {
     }
 
     public String saveJsonToString() {
-        URL apiEndpoint = null;
+        URL apiEndpoint;
         String jsonText;
-        HttpURLConnection connection = null;
+        HttpURLConnection connection;
         try {
             apiEndpoint = new URL(this.url);
         } catch (MalformedURLException e) {
@@ -72,8 +72,8 @@ public class ApiConnector {
                     int duration = step.getJSONObject("duration").getInt("value");
                     int distance = step.getJSONObject("distance").getInt("value");
 
-                    String startVertexName = step.getJSONObject("start_location").toString();
-                    String endVertexName = step.getJSONObject("end_location").toString();
+//                    String startVertexName = step.getJSONObject("start_location").toString();
+//                    String endVertexName = step.getJSONObject("end_location").toString();
 //todo check json lan and long
                     double sLongitude = step.getJSONObject("start_location").getDouble("lng");
                     double sLatitude = step.getJSONObject("start_location").getDouble("lat");
