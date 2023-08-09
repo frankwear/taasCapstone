@@ -65,6 +65,7 @@ public class ApiConnector {
                 JSONObject leg = legsArray.getJSONObject(i);
 
                 JSONArray stepsArray = leg.getJSONArray("steps");
+                String startVertexHumanName = "";
                 for (int j = 0; j < stepsArray.length(); j++) {
                     JSONObject step = stepsArray.getJSONObject(j);
 
@@ -82,7 +83,9 @@ public class ApiConnector {
 
                     // Construct the name generator and retrieve the human-readable names
                     WeightedGraphNameGenerator nameGenerator = new WeightedGraphNameGenerator();
-                    String startVertexHumanName = nameGenerator.getHumanReadableName(sLatitude, sLongitude);
+                    if (startVertexHumanName.equals("")) {
+                        startVertexHumanName = nameGenerator.getHumanReadableName(sLatitude, sLongitude);
+                    }
                     String endVertexHumanName = nameGenerator.getHumanReadableName(eLatitude, eLongitude);
 
                     // Create vertices with human-readable names
@@ -91,6 +94,7 @@ public class ApiConnector {
 
                     weightedGraph.addEdge(source, destination, mode, duration, 0.0, distance);
                     if (weightedGraph.vertexList.size() > 30) {break;}
+                    startVertexHumanName = endVertexHumanName; // prep for next iteration
 
 /*
                     // Get the existing start and end vertices
