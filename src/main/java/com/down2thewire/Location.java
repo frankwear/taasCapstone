@@ -37,5 +37,6 @@ public class Location {
 
     public Long generateUniqueID() {
         //todo
+        return new Long(0);  // delete
     }
 }

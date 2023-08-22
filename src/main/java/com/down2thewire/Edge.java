@@ -19,7 +19,7 @@ class Edge {
             this.cost = estimateCost(this);
         }
     }
-
+    public Edge(){}
     public Vertex getStart() {
         return start;
     }
@@ -113,6 +113,6 @@ class Edge {
 
     public Edge cloneEdge() {
         //todo clone edge and return
-        return new Edge;  // delete
+        return new Edge();  // delete
     }
 }

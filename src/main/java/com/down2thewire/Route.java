@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 public class Route {
-    LinkedList<WayPoint> wayPointLinkedList;
+    LinkedList<Vertex> wayPointLinkedList;
     LinkedList<Edge> edgeList;
 
 
@@ -18,8 +18,8 @@ public class Route {
         return null; // Edge not found
     }
 
-    public WeightedGraph() {
-        this.wayPointLinkedList = new LinkedList<>();
+    public Route() {
+        this.wayPointLinkedList = new LinkedList<Vertex>();
         this.edgeList = new LinkedList<>();
     }
 
