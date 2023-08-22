@@ -116,7 +116,7 @@ public class WayPoint {
     }
 
     public void setEdge (Edge edge) {
-        Edge newEdge = new Edge;
+        Edge newEdge = new Edge();
         newEdge = edge.cloneEdge();
         this.edge = newEdge;
     }
@@ -125,9 +125,12 @@ public class WayPoint {
         return this.edge;
     }
 
-    public getNext () {
-        this.edge.get
-    }
+//    public WayPoint getNeighbor () {
+//        if (location.isMatch(Start)) {
+//            return end;
+//        }
+//
+//    }
 
 /*
     public boolean isMatch(Vertex tempVer) {
