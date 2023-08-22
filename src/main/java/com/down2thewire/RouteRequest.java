@@ -12,8 +12,8 @@ public class RouteRequest {
     int[] modePref = {2,2,2,2,2,2,2,2,0,0};
     String origin;
     String destination;
-    WeightedGraph.Vertex originVertex;
-    WeightedGraph.Vertex destinationVertex;
+    Vertex originVertex;
+    Vertex destinationVertex;
 
     String priority;  //QUICK, CHEAP, FREE, COMFORTABLE, PERSONALIZED, EASY, EXERCISE
     public RouteRequest() {
@@ -80,17 +80,17 @@ public class RouteRequest {
     public void setBusPref(int p) {
         this.modePref[7] = p;
     }
-    public void setOriginVertex (WeightedGraph.Vertex v) {this.originVertex = v;}
-    public WeightedGraph.Vertex getOriginVertex() {return this.originVertex;}
-    public void setDestinationVertex (WeightedGraph.Vertex v) {this.destinationVertex = v;}
-    public WeightedGraph.Vertex getDestinationVertex() {return this.destinationVertex;}
+    public void setOriginVertex (Vertex v) {this.originVertex = v;}
+    public Vertex getOriginVertex() {return this.originVertex;}
+    public void setDestinationVertex (Vertex v) {this.destinationVertex = v;}
+    public Vertex getDestinationVertex() {return this.destinationVertex;}
 
     public LinkedList<String> getModePrefAsList(){
 
         LinkedList<String> preferredModes = new LinkedList<>();
         for (int i = 0; i < modePref.length; i++){
             if (modePref[i] != 0){
-                preferredModes.addLast(WeightedGraph.Edge.getMode(i));
+                preferredModes.addLast(Edge.getMode(i));
             }
         }
         return preferredModes;
@@ -144,6 +144,18 @@ public class RouteRequest {
         weightedGraph = googleConnector.constructWeightedGraph(jsonOutput);
         return weightedGraph;
     }
+
+    public WeightedGraph getAPIRouteFromVertices (Vertex origin, Vertex destination, String mode) {
+        // todo - complete getAPIRouteFromVertices
+        // create connector
+        ApiConnector googleConnector = new ApiConnector(origin, destination, mode);
+        String jsonOutput = googleConnector.saveJsonToString();
+        WeightedGraph weightedGraph;
+        weightedGraph = googleConnector.constructWeightedGraph(jsonOutput);
+        return weightedGraph;
+    }
+
+
 
     public void setModePrefFromAccount(UserAccount uAcct) {
         this.modePref = uAcct.modePref;

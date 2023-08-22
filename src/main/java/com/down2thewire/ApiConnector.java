@@ -21,6 +21,10 @@ public class ApiConnector {
         this.url = buildDirectionsUrl(origin, destination, mode, apiKey);
     }
 
+    public ApiConnector(Vertex originVertex, Vertex destinationVertex, String mode){
+        this.url = buildDirectionsUrl(originVertex.location.AsString(), destinationVertex.location.AsString(), mode, apiKey);
+    }
+
     private static String buildDirectionsUrl(String origin, String destination, String mode, String apiKey) {
         return "https://maps.googleapis.com/maps/api/directions/json?" +
                 "origin=" + origin.replace(" ", "+") +
@@ -89,8 +93,8 @@ public class ApiConnector {
                     String endVertexHumanName = nameGenerator.getHumanReadableName(eLatitude, eLongitude);
 
                     // Create vertices with human-readable names
-                    WeightedGraph.Vertex source = new WeightedGraph.Vertex(new Location(sLatitude, sLongitude), startVertexHumanName);
-                    WeightedGraph.Vertex destination = new WeightedGraph.Vertex(new Location(eLatitude, eLongitude), endVertexHumanName);
+                    Vertex source = new Vertex(new Location(sLatitude, sLongitude), startVertexHumanName);
+                    Vertex destination = new Vertex(new Location(eLatitude, eLongitude), endVertexHumanName);
 
                     weightedGraph.addEdge(source, destination, mode, duration, 0.0, distance);
                     if (weightedGraph.vertexList.size() > 30) {break;}

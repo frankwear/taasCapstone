@@ -41,8 +41,8 @@ public class TaasApplication {
         session.instanceGM = new GeoModel(session.instanceRR);
         session.instanceGM.generateGeoModel();
         session.instanceGM.geographicMap.printGraph();
-//        session.instanceRA = new RouteAnalyzer(session.instanceGM.geographicMap, session.instanceRR); // comment
-//        session.instanceRA.getAllPaths();
+        session.instanceRA = new RouteAnalyzer(session.instanceGM.geographicMap, session.instanceRR); // comment
+        session.instanceRA.getAllPaths();
 
 //        session.instanceRouteOffering = session.instanceRA.getBest4UserRoutes(); // comment
         System.out.println("Done");

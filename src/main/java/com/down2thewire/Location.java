@@ -27,4 +27,11 @@ public class Location {
         return latitude;
     }
 
+    public String AsString() {
+        double roundedLatitude = Math.round(getLatitude()*100000);
+        roundedLatitude = roundedLatitude/100000;
+        double roundedLongitude = Math.round(getLongitude()*100000);
+        roundedLongitude = roundedLongitude/100000;
+        return String.valueOf(roundedLatitude) + "," + String.valueOf(roundedLongitude);
+    }
 }

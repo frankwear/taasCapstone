@@ -20,12 +20,12 @@ class GeoModelTest {
 
     private WeightedGraph createTestGraphWithUnchangedMode() {
         WeightedGraph graph = new WeightedGraph();
-        WeightedGraph.Vertex v1 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.9228732,-84.3418493), "Macys - Perimeter Mall"));
-        WeightedGraph.Vertex v2 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.921227,-84.344398), "Rail stop - Dunwoody Marta Station"));
-        WeightedGraph.Vertex v3 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.789112,-84.387383), "Rail stop - Arts Center Marta Station"));
-        WeightedGraph.Vertex v4 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.7892632,-84.3873414), "Bus stop - Arts Center Marta Station"));
-        WeightedGraph.Vertex v5 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.8082253,-84.3934548), "Bus stop - Peachtree Rd at Collier Rd"));
-        WeightedGraph.Vertex v6 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.8085817,-84.3943387), "Piedmont Hospital - Peachtree Rd"));
+        Vertex v1 = graph.addVertex(new Vertex(new Location(33.9228732,-84.3418493), "Macys - Perimeter Mall"));
+        Vertex v2 = graph.addVertex(new Vertex(new Location(33.921227,-84.344398), "Rail stop - Dunwoody Marta Station"));
+        Vertex v3 = graph.addVertex(new Vertex(new Location(33.789112,-84.387383), "Rail stop - Arts Center Marta Station"));
+        Vertex v4 = graph.addVertex(new Vertex(new Location(33.7892632,-84.3873414), "Bus stop - Arts Center Marta Station"));
+        Vertex v5 = graph.addVertex(new Vertex(new Location(33.8082253,-84.3934548), "Bus stop - Peachtree Rd at Collier Rd"));
+        Vertex v6 = graph.addVertex(new Vertex(new Location(33.8085817,-84.3943387), "Piedmont Hospital - Peachtree Rd"));
 
 
         // add edges
@@ -53,21 +53,21 @@ class GeoModelTest {
         // add vertices from two routes
         // route 1  - Walking and Transit
         WeightedGraph graph = new WeightedGraph();
-        WeightedGraph.Vertex v01 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.9228732,-84.3418493), "Macys - Perimeter Mall"));
-        WeightedGraph.Vertex v02 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.921227,-84.344398), "Rail stop - Dunwoody Marta Station"));
-        WeightedGraph.Vertex v03 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.789112,-84.387383), "Rail stop - Arts Center Marta Station"));
-        WeightedGraph.Vertex v04 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.7892632,-84.3873414), "Bus stop - Arts Center Marta Station"));
-        WeightedGraph.Vertex v05 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.8082253,-84.3934548), "Bus stop - Peachtree Rd at Collier Rd"));
-        WeightedGraph.Vertex v06 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.8085817,-84.3943387), "Piedmont Hospital - Peachtree Rd"));
+        Vertex v01 = graph.addVertex(new Vertex(new Location(33.9228732,-84.3418493), "Macys - Perimeter Mall"));
+        Vertex v02 = graph.addVertex(new Vertex(new Location(33.921227,-84.344398), "Rail stop - Dunwoody Marta Station"));
+        Vertex v03 = graph.addVertex(new Vertex(new Location(33.789112,-84.387383), "Rail stop - Arts Center Marta Station"));
+        Vertex v04 = graph.addVertex(new Vertex(new Location(33.7892632,-84.3873414), "Bus stop - Arts Center Marta Station"));
+        Vertex v05 = graph.addVertex(new Vertex(new Location(33.8082253,-84.3934548), "Bus stop - Peachtree Rd at Collier Rd"));
+        Vertex v06 = graph.addVertex(new Vertex(new Location(33.8085817,-84.3943387), "Piedmont Hospital - Peachtree Rd"));
 
         // route 2   - Driving and Transit
-        WeightedGraph.Vertex v07 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.9228732,-84.3418493), "Macys - Perimeter Mall"));  // duplicate
-        WeightedGraph.Vertex v08 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.9251111,-84.3401111), "Parking Lot - Dunwoody Marta Station"));  // unique - parking lot vs. station
-        WeightedGraph.Vertex v09 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.921227,-84.344398), "Rail stop - Dunwoody Marta Station"));  // duplicate
-        WeightedGraph.Vertex v10 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.789114,-84.387384), "Rail stop - Arts Center Marta Station"));  // duplicate by proximity
-        WeightedGraph.Vertex v11 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.7892632,-84.3873414), "Bus stop - Arts Center Marta Station"));  // duplicate
-        WeightedGraph.Vertex v12 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.8082253,-84.3934548), "Bus stop - Peachtree Rd at Collier Rd"));  // duplicate
-        WeightedGraph.Vertex v13 = graph.addVertex(new WeightedGraph.Vertex(new Location(33.8085817,-84.3943387), "Piedmont Hospital - Peachtree Rd"));  // duplicate
+        Vertex v07 = graph.addVertex(new Vertex(new Location(33.9228732,-84.3418493), "Macys - Perimeter Mall"));  // duplicate
+        Vertex v08 = graph.addVertex(new Vertex(new Location(33.9251111,-84.3401111), "Parking Lot - Dunwoody Marta Station"));  // unique - parking lot vs. station
+        Vertex v09 = graph.addVertex(new Vertex(new Location(33.921227,-84.344398), "Rail stop - Dunwoody Marta Station"));  // duplicate
+        Vertex v10 = graph.addVertex(new Vertex(new Location(33.789114,-84.387384), "Rail stop - Arts Center Marta Station"));  // duplicate by proximity
+        Vertex v11 = graph.addVertex(new Vertex(new Location(33.7892632,-84.3873414), "Bus stop - Arts Center Marta Station"));  // duplicate
+        Vertex v12 = graph.addVertex(new Vertex(new Location(33.8082253,-84.3934548), "Bus stop - Peachtree Rd at Collier Rd"));  // duplicate
+        Vertex v13 = graph.addVertex(new Vertex(new Location(33.8085817,-84.3943387), "Piedmont Hospital - Peachtree Rd"));  // duplicate
 
 
         // add edges from two routes

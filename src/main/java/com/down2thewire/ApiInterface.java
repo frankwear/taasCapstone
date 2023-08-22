@@ -86,8 +86,8 @@ public class ApiInterface {
                     String endVertexHumanName = nameGenerator.getHumanReadableName(eLatitude, eLongitude);
 
                     // Create vertices with human-readable names
-                    WeightedGraph.Vertex source = new WeightedGraph.Vertex(new Location(sLatitude, sLongitude), startVertexHumanName);
-                    WeightedGraph.Vertex destination = new WeightedGraph.Vertex(new Location(eLatitude, eLongitude), endVertexHumanName);
+                    Vertex source = new Vertex(new Location(sLatitude, sLongitude), startVertexHumanName);
+                    Vertex destination = new Vertex(new Location(eLatitude, eLongitude), endVertexHumanName);
 
                     weightedGraph.addEdge(source, destination, mode, duration, 0.0, distance);
                     if (weightedGraph.vertexList.size() > 30) {break;}
