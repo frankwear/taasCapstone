@@ -125,8 +125,8 @@ public class WayPoint {
         return this.edge;
     }
 
-    public getNext () {
-        this.edge.get
+    public WayPoint getNext () {
+        return this.edge.getNeighbor(this.location);
     }
 
 /*

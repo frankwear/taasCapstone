@@ -8,6 +8,10 @@ public class Route {
     LinkedList<WayPoint> wayPointLinkedList;
     LinkedList<Edge> edgeList;
 
+    public Route() {
+        this.wayPointLinkedList = new LinkedList<>();
+        this.edgeList = new LinkedList<>();
+    }
 
     public Edge getEdge(Vertex start, Vertex end) {
         for (Edge edge : edgeList) {
@@ -18,10 +22,7 @@ public class Route {
         return null; // Edge not found
     }
 
-    public WeightedGraph() {
-        this.wayPointLinkedList = new LinkedList<>();
-        this.edgeList = new LinkedList<>();
-    }
+
 
     public Vertex addVertex(Vertex v) {
         if(isUnique(v)) {
