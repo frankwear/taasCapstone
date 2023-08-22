@@ -97,27 +97,27 @@ public class RouteAnalyzer {
     }
     public LinkedList<WeightedGraph> getAllPaths(int[] modePref, String origin, String destination) {
         List<String> allowableModes = new ArrayList<>();
-        LinkedList<WeightedGraph.Vertex> visited = new LinkedList<>();
+        LinkedList<Vertex> visited = new LinkedList<>();
         LinkedList<WeightedGraph> allPaths = new LinkedList<>();
-        WeightedGraph.Vertex startVertex = userRequest.originVertex;
-        WeightedGraph.Vertex endVertex = userRequest.destinationVertex;
+        Vertex startVertex = userRequest.originVertex;
+        Vertex endVertex = userRequest.destinationVertex;
 
 
         // Map the mode preferences to the corresponding modes
         for (int i = 0; i < modePref.length; i++) {
             if (modePref[i] > 0) {
-                String mode = WeightedGraph.Edge.getMode(i);
+                String mode = Edge.getMode(i);
                 allowableModes.add(mode);
             }
         }
 
         // Initialize Recursive search for all available routes
-        allPaths = getAllPathsFromHere(startVertex, endVertex, allowableModes, new WeightedGraph(), visited, allPaths);
+        allPaths = getAllPathsFromHere(startVertex, endVertex, allowableModes, new WeightedGraph(), visited);
 
         return allPaths;
     }
 
-    public LinkedList<WeightedGraph> getAllPathsFromHere(WeightedGraph.Vertex currentVertex,
+/*    public LinkedList<WeightedGraph> getAllPathsFromHere(WeightedGraph.Vertex currentVertex,
                                                          WeightedGraph.Vertex endVertex,
                                                          List<String> allowableModes,
                                                          WeightedGraph currentPath,
@@ -157,7 +157,45 @@ public class RouteAnalyzer {
         currentPath.removeLastVertex();
         return allPathsFromHere;
     }
+*/
 
+    public LinkedList<WeightedGraph> getAllPathsFromHere(Vertex currentVertex,
+                                                         Vertex endVertex,
+                                                         List<String> allowableModes,
+                                                         WeightedGraph currentPath,
+                                                         LinkedList<Vertex> visited) {
+
+        // start this iteration with current path including the last edge, but not the last vertex.
+        // on the first iteration, the current path is empty, visited is empty, allPathsFromHere is empty
+        LinkedList<WeightedGraph> allPathsFromHere = new LinkedList<>();
+        visited.add(currentVertex); // lists the vertices that are in the current path.
+        currentPath.addJustVertex(currentVertex);
+
+        List<Edge> adjacentEdgeList = currentVertex.getOutgoingEdges(this.routeModel.edgeList);
+        adjacentEdgeList.removeAll(visited);
+        if (adjacentEdgeList.size() == 0) { // dead-end without reaching endVertex
+            currentPath.removeLastVertex();
+            currentPath.removeLastEdge();
+            return allPathsFromHere;  // without adding any new paths
+        }
+        for (Edge edge : adjacentEdgeList) {
+            if (edge.getEnd().isMatch(endVertex)) { // if you reach the destination
+                currentPath.addJustEdge(edge);
+                currentPath.addJustVertex(edge.getEnd());
+                allPathsFromHere.add(currentPath.cloneOfWgAndLists());
+                currentPath.removeLastVertex();
+                currentPath.removeLastEdge();
+            } else {
+                Vertex neighbor = edge.getEnd();
+                currentPath.addJustEdge(edge);
+                allPathsFromHere.addAll(getAllPathsFromHere(neighbor, endVertex, allowableModes, currentPath, visited));
+                currentPath.removeLastEdge();
+            }
+        }
+        visited.remove(currentVertex);
+        currentPath.removeLastVertex();
+        return allPathsFromHere;
+    }
 
 
 /*

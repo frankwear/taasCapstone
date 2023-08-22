@@ -6,8 +6,8 @@ import java.util.List;
 public class GeoModel {
     WeightedGraph geographicMap = new WeightedGraph();
     List<WeightedGraph> routeList = new ArrayList<>();
-    WeightedGraph.Vertex originVert;
-    WeightedGraph.Vertex destinationVert;
+    Vertex originVert;
+    Vertex destinationVert;
     RouteRequest modelRouteRequest;
 
 
@@ -49,8 +49,8 @@ public class GeoModel {
         int listSize = route.edgeList.size();
         for (int i = 0; i<listSize; i++) {
             if (lastMode.equals(route.edgeList.get(i).mode)) {  // do two adjacent edges have the same mode, combine them
-                WeightedGraph.Edge edge1 = route.edgeList.get(i-1);
-                WeightedGraph.Edge edge2 = route.edgeList.get(i);
+                Edge edge1 = route.edgeList.get(i-1);
+                Edge edge2 = route.edgeList.get(i);
                 edge1.distance += edge2.distance;
                 edge1.duration += edge2.duration;
                 edge1.cost += edge2.cost;
@@ -109,8 +109,8 @@ public class GeoModel {
             for (int j = i + 1; j < eLSize; j++) {
                 if (graph.edgeList.get(i).mode == (graph.edgeList.get(j).mode)) {
                     // reduce repeated lookups with local variables
-                    WeightedGraph.Edge edge1 = graph.edgeList.get(i);
-                    WeightedGraph.Edge edge2 = graph.edgeList.get(j);
+                    Edge edge1 = graph.edgeList.get(i);
+                    Edge edge2 = graph.edgeList.get(j);
                     if (edge1.start.isMatch(edge2.start) && (edge1.end.isMatch(edge2.end))) {
                         graph.edgeList.remove(j);  eLSize--; j--;
                     }

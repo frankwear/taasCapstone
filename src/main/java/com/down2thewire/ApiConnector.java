@@ -13,12 +13,16 @@ import java.nio.charset.StandardCharsets;
 public class ApiConnector {
     String apiKey = ApiKeys.getGoogleKey();
     String url;
-    String resultText;
+
 
 
 
     public ApiConnector(String origin, String destination, String mode){
         this.url = buildDirectionsUrl(origin, destination, mode, apiKey);
+    }
+
+    public ApiConnector(Vertex originVertex, Vertex destinationVertex, String mode){
+        this.url = buildDirectionsUrl(originVertex.location.AsString(), destinationVertex.location.AsString(), mode, apiKey);
     }
 
     private static String buildDirectionsUrl(String origin, String destination, String mode, String apiKey) {
@@ -30,9 +34,9 @@ public class ApiConnector {
     }
 
     public String saveJsonToString() {
-        URL apiEndpoint = null;
+        URL apiEndpoint;
         String jsonText;
-        HttpURLConnection connection = null;
+        HttpURLConnection connection;
         try {
             apiEndpoint = new URL(this.url);
         } catch (MalformedURLException e) {
@@ -65,14 +69,15 @@ public class ApiConnector {
                 JSONObject leg = legsArray.getJSONObject(i);
 
                 JSONArray stepsArray = leg.getJSONArray("steps");
+                String startVertexHumanName = "";
                 for (int j = 0; j < stepsArray.length(); j++) {
                     JSONObject step = stepsArray.getJSONObject(j);
 
                     int duration = step.getJSONObject("duration").getInt("value");
                     int distance = step.getJSONObject("distance").getInt("value");
 
-                    String startVertexName = step.getJSONObject("start_location").toString();
-                    String endVertexName = step.getJSONObject("end_location").toString();
+//                    String startVertexName = step.getJSONObject("start_location").toString();
+//                    String endVertexName = step.getJSONObject("end_location").toString();
 //todo check json lan and long
                     double sLongitude = step.getJSONObject("start_location").getDouble("lng");
                     double sLatitude = step.getJSONObject("start_location").getDouble("lat");
@@ -82,15 +87,18 @@ public class ApiConnector {
 
                     // Construct the name generator and retrieve the human-readable names
                     WeightedGraphNameGenerator nameGenerator = new WeightedGraphNameGenerator();
-                    String startVertexHumanName = nameGenerator.getHumanReadableName(sLatitude, sLongitude);
+                    if (startVertexHumanName.equals("")) {
+                        startVertexHumanName = nameGenerator.getHumanReadableName(sLatitude, sLongitude);
+                    }
                     String endVertexHumanName = nameGenerator.getHumanReadableName(eLatitude, eLongitude);
 
                     // Create vertices with human-readable names
-                    WeightedGraph.Vertex source = new WeightedGraph.Vertex(new Location(sLatitude, sLongitude), startVertexHumanName);
-                    WeightedGraph.Vertex destination = new WeightedGraph.Vertex(new Location(eLatitude, eLongitude), endVertexHumanName);
+                    Vertex source = new Vertex(new Location(sLatitude, sLongitude), startVertexHumanName);
+                    Vertex destination = new Vertex(new Location(eLatitude, eLongitude), endVertexHumanName);
 
                     weightedGraph.addEdge(source, destination, mode, duration, 0.0, distance);
                     if (weightedGraph.vertexList.size() > 30) {break;}
+                    startVertexHumanName = endVertexHumanName; // prep for next iteration
 
 /*
                     // Get the existing start and end vertices

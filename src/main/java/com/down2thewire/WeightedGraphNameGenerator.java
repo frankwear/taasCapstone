@@ -45,7 +45,9 @@ public class WeightedGraphNameGenerator {
             InputStream inputStream = connection.getInputStream();
             jsonText = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            jsonText = "location name unknown";
+            // todo - add better error handling
+//            throw new RuntimeException(e);
         }
         connection.disconnect();
         return jsonText;
