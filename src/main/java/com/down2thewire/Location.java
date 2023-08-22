@@ -34,4 +34,8 @@ public class Location {
         roundedLongitude = roundedLongitude/100000;
         return String.valueOf(roundedLatitude) + "," + String.valueOf(roundedLongitude);
     }
+
+    public Long generateUniqueID() {
+        //todo
+    }
 }
