@@ -110,4 +110,9 @@ class Edge {
     public Vertex getEnd() {
         return end;
     }
+
+    public Edge cloneEdge() {
+        //todo clone edge and return
+        return new Edge;  // delete
+    }
 }
