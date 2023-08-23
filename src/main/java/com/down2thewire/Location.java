@@ -37,6 +37,29 @@ public class Location {
 
     public Long generateUniqueID() {
         //todo
-        return new Long(0);  // delete
+        double tempLat = (this.latitude + 90) * 10000;
+        double tempLong = (this.longitude + 180) * 10000;
+        long tempLat2 = (long) tempLat;
+        long tempLong2 = (long) tempLong;
+
+        long id = 0;
+        for (int i = 7; i > 0; i--) {
+            long r = (long) (tempLong2 / Math.pow(10, (i - 1)));
+            r = (long) (r * (Math.pow(10, (2*i -1))));
+            tempLong2 = (long) (tempLong2 % Math.pow(10, i - 1));
+
+            long r1 = (long) (tempLat2 / Math.pow(10, (i - 1)));
+            r1 = (long) (r1 * (Math.pow(10, (2*i -2))));
+            tempLat2 = (long) (tempLat2 % Math.pow(10, i - 1));
+            id = id + r + r1;
+        }
+        return id;  // delete
     }
+
+/* public static void main(String args[]) {
+     Location testloc = new Location(34.0380828, -84.584152);
+     Long id = testloc.generateUniqueID();
+     Long l1 = 935440135880L;
+
+ }*/
 }
