@@ -37,6 +37,7 @@ public class Location {
 
     public Long generateUniqueID() {
         //todo
+
         double tempLat = (this.latitude + 90) * 10000;
         double tempLong = (this.longitude + 180) * 10000;
         long tempLat2 = (long) tempLat;
@@ -53,7 +54,7 @@ public class Location {
             tempLat2 = (long) (tempLat2 % Math.pow(10, i - 1));
             id = id + r + r1;
         }
-        return id;  // delete
+        return id;
     }
 
 /* public static void main(String args[]) {
