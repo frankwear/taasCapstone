@@ -115,8 +115,9 @@ class Edge {
 
     public Edge cloneEdge() {
         //todo clone edge and return
-        return new Edge();  // delete
+        return new Edge(start, end, mode, duration, cost, distance);  // delete
     }
+
 
 
     public Vertex getNeighbor(Location location) {
@@ -125,5 +126,6 @@ class Edge {
         }
         return start;
     }
+
 
 }
