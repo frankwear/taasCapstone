@@ -117,9 +117,9 @@ class Edge {
         return new Edge();  // delete
     }
 
-    public WayPoint getNeighbor(Location location) {
-        if (location.isMatch(start)) {
-            return end;
-        }
-    }
+//    public WayPoint getNeighbor(Location location) {
+//        if (location.isMatch(start)) {
+//            return end;
+//        }
+//    }
 }
