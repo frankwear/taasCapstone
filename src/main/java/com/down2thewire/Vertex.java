@@ -6,6 +6,7 @@ import java.util.List;
 public class Vertex {
         Location location;
         String vertexName;
+        Long vertexID;
         // 0-walk, 1-drive, 2-rideshare, 3-carRental, 4-bicycle, 5-scooter, 6-transit, 7-bus, 8-airplane, 9-unused
         /*
          * Walking is allowed in most places with stops. It is not allowed on the Interstate
