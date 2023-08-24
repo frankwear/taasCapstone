@@ -118,10 +118,12 @@ class Edge {
         return new Edge();  // delete
     }
 
+
     public Vertex getNeighbor(Location location) {
         if (location.isMatch(start.location)) {
             return end;
         }
         return start;
     }
+
 }
