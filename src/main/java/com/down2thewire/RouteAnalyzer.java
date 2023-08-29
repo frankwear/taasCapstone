@@ -97,6 +97,7 @@ public class RouteAnalyzer {
     }
     public LinkedList<WeightedGraph> getAllPaths(int[] modePref, String origin, String destination) {
         List<String> allowableModes = new ArrayList<>();
+        //todo change to Vertex2 ;
         LinkedList<Vertex> visited = new LinkedList<>();
         LinkedList<WeightedGraph> allPaths = new LinkedList<>();
         Vertex startVertex = userRequest.originVertex;
@@ -170,7 +171,7 @@ public class RouteAnalyzer {
         LinkedList<WeightedGraph> allPathsFromHere = new LinkedList<>();
         visited.add(currentVertex); // lists the vertices that are in the current path.
         currentPath.addJustVertex(currentVertex);
-
+        //todo - change to Vertex2
         List<Edge> adjacentEdgeList = currentVertex.getOutgoingEdges(this.routeModel.edgeList);
         adjacentEdgeList.removeAll(visited);
         if (adjacentEdgeList.size() == 0) { // dead-end without reaching endVertex
