@@ -1,3 +1,13 @@
+
+
+
+
+
+
+
+
+
+
 package com.down2thewire;
 
 import java.util.ArrayList;
@@ -28,10 +38,11 @@ public class Vertex2<T> extends GNode<T> {
         this.id = uniqueNameId;
         //       this.tentativeDistance = Double.POSITIVE_INFINITY;
     }
-    public Vertex2(){
-        super();
-    };
 
+    public Vertex2() {
+        super();
+    }
+}
     /*
 
         public Double getLongitude() {
@@ -118,7 +129,7 @@ public class Vertex2<T> extends GNode<T> {
         public void setTentativeDistance(double tentativeDistance) {
             this.tentativeDistance = tentativeDistance;
         }
-*/
+
         public List<Edge2> getOutgoingEdges(List<Edge2> edgeList) {
 
             return this.outgoingEdges;
@@ -144,4 +155,4 @@ public class Vertex2<T> extends GNode<T> {
         Edge2 e = new Edge2(v, v2, "My Walk", 300, 5.00, 234);
         System.out.println("  ");
     }
-}
+*/

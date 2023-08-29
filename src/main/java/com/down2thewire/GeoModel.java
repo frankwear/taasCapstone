@@ -3,11 +3,11 @@ package com.down2thewire;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GeoModel {
+public class GeoModel{
     WeightedGraph geographicMap = new WeightedGraph();
     List<WeightedGraph> routeList = new ArrayList<>();
-    Vertex originVert;
-    Vertex destinationVert;
+    Vertex2 originVert;
+    Vertex2 destinationVert;
     RouteRequest modelRouteRequest;
 
 
@@ -31,8 +31,8 @@ public class GeoModel {
         this.destinationVert = coreRoute.vertexList.getLast();
         this.routeList.add(coreRoute);
         for (int i = 1; i < coreRoute.vertexList.size(); i++) {
-            String legStart = coreRoute.vertexList.get(i-1).vertexName;
-            String legEnd = coreRoute.vertexList.get(i).vertexName;
+            Vertex2 legStart = coreRoute.vertexList.get(i-1);
+            Vertex2 legEnd = coreRoute.vertexList.get(i);
             for (String loopMode : modes) {
                 WeightedGraph legRoute = tempRequest.getAPIWeightedGraph(legStart, legEnd, loopMode);
                 legRoute = GeoModel.removeAdjacentSameModeEdges(legRoute);
@@ -49,15 +49,15 @@ public class GeoModel {
         int listSize = route.edgeList.size();
         for (int i = 0; i<listSize; i++) {
             if (lastMode.equals(route.edgeList.get(i).mode)) {  // do two adjacent edges have the same mode, combine them
-                Edge edge1 = route.edgeList.get(i-1);
-                Edge edge2 = route.edgeList.get(i);
+                Edge2 edge1 = route.edgeList.get(i-1);
+                Edge2 edge2 = route.edgeList.get(i);
                 edge1.distance += edge2.distance;
                 edge1.duration += edge2.duration;
                 edge1.cost += edge2.cost;
                 edge1.end = edge2.end;
                 route.edgeList.set(i-1, edge1);
                 route.edgeList.remove(i); listSize--;
-                route.vertexList.remove(route.getVertex(edge2.start.vertexName));
+                route.vertex.List.remove(route.getVertex(edge2.start));
                 i--;
             }
             lastMode = route.edgeList.get(i).mode;
@@ -109,8 +109,8 @@ public class GeoModel {
             for (int j = i + 1; j < eLSize; j++) {
                 if (graph.edgeList.get(i).mode == (graph.edgeList.get(j).mode)) {
                     // reduce repeated lookups with local variables
-                    Edge edge1 = graph.edgeList.get(i);
-                    Edge edge2 = graph.edgeList.get(j);
+                    Edge2 edge1 = graph.edgeList.get(i);
+                    Edge2 edge2 = graph.edgeList.get(j);
                     if (edge1.start.isMatch(edge2.start) && (edge1.end.isMatch(edge2.end))) {
                         graph.edgeList.remove(j);  eLSize--; j--;
                     }

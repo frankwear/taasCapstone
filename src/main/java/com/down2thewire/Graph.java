@@ -5,8 +5,8 @@ abstract class Graph {
 
     //new MyBSTree;
 
-    abstract void addNode(Vertex node);
-    abstract void removeNode(Vertex node);
+    abstract Vertex2 addVertex(Vertex2 node);
+    abstract void removeNode(Vertex2 node);
     abstract void addGraph(Graph graph);
     abstract Boolean isUnique(Vertex node);
     //in the addGraph - adding two graphs so that there are no duplicate nodes
@@ -21,4 +21,5 @@ abstract class Graph {
     //overloaded with location
     abstract Node findNext(Location l);
     abstract Node getNextNode(Location l);
+    abstract Object getOutgoingEdges();
 }

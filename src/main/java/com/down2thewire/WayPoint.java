@@ -3,12 +3,12 @@ package com.down2thewire;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WayPoint {
+public class WayPoint extends GNode {
 
     Location location;
     String wayPointName;
     Long wayPointID;
-    Edge edge;
+    Edge2 edge;
     // 0-walk, 1-drive, 2-rideshare, 3-carRental, 4-bicycle, 5-scooter, 6-transit, 7-bus, 8-airplane, 9-unused
     /*
      * Walking is allowed in most places with stops. It is not allowed on the Interstate
@@ -117,12 +117,14 @@ public class WayPoint {
     public void setEdge (Edge edge) {
         Edge newEdge = new Edge();
         newEdge = edge.cloneEdge();
-        this.edge = newEdge;
+//        this.edge = newEdge;
     }
 
-    public Edge getEdge() {
-        return this.edge;
-    }
+
+
+ //   public Edge getOutgoingEdges() {
+ //       return this.edge;
+ //   }
 
 //    public WayPoint getNeighbor () {
 //        if (location.isMatch(Start)) {

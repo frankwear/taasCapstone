@@ -4,17 +4,17 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
-public class Route {
-    LinkedList<Vertex> wayPointLinkedList;
-    LinkedList<Edge> edgeList;
+public class Route extends Graph {
+    LinkedList<WayPoint> wayPointLinkedList;
+    LinkedList<Edge2> edgeList;
 
     public Route() {
-        this.wayPointLinkedList = new LinkedList<Vertex>();
+        this.wayPointLinkedList = new LinkedList<WayPoint>();
         this.edgeList = new LinkedList<>();
     }
 
-    public Edge getEdge(Vertex start, Vertex end) {
-        for (Edge edge : edgeList) {
+    public Edge2 getEdge(WayPoint start, WayPoint end) {
+        for (Edge2 edge : edgeList) {
             if (edge.getStart().equals(start) && edge.getEnd().equals(end)) {
                 return edge;
             }
@@ -24,7 +24,7 @@ public class Route {
 
 
 
-    public Vertex addVertex(Vertex v) {
+    public WayPoint addVertex(WayPoint v) {
         if(isUnique(v)) {
             wayPointLinkedList.addLast(v);
         } else {
@@ -33,9 +33,11 @@ public class Route {
 
         return getVertex(getVertexIndex(v));  // return new vertex or the one that matched
     }
-    public Boolean isUnique(Vertex v){
+    public void removeNode(WayPoint node){};
+
+    public Boolean isUnique(WayPoint v){
         Boolean hasMatch = false;
-        for (Vertex mainVertex : this.wayPointLinkedList) {
+        for (WayPoint mainVertex : this.wayPointLinkedList) {
             if (mainVertex.isMatch(v)) {
                 hasMatch = true;
                 break;
@@ -43,9 +45,9 @@ public class Route {
         }
         return !hasMatch;
     }
-    public int findMatch(Vertex tempVer) {
+    public int findMatch(Vertex2 tempVer) {
         int index = 0;
-        for (Vertex mainVertex : this.wayPointLinkedList) {
+        for (WayPoint mainVertex : this.wayPointLinkedList) {
             if (mainVertex.isMatch(tempVer)) {
                 return index;
             }
@@ -53,12 +55,12 @@ public class Route {
         }
         return -1;
     }
-    private Vertex getVertex(int i) {
+    private WayPoint getVertex(int i) {
         return wayPointLinkedList.get(i);  // may return out of bounds if vertex doesn't exist
     }
 
-    public int getVertexIndex(Vertex v) {
-        ListIterator<Vertex> vertexIterator = (ListIterator<Vertex>) wayPointLinkedList.iterator();
+    public int getVertexIndex(WayPoint v) {
+        ListIterator<WayPoint> vertexIterator = (ListIterator<WayPoint>) wayPointLinkedList.iterator();
         while (vertexIterator.hasNext()) {
             if (vertexIterator.next() == v) {
                 return vertexIterator.previousIndex();
@@ -68,23 +70,23 @@ public class Route {
     }
 
     public int getVertexIndex(String s) {
-        ListIterator<Vertex> vertexIterator = (ListIterator<Vertex>) wayPointLinkedList.iterator();
+        ListIterator<WayPoint> vertexIterator = (ListIterator<WayPoint>) wayPointLinkedList.iterator();
         while (vertexIterator.hasNext()) {
-            if (vertexIterator.next().vertexName.contains(s)) {
+            if (vertexIterator.next().description.contains(s)) {
                 return vertexIterator.previousIndex();
             } //TODO Figure out what this means, maybe at an iterator ++
         }   //vertexIterator++;
         return -1; // return -1 if not found
     }
 
-    public Vertex getVertex(String s) {
+    public WayPoint getVertex(String s) {
         int vIndex = getVertexIndex(s);
         if (vIndex >= 0) {
             return this.wayPointLinkedList.get(vIndex);
         } else {return null;}
     }
 
-    public void addEdge(Edge e) {
+    public void addEdge(Edge2 e) {
         addEdge(e.getStart(), e.getEnd(), e.getMode(), e.getDuration(), e.getCost(), e.distance);
 
         // make Vertex mode true at source and destination of the edge
@@ -96,7 +98,7 @@ public class Route {
 
     }
 
-    public Edge addEdge(Vertex start, Vertex end, String mode, Integer duration, Double cost, Integer distance)
+    public Edge2 addEdge(WayPoint start, WayPoint end, String mode, Integer duration, Double cost, Integer distance)
     {
 
         if (isUnique(start)){
@@ -109,7 +111,7 @@ public class Route {
         } else {
             end = this.wayPointLinkedList.get(findMatch(end));
         }
-        this.edgeList.addLast(new Edge(start, end, mode, duration, cost, distance));
+        this.edgeList.addLast(new Edge2(start, end, mode, duration, cost, distance));
 
         // make Vertex mode true at source and destination of the edge
         // todo - alter vertex mode list when edge is added.  Resolve
@@ -129,18 +131,18 @@ public class Route {
         wayPointLinkedList.removeLast();
     }
 
-    public Vertex addJustVertex(Vertex v) {
+    public WayPoint addJustVertex(WayPoint v) {
         this.wayPointLinkedList.addLast(v);
         return v;
     }
-    public Edge addJustEdge(Edge e) {
+    public Edge2 addJustEdge(Edge2 e) {
         this.edgeList.addLast(e);
         return e;
     }
     public void addGraph(WeightedGraph g) {
 
         // iterate over edges of argument g - adding an edge adds if vertices if they are unique
-        ListIterator<Edge> eIterator = (ListIterator<Edge>) g.edgeList.iterator();
+        ListIterator<Edge2> eIterator = (ListIterator<Edge2>) g.edgeList.iterator();
         while (eIterator.hasNext()) {
             this.addEdge(eIterator.next());
         }
@@ -149,11 +151,11 @@ public class Route {
     public WeightedGraph cloneOfWgAndLists() {
         // Vertices and Edges are NOT cloned
         WeightedGraph cloneWG = new WeightedGraph();
-        cloneWG.vertexList = new LinkedList<Vertex>();
-        for (Vertex vertex : this.wayPointLinkedList) {
+        cloneWG.vertexList = new LinkedList<WayPoint>();
+        for (WayPoint vertex : this.wayPointLinkedList) {
             cloneWG.addJustVertex(vertex);
         }
-        for (Edge edge : this.edgeList) {
+        for (Edge2 edge : this.edgeList) {
             cloneWG.addJustEdge(edge);
         }
         return cloneWG;
@@ -162,23 +164,23 @@ public class Route {
 
 
     public void printGraph(){
-        Iterator<Vertex> vertexIterator = wayPointLinkedList.iterator();
+        Iterator<WayPoint> vertexIterator = wayPointLinkedList.iterator();
         while (vertexIterator.hasNext()) {
-            Vertex tempVertex = vertexIterator.next();
+            WayPoint tempVertex = vertexIterator.next();
             System.out.println(tempVertex.location.longitude + "  " + tempVertex.location.latitude + "  " +
-                    tempVertex.vertexName);
+                    tempVertex.description);
         }
-        Iterator<Edge> edgeIterator = edgeList.iterator();
+        Iterator<Edge2> edgeIterator = edgeList.iterator();
         while (edgeIterator.hasNext()) {
-            Edge tempEdge = edgeIterator.next();
-            System.out.println("\n\nFrom: " + tempEdge.start.vertexName + "\nTo " + tempEdge.end.vertexName +
+            Edge2 tempEdge = edgeIterator.next();
+            System.out.println("\n\nFrom: " + tempEdge.start.description + "\nTo " + tempEdge.end.description +
                     "\nMode: " + tempEdge.mode + "\nDistance: " + tempEdge.distance +
                     "\nDuration: " + tempEdge.duration +
                     "\nCost: " + tempEdge.cost);
         }
     }
 
-
+/*
     public void loadTestGraph1(WeightedGraph graph){
 
         // add vertices
@@ -249,14 +251,14 @@ public class Route {
         Edge e5 = this.addEdge(v5, v6, "TRANSIT", 103, 0.00, 121);
     }
 
-
+*/
 
     public static void main(String[] args) {
 
 
         WeightedGraph graph = new WeightedGraph();
         // graph.loadTestGraph1(graph);
-        graph.loadTestGraphDunMacysToPiedmont(graph);
+       // graph.loadTestGraphDunMacysToPiedmont(graph);
         graph.printGraph();
     }
 
