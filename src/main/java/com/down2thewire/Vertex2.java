@@ -3,32 +3,36 @@ package com.down2thewire;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vertex {
-        Location location;
-        String vertexName;
-        Long vertexID;
-        // 0-walk, 1-drive, 2-rideshare, 3-carRental, 4-bicycle, 5-scooter, 6-transit, 7-bus, 8-airplane, 9-unused
-        /*
-         * Walking is allowed in most places with stops. It is not allowed on the Interstate
-         * Changing modes to/from driving requires a parking lot, and the cost of parking should be added to the final driven leg
-         * Rideshare is allowed almost anywhere. In some places like the airport, there are specific pickup areas.
-         * Car Rental locations - where you can rent a car, for instance, the airport car rental lots
-         * Bicycle is allowed in most places with stops, but changing to/from bike means bike rental or locking rack.
-         * Biking is not allowed on the Interstate
-         * Scooter Rental Locations - where you can rent a scooter.
-         */
+public class Vertex2<T> extends GNode<T> {
+    Location location;
+    String description;
+    Long id;
 
-        private boolean[] modes = {false, false, false, false, false, false, false, false, false, false};
-        private double tentativeDistance;
+    List<Edge2> outgoingEdges;
 
-        public Vertex(Location location, String uniqueNameId) {
-            this.location = location;
-            this.vertexName = uniqueNameId;
-            this.tentativeDistance = Double.POSITIVE_INFINITY;
-        }
+    // 0-walk, 1-drive, 2-rideshare, 3-carRental, 4-bicycle, 5-scooter, 6-transit, 7-bus, 8-airplane, 9-unused
+    /*
+     * Walking is allowed in most places with stops. It is not allowed on the Interstate
+     * Changing modes to/from driving requires a parking lot, and the cost of parking should be added to the final driven leg
+     * Rideshare is allowed almost anywhere. In some places like the airport, there are specific pickup areas.
+     * Car Rental locations - where you can rent a car, for instance, the airport car rental lots
+     * Bicycle is allowed in most places with stops, but changing to/from bike means bike rental or locking rack.
+     * Biking is not allowed on the Interstate
+     * Scooter Rental Locations - where you can rent a scooter.
+     */
 
-        public Vertex() {
-        }
+    private double tentativeDistance;
+
+    public Vertex2(Location location, Long uniqueNameId) {
+        this.location = location;
+        this.id = uniqueNameId;
+        //       this.tentativeDistance = Double.POSITIVE_INFINITY;
+    }
+    public Vertex2(){
+        super();
+    };
+
+    /*
 
         public Double getLongitude() {
             return this.location.getLongitude();
@@ -114,17 +118,15 @@ public class Vertex {
         public void setTentativeDistance(double tentativeDistance) {
             this.tentativeDistance = tentativeDistance;
         }
+*/
+        public List<Edge2> getOutgoingEdges(List<Edge2> edgeList) {
 
-        public List<Edge> getOutgoingEdges(List<Edge> edgeList) {
-            List<Edge> outgoingEdges = new ArrayList<>();
-            for (Edge edge : edgeList) {
-                if (edge.start.isMatch(this)) {
-                    outgoingEdges.add(edge);
-                }
-            }
-            return outgoingEdges;
+            return this.outgoingEdges;
         }
-// *list of vertex with list of edges ;
+
+        public void addEdge(Edge2 edge){
+
+        }
 
         public boolean isMatch(com.down2thewire.Vertex tempVer) {
             // match rounded to 4 decimal places - about 10 meters, so 20-meter square box around location
@@ -133,5 +135,13 @@ public class Vertex {
             }
             return Boolean.FALSE;
         }
-    }
 
+    public static void main (String[] Args){
+        Location l = new Location(34.5567898, -89.346566);
+        Vertex2 v = new Vertex2<>(l, l.generateUniqueID());
+        Location l2 = new Location(35.5567898, -88.346566);
+        Vertex2 v2 = new Vertex2<>(l2, l2.generateUniqueID());
+        Edge2 e = new Edge2(v, v2, "My Walk", 300, 5.00, 234);
+        System.out.println("  ");
+    }
+}
