@@ -1,14 +1,20 @@
 package com.down2thewire;
 import java.util.List;
 //import java.util.TreeMap;
-abstract class Graph {
+abstract class Graph<T>{
 
     //new MyBSTree;
 
-    abstract Vertex2 addVertex(Vertex2 node);
-    abstract void removeNode(Vertex2 node);
+    abstract Node addNode(Node node);
+    abstract void removeNode(Node node);
+
+
     abstract void addGraph(Graph graph);
-    abstract Boolean isUnique(Vertex node);
+    Node> node);
+    public abstract Boolean isUnique(T node);
+
+    public abstract void addGraph(Route g);
+
     //in the addGraph - adding two graphs so that there are no duplicate nodes
     abstract Graph cloneGraph(Graph graph);
     //
@@ -21,5 +27,5 @@ abstract class Graph {
     //overloaded with location
     abstract Node findNext(Location l);
     abstract Node getNextNode(Location l);
-    abstract Object getOutgoingEdges();
+
 }

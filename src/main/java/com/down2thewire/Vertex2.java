@@ -13,7 +13,7 @@ package com.down2thewire;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vertex2<T> extends GNode<T> {
+public class Vertex2<T> extends Node<List<Edge2>> {
     Location location;
     String description;
     Long id;
@@ -37,6 +37,10 @@ public class Vertex2<T> extends GNode<T> {
         this.location = location;
         this.id = uniqueNameId;
         //       this.tentativeDistance = Double.POSITIVE_INFINITY;
+    }
+    public Vertex2(Location location){
+        this.location = location;
+        this.id = location.generateUniqueID();
     }
 
     public Vertex2() {

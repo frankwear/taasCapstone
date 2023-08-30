@@ -2,7 +2,7 @@ package com.down2thewire;
 
 import java.util.*;
 
-public class WeightedGraph {
+public class GeographicModel extends Graph {
     LinkedList<Vertex2> vertexList;
     LinkedList<Edge2> edgeList;
 
@@ -16,12 +16,15 @@ public class WeightedGraph {
         return null; // Edge not found
     }
 
-    public WeightedGraph() {
+
+
+    public GeographicModel() {
         this.vertexList = new LinkedList<>();
         this.edgeList = new LinkedList<>();
     }
 
     public Vertex2 addVertex(Vertex2 v) {
+
         if(isUnique(v)) {
             vertexList.addLast(v);
         } else {
@@ -30,16 +33,16 @@ public class WeightedGraph {
 
         return getVertex(getVertexIndex(v));  // return new vertex or the one that matched
     }
-    public Boolean isUnique(GNode v){
-        Boolean hasMatch = false;
-        for (Vertex2 mainVertex : this.vertexList) {
-            if (mainVertex.isMatch(v)) {
-                hasMatch = true;
-                break;
-            }
-        }
-        return !hasMatch;
+    public Vertex2 addVertex(Double latitude, Double longitude) {
+        Location tempLocation = new Location (latitude, longitude);
+        Vertex2 tempVertex = new Vertex2(tempLocation, tempLocation.generateUniqueID());
+        return tempVertex;
     }
+    @Override
+    public Boolean isUnique(Vertex2 v){
+        return !vertexList.contains(v);
+    }
+
     public int findMatch(Vertex2 tempVer) {
         int index = 0;
         for (Vertex2 mainVertex : this.vertexList) {
@@ -81,43 +84,7 @@ public class WeightedGraph {
         } else {return null;}
     }
 
-    public void addEdge(Edge2 e) {
-        addEdge((Vertex2) e.getStart(), (Vertex2) e.getEnd(), e.getMode(), e.getDuration(), e.getCost(), e.distance);
 
-        // make Vertex mode true at source and destination of the edge
-//        int sIndex = getVertexIndex(e.start.vertexName);
-//        this.vertexList.get(sIndex).modes[Edge.getMode(e.mode)] = true;
-//        int dIndex = getVertexIndex(e.end.vertexName);
-//        this.vertexList.get(dIndex).modes[Edge.getMode(e.mode)] = true;
-//        return this.edgeList.getLast();
-
-    }
-
-    public Edge2 addEdge(Vertex2 start, Vertex2 end, String mode, Integer duration, Double cost, Integer distance)
-    {
-
-        if (isUnique(start)){
-            start = addVertex(start);
-        } else {
-            start = this.vertexList.get(findMatch(start));
-        }
-        if (isUnique(end)){
-            end = addVertex(end);
-        } else {
-            end = this.vertexList.get(findMatch(end));
-        }
-        this.edgeList.addLast(new Edge2(start, end, mode, duration, cost, distance));
-
-        // make Vertex mode true at source and destination of the edge
-        // todo - alter vertex mode list when edge is added.  Resolve
-/*        int sIndex = getVertexIndex(start.vertexName);
-        this.vertexList.get(sIndex).modes[Edge.getMode(mode)] = true;
-        int dIndex = getVertexIndex(end.vertexName);
-        this.vertexList.get(dIndex).modes[Edge.getMode(mode)] = true; */
-        return this.edgeList.getLast();
-
-        //
-    }
     public void removeLastEdge() {
         edgeList.removeLast();
     }
@@ -126,35 +93,21 @@ public class WeightedGraph {
         vertexList.removeLast();
     }
 
-    public Vertex2 addJustVertex(Vertex2 v) {
-        this.vertexList.addLast(v);
-        return v;
+
+    public Vertex2 convertToVertex (WayPoint wayPoint){
+        Vertex2 tempVertex = new Vertex2(wayPoint.location, wayPoint.getId());
+        return tempVertex;
     }
-    public Edge2 addJustEdge(Edge2 e) {
-        this.edgeList.addLast(e);
-        return e;
-    }
-    public void addGraph(WeightedGraph g) {
+    @Override
+    public void addGraph(Route route) {
 
         // iterate over edges of argument g - adding an edge adds if vertices if they are unique
-        ListIterator<Edge2> eIterator = (ListIterator<Edge2>) g.edgeList.iterator();
-        while (eIterator.hasNext()) {
-            this.addEdge(eIterator.next());
+        ListIterator<WayPoint> wayPointListIteratorIterator = (ListIterator<WayPoint>) route.wayPointLinkedList;
+        while (wayPointListIteratorIterator.hasNext()) {
+            vertexList.add(convertToVertex(wayPointListIteratorIterator.next()));
         }
     }
 
-    public WeightedGraph cloneOfWgAndLists() {
-        // Vertices and Edges are NOT cloned
-        WeightedGraph cloneWG = new WeightedGraph();
-        cloneWG.vertexList = new LinkedList<Vertex2>();
-        for (Vertex2 vertex : this.vertexList) {
-            cloneWG.addJustVertex(vertex);
-        }
-        for (Edge2 edge : this.edgeList) {
-            cloneWG.addJustEdge(edge);
-        }
-        return cloneWG;
-    }
 
 
 
@@ -174,6 +127,59 @@ public class WeightedGraph {
                     "\nCost: " + tempEdge.cost);
         }
     }
+
+    @Override
+    Node addNode(Node node) {
+        return null;
+    }
+
+    @Override
+    void removeNode(Node node) {
+
+    }
+
+
+
+
+
+
+
+    @Override
+    Graph cloneGraph(Graph graph) {
+        return null;
+    }
+
+    @Override
+    void printGraph(Graph graph) {
+
+    }
+
+    @Override
+    List<Node> find(String s) {
+        return null;
+    }
+
+    @Override
+    List<Node> find(Location l) {
+        return null;
+    }
+
+    @Override
+    Node findNext(String s) {
+        return null;
+    }
+
+    @Override
+    Node findNext(Location l) {
+        return null;
+    }
+
+    @Override
+    Node getNextNode(Location l) {
+        return null;
+    }
+
+
 
 
 //    public void loadTestGraph1(WeightedGraph graph){

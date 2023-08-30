@@ -135,35 +135,35 @@ public class RouteRequest {
         setDestination("King Queen Building, 5 Concourse Pkwy, Sandy Springs, GA 30328");
     }
 
-    public WeightedGraph getAPIWeightedGraph (String origin, String destination, String mode) {
+    public GeographicModel getAPIWeightedGraph (String origin, String destination, String mode) {
         // todo - complete getAPIWeightedGraph() method
         // create connector
         ApiConnector googleConnector = new ApiConnector(origin, destination, mode);
         String jsonOutput = googleConnector.saveJsonToString();
-        WeightedGraph weightedGraph;
-        weightedGraph = googleConnector.constructWeightedGraph(jsonOutput);
-        return weightedGraph;
+        GeographicModel geographicModel;
+        geographicModel = googleConnector.constructWeightedGraph(jsonOutput);
+        return geographicModel;
     }
-    public WeightedGraph getAPIWeightedGraph (Vertex2 origin, Vertex2 destination, String mode) {
+    public GeographicModel getAPIWeightedGraph (Vertex2 origin, Vertex2 destination, String mode) {
         // todo - complete getAPIWeightedGraph() method
         // create connector
         ApiConnector googleConnector = new ApiConnector(origin, destination, mode);
         String jsonOutput = googleConnector.saveJsonToString();
-        WeightedGraph weightedGraph;
-        weightedGraph = googleConnector.constructWeightedGraph(jsonOutput);
-        return weightedGraph;
+        GeographicModel geographicModel;
+        geographicModel = googleConnector.constructWeightedGraph(jsonOutput);
+        return geographicModel;
     }
 
 
 
-    public WeightedGraph getAPIRouteFromVertices (Vertex2 origin, Vertex2 destination, String mode) {
+    public GeographicModel getAPIRouteFromVertices (Vertex2 origin, Vertex2 destination, String mode) {
         // todo - complete getAPIRouteFromVertices
         // create connector
         ApiConnector googleConnector = new ApiConnector(origin, destination, mode);
         String jsonOutput = googleConnector.saveJsonToString();
-        WeightedGraph weightedGraph;
-        weightedGraph = googleConnector.constructWeightedGraph(jsonOutput);
-        return weightedGraph;
+        GeographicModel geographicModel;
+        geographicModel = googleConnector.constructWeightedGraph(jsonOutput);
+        return geographicModel;
     }
 
 

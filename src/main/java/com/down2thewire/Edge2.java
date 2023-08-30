@@ -172,10 +172,16 @@ public class Edge2 <T> {
     public Vertex getEnd() {
         return end;
     }
-
-    public Edge cloneEdge() {
-        //todo clone edge and return
-        return new Edge();  // delete
+*/
+    public Edge2 clone() {
+        Edge2 tempEdge = new Edge2();
+        tempEdge.start = this.start;
+        tempEdge.end = this.end;
+        tempEdge.duration = this.duration;
+        tempEdge.distance = this.distance;
+        tempEdge.cost = this.cost;
+        tempEdge.mode = this.mode;
+        return tempEdge;
     }
 */
     public GNode getNeighbor() {

@@ -114,10 +114,10 @@ public class WayPoint extends GNode {
         this.wayPointName = name;
     }
 
-    public void setEdge (Edge edge) {
-        Edge newEdge = new Edge();
-        newEdge = edge.cloneEdge();
-//        this.edge = newEdge;
+    public void setEdge (Edge2 edge) {
+        Edge2 newEdge;
+        newEdge = edge.clone();
+        this.edge = newEdge;
     }
 
 

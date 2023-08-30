@@ -6,18 +6,18 @@ import java.util.List;
 
 public class RouteAnalyzer {
 
-    static WeightedGraph routeModel = new WeightedGraph();
+    static GeographicModel routeModel = new GeographicModel();
     RouteRequest userRequest = new RouteRequest();
 
 
 
-    public RouteAnalyzer(WeightedGraph routeModel, RouteRequest userRequest) {
+    public RouteAnalyzer(GeographicModel routeModel, RouteRequest userRequest) {
         this.routeModel = routeModel;
         this.userRequest = userRequest;
     }
 
-    public LinkedList<WeightedGraph> getBest4UserRoutes() {
-        LinkedList<WeightedGraph> allPaths = getAllPaths(
+    public LinkedList<GeographicModel> getBest4UserRoutes() {
+        LinkedList<GeographicModel> allPaths = getAllPaths(
                 userRequest.modePref,
                 userRequest.origin,
                 userRequest.destination
@@ -92,14 +92,14 @@ public class RouteAnalyzer {
         }
 
      */
-    public LinkedList<WeightedGraph> getAllPaths(){
+    public LinkedList<GeographicModel> getAllPaths(){
         return getAllPaths(this.userRequest.modePref, this.userRequest.getOrigin(), this.userRequest.getDestination());
     }
-    public LinkedList<WeightedGraph> getAllPaths(int[] modePref, String origin, String destination) {
+    public LinkedList<GeographicModel> getAllPaths(int[] modePref, String origin, String destination) {
         List<String> allowableModes = new ArrayList<>();
         //todo change to Vertex2 ;
         LinkedList<Vertex> visited = new LinkedList<>();
-        LinkedList<WeightedGraph> allPaths = new LinkedList<>();
+        LinkedList<GeographicModel> allPaths = new LinkedList<>();
         Vertex startVertex = userRequest.originVertex;
         Vertex endVertex = userRequest.destinationVertex;
 
@@ -113,7 +113,7 @@ public class RouteAnalyzer {
         }
 
         // Initialize Recursive search for all available routes
-        allPaths = getAllPathsFromHere(startVertex, endVertex, allowableModes, new WeightedGraph(), visited);
+        allPaths = getAllPathsFromHere(startVertex, endVertex, allowableModes, new GeographicModel(), visited);
 
         return allPaths;
     }
@@ -160,15 +160,15 @@ public class RouteAnalyzer {
     }
 */
 
-    public LinkedList<WeightedGraph> getAllPathsFromHere(Vertex currentVertex,
-                                                         Vertex endVertex,
-                                                         List<String> allowableModes,
-                                                         WeightedGraph currentPath,
-                                                         LinkedList<Vertex> visited) {
+    public LinkedList<GeographicModel> getAllPathsFromHere(Vertex currentVertex,
+                                                           Vertex endVertex,
+                                                           List<String> allowableModes,
+                                                           GeographicModel currentPath,
+                                                           LinkedList<Vertex> visited) {
 
         // start this iteration with current path including the last edge, but not the last vertex.
         // on the first iteration, the current path is empty, visited is empty, allPathsFromHere is empty
-        LinkedList<WeightedGraph> allPathsFromHere = new LinkedList<>();
+        LinkedList<GeographicModel> allPathsFromHere = new LinkedList<>();
         visited.add(currentVertex); // lists the vertices that are in the current path.
         currentPath.addJustVertex(currentVertex);
         //todo - change to Vertex2

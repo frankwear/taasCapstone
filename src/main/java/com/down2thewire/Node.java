@@ -58,4 +58,7 @@ abstract class Node<T> {
     public Boolean isMatch(Node<T> node){
         return node.location.isMatch(this.location);
     }
+    public Object getOutgoingEdges (){
+        return edge;
+    }
 }

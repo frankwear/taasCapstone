@@ -10,7 +10,7 @@ public class RouteTest {
     @Test
     void AddVertexAndDuplicate(){
     Route route = new Route();
-    Vertex v1 = new Vertex(new Location(34.0380828, -84.584152), "Marietta");
+    Vertex2 v1 = new Vertex2(new Location(34.0380828, -84.584152));
     //Vertex v2 = new Vertex(new Location(34.0380828, -84.584152), "Marietta");
 
     assertTrue(route.isUnique(v1));

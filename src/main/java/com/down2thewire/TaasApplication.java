@@ -3,11 +3,11 @@ package com.down2thewire;
 import java.util.LinkedList;
 
 public class TaasApplication {
-    static GeoModel instanceGM;
+    static GeoModelAnalyzer instanceGM;
     static RouteAnalyzer instanceRA;
     static RouteRequest instanceRR;
-    static LinkedList<WeightedGraph> instanceRouteOffering;
-    static WeightedGraph chosenRoute;
+    static LinkedList<GeographicModel> instanceRouteOffering;
+    static GeographicModel chosenRoute;
     static UserInterface instanceUI;
 
     // Todo - interface with UI
@@ -38,7 +38,7 @@ public class TaasApplication {
     private static void manageSession(TaasApplication session){
         session.instanceUI = new UserInterface();
         session.instanceRR = session.instanceUI.getRequest();
-        session.instanceGM = new GeoModel(session.instanceRR);
+        session.instanceGM = new GeoModelAnalyzer(session.instanceRR);
         session.instanceGM.generateGeoModel();
         session.instanceGM.geographicMap.printGraph();
         session.instanceRA = new RouteAnalyzer(session.instanceGM.geographicMap, session.instanceRR); // comment

@@ -56,8 +56,8 @@ public class ApiConnector {
         return jsonText;
     }
 
-    public WeightedGraph constructWeightedGraph(String json) {
-        WeightedGraph weightedGraph = new WeightedGraph();
+    public GeographicModel constructWeightedGraph(String json) {
+        GeographicModel geographicModel = new GeographicModel();
 
         JSONObject directionsJson = new JSONObject(json);
         JSONArray routesArray = directionsJson.getJSONArray("routes");
@@ -98,8 +98,8 @@ public class ApiConnector {
                     Vertex2 source = new Vertex2(start, start.generateUniqueID());
                     Vertex2 destination = new Vertex2(end, end.generateUniqueID());
 
-                    weightedGraph.addEdge(source, destination, mode, duration, 0.0, distance);
-                    if (weightedGraph.vertexList.size() > 30) {break;}
+                    geographicModel.addEdge(source, destination, mode, duration, 0.0, distance);
+                    if (geographicModel.vertexList.size() > 30) {break;}
                     startVertexHumanName = endVertexHumanName; // prep for next iteration
 
 /*
@@ -110,10 +110,10 @@ public class ApiConnector {
                     weightedGraph.addEdge(source, destination, mode, duration, 0.0, distance);
                     */
                 }
-                if (weightedGraph.vertexList.size() > 30) {break;}
+                if (geographicModel.vertexList.size() > 30) {break;}
             }
         }
-        return weightedGraph;
+        return geographicModel;
     }
 }
 

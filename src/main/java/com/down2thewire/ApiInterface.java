@@ -50,8 +50,8 @@ public class ApiInterface {
         return jsonText;
     }
 
-    public WeightedGraph constructWeightedGraph(String json) {
-        WeightedGraph weightedGraph = new WeightedGraph();
+    public GeographicModel constructWeightedGraph(String json) {
+        GeographicModel geographicModel = new GeographicModel();
 
         JSONObject directionsJson = new JSONObject(json);
         JSONArray routesArray = directionsJson.getJSONArray("routes");
@@ -89,13 +89,13 @@ public class ApiInterface {
                     Vertex source = new Vertex(new Location(sLatitude, sLongitude), startVertexHumanName);
                     Vertex destination = new Vertex(new Location(eLatitude, eLongitude), endVertexHumanName);
 
-                    weightedGraph.addEdge(source, destination, mode, duration, 0.0, distance);
-                    if (weightedGraph.vertexList.size() > 30) {break;}
+                    geographicModel.addEdge(source, destination, mode, duration, 0.0, distance);
+                    if (geographicModel.vertexList.size() > 30) {break;}
                     startVertexHumanName = endVertexHumanName; // prep for next iteration
                 }
             }
         }
-        return weightedGraph;
+        return geographicModel;
     }
 
     public static void main(String[] args) {
@@ -105,7 +105,7 @@ public class ApiInterface {
 
         ApiInterface apiInterface = new ApiInterface(origin, destination, mode);
         String json = apiInterface.saveJsonToString();
-        WeightedGraph weightedGraph = apiInterface.constructWeightedGraph(json);
+        GeographicModel geographicModel = apiInterface.constructWeightedGraph(json);
 
         // Rest of the code...
     }

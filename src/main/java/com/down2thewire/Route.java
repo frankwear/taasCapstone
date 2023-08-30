@@ -21,10 +21,9 @@ public class Route extends Graph {
         }
         return null; // Edge not found
     }
-
-
-
-    public WayPoint addVertex(WayPoint v) {
+    @Override
+    public void addGraph(Graph graph){}
+    public WayPoint addWaypoint(WayPoint v) {
         if(isUnique(v)) {
             wayPointLinkedList.addLast(v);
         } else {
@@ -34,6 +33,7 @@ public class Route extends Graph {
         return getVertex(getVertexIndex(v));  // return new vertex or the one that matched
     }
     public void removeNode(WayPoint node){};
+
 
     public Boolean isUnique(WayPoint v){
         Boolean hasMatch = false;
@@ -102,12 +102,12 @@ public class Route extends Graph {
     {
 
         if (isUnique(start)){
-            start = addVertex(start);
+            start = addWaypoint(start);
         } else {
             start = this.wayPointLinkedList.get(findMatch(start));
         }
         if (isUnique(end)){
-            end = addVertex(end);
+            end = addWaypoint(end);
         } else {
             end = this.wayPointLinkedList.get(findMatch(end));
         }
@@ -139,7 +139,8 @@ public class Route extends Graph {
         this.edgeList.addLast(e);
         return e;
     }
-    public void addGraph(WeightedGraph g) {
+    @Override
+    public void addGraph(Route g) {
 
         // iterate over edges of argument g - adding an edge adds if vertices if they are unique
         ListIterator<Edge2> eIterator = (ListIterator<Edge2>) g.edgeList.iterator();
@@ -148,9 +149,12 @@ public class Route extends Graph {
         }
     }
 
-    public WeightedGraph cloneOfWgAndLists() {
-        // Vertices and Edges are NOT cloned
-        WeightedGraph cloneWG = new WeightedGraph();
+    public Graph cloneGraph(Graph graph){
+    //public GeographicModel cloneOfWgAndLists()
+        // Vertices and Edges are NOT cloned //Only route to be cloned here not WeightedGraph
+        // todo - clone of route to be created here
+        /*
+        GeographicModel cloneWG = new GeographicModel();
         cloneWG.vertexList = new LinkedList<WayPoint>();
         for (WayPoint vertex : this.wayPointLinkedList) {
             cloneWG.addJustVertex(vertex);
@@ -256,7 +260,7 @@ public class Route extends Graph {
     public static void main(String[] args) {
 
 
-        WeightedGraph graph = new WeightedGraph();
+        GeographicModel graph = new GeographicModel();
         // graph.loadTestGraph1(graph);
        // graph.loadTestGraphDunMacysToPiedmont(graph);
         graph.printGraph();
