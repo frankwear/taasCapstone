@@ -97,7 +97,7 @@ public class GeographicModel {
         Vertex2 tempVertex = new Vertex2(wayPoint.location, wayPoint.getId());
         return tempVertex;
     }
-    @Override
+
     public void addGraph(Route route) {
 
         // iterate over edges of argument g - adding an edge adds if vertices if they are unique
@@ -127,12 +127,12 @@ public class GeographicModel {
         }
     }
 
-    @Override
+
     Node addNode(Node node) {
         return null;
     }
 
-    @Override
+
     void removeNode(Node node) {
 
     }
@@ -143,22 +143,22 @@ public class GeographicModel {
         return null;
     }
 
-    @Override
+
     List<Node> find(Location l) {
         return null;
     }
 
-    @Override
+
     Node findNext(String s) {
         return null;
     }
 
-    @Override
+
     Node findNext(Location l) {
         return null;
     }
 
-    @Override
+
     Node getNextNode(Location l) {
         return null;
     }
