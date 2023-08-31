@@ -1,14 +1,25 @@
+
+
+
+
+
+
+
+
+
+
 package com.down2thewire;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-public class Vertex2<T> extends GNode<T> {
+public class Vertex2 extends Node<Vertex2> {
     Location location;
     String description;
     Long id;
 
-    List<Edge2> outgoingEdges;
+    List<Edge2> outgoingEdges = new LinkedList<>();
 
     // 0-walk, 1-drive, 2-rideshare, 3-carRental, 4-bicycle, 5-scooter, 6-transit, 7-bus, 8-airplane, 9-unused
     /*
@@ -24,13 +35,63 @@ public class Vertex2<T> extends GNode<T> {
     private double tentativeDistance;
 
     public Vertex2(Location location, Long uniqueNameId) {
+        super();
         this.location = location;
         this.id = uniqueNameId;
         //       this.tentativeDistance = Double.POSITIVE_INFINITY;
     }
-    public Vertex2(){
-        super();
-    };
+    public Vertex2(Location location){
+        this.location = location;
+        this.id = location.generateUniqueID();
+    }
+
+//    public Vertex2() {
+//        super();
+//    }
+
+    public void addEdge(Edge2<Vertex2> e) {
+        addEdge(e.getStart(), e.getEnd(), e.getMode(), e.getDuration(), e.getCost(), e.distance);
+    }
+
+    public void addEdge(Vertex2 start, Vertex2 end, String mode, Integer duration, double cost, Integer distance) {
+        Edge2<Vertex2> tempEdge = new Edge2<>();
+        tempEdge.start = this;
+        tempEdge.end = end;
+        tempEdge.mode = mode;
+        tempEdge.duration = duration;
+        tempEdge.cost = cost;
+        tempEdge.distance = distance;
+        outgoingEdges.add(tempEdge);
+
+        // note see next few lines for code from Route
+    }
+/*
+    public Edge2 addEdge(WayPoint start, WayPoint end, String mode, Integer duration, Double cost, Integer distance)
+    {
+
+        if (isUnique(start)){
+            start = addWaypoint(start);
+        } else {
+            start = this.wayPointLinkedList.get(findMatch(start));
+        }
+        if (isUnique(end)){
+            end = addWaypoint(end);
+        } else {
+            end = this.wayPointLinkedList.get(findMatch(end));
+        }
+        this.edgeList.addLast(new Edge2(start, end, mode, duration, cost, distance));
+
+        // make Vertex mode true at source and destination of the edge
+        // todo - alter vertex mode list when edge is added.  Resolve
+/*        int sIndex = getVertexIndex(start.vertexName);
+        this.vertexList.get(sIndex).modes[Edge.getMode(mode)] = true;
+        int dIndex = getVertexIndex(end.vertexName);
+        this.vertexList.get(dIndex).modes[Edge.getMode(mode)] = true;
+        return this.edgeList.getLast();*/
+
+    //
+}
+
 
     /*
 
@@ -118,7 +179,7 @@ public class Vertex2<T> extends GNode<T> {
         public void setTentativeDistance(double tentativeDistance) {
             this.tentativeDistance = tentativeDistance;
         }
-*/
+
         public List<Edge2> getOutgoingEdges(List<Edge2> edgeList) {
 
             return this.outgoingEdges;
@@ -144,4 +205,4 @@ public class Vertex2<T> extends GNode<T> {
         Edge2 e = new Edge2(v, v2, "My Walk", 300, 5.00, 234);
         System.out.println("  ");
     }
-}
+*/

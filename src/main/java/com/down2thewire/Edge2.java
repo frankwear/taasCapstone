@@ -1,15 +1,16 @@
 package com.down2thewire;
 
-public class Edge2 {
+public class Edge2 <T extends Node> {
     // todo - The Vertex in the Edge Class need to be a <generic Node> rather than Vertex or Waypoint
-    GNode start;
-    GNode end;
+    T start;
+    T end;
     String mode;
     Integer duration;
     Double cost;
     Integer distance;
 
-    public <T> Edge2(GNode<T> s, GNode<T> e, String mode, Integer duration, Double cost, Integer distance) {
+
+    public Edge2(T s, T e, String mode, Integer duration, Double cost, Integer distance) {
         this.start = s;
         this.end = e;
         this.mode = mode;
@@ -21,7 +22,30 @@ public class Edge2 {
         //          this.cost = estimateCost();
         //     }
     }
-/*
+    public Edge2(){}
+    public T getStart() {
+        return start;
+    }
+
+    public T getEnd() {
+        return end;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+
+
+    /*
     private Double estimateCost() {
         // Implement your cost estimation logic here
         return 0.0d;
@@ -149,16 +173,19 @@ public class Edge2 {
     public Vertex getEnd() {
         return end;
     }
-
-    public Edge cloneEdge() {
-        //todo clone edge and return
-        return new Edge();  // delete
+*/
+    public Edge2 clone() {
+        Edge2 tempEdge = new Edge2();
+        tempEdge.start = this.start;
+        tempEdge.end = this.end;
+        tempEdge.duration = this.duration;
+        tempEdge.distance = this.distance;
+        tempEdge.cost = this.cost;
+        tempEdge.mode = this.mode;
+        return tempEdge;
     }
 
-    public Vertex getNeighbor(Location location) {
-        if (location.isMatch(start.location)) {
-            return end;
-        }
-        return start;
-    }*/
+    public Node getNeighbor() {
+        return this.end;
+    }
 }

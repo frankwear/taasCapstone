@@ -78,8 +78,8 @@ class RouteRequestTest {
         testRR.setPriority(testUser.getPriority());
         testRR.setOrigin("Dunwoody Marta Station");
         testRR.setDestination("Piedmont Atlanta Hospital");
-        GeoModel testModel = new GeoModel(testRR);
-        WeightedGraph resultingGraph = testModel.generateGeoModel();
+        GeoModelAnalyzer testModel = new GeoModelAnalyzer(testRR);
+        GeographicModel resultingGraph = testModel.generateGeoModel();
         resultingGraph.printGraph();
     }
 }

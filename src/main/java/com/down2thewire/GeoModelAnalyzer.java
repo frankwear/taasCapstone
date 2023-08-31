@@ -3,27 +3,27 @@ package com.down2thewire;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GeoModel {
-    WeightedGraph geographicMap = new WeightedGraph();
-    List<WeightedGraph> routeList = new ArrayList<>();
-    Vertex originVert;
-    Vertex destinationVert;
+public class GeoModelAnalyzer {
+    GeographicModel geographicMap = new GeographicModel();
+    List<GeographicModel> routeList = new ArrayList<>();
+    Vertex2 originVert;
+    Vertex2 destinationVert;
     RouteRequest modelRouteRequest;
 
 
-    public GeoModel() {
+    public GeoModelAnalyzer() {
     }
-    public GeoModel(RouteRequest rr) {
+    public GeoModelAnalyzer(RouteRequest rr) {
         modelRouteRequest = rr;
     }
 
 
-    public WeightedGraph generateGeoModel() {
+    public GeographicModel generateGeoModel() {
         String origin = modelRouteRequest.getOrigin();
         String destination = modelRouteRequest.getDestination();
         List<String> modes = modelRouteRequest.getModePrefAsList();
         RouteRequest tempRequest = new RouteRequest();
-        WeightedGraph coreRoute = tempRequest.getAPIWeightedGraph(origin, destination, "transit");
+        GeographicModel coreRoute = tempRequest.getAPIWeightedGraph(origin, destination, "transit");
         modelRouteRequest.originVertex = coreRoute.vertexList.getFirst();
         modelRouteRequest.destinationVertex = coreRoute.vertexList.getLast();
         coreRoute = removeAdjacentSameModeEdges(coreRoute);
@@ -31,33 +31,35 @@ public class GeoModel {
         this.destinationVert = coreRoute.vertexList.getLast();
         this.routeList.add(coreRoute);
         for (int i = 1; i < coreRoute.vertexList.size(); i++) {
-            String legStart = coreRoute.vertexList.get(i-1).vertexName;
-            String legEnd = coreRoute.vertexList.get(i).vertexName;
+            Vertex2 legStart = coreRoute.vertexList.get(i-1);
+            Vertex2 legEnd = coreRoute.vertexList.get(i);
             for (String loopMode : modes) {
-                WeightedGraph legRoute = tempRequest.getAPIWeightedGraph(legStart, legEnd, loopMode);
-                legRoute = GeoModel.removeAdjacentSameModeEdges(legRoute);
+                GeographicModel legRoute = tempRequest.getAPIWeightedGraph(legStart, legEnd, loopMode);
+                legRoute = GeoModelAnalyzer.removeAdjacentSameModeEdges(legRoute);
                 this.routeList.add(legRoute);
-                this.geographicMap.addGraph(legRoute);
+ //               this.geographicMap.addGraph(legRoute);
             }
-            geographicMap = GeoModel.removeDuplicateVertices(geographicMap);
+            geographicMap = GeoModelAnalyzer.removeDuplicateVertices(geographicMap);
         }
         //FixMe - some vertices have only one edge
         return geographicMap;
     }
-    public static WeightedGraph removeAdjacentSameModeEdges(WeightedGraph route) {  // considering routes non-branching
+    public static GeographicModel removeAdjacentSameModeEdges(GeographicModel route) {  // considering routes non-branching
+//todo - Correct logic on this to have edge as part of vertex.  Also change to apply only to Routes and not geomodels.
+
         String lastMode = "";
         int listSize = route.edgeList.size();
         for (int i = 0; i<listSize; i++) {
             if (lastMode.equals(route.edgeList.get(i).mode)) {  // do two adjacent edges have the same mode, combine them
-                Edge edge1 = route.edgeList.get(i-1);
-                Edge edge2 = route.edgeList.get(i);
+                Edge2 edge1 = route.edgeList.get(i-1);
+                Edge2 edge2 = route.edgeList.get(i);
                 edge1.distance += edge2.distance;
                 edge1.duration += edge2.duration;
                 edge1.cost += edge2.cost;
                 edge1.end = edge2.end;
                 route.edgeList.set(i-1, edge1);
                 route.edgeList.remove(i); listSize--;
-                route.vertexList.remove(route.getVertex(edge2.start.vertexName));
+//                route.vertex.List.remove(route.getVertex(edge2.start));
                 i--;
             }
             lastMode = route.edgeList.get(i).mode;
@@ -72,7 +74,7 @@ public class GeoModel {
         return transitMap;
     } */
 
-    public static WeightedGraph removeDuplicateVertices(WeightedGraph graph) {
+    public static GeographicModel removeDuplicateVertices(GeographicModel graph) {
  /*     // This version is not dependent on order, but way less efficient and more complex.  Save in case
         // needed for combined weighted graphs that are not linear.
         */
@@ -109,8 +111,8 @@ public class GeoModel {
             for (int j = i + 1; j < eLSize; j++) {
                 if (graph.edgeList.get(i).mode == (graph.edgeList.get(j).mode)) {
                     // reduce repeated lookups with local variables
-                    Edge edge1 = graph.edgeList.get(i);
-                    Edge edge2 = graph.edgeList.get(j);
+                    Edge2 edge1 = graph.edgeList.get(i);
+                    Edge2 edge2 = graph.edgeList.get(j);
                     if (edge1.start.isMatch(edge2.start) && (edge1.end.isMatch(edge2.end))) {
                         graph.edgeList.remove(j);  eLSize--; j--;
                     }
