@@ -98,7 +98,7 @@ public class RouteAnalyzer {
     public LinkedList<GeographicModel> getAllPaths(int[] modePref, String origin, String destination) {
         List<String> allowableModes = new ArrayList<>();
         //todo change to Vertex2 ;
-        LinkedList<Vertex> visited = new LinkedList<>();
+        LinkedList<Vertex2> visited = new LinkedList<>();
         LinkedList<GeographicModel> allPaths = new LinkedList<>();
         Vertex2 startVertex = userRequest.originVertex;
         Vertex2 endVertex = userRequest.destinationVertex;

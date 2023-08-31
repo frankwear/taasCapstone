@@ -35,6 +35,7 @@ public class Vertex2 extends Node<Vertex2> {
     private double tentativeDistance;
 
     public Vertex2(Location location, Long uniqueNameId) {
+        super();
         this.location = location;
         this.id = uniqueNameId;
         //       this.tentativeDistance = Double.POSITIVE_INFINITY;

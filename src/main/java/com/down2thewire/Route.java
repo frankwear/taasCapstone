@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
-public class Route extends Graph {
+public class Route {
     LinkedList<WayPoint> wayPointLinkedList;
     LinkedList<Edge2> edgeList;
 
@@ -35,7 +35,7 @@ public class Route extends Graph {
         }
         return !hasMatch;
     }
-    public int findMatch(Vertex2 tempVer) {
+    public int findMatch(WayPoint tempVer) {
         int index = 0;
         for (WayPoint mainVertex : this.wayPointLinkedList) {
             if (mainVertex.isMatch(tempVer)) {
@@ -76,8 +76,6 @@ public class Route extends Graph {
         } else {return null;}
     }
 
-    public void addEdge(Edge2 e) {
-        addEdge(e.getStart(), e.getEnd(), e.getMode(), e.getDuration(), e.getCost(), e.distance);
 
         // make Vertex mode true at source and destination of the edge
 //        int sIndex = getVertexIndex(e.start.vertexName);
@@ -86,7 +84,7 @@ public class Route extends Graph {
 //        this.vertexList.get(dIndex).modes[Edge.getMode(e.mode)] = true;
 //        return this.edgeList.getLast();
 
-    }
+
 
     public void addRoute(Route g) {
 
@@ -96,6 +94,7 @@ public class Route extends Graph {
             this.addWaypoint(wIterator.next());
         }
     }
+//    public void addGraph(Graph graph){}
 
     public Route cloneRoute(Route route){
 
@@ -111,7 +110,9 @@ public class Route extends Graph {
         for (Edge2 edge : this.edgeList) {
             cloneWG.addJustEdge(edge);
         }
-        return cloneWG;
+    return cloneWG;
+         */
+        return route;
     }
 
 

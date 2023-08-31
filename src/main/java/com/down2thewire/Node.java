@@ -21,6 +21,10 @@ abstract class Node<T extends Node> {
         this.id = location.generateUniqueID();
     }
 
+    public Node() {
+
+    }
+
     public Double getLongitude (){
         return this.location.longitude;
     }
