@@ -98,7 +98,7 @@ public class ApiConnector {
                     Vertex2 source = new Vertex2(start, start.generateUniqueID());
                     Vertex2 destination = new Vertex2(end, end.generateUniqueID());
 
-                    geographicModel.addEdge(source, destination, mode, duration, 0.0, distance);
+                    source.addEdge(source, destination, mode, duration, 0.0, distance);
                     if (geographicModel.vertexList.size() > 30) {break;}
                     startVertexHumanName = endVertexHumanName; // prep for next iteration
 

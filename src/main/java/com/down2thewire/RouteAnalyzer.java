@@ -100,8 +100,8 @@ public class RouteAnalyzer {
         //todo change to Vertex2 ;
         LinkedList<Vertex> visited = new LinkedList<>();
         LinkedList<GeographicModel> allPaths = new LinkedList<>();
-        Vertex startVertex = userRequest.originVertex;
-        Vertex endVertex = userRequest.destinationVertex;
+        Vertex2 startVertex = userRequest.originVertex;
+        Vertex2 endVertex = userRequest.destinationVertex;
 
 
         // Map the mode preferences to the corresponding modes
@@ -113,7 +113,7 @@ public class RouteAnalyzer {
         }
 
         // Initialize Recursive search for all available routes
-        allPaths = getAllPathsFromHere(startVertex, endVertex, allowableModes, new GeographicModel(), visited);
+//        allPaths = getAllPathsFromHere(startVertex, endVertex, allowableModes, new GeographicModel(), visited);
 
         return allPaths;
     }
@@ -160,43 +160,43 @@ public class RouteAnalyzer {
     }
 */
 
-    public LinkedList<GeographicModel> getAllPathsFromHere(Vertex currentVertex,
-                                                           Vertex endVertex,
-                                                           List<String> allowableModes,
-                                                           GeographicModel currentPath,
-                                                           LinkedList<Vertex> visited) {
-
-        // start this iteration with current path including the last edge, but not the last vertex.
-        // on the first iteration, the current path is empty, visited is empty, allPathsFromHere is empty
-        LinkedList<GeographicModel> allPathsFromHere = new LinkedList<>();
-        visited.add(currentVertex); // lists the vertices that are in the current path.
-        currentPath.addJustVertex(currentVertex);
-        //todo - change to Vertex2
-        List<Edge> adjacentEdgeList = currentVertex.getOutgoingEdges(this.routeModel.edgeList);
-        adjacentEdgeList.removeAll(visited);
-        if (adjacentEdgeList.size() == 0) { // dead-end without reaching endVertex
-            currentPath.removeLastVertex();
-            currentPath.removeLastEdge();
-            return allPathsFromHere;  // without adding any new paths
-        }
-        for (Edge edge : adjacentEdgeList) {
-            if (edge.getEnd().isMatch(endVertex)) { // if you reach the destination
-                currentPath.addJustEdge(edge);
-                currentPath.addJustVertex(edge.getEnd());
-                allPathsFromHere.add(currentPath.cloneOfWgAndLists());
-                currentPath.removeLastVertex();
-                currentPath.removeLastEdge();
-            } else {
-                Vertex neighbor = edge.getEnd();
-                currentPath.addJustEdge(edge);
-                allPathsFromHere.addAll(getAllPathsFromHere(neighbor, endVertex, allowableModes, currentPath, visited));
-                currentPath.removeLastEdge();
-            }
-        }
-        visited.remove(currentVertex);
-        currentPath.removeLastVertex();
-        return allPathsFromHere;
-    }
+//    public LinkedList<GeographicModel> getAllPathsFromHere(Vertex2 currentVertex,
+//                                                           Vertex2 endVertex,
+//                                                           List<String> allowableModes,
+//                                                           GeographicModel currentPath,
+//                                                           LinkedList<Vertex2> visited) {
+//
+//        // start this iteration with current path including the last edge, but not the last vertex.
+//        // on the first iteration, the current path is empty, visited is empty, allPathsFromHere is empty
+//        LinkedList<GeographicModel> allPathsFromHere = new LinkedList<>();
+//        visited.add(currentVertex); // lists the vertices that are in the current path.
+//        currentPath.addJustVertex(currentVertex);
+//        //todo - change to Vertex2
+//        List<Edge> adjacentEdgeList = currentVertex.getOutgoingEdges(this.routeModel.edgeList);
+//        adjacentEdgeList.removeAll(visited);
+//        if (adjacentEdgeList.size() == 0) { // dead-end without reaching endVertex
+//            currentPath.removeLastVertex();
+//            currentPath.removeLastEdge();
+//            return allPathsFromHere;  // without adding any new paths
+//        }
+//        for (Edge edge : adjacentEdgeList) {
+//            if (edge.getEnd().isMatch(endVertex)) { // if you reach the destination
+//                currentPath.addJustEdge(edge);
+//                currentPath.addJustVertex(edge.getEnd());
+//                allPathsFromHere.add(currentPath.cloneOfWgAndLists());
+//                currentPath.removeLastVertex();
+//                currentPath.removeLastEdge();
+//            } else {
+//                Vertex2 neighbor = edge.getEnd();
+//                currentPath.addJustEdge(edge);
+//                allPathsFromHere.addAll(getAllPathsFromHere(neighbor, endVertex, allowableModes, currentPath, visited));
+//                currentPath.removeLastEdge();
+//            }
+//        }
+//        visited.remove(currentVertex);
+//        currentPath.removeLastVertex();
+//        return allPathsFromHere;
+//    }
 
 
 /*

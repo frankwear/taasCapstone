@@ -2,7 +2,7 @@ package com.down2thewire;
 
 import java.util.*;
 
-public class GeographicModel extends Graph {
+public class GeographicModel {
     LinkedList<Vertex2> vertexList;
     LinkedList<Edge2> edgeList;
 
@@ -38,7 +38,6 @@ public class GeographicModel extends Graph {
         Vertex2 tempVertex = new Vertex2(tempLocation, tempLocation.generateUniqueID());
         return tempVertex;
     }
-    @Override
     public Boolean isUnique(Vertex2 v){
         return !vertexList.contains(v);
     }
@@ -140,21 +139,6 @@ public class GeographicModel extends Graph {
 
 
 
-
-
-
-
-    @Override
-    Graph cloneGraph(Graph graph) {
-        return null;
-    }
-
-    @Override
-    void printGraph(Graph graph) {
-
-    }
-
-    @Override
     List<Node> find(String s) {
         return null;
     }

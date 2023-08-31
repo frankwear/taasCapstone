@@ -43,6 +43,10 @@ public class WayPoint extends GNode {
         return this.location.getLatitude();
     }
 
+    public Edge2<WayPoint> getEdge(){
+        return this.edge;
+    }
+
 
 /*
     public void setWalk(boolean tf) {

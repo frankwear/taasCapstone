@@ -1,6 +1,6 @@
 package com.down2thewire;
 
-public class Edge2 <T> {
+public class Edge2 <T extends Node> {
     // todo - The Vertex in the Edge Class need to be a <generic Node> rather than Vertex or Waypoint
     GNode<T> start;
     GNode<T> end;

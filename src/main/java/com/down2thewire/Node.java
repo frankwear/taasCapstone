@@ -1,23 +1,13 @@
 package com.down2thewire;
 
-abstract class Node<T> {
+abstract class Node<T extends Node> {
     Location location;
     String description;
     Long id;
-    T edge;
+    Edge edge;
 
-    public Node (Location location, String description, T edge) {
-        this.location = location;
-        this.description = description;
-        this.id = location.generateUniqueID();
-        this.edge = edge;
-    }
-    public Node (Location location, T edge){
-        this.location = location;
-        this.description = "";
-        this.id = location.generateUniqueID();
-        this.edge = edge;
-    }
+
+
 
     public Node (Location location, String description){
         this.location = location;
@@ -62,3 +52,4 @@ abstract class Node<T> {
         return edge;
     }
 }
+

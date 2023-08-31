@@ -37,7 +37,7 @@ public class GeoModelAnalyzer {
                 GeographicModel legRoute = tempRequest.getAPIWeightedGraph(legStart, legEnd, loopMode);
                 legRoute = GeoModelAnalyzer.removeAdjacentSameModeEdges(legRoute);
                 this.routeList.add(legRoute);
-                this.geographicMap.addGraph(legRoute);
+ //               this.geographicMap.addGraph(legRoute);
             }
             geographicMap = GeoModelAnalyzer.removeDuplicateVertices(geographicMap);
         }
@@ -45,6 +45,8 @@ public class GeoModelAnalyzer {
         return geographicMap;
     }
     public static GeographicModel removeAdjacentSameModeEdges(GeographicModel route) {  // considering routes non-branching
+//todo - Correct logic on this to have edge as part of vertex.  Also change to apply only to Routes and not geomodels.
+
         String lastMode = "";
         int listSize = route.edgeList.size();
         for (int i = 0; i<listSize; i++) {
@@ -57,7 +59,7 @@ public class GeoModelAnalyzer {
                 edge1.end = edge2.end;
                 route.edgeList.set(i-1, edge1);
                 route.edgeList.remove(i); listSize--;
-                route.vertex.List.remove(route.getVertex(edge2.start));
+//                route.vertex.List.remove(route.getVertex(edge2.start));
                 i--;
             }
             lastMode = route.edgeList.get(i).mode;

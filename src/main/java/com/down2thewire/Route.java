@@ -13,26 +13,16 @@ public class Route extends Graph {
         this.edgeList = new LinkedList<>();
     }
 
-    public Edge2 getEdge(WayPoint start, WayPoint end) {
-        for (Edge2 edge : edgeList) {
-            if (edge.getStart().equals(start) && edge.getEnd().equals(end)) {
-                return edge;
-            }
-        }
-        return null; // Edge not found
-    }
-    @Override
-    public void addGraph(Graph graph){}
-    public WayPoint addWaypoint(WayPoint v) {
-        if(isUnique(v)) {
-            wayPointLinkedList.addLast(v);
-        } else {
-            v = getVertex(findMatch(v));
-        }
 
-        return getVertex(getVertexIndex(v));  // return new vertex or the one that matched
+    public WayPoint addWaypoint(WayPoint wayPoint){
+        wayPointLinkedList.addLast(wayPoint);
+        return wayPoint;
+        // todo - check unique?
     }
-    public void removeNode(WayPoint node){};
+
+    public void removeWaypoint(WayPoint node){
+        //todo - complete code
+    };
 
 
     public Boolean isUnique(WayPoint v){
@@ -98,58 +88,17 @@ public class Route extends Graph {
 
     }
 
-    public Edge2 addEdge(WayPoint start, WayPoint end, String mode, Integer duration, Double cost, Integer distance)
-    {
-
-        if (isUnique(start)){
-            start = addWaypoint(start);
-        } else {
-            start = this.wayPointLinkedList.get(findMatch(start));
-        }
-        if (isUnique(end)){
-            end = addWaypoint(end);
-        } else {
-            end = this.wayPointLinkedList.get(findMatch(end));
-        }
-        this.edgeList.addLast(new Edge2(start, end, mode, duration, cost, distance));
-
-        // make Vertex mode true at source and destination of the edge
-        // todo - alter vertex mode list when edge is added.  Resolve
-/*        int sIndex = getVertexIndex(start.vertexName);
-        this.vertexList.get(sIndex).modes[Edge.getMode(mode)] = true;
-        int dIndex = getVertexIndex(end.vertexName);
-        this.vertexList.get(dIndex).modes[Edge.getMode(mode)] = true; */
-        return this.edgeList.getLast();
-
-        //
-    }
-    public void removeLastEdge() {
-        edgeList.removeLast();
-    }
-
-    public void removeLastVertex() {
-        wayPointLinkedList.removeLast();
-    }
-
-    public WayPoint addJustVertex(WayPoint v) {
-        this.wayPointLinkedList.addLast(v);
-        return v;
-    }
-    public Edge2 addJustEdge(Edge2 e) {
-        this.edgeList.addLast(e);
-        return e;
-    }
-    @Override
-    public void addGraph(Route g) {
+    public void addRoute(Route g) {
 
         // iterate over edges of argument g - adding an edge adds if vertices if they are unique
-        ListIterator<Edge2> eIterator = (ListIterator<Edge2>) g.edgeList.iterator();
-        while (eIterator.hasNext()) {
-            this.addEdge(eIterator.next());
+        ListIterator<WayPoint> wIterator = (ListIterator<WayPoint>) g.wayPointLinkedList.iterator();
+        while (wIterator.hasNext()) {
+            this.addWaypoint(wIterator.next());
         }
     }
 
-    public Graph cloneGraph(Graph graph){
+    public Route cloneRoute(Route route){
+
     //public GeographicModel cloneOfWgAndLists()
         // Vertices and Edges are NOT cloned //Only route to be cloned here not WeightedGraph
         // todo - clone of route to be created here
@@ -168,11 +117,11 @@ public class Route extends Graph {
 
 
     public void printGraph(){
-        Iterator<WayPoint> vertexIterator = wayPointLinkedList.iterator();
-        while (vertexIterator.hasNext()) {
-            WayPoint tempVertex = vertexIterator.next();
-            System.out.println(tempVertex.location.longitude + "  " + tempVertex.location.latitude + "  " +
-                    tempVertex.description);
+        Iterator<WayPoint> waypointIterator = wayPointLinkedList.iterator();
+        while (waypointIterator.hasNext()) {
+            WayPoint tempWaypoint = waypointIterator.next();
+            System.out.println(tempWaypoint.location.longitude + "  " + tempWaypoint.location.latitude + "  " +
+                    tempWaypoint.description);
         }
         Iterator<Edge2> edgeIterator = edgeList.iterator();
         while (edgeIterator.hasNext()) {

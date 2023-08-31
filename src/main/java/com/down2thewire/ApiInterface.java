@@ -86,10 +86,10 @@ public class ApiInterface {
                     String endVertexHumanName = nameGenerator.getHumanReadableName(eLatitude, eLongitude);
 
                     // Create vertices with human-readable names
-                    Vertex source = new Vertex(new Location(sLatitude, sLongitude), startVertexHumanName);
-                    Vertex destination = new Vertex(new Location(eLatitude, eLongitude), endVertexHumanName);
+                    Vertex2 source = new Vertex2(new Location(sLatitude, sLongitude));
+                    Vertex2 destination = new Vertex2(new Location(eLatitude, eLongitude));
 
-                    geographicModel.addEdge(source, destination, mode, duration, 0.0, distance);
+                    source.addEdge(source, destination, mode, duration, 0.0, distance);
                     if (geographicModel.vertexList.size() > 30) {break;}
                     startVertexHumanName = endVertexHumanName; // prep for next iteration
                 }

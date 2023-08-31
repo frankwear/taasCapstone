@@ -37,11 +37,11 @@ class GeoModelAnalyzerTest {
         // add edges
         // for testing clarity, making each vertex a separate variable
 
-        geographicModel.addEdge(v1, v2, "WALKING", 271, 0.00, 347);
-        geographicModel.addEdge(v2, v3, "TRANSIT", 900, 0.00, 17083);
-        geographicModel.addEdge(v3, v4, "TRANSIT", 18, 0.00, 17);
-        geographicModel.addEdge(v4, v5, "WALKING", 699, 0.00, 3083);
-        geographicModel.addEdge(v5, v6, "TRANSIT", 103, 0.00, 121);
+        v1.addEdge(v1, v2, "WALKING", 271, 0.00, 347);
+        v2.addEdge(v2, v3, "TRANSIT", 900, 0.00, 17083);
+        v3.addEdge(v3, v4, "TRANSIT", 18, 0.00, 17);
+        v4.addEdge(v4, v5, "WALKING", 699, 0.00, 3083);
+        v5.addEdge(v5, v6, "TRANSIT", 103, 0.00, 121);
 
         return geographicModel;
     }
@@ -87,19 +87,19 @@ class GeoModelAnalyzerTest {
 
         // add edges from two routes
         // route 1
-        graph.addEdge(v01, v02, "WALKING", 271, 0.00, 347);
-        graph.addEdge(v02, v03, "TRANSIT", 900, 0.00, 17083);
-        graph.addEdge(v03, v04, "WALKING", 18, 0.00, 17);
-        graph.addEdge(v04, v05, "TRANSIT", 699, 0.00, 3083);
-        graph.addEdge(v05, v06, "WALKING", 103, 0.00, 121);
+        v01.addEdge(v01, v02, "WALKING", 271, 0.00, 347);
+        v02.addEdge(v02, v03, "TRANSIT", 900, 0.00, 17083);
+        v03.addEdge(v03, v04, "WALKING", 18, 0.00, 17);
+        v04.addEdge(v04, v05, "TRANSIT", 699, 0.00, 3083);
+        v05.addEdge(v05, v06, "WALKING", 103, 0.00, 121);
 
         // route 2
-        graph.addEdge(v07, v08, "DRIVING", 60, 0.00, 347);  // Unique
-        graph.addEdge(v08, v09, "WALKING", 64, 0.00, 59);  // Unique
-        graph.addEdge(v09, v10, "TRANSIT", 900, 0.00, 17083);  // duplicate
-        graph.addEdge(v10, v11, "WALKING", 18, 0.00, 17);  // duplicate
-        graph.addEdge(v11, v12, "TRANSIT", 699, 0.00, 3083);  // duplicate
-        graph.addEdge(v12, v13, "WALKING", 103, 0.00, 121);  // duplicate
+        v07.addEdge(v07, v08, "DRIVING", 60, 0.00, 347);  // Unique
+        v08.addEdge(v08, v09, "WALKING", 64, 0.00, 59);  // Unique
+        v09.addEdge(v09, v10, "TRANSIT", 900, 0.00, 17083);  // duplicate
+        v10.addEdge(v10, v11, "WALKING", 18, 0.00, 17);  // duplicate
+        v11.addEdge(v11, v12, "TRANSIT", 699, 0.00, 3083);  // duplicate
+        v12.addEdge(v12, v13, "WALKING", 103, 0.00, 121);  // duplicate
 
         return graph;
     }

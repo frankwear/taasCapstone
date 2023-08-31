@@ -2,14 +2,14 @@ package com.down2thewire;
 
 class Edge {
     // todo - The Vertex in the Edge Class need to be a <generic Node> rather than Vertex or Waypoint
-    Vertex start;
-    Vertex end;
+    Vertex2 start;
+    Vertex2 end;
     String mode;
     Integer duration;
     Double cost;
     Integer distance;
 
-    public Edge(Vertex start, Vertex end, String mode, Integer duration, Double cost, Integer distance) {
+    public Edge(Vertex2 start, Vertex2 end, String mode, Integer duration, Double cost, Integer distance) {
         this.start = start;
         this.end = end;
         this.mode = mode;
@@ -22,7 +22,7 @@ class Edge {
     }
     public Edge(){}
 
-    public Vertex getStart() {
+    public Vertex2 getStart() {
         return start;
     }
 
@@ -109,7 +109,7 @@ class Edge {
         }
     }
 
-    public Vertex getEnd() {
+    public Vertex2 getEnd() {
         return end;
     }
 
@@ -120,7 +120,7 @@ class Edge {
 
 
 
-    public Vertex getNeighbor(Location location) {
+    public Vertex2 getNeighbor(Location location) {
         if (location.isMatch(start.location)) {
             return end;
         }

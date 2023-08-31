@@ -10,10 +10,10 @@ public class RouteTest {
     @Test
     void AddVertexAndDuplicate(){
     Route route = new Route();
-    Vertex2 v1 = new Vertex2(new Location(34.0380828, -84.584152));
+    WayPoint w1 = new WayPoint(new Location(34.0380828, -84.584152));
     //Vertex v2 = new Vertex(new Location(34.0380828, -84.584152), "Marietta");
 
-    assertTrue(route.isUnique(v1));
+    assertTrue(route.isUnique(w1));
     //assertFalse(route.isUnique(v2));
 
     }
