@@ -3,7 +3,7 @@ package com.down2thewire;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WayPoint extends GNode {
+public class WayPoint extends Node {
 
     Location location;
     String wayPointName;

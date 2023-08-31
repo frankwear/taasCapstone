@@ -20,7 +20,7 @@ public class RouteTest {
     @Test
     void VertexLocation(){
         Route route = new Route();
-        Vertex v1 = new Vertex(new Location(0.0, 0.0), "Marietta");
-        assertTrue(route.isUnique(v1));
+        WayPoint w1 = new WayPoint(new Location(0.0, 0.0));
+        assertTrue(route.isUnique(w1));
     }
 }
