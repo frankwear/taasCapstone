@@ -23,7 +23,7 @@ class GeoModelAnalyzerTest {
         Location tempLocation = new Location(33.9228732,-84.3418493);
         WayPoint v1 = route.addWaypoint(new WayPoint(tempLocation));
         tempLocation = new Location(33.921227,-84.344398);
-        Vertex2 v2 = geographicModel.addVertex(new Vertex2(tempLocation, tempLocation.generateUniqueID()));;
+        WayPoint v2 = route.addWaypoint(new WayPoint(tempLocation));
         tempLocation = new Location(33.789112,-84.387383);
         WayPoint v3 = route.addWaypoint(new WayPoint(tempLocation));
         tempLocation = new Location(33.7892632,-84.3873414);
