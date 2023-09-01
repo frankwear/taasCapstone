@@ -14,7 +14,7 @@ class GeoModelAnalyzerTest {
     void removeAdjacentSameModeEdges() {
         Route testRoute = createTestGraphWithUnchangedMode();
         testRoute = GeoModelAnalyzer.removeAdjacentSameModeEdges(testRoute);
-        assertEquals(5, testRoute.vertexList.size());
+        assertEquals(5, testRoute.wayPointLinkedList.size());
         assertEquals(4, testRoute.edgeList.size());
     }
 
@@ -29,10 +29,9 @@ class GeoModelAnalyzerTest {
         tempLocation = new Location(33.7892632,-84.3873414);
         Vertex2 v4 = geographicModel.addVertex(new Vertex2(tempLocation, tempLocation.generateUniqueID()));
         tempLocation = new Location(33.8082253,-84.3934548);
-        Vertex2 v5 = geographicModel.addVertex(new Vertex2(tempLocation, tempLocation.generateUniqueID()));
+        WayPoint v5 = route.addWaypoint(new WayPoint(tempLocation ));
         tempLocation = new Location(33.8085817,-84.3943387);
-        Vertex2 v6 = geographicModel.addVertex(new Vertex2(tempLocation, tempLocation.generateUniqueID()));
-
+        WayPoint v6 = route.addWaypoint(new WayPoint(tempLocation));
 
         // add edges
         // for testing clarity, making each vertex a separate variable

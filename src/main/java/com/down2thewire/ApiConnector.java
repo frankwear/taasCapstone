@@ -24,6 +24,9 @@ public class ApiConnector {
     public ApiConnector(Vertex2 originVertex, Vertex2 destinationVertex, String mode){
         this.url = buildDirectionsUrl(originVertex.location.AsString(), destinationVertex.location.AsString(), mode, apiKey);
     }
+    public ApiConnector(WayPoint originWayPoint, WayPoint destinationWayPoint, String mode){
+        this.url = buildDirectionsUrl(originWayPoint.location.AsString(), destinationWayPoint.location.AsString(), mode, apiKey);
+    }
 
     private static String buildDirectionsUrl(String origin, String destination, String mode, String apiKey) {
         return "https://maps.googleapis.com/maps/api/directions/json?" +

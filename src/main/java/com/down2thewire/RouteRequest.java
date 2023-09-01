@@ -146,14 +146,14 @@ public class RouteRequest {
         apiRoute = googleConnector.constructRoute(jsonOutput);
         return apiRoute;
     }
-    public GeographicModel getAPIWeightedGraph (Vertex2 origin, Vertex2 destination, String mode) {
+    public Route getAPIWeightedGraph (Vertex2 origin, Vertex2 destination, String mode) {
         // todo - complete getAPIWeightedGraph() method
         // create connector
         ApiConnector googleConnector = new ApiConnector(origin, destination, mode);
         String jsonOutput = googleConnector.saveJsonToString();
-        GeographicModel geographicModel;
-        geographicModel = googleConnector.constructWeightedGraph(jsonOutput);
-        return geographicModel;
+        Route geographicRoute;
+        geographicRoute = googleConnector.constructRoute(jsonOutput);
+        return geographicRoute;
     }
 
 
