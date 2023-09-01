@@ -58,12 +58,11 @@ public class GeoModelAnalyzer {
                 edge1.duration += edge2.duration;
                 edge1.cost += edge2.cost;
                 edge1.end = edge2.end;
-                route.edgeList.set(i-1, edge1);
-                route.edgeList.remove(i); listSize--;
-//                route.vertex.List.remove(route.getVertex(edge2.start));
+                route.wayPointLinkedList.get(i-1).setEdge(edge1);
+                route.wayPointLinkedList.remove(i); listSize--;
                 i--;
             }
-            lastMode = route.edgeList.get(i).mode;
+            lastMode = route.wayPointLinkedList.get(i).getEdge().getMode();
         }
         return route;
     }

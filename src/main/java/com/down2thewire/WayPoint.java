@@ -32,6 +32,9 @@ public class WayPoint extends Node {
         this.location = location;
         this.wayPointID = location.generateUniqueID();
     }
+    public WayPoint() {
+
+    }
 
 
 

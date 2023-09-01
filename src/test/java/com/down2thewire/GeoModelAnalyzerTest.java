@@ -25,9 +25,9 @@ class GeoModelAnalyzerTest {
         tempLocation = new Location(33.921227,-84.344398);
         Vertex2 v2 = geographicModel.addVertex(new Vertex2(tempLocation, tempLocation.generateUniqueID()));;
         tempLocation = new Location(33.789112,-84.387383);
-        Vertex2 v3 = geographicModel.addVertex(new Vertex2(tempLocation, tempLocation.generateUniqueID()));
+        WayPoint v3 = route.addWaypoint(new WayPoint(tempLocation));
         tempLocation = new Location(33.7892632,-84.3873414);
-        Vertex2 v4 = geographicModel.addVertex(new Vertex2(tempLocation, tempLocation.generateUniqueID()));
+        WayPoint v4 = route.addWaypoint(new WayPoint(tempLocation));
         tempLocation = new Location(33.8082253,-84.3934548);
         WayPoint v5 = route.addWaypoint(new WayPoint(tempLocation ));
         tempLocation = new Location(33.8085817,-84.3943387);
@@ -42,7 +42,7 @@ class GeoModelAnalyzerTest {
         v4.setEdge(new Edge2(v4, v5, "WALKING", 699, 0.00, 3083));
         v5.setEdge(new Edge2(v5, v6, "TRANSIT", 103, 0.00, 121));
 
-        return geographicModel;
+        return route;
     }
 
     @Test
