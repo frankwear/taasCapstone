@@ -74,7 +74,7 @@ public class ApiConnector {
 
                 JSONArray stepsArray = leg.getJSONArray("steps");
                 String startVertexHumanName = "";
-                WayPoint lastDestination = new WayPoint(new Location(0.00,0.00));
+                WayPoint lastLegDestination = new WayPoint(new Location(0.00,0.00));
                 for (int j = 0; j < stepsArray.length(); j++) {
                     JSONObject step = stepsArray.getJSONObject(j);
 
@@ -103,17 +103,16 @@ public class ApiConnector {
                     WayPoint source = new WayPoint(start);
                     WayPoint destination = new WayPoint(end);
 
-                    if(lastDestination.getId().equals(source.getId())){
-                        lastDestination.id = lastDestination.location.generateUniqueID();
-                        source = lastDestination;
+                    if(!lastLegDestination.getId().equals(source.getId())){  //first iteration, normally
+                        route.addWaypoint(source);
+                    } else {
+                        source = lastLegDestination;
                     }
-                    Edge2 sourceEdge = new Edge2(source, destination, mode, duration, 0.00, distance);
-                    source.setEdge(sourceEdge);
-                    route.addWaypoint(source);
+                    source.setEdge(new Edge2(source, destination, mode, duration, 0.00, distance));
                     route.addWaypoint(destination);
 
                     if (route.wayPointLinkedList.size() > 30) {break;}
-                    lastDestination = destination;
+                    lastLegDestination = destination;
 
 /*
                     // Get the existing start and end vertices

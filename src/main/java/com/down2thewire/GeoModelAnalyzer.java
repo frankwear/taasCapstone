@@ -50,7 +50,7 @@ public class GeoModelAnalyzer {
 
         String lastMode = "";
         int listSize = route.wayPointLinkedList.size();
-        for (int i = 0; i<listSize; i++) {
+        for (int i = 0; i<listSize-1; i++) {
             if (lastMode.equals(route.wayPointLinkedList.get(i).getEdge().getMode())) {  // do two adjacent edges have the same mode, combine them
                 Edge2 edge1 = route.wayPointLinkedList.get(i-1).getEdge();
                 Edge2 edge2 = route.wayPointLinkedList.get(i).getEdge();
