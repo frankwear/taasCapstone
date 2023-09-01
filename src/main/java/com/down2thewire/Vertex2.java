@@ -44,7 +44,19 @@ public class Vertex2 extends Node<Vertex2> {
         this.location = location;
         this.id = location.generateUniqueID();
     }
-
+    public Vertex2(WayPoint wayPoint){
+        Vertex2 vertex = new Vertex2(wayPoint.getLocation());
+        vertex.id = wayPoint.getId();
+        vertex.outgoingEdges.add(wayPoint.getEdge());
+        vertex.description = wayPoint.getDescription();
+    }
+    static Vertex2 waypointToVertex(WayPoint wayPoint){
+        Vertex2 vertex = new Vertex2(wayPoint.getLocation());
+        vertex.id = wayPoint.getId();
+        vertex.outgoingEdges.add(wayPoint.getEdge());
+        vertex.description = wayPoint.getDescription();
+        return vertex;
+    }
 //    public Vertex2() {
 //        super();
 //    }
@@ -65,6 +77,7 @@ public class Vertex2 extends Node<Vertex2> {
 
         // note see next few lines for code from Route
     }
+
 /*
     public Edge2 addEdge(WayPoint start, WayPoint end, String mode, Integer duration, Double cost, Integer distance)
     {

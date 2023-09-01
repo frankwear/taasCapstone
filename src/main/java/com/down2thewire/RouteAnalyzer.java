@@ -100,8 +100,8 @@ public class RouteAnalyzer {
         //todo change to Vertex2 ;
         LinkedList<Vertex2> visited = new LinkedList<>();
         LinkedList<GeographicModel> allPaths = new LinkedList<>();
-        Vertex2 startVertex = userRequest.originVertex;
-        Vertex2 endVertex = userRequest.destinationVertex;
+        Vertex2 startVertex = Vertex2.waypointToVertex(userRequest.originWaypoint);
+        Vertex2 endVertex = Vertex2.waypointToVertex(userRequest.destinationWaypoint);
 
 
         // Map the mode preferences to the corresponding modes

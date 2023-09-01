@@ -12,8 +12,9 @@ public class RouteRequest {
     int[] modePref = {2,2,2,2,2,2,2,2,0,0};
     String origin;
     String destination;
-    Vertex2 originVertex;
-    Vertex2 destinationVertex;
+    WayPoint originWaypoint;
+
+    WayPoint destinationWaypoint;
 
     String priority;  //QUICK, CHEAP, FREE, COMFORTABLE, PERSONALIZED, EASY, EXERCISE
     public RouteRequest() {
@@ -80,11 +81,12 @@ public class RouteRequest {
     public void setBusPref(int p) {
         this.modePref[7] = p;
     }
-    public void setOriginVertex (Vertex2 v) {this.originVertex = v;}
-    public Vertex2 getOriginVertex() {return this.originVertex;}
-    public void setDestinationVertex (Vertex2 v) {this.destinationVertex = v;}
-    public Vertex2 getDestinationVertex() {return this.destinationVertex;}
-
+    /*
+    public void setOriginVertex (Vertex2 v) {this.originWaypoint = v;}
+    public Vertex2 getOriginVertex() {return this.originWaypoint;}
+    public void setDestinationWaypoint(Vertex2 v) {this.destinationWaypoint = v;}
+    public Vertex2 getDestinationWaypoint() {return this.destinationWaypoint;}
+*/
     public LinkedList<String> getModePrefAsList(){
 
         LinkedList<String> preferredModes = new LinkedList<>();
@@ -135,14 +137,14 @@ public class RouteRequest {
         setDestination("King Queen Building, 5 Concourse Pkwy, Sandy Springs, GA 30328");
     }
 
-    public GeographicModel getAPIWeightedGraph (String origin, String destination, String mode) {
+    public Route getAPIWeightedGraph (WayPoint origin, WayPoint destination, String mode) {
         // todo - complete getAPIWeightedGraph() method
         // create connector
         ApiConnector googleConnector = new ApiConnector(origin, destination, mode);
         String jsonOutput = googleConnector.saveJsonToString();
-        GeographicModel geographicModel;
-        geographicModel = googleConnector.constructWeightedGraph(jsonOutput);
-        return geographicModel;
+        Route apiRoute;
+        apiRoute = googleConnector.constructRoute(jsonOutput);
+        return apiRoute;
     }
     public GeographicModel getAPIWeightedGraph (Vertex2 origin, Vertex2 destination, String mode) {
         // todo - complete getAPIWeightedGraph() method
@@ -155,7 +157,7 @@ public class RouteRequest {
     }
 
 
-
+/*
     public GeographicModel getAPIRouteFromVertices (Vertex2 origin, Vertex2 destination, String mode) {
         // todo - complete getAPIRouteFromVertices
         // create connector
@@ -165,12 +167,13 @@ public class RouteRequest {
         geographicModel = googleConnector.constructWeightedGraph(jsonOutput);
         return geographicModel;
     }
-
+*/
 
 
     public void setModePrefFromAccount(UserAccount uAcct) {
         this.modePref = uAcct.modePref;
     }
+
 
 }
 

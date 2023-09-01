@@ -23,9 +23,9 @@ public class WayPoint extends Node {
 //    private boolean[] modes = {false, false, false, false, false, false, false, false, false, false};
 
 
-    public WayPoint(Location location, String uniqueNameId) {
+    public WayPoint(Location location, String uniqueName) {
         this.location = location;
-        this.wayPointName = uniqueNameId;
+        this.wayPointName = uniqueName;
         this.wayPointID = location.generateUniqueID();
     }
     public WayPoint(Location location) {
@@ -124,7 +124,9 @@ public class WayPoint extends Node {
         this.edge = newEdge;
     }
 
-
+    public Long getId() {
+        return this.location.generateUniqueID();
+    }
 
  //   public Edge getOutgoingEdges() {
  //       return this.edge;

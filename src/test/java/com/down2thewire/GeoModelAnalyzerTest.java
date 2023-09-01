@@ -12,16 +12,16 @@ class GeoModelAnalyzerTest {
 
     @Test
     void removeAdjacentSameModeEdges() {
-        GeographicModel testRoute = createTestGraphWithUnchangedMode();
+        Route testRoute = createTestGraphWithUnchangedMode();
         testRoute = GeoModelAnalyzer.removeAdjacentSameModeEdges(testRoute);
         assertEquals(5, testRoute.vertexList.size());
         assertEquals(4, testRoute.edgeList.size());
     }
 
-    private GeographicModel createTestGraphWithUnchangedMode() {
-        GeographicModel geographicModel = new GeographicModel();
+    private Route createTestGraphWithUnchangedMode() {
+        Route route = new Route();
         Location tempLocation = new Location(33.9228732,-84.3418493);
-        Vertex2 v1 = geographicModel.addVertex(new Vertex2(tempLocation, tempLocation.generateUniqueID()));
+        WayPoint v1 = route.addWaypoint(new WayPoint(tempLocation));
         tempLocation = new Location(33.921227,-84.344398);
         Vertex2 v2 = geographicModel.addVertex(new Vertex2(tempLocation, tempLocation.generateUniqueID()));;
         tempLocation = new Location(33.789112,-84.387383);
@@ -37,11 +37,11 @@ class GeoModelAnalyzerTest {
         // add edges
         // for testing clarity, making each vertex a separate variable
 
-        v1.addEdge(v1, v2, "WALKING", 271, 0.00, 347);
-        v2.addEdge(v2, v3, "TRANSIT", 900, 0.00, 17083);
-        v3.addEdge(v3, v4, "TRANSIT", 18, 0.00, 17);
-        v4.addEdge(v4, v5, "WALKING", 699, 0.00, 3083);
-        v5.addEdge(v5, v6, "TRANSIT", 103, 0.00, 121);
+        v1.setEdge(new Edge2(v1, v2, "WALKING", 271, 0.00, 347));
+        v2.setEdge(new Edge2(v2, v3, "TRANSIT", 900, 0.00, 17083));
+        v3.setEdge(new Edge2(v3, v4, "TRANSIT", 18, 0.00, 17));
+        v4.setEdge(new Edge2(v4, v5, "WALKING", 699, 0.00, 3083));
+        v5.setEdge(new Edge2(v5, v6, "TRANSIT", 103, 0.00, 121));
 
         return geographicModel;
     }

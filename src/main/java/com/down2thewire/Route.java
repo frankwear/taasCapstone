@@ -5,23 +5,30 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 public class Route {
-    LinkedList<WayPoint> wayPointLinkedList;
+    LinkedList<WayPoint> wayPointLinkedList = new LinkedList<>();
     LinkedList<Edge2> edgeList;
 
     public Route() {
         this.wayPointLinkedList = new LinkedList<WayPoint>();
-        this.edgeList = new LinkedList<>();
     }
 
 
     public WayPoint addWaypoint(WayPoint wayPoint){
+        if (!wayPointLinkedList.isEmpty()){
+            if (wayPointLinkedList.getLast().getId() == wayPoint.getId()) {
+                wayPointLinkedList.removeLast();
+            }
+        }
         wayPointLinkedList.addLast(wayPoint);
         return wayPoint;
-        // todo - check unique?
     }
 
-    public void removeWaypoint(WayPoint node){
-        //todo - complete code
+    public void removeWaypoint(WayPoint wayPoint){
+        int wIndex = findMatch(wayPoint);
+        wayPointLinkedList.remove(wIndex);
+    };
+    public void removeWaypoint(Integer wIndex){
+        wayPointLinkedList.remove(wIndex);
     };
 
 
@@ -123,6 +130,7 @@ public class Route {
             WayPoint tempWaypoint = waypointIterator.next();
             System.out.println(tempWaypoint.location.longitude + "  " + tempWaypoint.location.latitude + "  " +
                     tempWaypoint.description);
+
         }
         Iterator<Edge2> edgeIterator = edgeList.iterator();
         while (edgeIterator.hasNext()) {

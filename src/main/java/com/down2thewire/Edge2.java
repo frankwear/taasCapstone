@@ -32,7 +32,7 @@ public class Edge2 <T extends Node> {
     }
 
     public String getMode() {
-        return mode;
+        return this.mode;
     }
 
     public Integer getDuration() {

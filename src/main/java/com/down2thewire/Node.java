@@ -46,7 +46,7 @@ abstract class Node<T extends Node> {
     }
 
     public Long getId() {
-        return this.id;
+        return this.location.generateUniqueID();
     }
 
     public Boolean isMatch(Node<T> node){
