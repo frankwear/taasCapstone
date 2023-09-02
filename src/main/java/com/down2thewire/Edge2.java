@@ -32,15 +32,15 @@ public class Edge2 <T extends Node> {
     }
 
     public String getMode() {
-        return mode;
+        return this.mode;
     }
 
     public Integer getDuration() {
-        return duration;
+        return this.duration;
     }
 
     public double getCost() {
-        return cost;
+        return this.cost;
     }
 
 

@@ -24,6 +24,9 @@ public class ApiConnector {
     public ApiConnector(Vertex2 originVertex, Vertex2 destinationVertex, String mode){
         this.url = buildDirectionsUrl(originVertex.location.AsString(), destinationVertex.location.AsString(), mode, apiKey);
     }
+    public ApiConnector(WayPoint originWayPoint, WayPoint destinationWayPoint, String mode){
+        this.url = buildDirectionsUrl(originWayPoint.location.AsString(), destinationWayPoint.location.AsString(), mode, apiKey);
+    }
 
     private static String buildDirectionsUrl(String origin, String destination, String mode, String apiKey) {
         return "https://maps.googleapis.com/maps/api/directions/json?" +
@@ -56,20 +59,22 @@ public class ApiConnector {
         return jsonText;
     }
 
-    public GeographicModel constructWeightedGraph(String json) {
-        GeographicModel geographicModel = new GeographicModel();
+    public Route constructRoute(String json) {
+        Route route = new Route();
+
 
         JSONObject directionsJson = new JSONObject(json);
         JSONArray routesArray = directionsJson.getJSONArray("routes");
         if (routesArray.length() > 0) {
-            JSONObject route = routesArray.getJSONObject(0);
+            JSONObject apiRoute = routesArray.getJSONObject(0);
 
-            JSONArray legsArray = route.getJSONArray("legs");
+            JSONArray legsArray = apiRoute.getJSONArray("legs");
             for (int i = 0; i < legsArray.length(); i++) {
                 JSONObject leg = legsArray.getJSONObject(i);
 
                 JSONArray stepsArray = leg.getJSONArray("steps");
                 String startVertexHumanName = "";
+                WayPoint lastLegDestination = new WayPoint(new Location(0.00,0.00));
                 for (int j = 0; j < stepsArray.length(); j++) {
                     JSONObject step = stepsArray.getJSONObject(j);
 
@@ -88,19 +93,26 @@ public class ApiConnector {
                     String mode = step.getString("travel_mode").toLowerCase();
 
                     // Construct the name generator and retrieve the human-readable names
-                    WeightedGraphNameGenerator nameGenerator = new WeightedGraphNameGenerator();
-                    if (startVertexHumanName.equals("")) {
-                        startVertexHumanName = nameGenerator.getHumanReadableName(sLatitude, sLongitude);
-                    }
-                    String endVertexHumanName = nameGenerator.getHumanReadableName(eLatitude, eLongitude);
+////                    WeightedGraphNameGenerator nameGenerator = new WeightedGraphNameGenerator();
+//                    if (startVertexHumanName.equals("")) {
+//                        startVertexHumanName = nameGenerator.getHumanReadableName(sLatitude, sLongitude);
+//                    }
+//                    String endVertexHumanName = nameGenerator.getHumanReadableName(eLatitude, eLongitude);
 
                     // Create vertices with human-readable names
-                    Vertex2 source = new Vertex2(start, start.generateUniqueID());
-                    Vertex2 destination = new Vertex2(end, end.generateUniqueID());
+                    WayPoint source = new WayPoint(start);
+                    WayPoint destination = new WayPoint(end);
 
-                    source.addEdge(source, destination, mode, duration, 0.0, distance);
-                    if (geographicModel.vertexList.size() > 30) {break;}
-                    startVertexHumanName = endVertexHumanName; // prep for next iteration
+                    if(j == 0){  //first iteration, normally
+                        route.addWaypoint(source);
+                    } else {
+                        source = lastLegDestination;
+                    }
+                    source.setEdge(new Edge2(source, destination, mode, duration, 0.00, distance));
+                    route.addWaypoint(destination);
+
+                    if (route.wayPointLinkedList.size() > 30) {break;}
+                    lastLegDestination = destination;
 
 /*
                     // Get the existing start and end vertices
@@ -110,10 +122,10 @@ public class ApiConnector {
                     weightedGraph.addEdge(source, destination, mode, duration, 0.0, distance);
                     */
                 }
-                if (geographicModel.vertexList.size() > 30) {break;}
+                if (route.wayPointLinkedList.size() > 30) {break;}
             }
         }
-        return geographicModel;
+        return route;
     }
 }
 
