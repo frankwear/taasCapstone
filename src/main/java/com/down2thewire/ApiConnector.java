@@ -103,7 +103,7 @@ public class ApiConnector {
                     WayPoint source = new WayPoint(start);
                     WayPoint destination = new WayPoint(end);
 
-                    if(!lastLegDestination.getId().equals(source.getId())){  //first iteration, normally
+                    if(j == 0){  //first iteration, normally
                         route.addWaypoint(source);
                     } else {
                         source = lastLegDestination;

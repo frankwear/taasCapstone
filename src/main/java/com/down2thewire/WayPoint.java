@@ -33,7 +33,9 @@ public class WayPoint extends Node {
         this.wayPointID = location.generateUniqueID();
     }
 
-
+    public Location getLocation (){
+        return this.location;
+    }
 
 
     public Double getLongitude() {

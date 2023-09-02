@@ -42,6 +42,31 @@ public class GeoModelAnalyzer {
             }
             geographicMap = GeoModelAnalyzer.removeDuplicateVertices(geographicMap);
         }
+        for (int i = 0; i < routeList.size(); i++){
+            int size = routeList.get(i).wayPointLinkedList.size();
+            Vertex2 lastLegDestination = new Vertex2(new Location(0.0d, 0.0d));
+            for (int j = 0; j < size-1; j++){
+                WayPoint w1 = routeList.get(i).wayPointLinkedList.get(j);
+                Vertex2 v1 = new Vertex2(new Location(0.0,0.0));
+                if (j==0) {
+                    v1 = Vertex2.waypointToVertex(w1);
+                } else {
+                     v1 = lastLegDestination;
+                }
+                Edge2<WayPoint> e1 = w1.getEdge();
+                WayPoint w2 = routeList.get(i).wayPointLinkedList.get(j+1);
+                Vertex2 v2 = Vertex2.waypointToVertex(w2);
+                Edge2<Vertex2> forward = new Edge2<>(v1, v2, e1.getMode(), e1.getDuration(), e1.getCost(), e1.distance);
+                v1.addEdge(forward);
+                Edge2<Vertex2> backward = new Edge2<>(v2, v1, e1.getMode(), e1.getDuration(), e1.getCost(), e1.distance);
+                v2.addEdge(backward);
+                geographicMap.addVertex(v1);
+                if (j == size-1){
+                    geographicMap.addVertex(v2);
+                }
+                lastLegDestination = v2;
+            }
+        }
         //FixMe - some vertices have only one edge
         return geographicMap;
     }

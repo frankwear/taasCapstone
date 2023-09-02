@@ -36,11 +36,11 @@ public class Edge2 <T extends Node> {
     }
 
     public Integer getDuration() {
-        return duration;
+        return this.duration;
     }
 
     public double getCost() {
-        return cost;
+        return this.cost;
     }
 
 

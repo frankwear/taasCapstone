@@ -40,9 +40,14 @@ public class Vertex2 extends Node<Vertex2> {
         this.id = uniqueNameId;
         //       this.tentativeDistance = Double.POSITIVE_INFINITY;
     }
-    public Vertex2(Location location){
+    public Vertex2(Location location) {
         this.location = location;
         this.id = location.generateUniqueID();
+        super.location = location;
+    }
+
+    public Location getLocation (){
+        return this.location;
     }
     public Vertex2(WayPoint wayPoint){
         Vertex2 vertex = new Vertex2(wayPoint.getLocation());
@@ -53,7 +58,7 @@ public class Vertex2 extends Node<Vertex2> {
     static Vertex2 waypointToVertex(WayPoint wayPoint){
         Vertex2 vertex = new Vertex2(wayPoint.getLocation());
         vertex.id = wayPoint.getId();
-        vertex.outgoingEdges.add(wayPoint.getEdge());
+ //       vertex.outgoingEdges.add(wayPoint.getEdge());
         vertex.description = wayPoint.getDescription();
         return vertex;
     }

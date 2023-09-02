@@ -15,11 +15,11 @@ abstract class Node<T extends Node> {
         this.id = location.generateUniqueID();
     }
 
-    public Node (Location location) {
-        this.location = location;
-        this.description = "";
-        this.id = location.generateUniqueID();
-    }
+//    public Node (Location location) {
+//        this.location = location;
+//        this.description = "";
+//        this.id = location.generateUniqueID();
+//    }
 
     public Node() {
 
@@ -37,9 +37,9 @@ abstract class Node<T extends Node> {
         this.description = description;
     }
 
-    public Location getLocation (){
-        return this.location;
-    }
+//    public Location getLocation (){
+//        return this.location;
+//    }
 
     public String getDescription() {
         return description;
