@@ -135,8 +135,8 @@ public class RouteRequest {
     public void setEndsOfficeBarToKingQueen() {
         setOrigin("The Office Bar, 1105 W. Peachtree St, Atlanta");
         setDestination("King Queen Building, 5 Concourse Pkwy, Sandy Springs, GA 30328");
-    }
 
+    }
     public Route getAPIWeightedGraph (WayPoint origin, WayPoint destination, String mode) {
         // todo - complete getAPIWeightedGraph() method
         // create connector
@@ -162,6 +162,16 @@ public class RouteRequest {
         String jsonOutput = googleConnector.saveJsonToString();
         Route geographicRoute;
         geographicRoute = googleConnector.constructRoute(jsonOutput);
+        return geographicRoute;
+    }
+    public Route getAPIWeightedGraph (String origin, String destination, String mode, Boolean alternatives) {
+        // todo - complete getAPIWeightedGraph() method
+        // create connector
+        ApiConnector googleConnector = new ApiConnector(origin, destination, mode, alternatives);
+        String jsonOutput = googleConnector.saveJsonToString();
+        Route geographicRoute;
+        geographicRoute = googleConnector.constructRoute(jsonOutput);
+        geographicRoute.printGraph();
         return geographicRoute;
     }
 

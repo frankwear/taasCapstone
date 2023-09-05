@@ -33,7 +33,7 @@ public class GeoModelAnalyzer {
         LinkedList<Route> routes = new LinkedList<>();
 
 
-        Route coreRoute = tempRequest.getAPIWeightedGraph(origin, destination, "transit");
+        Route coreRoute = tempRequest.getAPIWeightedGraph(origin, destination, "transit", Boolean.TRUE);
         modelRouteRequest.originWaypoint = coreRoute.wayPointLinkedList.getFirst();
         modelRouteRequest.destinationWaypoint = coreRoute.wayPointLinkedList.getLast();
         coreRoute = removeAdjacentSameModeEdges(coreRoute);

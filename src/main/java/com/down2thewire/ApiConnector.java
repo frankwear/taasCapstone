@@ -20,6 +20,10 @@ public class ApiConnector {
     public ApiConnector(String origin, String destination, String mode){
         this.url = buildDirectionsUrl(origin, destination, mode, apiKey);
     }
+    public ApiConnector(String origin, String destination, String mode, Boolean alternatives){
+        this.url = buildDirectionsUrl(origin, destination, mode, apiKey, alternatives);
+        System.out.println(" ");
+    }
 
     public ApiConnector(Vertex2 originVertex, Vertex2 destinationVertex, String mode){
         this.url = buildDirectionsUrl(originVertex.location.AsString(), destinationVertex.location.AsString(), mode, apiKey);
@@ -32,7 +36,14 @@ public class ApiConnector {
         return "https://maps.googleapis.com/maps/api/directions/json?" +
                 "origin=" + origin.replace(" ", "+") +
                 "&destination=" + destination.replace(" ", "+") +
-                "&Alternative=" + "TRUE" +
+                "&mode=" + mode +
+                "&key=" + apiKey;
+    }
+    private static String buildDirectionsUrl(String origin, String destination, String mode, String apiKey, Boolean alternatives) {
+        return "https://maps.googleapis.com/maps/api/directions/json?" +
+                "origin=" + origin.replace(" ", "+") +
+                "&destination=" + destination.replace(" ", "+") +
+                "&Alternatives=" + alternatives +
                 "&mode=" + mode +
                 "&key=" + apiKey;
     }
