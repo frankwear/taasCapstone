@@ -1,11 +1,16 @@
 package com.down2thewire;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class GeoModelAnalyzer {
+
+//    public GeographicModel geographicMap;
     GeographicModel geographicMap = new GeographicModel();
-    List<Route> routeList = new ArrayList<>();
+
+    //List<Route> routeList = new ArrayList<>();
+    List<Route> routeList = new LinkedList<>();
     WayPoint originWayPoint;
 
     WayPoint destinationWayPoint;
@@ -19,11 +24,15 @@ public class GeoModelAnalyzer {
     }
 
 
-    public GeographicModel generateGeoModel(){
+    public GeographicModel generateGeoModel() {
         String origin = modelRouteRequest.getOrigin();
         String destination = modelRouteRequest.getDestination();
         List<String> modes = modelRouteRequest.getModePrefAsList();
         RouteRequest tempRequest = new RouteRequest();
+
+        LinkedList<Route> routes = new LinkedList<>();
+
+
         Route coreRoute = tempRequest.getAPIWeightedGraph(origin, destination, "transit");
         modelRouteRequest.originWaypoint = coreRoute.wayPointLinkedList.getFirst();
         modelRouteRequest.destinationWaypoint = coreRoute.wayPointLinkedList.getLast();
@@ -32,44 +41,82 @@ public class GeoModelAnalyzer {
         this.destinationWayPoint = coreRoute.wayPointLinkedList.getLast();
         this.routeList.add(coreRoute);
         for (int i = 1; i < coreRoute.wayPointLinkedList.size(); i++) {
-            WayPoint legStart = coreRoute.wayPointLinkedList.get(i-1);
+            WayPoint legStart = coreRoute.wayPointLinkedList.get(i - 1);
             WayPoint legEnd = coreRoute.wayPointLinkedList.get(i);
             for (String loopMode : modes) {
                 Route legRoute = tempRequest.getAPIWeightedGraph(legStart, legEnd, loopMode);
-                legRoute = GeoModelAnalyzer.removeAdjacentSameModeEdges(legRoute);
+                legRoute = removeAdjacentSameModeEdges(legRoute);
                 this.routeList.add(legRoute);
  //               this.geographicMap.addGraph(legRoute);
             }
-            geographicMap = GeoModelAnalyzer.removeDuplicateVertices(geographicMap);
+            //geographicMap = GeoModelAnalyzer.removeDuplicateVertices(geographicMap)
         }
-        for (int i = 0; i < routeList.size(); i++){
-            int size = routeList.get(i).wayPointLinkedList.size();
-            Vertex2 lastLegDestination = new Vertex2(new Location(0.0d, 0.0d));
-            for (int j = 0; j < size-1; j++){
-                WayPoint w1 = routeList.get(i).wayPointLinkedList.get(j);
-                Vertex2 v1 = new Vertex2(new Location(0.0,0.0));
-                if (j==0) {
-                    v1 = Vertex2.waypointToVertex(w1);
-                } else {
-                     v1 = lastLegDestination;
+
+//        GeographicModel geographicMap = new GeographicModel();
+
+        for (Route route : routes) {
+            if (route.wayPointLinkedList != null) {
+                for (int i = 0; i < route.wayPointLinkedList.size(); i++) {
+                    WayPoint w1 = route.wayPointLinkedList.get(i);
+                    if (w1 != null) {
+                        Vertex2 v1 = Vertex2.waypointToVertex(w1);
+                        if (v1 != null) {
+                            geographicMap.addVertex(v1);
+
+                            if (i > 0) {
+                                WayPoint w2 = route.wayPointLinkedList.get(i - 1);
+                                if (w2 != null) {
+                                    Vertex2 v2 = Vertex2.waypointToVertex(w2);
+                                    if (v2 != null) {
+                                        Edge2<Vertex2> edge = new Edge2<>(v1, v2,
+                                                (w1.getEdge() != null) ? w1.getEdge().getMode() : null,
+                                                (w1.getEdge() != null) ? w1.getEdge().getDuration() : 0,
+                                                (w1.getEdge() != null) ? w1.getEdge().getCost() : 0,
+                                                (w1.getEdge() != null) ? w1.getEdge().distance : 0);
+                                        v1.addEdge(edge);
+                                        geographicMap.addEdge(edge);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-                Edge2<WayPoint> e1 = w1.getEdge();
-                WayPoint w2 = routeList.get(i).wayPointLinkedList.get(j+1);
-                Vertex2 v2 = Vertex2.waypointToVertex(w2);
-                Edge2<Vertex2> forward = new Edge2<>(v1, v2, e1.getMode(), e1.getDuration(), e1.getCost(), e1.distance);
-                v1.addEdge(forward);
-                Edge2<Vertex2> backward = new Edge2<>(v2, v1, e1.getMode(), e1.getDuration(), e1.getCost(), e1.distance);
-                v2.addEdge(backward);
-                geographicMap.addVertex(v1);
-                if (j == size-1){
-                    geographicMap.addVertex(v2);
-                }
-                lastLegDestination = v2;
             }
         }
-        //FixMe - some vertices have only one edge
+
+
         return geographicMap;
     }
+
+
+
+//        for (int i = 0; i < routeList.size(); i++){
+//            int size = routeList.get(i).wayPointLinkedList.size();
+//            Vertex2 lastLegDestination = new Vertex2(new Location(0.0d, 0.0d));
+//            for (int j = 0; j < size-1; j++){
+//                WayPoint w1 = routeList.get(i).wayPointLinkedList.get(j);
+//                Vertex2 v1 = new Vertex2(new Location(0.0,0.0));
+//                if (j==0) {
+//                    v1 = Vertex2.waypointToVertex(w1);
+//                } else {
+//                     v1 = lastLegDestination;
+//                }
+//                Edge2<WayPoint> e1 = w1.getEdge();
+//                WayPoint w2 = routeList.get(i).wayPointLinkedList.get(j+1);
+//                Vertex2 v2 = Vertex2.waypointToVertex(w2);
+//                Edge2<Vertex2> forward = new Edge2<>(v1, v2, e1.getMode(), e1.getDuration(), e1.getCost(), e1.distance);
+//                v1.addEdge(forward);
+//                Edge2<Vertex2> backward = new Edge2<>(v2, v1, e1.getMode(), e1.getDuration(), e1.getCost(), e1.distance);
+//                v2.addEdge(backward);
+//                geographicMap.addVertex(v1);
+//                if (j == size-1){
+//                    geographicMap.addVertex(v2);
+//                }
+//                lastLegDestination = v2;
+//            }
+//        }
+        //FixMe - some vertices have only one edge
+
     public static Route removeAdjacentSameModeEdges(Route route) {  // considering routes non-branching
 //todo - Correct logic on this to have edge as part of vertex.  Also change to apply only to Routes and not geomodels.
 

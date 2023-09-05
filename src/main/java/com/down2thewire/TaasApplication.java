@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class TaasApplication {
     static GeoModelAnalyzer instanceGmAnalyzer;
-//    static RouteAnalyzer instanceRA;
+    //    static RouteAnalyzer instanceRA;
     static RouteRequest instanceRR;
     static LinkedList<GeographicModel> instanceRouteOffering;
     static GeographicModel chosenRoute;

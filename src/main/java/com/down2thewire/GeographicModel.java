@@ -4,7 +4,9 @@ import java.util.*;
 
 public class GeographicModel {
     LinkedList<Vertex2> vertexList;
+
     LinkedList<Edge2> edgeList;
+    List<Edge2<Vertex2>> eList = new ArrayList<>();
 
 
     public Edge2 getEdge(Vertex2 start, Vertex2 end) {
