@@ -6,7 +6,7 @@ import java.util.List;
 
 public class GeoModelAnalyzer {
 
-//    public GeographicModel geographicMap;
+    //    public GeographicModel geographicMap;
     GeographicModel geographicMap = new GeographicModel();
 
     //List<Route> routeList = new ArrayList<>();
@@ -40,6 +40,8 @@ public class GeoModelAnalyzer {
         this.originWayPoint = coreRoute.wayPointLinkedList.getFirst();
         this.destinationWayPoint = coreRoute.wayPointLinkedList.getLast();
         this.routeList.add(coreRoute);
+
+
         for (int i = 1; i < coreRoute.wayPointLinkedList.size(); i++) {
             WayPoint legStart = coreRoute.wayPointLinkedList.get(i - 1);
             WayPoint legEnd = coreRoute.wayPointLinkedList.get(i);
@@ -47,7 +49,9 @@ public class GeoModelAnalyzer {
                 Route legRoute = tempRequest.getAPIWeightedGraph(legStart, legEnd, loopMode);
                 legRoute = removeAdjacentSameModeEdges(legRoute);
                 this.routeList.add(legRoute);
- //               this.geographicMap.addGraph(legRoute);
+                routes.add(legRoute);
+
+                //               this.geographicMap.addGraph(legRoute);
             }
             //geographicMap = GeoModelAnalyzer.removeDuplicateVertices(geographicMap)
         }
@@ -115,7 +119,7 @@ public class GeoModelAnalyzer {
 //                lastLegDestination = v2;
 //            }
 //        }
-        //FixMe - some vertices have only one edge
+    //FixMe - some vertices have only one edge
 
     public static Route removeAdjacentSameModeEdges(Route route) {  // considering routes non-branching
 //todo - Correct logic on this to have edge as part of vertex.  Also change to apply only to Routes and not geomodels.

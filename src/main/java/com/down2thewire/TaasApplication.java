@@ -46,7 +46,6 @@ public class TaasApplication {
 //        session.instanceRA.getAllPaths();
 
 //        session.instanceRouteOffering = session.instanceRA.getBest4UserRoutes(); // comment
-        System.out.println("Done");
 //          chosenRoute = instanceUI.getUsersChoiceOfRoute(session.instanceRouteOffering);
 //          instanceUI.displayRoute(chosenRoute);
     }

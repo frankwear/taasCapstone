@@ -11,7 +11,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 public class WeightedGraphNameGenerator {
-    private String apiKey = ApiKeys.getGoogleKey();;  // Todo - Outdated API key.  Teams chat with Jeff.
+    private final String apiKey = ApiKeys.getGoogleKey();  // Todo - Outdated API key.  Teams chat with Jeff.
 
     public String getHumanReadableName(double latitude, double longitude) {
         String url = buildGeocodingUrl(latitude, longitude, apiKey);

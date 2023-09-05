@@ -32,7 +32,7 @@ public class Location {
         roundedLatitude = roundedLatitude/100000;
         double roundedLongitude = Math.round(getLongitude()*100000);
         roundedLongitude = roundedLongitude/100000;
-        return String.valueOf(roundedLatitude) + "," + String.valueOf(roundedLongitude);
+        return roundedLatitude + "," + roundedLongitude;
     }
 
     public Long generateUniqueID() {
