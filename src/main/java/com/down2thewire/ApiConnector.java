@@ -32,6 +32,7 @@ public class ApiConnector {
         return "https://maps.googleapis.com/maps/api/directions/json?" +
                 "origin=" + origin.replace(" ", "+") +
                 "&destination=" + destination.replace(" ", "+") +
+                "&Alternative=" + "TRUE" +
                 "&mode=" + mode +
                 "&key=" + apiKey;
     }
