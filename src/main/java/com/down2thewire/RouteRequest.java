@@ -137,7 +137,7 @@ public class RouteRequest {
         setDestination("King Queen Building, 5 Concourse Pkwy, Sandy Springs, GA 30328");
     }
 
-    public Route getAPIWeightedGraph (WayPoint origin, WayPoint destination, String mode) {
+    public Route getRouteFromApi(WayPoint origin, WayPoint destination, String mode) {
         // todo - complete getAPIWeightedGraph() method
         // create connector
         ApiConnector googleConnector = new ApiConnector(origin, destination, mode);
@@ -146,7 +146,7 @@ public class RouteRequest {
         apiRoute = googleConnector.constructRoute(jsonOutput);
         return apiRoute;
     }
-    public Route getAPIWeightedGraph (Vertex2 origin, Vertex2 destination, String mode) {
+    public Route getRouteFromApi(Vertex2 origin, Vertex2 destination, String mode) {
         // todo - complete getAPIWeightedGraph() method
         // create connector
         ApiConnector googleConnector = new ApiConnector(origin, destination, mode);
@@ -155,7 +155,7 @@ public class RouteRequest {
         geographicRoute = googleConnector.constructRoute(jsonOutput);
         return geographicRoute;
     }
-    public Route getAPIWeightedGraph (String origin, String destination, String mode) {
+    public Route getRouteFromApi(String origin, String destination, String mode) {
         // todo - complete getAPIWeightedGraph() method
         // create connector
         ApiConnector googleConnector = new ApiConnector(origin, destination, mode);
@@ -163,6 +163,15 @@ public class RouteRequest {
         Route geographicRoute;
         geographicRoute = googleConnector.constructRoute(jsonOutput);
         return geographicRoute;
+    }
+    public LinkedList<Route> getRoutesFromApi(String origin, String destination, String mode, Boolean alternatives) {
+        // todo - complete getAPIWeightedGraph() method
+        // create connector
+        ApiConnector googleConnector = new ApiConnector(origin, destination, mode, Boolean.TRUE);
+        String jsonOutput = googleConnector.saveJsonToString();
+        LinkedList<Route> areaRoutes = new LinkedList<>();
+        areaRoutes = googleConnector.constructRouteList(jsonOutput);
+        return areaRoutes;
     }
 
 

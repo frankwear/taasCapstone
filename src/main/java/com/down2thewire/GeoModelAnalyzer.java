@@ -1,6 +1,7 @@
 package com.down2thewire;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class GeoModelAnalyzer {
@@ -24,18 +25,35 @@ public class GeoModelAnalyzer {
         String destination = modelRouteRequest.getDestination();
         List<String> modes = modelRouteRequest.getModePrefAsList();
         RouteRequest tempRequest = new RouteRequest();
-        Route coreRoute = tempRequest.getAPIWeightedGraph(origin, destination, "transit");
-        modelRouteRequest.originWaypoint = coreRoute.wayPointLinkedList.getFirst();
-        modelRouteRequest.destinationWaypoint = coreRoute.wayPointLinkedList.getLast();
-        coreRoute = removeAdjacentSameModeEdges(coreRoute);
-        this.originWayPoint = coreRoute.wayPointLinkedList.getFirst();
-        this.destinationWayPoint = coreRoute.wayPointLinkedList.getLast();
-        this.routeList.add(coreRoute);
-        for (int i = 1; i < coreRoute.wayPointLinkedList.size(); i++) {
-            WayPoint legStart = coreRoute.wayPointLinkedList.get(i-1);
-            WayPoint legEnd = coreRoute.wayPointLinkedList.get(i);
+//        Route coreRoute = tempRequest.getRouteFromApi(origin, destination, "transit");
+
+        LinkedList<Route> coreRoute = tempRequest.getRoutesFromApi(origin, destination, "transit", Boolean.TRUE);
+
+        // the following 7 code lines are to process just the first returned route from the coreRoute list
+        // this we become a loop after tested successfully, to process all routes in list
+
+        modelRouteRequest.originWaypoint = coreRoute.getFirst().wayPointLinkedList.getFirst();
+        modelRouteRequest.destinationWaypoint = coreRoute.getFirst().wayPointLinkedList.getLast();
+        coreRoute.set(0, removeAdjacentSameModeEdges(coreRoute.getFirst()));
+        this.originWayPoint = coreRoute.getFirst().wayPointLinkedList.getFirst();
+        this.destinationWayPoint = coreRoute.getFirst().wayPointLinkedList.getLast();
+        this.routeList.add(coreRoute.getFirst());
+        for (int i = 1; i < coreRoute.getFirst().wayPointLinkedList.size(); i++) {
+            WayPoint legStart = coreRoute.getFirst().wayPointLinkedList.get(i-1);
+            WayPoint legEnd = coreRoute.getFirst().wayPointLinkedList.get(i);
+
+//            modelRouteRequest.originWaypoint = coreRoute.wayPointLinkedList.getFirst();
+//            modelRouteRequest.destinationWaypoint = coreRoute.wayPointLinkedList.getLast();
+//            coreRoute = removeAdjacentSameModeEdges(coreRoute));
+//            this.originWayPoint = coreRoute.wayPointLinkedList.getFirst();
+//            this.destinationWayPoint = coreRoute.wayPointLinkedList.getLast();
+//            this.routeList.add(coreRoute);
+//            for (int i = 1; i < coreRoute.wayPointLinkedList.size(); i++) {
+//                WayPoint legStart = coreRoute.wayPointLinkedList.get(i-1);
+//                WayPoint legEnd = coreRoute.wayPointLinkedList.get(i);
+
             for (String loopMode : modes) {
-                Route legRoute = tempRequest.getAPIWeightedGraph(legStart, legEnd, loopMode);
+                Route legRoute = tempRequest.getRouteFromApi(legStart, legEnd, loopMode);
                 legRoute = GeoModelAnalyzer.removeAdjacentSameModeEdges(legRoute);
                 this.routeList.add(legRoute);
  //               this.geographicMap.addGraph(legRoute);

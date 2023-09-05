@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.LinkedList;
 
 public class ApiConnector {
     String apiKey = ApiKeys.getGoogleKey();
@@ -19,6 +20,9 @@ public class ApiConnector {
 
     public ApiConnector(String origin, String destination, String mode){
         this.url = buildDirectionsUrl(origin, destination, mode, apiKey);
+    }
+    public ApiConnector(String origin, String destination, String mode, Boolean alternatives){
+        this.url = buildDirectionsUrl(origin, destination, mode, apiKey, alternatives);
     }
 
     public ApiConnector(Vertex2 originVertex, Vertex2 destinationVertex, String mode){
@@ -32,6 +36,14 @@ public class ApiConnector {
         return "https://maps.googleapis.com/maps/api/directions/json?" +
                 "origin=" + origin.replace(" ", "+") +
                 "&destination=" + destination.replace(" ", "+") +
+                "&mode=" + mode +
+                "&key=" + apiKey;
+    }
+    private static String buildDirectionsUrl(String origin, String destination, String mode, String apiKey, Boolean alternatives) {
+        return "https://maps.googleapis.com/maps/api/directions/json?" +
+                "origin=" + origin.replace(" ", "+") +
+                "&destination=" + destination.replace(" ", "+") +
+                "&alternatives=true" +
                 "&mode=" + mode +
                 "&key=" + apiKey;
     }
@@ -57,6 +69,73 @@ public class ApiConnector {
         }
         connection.disconnect();
         return jsonText;
+    }
+
+    public LinkedList<Route> constructRouteList(String json) {
+        LinkedList<Route> routes = new LinkedList<>();
+
+        JSONObject apiDirectionsJson = new JSONObject(json);
+        JSONArray routesArray = apiDirectionsJson.getJSONArray("routes");
+        for (int k = 0; k < routesArray.length(); k++) {
+            JSONObject apiRoute = routesArray.getJSONObject(k);
+            JSONArray legsArray = apiRoute.getJSONArray("legs");
+            for (int i = 0; i < legsArray.length(); i++) {
+                JSONObject leg = legsArray.getJSONObject(i);
+                JSONArray apiEdgesArray = leg.getJSONArray("steps");
+                String startVertexHumanName = "";
+                WayPoint lastLegDestination = new WayPoint(new Location(0.00,0.00));
+                Route route = new Route();
+                for (int j = 0; j < apiEdgesArray.length(); j++) {
+                    JSONObject step = apiEdgesArray.getJSONObject(j);
+
+                    int duration = step.getJSONObject("duration").getInt("value");
+                    int distance = step.getJSONObject("distance").getInt("value");
+
+//                    String startVertexName = step.getJSONObject("start_location").toString();
+//                    String endVertexName = step.getJSONObject("end_location").toString();
+                    double sLongitude = step.getJSONObject("start_location").getDouble("lng");
+                    double sLatitude = step.getJSONObject("start_location").getDouble("lat");
+                    Location start = new Location(sLatitude, sLongitude);
+                    double eLongitude = step.getJSONObject("end_location").getDouble("lng");
+                    double eLatitude = step.getJSONObject("end_location").getDouble("lat");
+                    Location end = new Location(eLatitude, eLongitude);
+                    String mode = step.getString("travel_mode").toLowerCase();
+
+                    // Construct the name generator and retrieve the human-readable names
+////                    WeightedGraphNameGenerator nameGenerator = new WeightedGraphNameGenerator();
+//                    if (startVertexHumanName.equals("")) {
+//                        startVertexHumanName = nameGenerator.getHumanReadableName(sLatitude, sLongitude);
+//                    }
+//                    String endVertexHumanName = nameGenerator.getHumanReadableName(eLatitude, eLongitude);
+
+                    // Create vertices with human-readable names
+                    WayPoint source = new WayPoint(start);
+                    WayPoint destination = new WayPoint(end);
+
+                    if(j == 0){  //first iteration, normally
+                        route.addWaypoint(source);
+                    } else {
+                        source = lastLegDestination;
+                    }
+                    source.setEdge(new Edge2(source, destination, mode, duration, 0.00, distance));
+                    route.addWaypoint(destination);
+
+                    if (route.wayPointLinkedList.size() > 30) {break;}
+                    lastLegDestination = destination;
+
+/*
+                    // Get the existing start and end vertices
+                    WeightedGraph.Vertex2 source = new WeightedGraph.Vertex2(new Location(sLatitude, sLongitude), startVertexName);
+                    WeightedGraph.Vertex2 destination = new WeightedGraph.Vertex2(new Location(eLatitude, eLongitude), endVertexName);
+
+                    weightedGraph.addEdge(source, destination, mode, duration, 0.0, distance);
+                    */
+                }
+                routes.add(route);
+                if (route.wayPointLinkedList.size() > 30) {break;}
+            }
+        }
+        return routes;
     }
 
     public Route constructRoute(String json) {
