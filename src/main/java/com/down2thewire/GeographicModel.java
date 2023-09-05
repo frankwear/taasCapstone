@@ -163,7 +163,13 @@ public class GeographicModel {
         return null;
     }
 
+    public void addEdge(GeographicModel e, Edge2<Vertex2> edge) {
+        edgeList.add(edge);
+    }
 
+    public void addEdge(Edge2<Vertex2> edge) {
+        eList.add(edge);
+    }
 
 
 //    public void loadTestGraph1(WeightedGraph graph){

@@ -1,7 +1,7 @@
 package com.down2thewire;
 
 public class UserAccount {
-    public String accountID = new String();
+    public String accountID = "";
     int[] modePref = new int[10];
     String priority;  //QUICK, CHEAP, FREE, COMFORTABLE, PERSONALIZED, EASY, EXERCISE
 
@@ -12,7 +12,7 @@ public class UserAccount {
 
     }
 
-    public int[] getModePref(){ return this.modePref;};
+    public int[] getModePref(){ return this.modePref;}
 
     public void setUID(String id){
         this.accountID = id;
