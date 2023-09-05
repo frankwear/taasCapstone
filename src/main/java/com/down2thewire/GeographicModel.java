@@ -114,12 +114,12 @@ public class GeographicModel {
         Iterator<Vertex2> vertexIterator = vertexList.iterator();
         while (vertexIterator.hasNext()) {
             Vertex2 tempVertex = vertexIterator.next();
-            System.out.println(tempVertex.location.longitude + "  " + tempVertex.location.latitude + "  " +
+            System.out.println("\nVertex: " + tempVertex.location.longitude + "  " + tempVertex.location.latitude + "  " +
                     tempVertex.getId());
             Iterator<Edge2> edge2Iterator = tempVertex.outgoingEdges.iterator();
             while (edge2Iterator.hasNext()){
                 Edge2<Vertex2> tempEdge = edge2Iterator.next();
-                System.out.println("Destination: " + tempEdge.getStart().getId().toString() + "\nMode: " + tempEdge.getMode() +
+                System.out.println("Destination: " + tempEdge.getEnd().getId().toString() + "\nMode: " + tempEdge.getMode() +
                         "\nDistance: " + tempEdge.distance);
             }
         }
