@@ -101,10 +101,18 @@ public class GeographicModel {
     public void addGraph(Route route) {
 
         // iterate over edges of argument g - adding an edge adds if vertices if they are unique
-        ListIterator<WayPoint> wayPointListIteratorIterator = (ListIterator<WayPoint>) route.wayPointLinkedList;
+        ListIterator<WayPoint> wayPointListIteratorIterator = route.wayPointLinkedList.listIterator();
         while (wayPointListIteratorIterator.hasNext()) {
             vertexList.add(convertToVertex(wayPointListIteratorIterator.next()));
         }
+    }
+    public GeographicModel addGraph(GeographicModel tempGeoModel) {
+        LinkedList<Vertex2> tempVertexList = new LinkedList<>(tempGeoModel.vertexList);
+        ListIterator<Vertex2> vertex2ListIterator = tempVertexList.listIterator();
+        while (vertex2ListIterator.hasNext()) {
+            this.vertexList.add(vertex2ListIterator.next());
+        }
+        return this;
     }
 
 

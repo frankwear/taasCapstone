@@ -25,24 +25,27 @@ public class GeoModelAnalyzer {
     public GeographicModel generateGeoModel(){
         String origin = modelRouteRequest.getOrigin();
         String destination = modelRouteRequest.getDestination();
-        List<String> modes = modelRouteRequest.getModePrefAsList();
+ //       List<String> modes = modelRouteRequest.getModePrefAsList();
         RouteRequest tempRequest = new RouteRequest();
 //        Route coreRoute = tempRequest.getRouteFromApi(origin, destination, "transit");
 
         LinkedList<Route> coreRoute = tempRequest.getRoutesFromApi(origin, destination, "transit", Boolean.TRUE);
 
+        this.originWayPoint = coreRoute.get(0).wayPointLinkedList.getFirst();
+        this.destinationWayPoint = coreRoute.get(0).wayPointLinkedList.getLast();
         // the following 7 code lines are to process just the first returned route from the coreRoute list
         // this we become a loop after tested successfully, to process all routes in list
 
-        modelRouteRequest.originWaypoint = coreRoute.getFirst().wayPointLinkedList.getFirst();
-        modelRouteRequest.destinationWaypoint = coreRoute.getFirst().wayPointLinkedList.getLast();
-        coreRoute.set(0, removeAdjacentSameModeEdges(coreRoute.getFirst()));
-        this.originWayPoint = coreRoute.getFirst().wayPointLinkedList.getFirst();
-        this.destinationWayPoint = coreRoute.getFirst().wayPointLinkedList.getLast();
-        this.routeList.add(coreRoute.getFirst());
-        for (int i = 1; i < coreRoute.getFirst().wayPointLinkedList.size(); i++) {
-            WayPoint legStart = coreRoute.getFirst().wayPointLinkedList.get(i-1);
-            WayPoint legEnd = coreRoute.getFirst().wayPointLinkedList.get(i);
+        for (int j = 0; j < coreRoute.size(); j++) {
+            coreRoute.set(j, removeAdjacentSameModeEdges(coreRoute.get(j)));
+            this.routeList.add(coreRoute.get(j));
+            this.geographicMap.addGraph(convertRouteToGeoModel(coreRoute.get(j)));
+        }
+
+        for (int i = 1; i < geographicMap.vertexList.size(); i++) {
+            Vertex2 legStart = geographicMap.vertexList.get(i-1);
+            Vertex2 legEnd = geographicMap.vertexList.get(i);
+            // todo - Set up repetitive lookup to a nexted loop
 
 //            modelRouteRequest.originWaypoint = coreRoute.wayPointLinkedList.getFirst();
 //            modelRouteRequest.destinationWaypoint = coreRoute.wayPointLinkedList.getLast();
@@ -53,28 +56,38 @@ public class GeoModelAnalyzer {
 //            for (int i = 1; i < coreRoute.wayPointLinkedList.size(); i++) {
 //                WayPoint legStart = coreRoute.wayPointLinkedList.get(i-1);
 //                WayPoint legEnd = coreRoute.wayPointLinkedList.get(i);
+            //Driving bicycling transit walking
+            List<String> modes= Arrays.asList("DRIVING", "BICYCLE", "TRANSIT", "WALKING");
 
             for (String loopMode : modes) {
                 Route legRoute = tempRequest.getRouteFromApi(legStart, legEnd, loopMode);
                 legRoute = GeoModelAnalyzer.removeAdjacentSameModeEdges(legRoute);
+
+                // todo add to geographic model
                 this.routeList.add(legRoute);
- //               this.geographicMap.addGraph(legRoute);
+                GeographicModel tempGeoModel = convertRouteToGeoModel(legRoute);
+                geographicMap.addGraph(tempGeoModel);
             }
             geographicMap = GeoModelAnalyzer.removeDuplicateVertices(geographicMap);
         }
-        for (int i = 0; i < routeList.size(); i++){
-            int size = routeList.get(i).wayPointLinkedList.size();
+        //FixMe - some vertices have only one edge
+        return geographicMap;
+    }
+
+    public GeographicModel convertRouteToGeoModel (Route route) {
+
+            int size = route.wayPointLinkedList.size();
             Vertex2 lastLegDestination = new Vertex2(new Location(0.0d, 0.0d));
             for (int j = 0; j < size-1; j++){
-                WayPoint w1 = routeList.get(i).wayPointLinkedList.get(j);
+                WayPoint w1 = route.wayPointLinkedList.get(j);
                 Vertex2 v1 = new Vertex2(new Location(0.0,0.0));
                 if (j==0) {
                     v1 = Vertex2.waypointToVertex(w1);
                 } else {
-                     v1 = lastLegDestination;
+                    v1 = lastLegDestination;
                 }
                 Edge2<WayPoint> e1 = w1.getEdge();
-                WayPoint w2 = routeList.get(i).wayPointLinkedList.get(j+1);
+                WayPoint w2 = route.wayPointLinkedList.get(j+1);
                 Vertex2 v2 = Vertex2.waypointToVertex(w2);
                 Edge2<Vertex2> forward = new Edge2<>(v1, v2, e1.getMode(), e1.getDuration(), e1.getCost(), e1.distance);
                 v1.addEdge(forward);
@@ -86,10 +99,9 @@ public class GeoModelAnalyzer {
                 }
                 lastLegDestination = v2;
             }
-        }
-        //FixMe - some vertices have only one edge
         return geographicMap;
     }
+
     public static Route removeAdjacentSameModeEdges(Route route) {  // considering routes non-branching
 //todo - Correct logic on this to have edge as part of vertex.  Also change to apply only to Routes and not geomodels.
 
