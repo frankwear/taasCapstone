@@ -10,6 +10,7 @@ public class TaasApplication {
     static GeographicModel chosenRoute;
     static UserInterface instanceUI;
 
+
     // Todo - interface with UI
 //    UserInterface instanceUI = new UserInterface();
 

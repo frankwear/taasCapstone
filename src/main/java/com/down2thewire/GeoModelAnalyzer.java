@@ -1,6 +1,7 @@
 package com.down2thewire;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ public class GeoModelAnalyzer {
 
     WayPoint destinationWayPoint;
     RouteRequest modelRouteRequest;
+
 
 
     public GeoModelAnalyzer() {
