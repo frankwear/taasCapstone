@@ -21,6 +21,24 @@ public class GeoModelAnalyzer {
         modelRouteRequest = rr;
     }
 
+    public void removeDuplicateVertices() {
+        geographicMap.sortVertexList();
+
+        for (int i = geographicMap.vertexList.size() - 1; i > 0; i--) {
+            Vertex2 currentVertex = geographicMap.vertexList.get(i);
+
+            Vertex2 nextVertex = geographicMap.vertexList.get(i - 1);
+
+            if (currentVertex.getId().equals(nextVertex.getId())) {
+                LinkedList<Edge2> tempEdges= geographicMap.vertexList.get(i).outgoingEdges;
+                for(int j = 0; j< tempEdges.size();j++){
+                    tempEdges.get(j).start=nextVertex;
+                    nextVertex.outgoingEdges.add(tempEdges.get(j));
+                }
+                geographicMap.vertexList.remove(i);//modified all edges; delete vertex i
+            }
+        }
+    }
 
     public GeographicModel generateGeoModel(){
         String origin = modelRouteRequest.getOrigin();
@@ -41,7 +59,8 @@ public class GeoModelAnalyzer {
             this.routeList.add(coreRoute.get(j));
             this.geographicMap.addGraph(convertRouteToGeoModel(coreRoute.get(j)));
         }
-
+        LinkedList<Vertex2> tempVertices= new LinkedList<>();
+        tempVertices=geographicMap.vertexList;
         for (int i = 1; i < geographicMap.vertexList.size(); i++) {
             Vertex2 legStart = geographicMap.vertexList.get(i-1);
             Vertex2 legEnd = geographicMap.vertexList.get(i);
@@ -64,11 +83,13 @@ public class GeoModelAnalyzer {
                 legRoute = GeoModelAnalyzer.removeAdjacentSameModeEdges(legRoute);
 
                 // todo add to geographic model
+                //create a bug and add to sprint
                 this.routeList.add(legRoute);
                 GeographicModel tempGeoModel = convertRouteToGeoModel(legRoute);
                 geographicMap.addGraph(tempGeoModel);
             }
-            geographicMap = GeoModelAnalyzer.removeDuplicateVertices(geographicMap);
+            removeDuplicateVertices();
+            //redo remove duplicates method
         }
         //FixMe - some vertices have only one edge
         return geographicMap;
@@ -132,6 +153,7 @@ public class GeoModelAnalyzer {
     } */
 
     public static GeographicModel removeDuplicateVertices(GeographicModel graph) {
+        //redo this method
  /*     // This version is not dependent on order, but way less efficient and more complex.  Save in case
         // needed for combined weighted graphs that are not linear.
         */
