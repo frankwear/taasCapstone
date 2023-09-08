@@ -36,6 +36,17 @@ public class GeographicModel {
         return !vertexList.contains(v);
     }
 
+
+    public void sortVertexList() {
+        Comparator<Vertex2> compareVertexList = (v1, v2) -> {
+        Long v1Id=v1.getId();
+        Long v2Id= v2.getId();
+        return v1Id.compareTo(v2Id);
+        };
+        Collections.sort(vertexList, compareVertexList);
+
+    }
+
     public int findMatch(Vertex2 tempVer) {
         int index = 0;
         for (Vertex2 mainVertex : this.vertexList) {

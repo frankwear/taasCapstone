@@ -10,7 +10,9 @@
 
 package com.down2thewire;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Vertex2 extends Node<Vertex2> {
     Location location;
@@ -80,21 +82,6 @@ public class Vertex2 extends Node<Vertex2> {
 
         // note see next few lines for code from Route
     }
-
-//    @Override
-//    public int compare(Vertex2 v1, Vertex2 v2) {
-//        Long v1Id = v1.getId();
-//        Long v2Id = v2.getId();
-//
-//        if (v1Id > v2Id) {
-//            return 1;
-//        } else if (v1Id < v2Id) {
-//            return -1;
-//        } else {
-//            return 0;
-//        }
-//    }
-
 
 /*
     public Edge2 addEdge(WayPoint start, WayPoint end, String mode, Integer duration, Double cost, Integer distance)
