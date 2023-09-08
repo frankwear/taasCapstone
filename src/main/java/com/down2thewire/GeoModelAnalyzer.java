@@ -131,6 +131,12 @@ public class GeoModelAnalyzer {
         return transitMap;
     } */
 
+
+    public void removeDuplicateVertices(){
+        for (int i = geographicMap.vertexList.size()-1; i >= 0; i--){
+
+        }
+    }
     public static GeographicModel removeDuplicateVertices(GeographicModel graph) {
  /*     // This version is not dependent on order, but way less efficient and more complex.  Save in case
         // needed for combined weighted graphs that are not linear.
