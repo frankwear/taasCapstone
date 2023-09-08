@@ -60,23 +60,14 @@ public class GeoModelAnalyzer {
             this.geographicMap.addGraph(convertRouteToGeoModel(coreRoute.get(j)));
         }
         LinkedList<Vertex2> tempVertices= new LinkedList<>();
-        tempVertices=geographicMap.vertexList;
-        for (int i = 1; i < geographicMap.vertexList.size(); i++) {
-            Vertex2 legStart = geographicMap.vertexList.get(i-1);
-            Vertex2 legEnd = geographicMap.vertexList.get(i);
+        tempVertices= (LinkedList<Vertex2>) geographicMap.vertexList.clone();
+        for (int i = 1; i < tempVertices.size(); i++) {
+            Vertex2 legStart = tempVertices.get(i-1);
+            Vertex2 legEnd = tempVertices.get(i);
             // todo - Set up repetitive lookup to a nexted loop
 
-//            modelRouteRequest.originWaypoint = coreRoute.wayPointLinkedList.getFirst();
-//            modelRouteRequest.destinationWaypoint = coreRoute.wayPointLinkedList.getLast();
-//            coreRoute = removeAdjacentSameModeEdges(coreRoute));
-//            this.originWayPoint = coreRoute.wayPointLinkedList.getFirst();
-//            this.destinationWayPoint = coreRoute.wayPointLinkedList.getLast();
-//            this.routeList.add(coreRoute);
-//            for (int i = 1; i < coreRoute.wayPointLinkedList.size(); i++) {
-//                WayPoint legStart = coreRoute.wayPointLinkedList.get(i-1);
-//                WayPoint legEnd = coreRoute.wayPointLinkedList.get(i);
-            //Driving bicycling transit walking
-            List<String> modes= Arrays.asList("DRIVING", "BICYCLE", "TRANSIT", "WALKING");
+
+            List<String> modes= Arrays.asList("driving", "bicycling", "transit", "walking");
 
             for (String loopMode : modes) {
                 Route legRoute = tempRequest.getRouteFromApi(legStart, legEnd, loopMode);
@@ -88,15 +79,14 @@ public class GeoModelAnalyzer {
                 GeographicModel tempGeoModel = convertRouteToGeoModel(legRoute);
                 geographicMap.addGraph(tempGeoModel);
             }
-            removeDuplicateVertices();
-            //redo remove duplicates method
         }
+        removeDuplicateVertices();
         //FixMe - some vertices have only one edge
         return geographicMap;
     }
 
     public GeographicModel convertRouteToGeoModel (Route route) {
-
+            GeographicModel tempGeoModel = new GeographicModel();
             int size = route.wayPointLinkedList.size();
             Vertex2 lastLegDestination = new Vertex2(new Location(0.0d, 0.0d));
             for (int j = 0; j < size-1; j++){
@@ -114,13 +104,13 @@ public class GeoModelAnalyzer {
                 v1.addEdge(forward);
                 Edge2<Vertex2> backward = new Edge2<>(v2, v1, e1.getMode(), e1.getDuration(), e1.getCost(), e1.distance);
                 v2.addEdge(backward);
-                geographicMap.addVertex(v1);
-                if (j == size-1){
-                    geographicMap.addVertex(v2);
+                tempGeoModel.addVertex(v1);
+                if (j == size-2){
+                    tempGeoModel.addVertex(v2);
                 }
                 lastLegDestination = v2;
             }
-        return geographicMap;
+        return tempGeoModel;
     }
 
     public static Route removeAdjacentSameModeEdges(Route route) {  // considering routes non-branching
