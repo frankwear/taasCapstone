@@ -19,7 +19,7 @@ public class Vertex2 extends Node<Vertex2> {
     String description;
     Long id;
 
-    List<Edge2> outgoingEdges = new LinkedList<>();
+    LinkedList<Edge2> outgoingEdges = new LinkedList<>();
 
     // 0-walk, 1-drive, 2-rideshare, 3-carRental, 4-bicycle, 5-scooter, 6-transit, 7-bus, 8-airplane, 9-unused
     /*

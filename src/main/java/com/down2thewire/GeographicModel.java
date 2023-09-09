@@ -7,14 +7,7 @@ public class GeographicModel {
     LinkedList<Edge2> edgeList;
 
 
-    public Edge2 getEdge(Vertex2 start, Vertex2 end) {
-        for (Edge2 edge : edgeList) {
-            if (edge.getStart().equals(start) && edge.getEnd().equals(end)) {
-                return edge;
-            }
-        }
-        return null; // Edge not found
-    }
+
 
 
 
@@ -41,6 +34,8 @@ public class GeographicModel {
     public Boolean isUnique(Vertex2 v){
         return !vertexList.contains(v);
     }
+
+
 
     public int findMatch(Vertex2 tempVer) {
         int index = 0;
@@ -84,9 +79,6 @@ public class GeographicModel {
     }
 
 
-    public void removeLastEdge() {
-        edgeList.removeLast();
-    }
 
     public void removeLastVertex() {
         vertexList.removeLast();
@@ -113,6 +105,10 @@ public class GeographicModel {
             this.vertexList.add(vertex2ListIterator.next());
         }
         return this;
+    }
+
+    public void sortVertexList(){
+        vertexList.sort(Comparator.comparing(Vertex2::getId));
     }
 
 
