@@ -143,60 +143,55 @@ public class GeoModelAnalyzer {
     } */
 
 
-    public void removeDuplicateVertices(){
-        for (int i = geographicMap.vertexList.size()-1; i >= 0; i--){
-
-        }
-    }
-    public static GeographicModel removeDuplicateVertices(GeographicModel graph) {
-        //redo this method
- /*     // This version is not dependent on order, but way less efficient and more complex.  Save in case
-        // needed for combined weighted graphs that are not linear.
-        */
-        // Remove duplicate vertices and reassign edges to kept vertex
-        int vLSize = graph.vertexList.size();
-        for (int i = 0; i < vLSize; i++) {
-            for (int j = i + 1; j < vLSize; j++) {
-                if (graph.vertexList.get(i).isMatch(graph.vertexList.get(j))) {
-                    // redirect edges from vert j to vert i so you can delete vertex j
-                    // delete edges between the two matched vertices
-                    int eLSize = graph.edgeList.size();
-                    for (int k = 0; k < eLSize; k++) {
-                        if (graph.edgeList.get(k).start.isMatch(graph.vertexList.get(j))) {
-                            graph.edgeList.get(k).start = graph.vertexList.get(i);
-                        }
-                        if (graph.edgeList.get(k).end.isMatch(graph.vertexList.get(j))) {
-                            graph.edgeList.get(k).end = graph.vertexList.get(i);
-                        }
-                        if (graph.edgeList.get(k).start.isMatch(graph.edgeList.get(k).end)) {
-                            graph.edgeList.remove(k);
-                            eLSize--;
-                            k--;
-                        }
-                    }
-                    graph.vertexList.remove(j);
-                    vLSize--;
-                    j--;
-                }
-            }
-        }
-        // Remove duplicate edges
-        int eLSize = graph.edgeList.size();
-        for (int i = 0; i < eLSize; i++) {
-            for (int j = i + 1; j < eLSize; j++) {
-                if (graph.edgeList.get(i).mode == (graph.edgeList.get(j).mode)) {
-                    // reduce repeated lookups with local variables
-                    Edge2 edge1 = graph.edgeList.get(i);
-                    Edge2 edge2 = graph.edgeList.get(j);
-                    if (edge1.start.isMatch(edge2.start) && (edge1.end.isMatch(edge2.end))) {
-                        graph.edgeList.remove(j);  eLSize--; j--;
-                    }
-                    if (edge1.start.isMatch(edge2.end) && (edge1.end.isMatch(edge1.start))) {
-                        graph.edgeList.remove(j);  eLSize--; j--;
-                    }
-                }
-            }
-        }
-        return graph;
-    }
+//    public static GeographicModel removeDuplicateVertices(GeographicModel graph) {
+//        //redo this method
+// /*     // This version is not dependent on order, but way less efficient and more complex.  Save in case
+//        // needed for combined weighted graphs that are not linear.
+//        */
+//        // Remove duplicate vertices and reassign edges to kept vertex
+//        int vLSize = graph.vertexList.size();
+//        for (int i = 0; i < vLSize; i++) {
+//            for (int j = i + 1; j < vLSize; j++) {
+//                if (graph.vertexList.get(i).isMatch(graph.vertexList.get(j))) {
+//                    // redirect edges from vert j to vert i so you can delete vertex j
+//                    // delete edges between the two matched vertices
+//                    int eLSize = graph.edgeList.size();
+//                    for (int k = 0; k < eLSize; k++) {
+//                        if (graph.edgeList.get(k).start.isMatch(graph.vertexList.get(j))) {
+//                            graph.edgeList.get(k).start = graph.vertexList.get(i);
+//                        }
+//                        if (graph.edgeList.get(k).end.isMatch(graph.vertexList.get(j))) {
+//                            graph.edgeList.get(k).end = graph.vertexList.get(i);
+//                        }
+//                        if (graph.edgeList.get(k).start.isMatch(graph.edgeList.get(k).end)) {
+//                            graph.edgeList.remove(k);
+//                            eLSize--;
+//                            k--;
+//                        }
+//                    }
+//                    graph.vertexList.remove(j);
+//                    vLSize--;
+//                    j--;
+//                }
+//            }
+//        }
+//        // Remove duplicate edges
+//        int eLSize = graph.edgeList.size();
+//        for (int i = 0; i < eLSize; i++) {
+//            for (int j = i + 1; j < eLSize; j++) {
+//                if (graph.edgeList.get(i).mode == (graph.edgeList.get(j).mode)) {
+//                    // reduce repeated lookups with local variables
+//                    Edge2 edge1 = graph.edgeList.get(i);
+//                    Edge2 edge2 = graph.edgeList.get(j);
+//                    if (edge1.start.isMatch(edge2.start) && (edge1.end.isMatch(edge2.end))) {
+//                        graph.edgeList.remove(j);  eLSize--; j--;
+//                    }
+//                    if (edge1.start.isMatch(edge2.end) && (edge1.end.isMatch(edge1.start))) {
+//                        graph.edgeList.remove(j);  eLSize--; j--;
+//                    }
+//                }
+//            }
+//        }
+//        return graph;
+//    }
 }

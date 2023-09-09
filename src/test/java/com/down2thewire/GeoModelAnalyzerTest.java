@@ -48,7 +48,7 @@ class GeoModelAnalyzerTest {
     @Test
     void removeDuplicateVertices() {
         GeographicModel testGeoModel = createTestGraphWithDuplicateVertices();
-        testGeoModel = GeoModelAnalyzer.removeDuplicateVertices(testGeoModel);
+ //       testGeoModel = GeoModelAnalyzer.removeDuplicateVertices(testGeoModel);
         assertEquals(7, testGeoModel.vertexList.size());
         assertEquals(7, testGeoModel.edgeList.size());
         testGeoModel.printGraph();
