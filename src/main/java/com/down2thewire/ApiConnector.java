@@ -26,7 +26,7 @@ public class ApiConnector {
     }
 
     public ApiConnector(Vertex2 originVertex, Vertex2 destinationVertex, String mode){
-        this.url = buildDirectionsUrl(originVertex.location.AsString(), destinationVertex.location.AsString(), mode, apiKey);
+        this.url = buildDirectionsUrl(originVertex.getLocation().AsString(), destinationVertex.getLocation().AsString(), mode, apiKey);
     }
     public ApiConnector(WayPoint originWayPoint, WayPoint destinationWayPoint, String mode){
         this.url = buildDirectionsUrl(originWayPoint.location.AsString(), destinationWayPoint.location.AsString(), mode, apiKey);

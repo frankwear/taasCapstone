@@ -4,79 +4,107 @@ import java.util.*;
 
 public class GeographicModel {
     LinkedList<Vertex2> vertexList;
-    LinkedList<Edge2> edgeList;
-
-
-
-
-
 
     public GeographicModel() {
         this.vertexList = new LinkedList<>();
-        this.edgeList = new LinkedList<>();
     }
+
+
+
 
     public Vertex2 addVertex(Vertex2 v) {
-
         if(isUnique(v)) {
             vertexList.addLast(v);
+            return v;
         } else {
-            v = getVertex(findMatch(v));
+            System.out.println("Duplicate Vertex " + v.getId() + " not added.");  // Remove comment for debugging
+            return vertexList.get(findMatchById(v));
         }
-
-        return getVertex(getVertexIndex(v));  // return new vertex or the one that matched
     }
+
     public Vertex2 addVertex(Double latitude, Double longitude) {
         Location tempLocation = new Location (latitude, longitude);
         Vertex2 tempVertex = new Vertex2(tempLocation, tempLocation.generateUniqueID());
-        return tempVertex;
+        return addVertex(tempVertex);  // only adds a vertex is it is unique
     }
+
+    //////// Warning - this method removes the vertex from the linkedList regardless of other edges that may
+    // refer to is as start or end.  Only use after validating that it is not referenced.  ////////
+    private void removeVertexAndEdgesHard(int i){
+        this.vertexList.remove(i);
+    }
+
+    public void removeDuplicateVertices() {
+
+        // No duplicates should be added, but this is a cleanup just in case
+
+        sortVertexList();
+        for (int i = getVertexListSize() - 1; i > 0; i--) {
+            Vertex2 currentVertex = getVertex(i);
+            Vertex2 priorVertex = getVertex(i - 1);
+
+            if (currentVertex.getId().equals(priorVertex.getId())) {
+                currentVertex.updateNeighborsEdges(currentVertex, priorVertex);
+
+                // update currentVertex edges
+                for(int j = 0; j < currentVertex.getEdgeListSize(); j++){
+                    currentVertex.getOutgoingEdges().get(j).setStart(priorVertex);
+                    priorVertex.addEdge(currentVertex.getOutgoingEdges().get(j));
+                }
+                removeVertexAndEdgesHard(i);
+            }
+        }
+    }
+
     public Boolean isUnique(Vertex2 v){
-        return !vertexList.contains(v);
+        for (Vertex2 mainVertex : this.vertexList) {
+            if (mainVertex.getId().equals(v.getId())) {
+                return Boolean.FALSE;
+            }
+        }
+        return Boolean.TRUE;
     }
 
-
-
-    public int findMatch(Vertex2 tempVer) {
+    public int findMatchById(Vertex2 tempVertex) {
         int index = 0;
         for (Vertex2 mainVertex : this.vertexList) {
-            if (mainVertex.isMatch(tempVer)) {
+            if (mainVertex.isMatchById(tempVertex)) {
                 return index;
             }
             index++;
         }
         return -1;
     }
-    private Vertex2 getVertex(int i) {
+
+    public int getVertexListSize(){
+        return vertexList.size();
+    }
+    public Vertex2 getVertex(int i) {
         return vertexList.get(i);  // may return out of bounds if vertex doesn't exist
     }
 
-    public int getVertexIndex(Vertex2 v) {
-        ListIterator<Vertex2> vertexIterator = (ListIterator<Vertex2>) vertexList.iterator();
-        while (vertexIterator.hasNext()) {
-            if (vertexIterator.next() == v) {
-                return vertexIterator.previousIndex();
-            } //TODO Figure out what this means, maybe at an iterator ++
-        }   //vertexIterator++;
-        return -1; // return -1 if not found
-    }
-
-    public int getVertexIndex(String s) {
+    public LinkedList<Vertex2> getMatchingVertexNames(String s) {
+        LinkedList<Vertex2> matchingList = new LinkedList<>();
         ListIterator<Vertex2> vertexIterator = (ListIterator<Vertex2>) vertexList.iterator();
         while (vertexIterator.hasNext()) {
             if (vertexIterator.next().description.contains(s)) {
+                matchingList.addLast(vertexIterator.next());
+            } //TODO Figure out what this means, maybe at an iterator ++
+        }
+        return matchingList;
+    }
+
+    public int getVertexIndexById(Vertex2 v) {
+        ListIterator<Vertex2> vertexIterator = (ListIterator<Vertex2>) vertexList.iterator();
+        while (vertexIterator.hasNext()) {
+            if (vertexIterator.next().getId() == v.getId()) {
                 return vertexIterator.previousIndex();
             } //TODO Figure out what this means, maybe at an iterator ++
         }   //vertexIterator++;
         return -1; // return -1 if not found
     }
 
-    public Vertex2 getVertex(String s) {
-        int vIndex = getVertexIndex(s);
-        if (vIndex >= 0) {
-            return this.vertexList.get(vIndex);
-        } else {return null;}
-    }
+
 
 
 
@@ -118,14 +146,9 @@ public class GeographicModel {
         Iterator<Vertex2> vertexIterator = vertexList.iterator();
         while (vertexIterator.hasNext()) {
             Vertex2 tempVertex = vertexIterator.next();
-            System.out.println("\nVertex: " + tempVertex.location.longitude + "  " + tempVertex.location.latitude + "  " +
+            System.out.println("\nVertex: " + tempVertex.getLongitude() + "  " + tempVertex.getLatitude() + "  " +
                     tempVertex.getId());
-            Iterator<Edge2> edge2Iterator = tempVertex.outgoingEdges.iterator();
-            while (edge2Iterator.hasNext()){
-                Edge2<Vertex2> tempEdge = edge2Iterator.next();
-                System.out.println("Destination: " + tempEdge.getEnd().getId().toString() + "\nMode: " + tempEdge.getMode() +
-                        "\nDistance: " + tempEdge.distance);
-            }
+            tempVertex.printEdges();
         }
     }
 

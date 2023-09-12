@@ -49,8 +49,13 @@ abstract class Node<T extends Node> {
         return this.location.generateUniqueID();
     }
 
-    public Boolean isMatch(Node<T> node){
-        return node.location.isMatch(this.location);
+    public Boolean isNear(Node<T> node, int feet){
+        return node.location.isNear(this.location, feet);
+    }
+
+    public Boolean isMatchById(Node<T> node) {
+        if (node.getId().equals(this.id)){return Boolean.TRUE;}
+        else return Boolean.FALSE;
     }
     public Object getOutgoingEdges (){
         return edge;

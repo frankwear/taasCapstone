@@ -21,24 +21,7 @@ public class GeoModelAnalyzer {
         modelRouteRequest = rr;
     }
 
-    public void removeDuplicateVertices() {
-        geographicMap.sortVertexList();
 
-        for (int i = geographicMap.vertexList.size() - 1; i > 0; i--) {
-            Vertex2 currentVertex = geographicMap.vertexList.get(i);
-
-            Vertex2 nextVertex = geographicMap.vertexList.get(i - 1);
-
-            if (currentVertex.getId().equals(nextVertex.getId())) {
-                LinkedList<Edge2> tempEdges= geographicMap.vertexList.get(i).outgoingEdges;
-                for(int j = 0; j< tempEdges.size();j++){
-                    tempEdges.get(j).start=nextVertex;
-                    nextVertex.outgoingEdges.add(tempEdges.get(j));
-                }
-                geographicMap.vertexList.remove(i);//modified all edges; delete vertex i
-            }
-        }
-    }
 
     public GeographicModel generateGeoModel(){
         String origin = modelRouteRequest.getOrigin();
@@ -80,7 +63,7 @@ public class GeoModelAnalyzer {
                 geographicMap.addGraph(tempGeoModel);
             }
         }
-        removeDuplicateVertices();
+        geographicMap.removeDuplicateVertices();
         //FixMe - some vertices have only one edge
         return geographicMap;
     }

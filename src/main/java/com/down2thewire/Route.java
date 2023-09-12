@@ -35,7 +35,7 @@ public class Route {
     public Boolean isUnique(WayPoint v){
         Boolean hasMatch = false;
         for (WayPoint mainVertex : this.wayPointLinkedList) {
-            if (mainVertex.isMatch(v)) {
+            if (mainVertex.isMatchById(v)) {
                 hasMatch = true;
                 break;
             }
@@ -45,7 +45,7 @@ public class Route {
     public int findMatch(WayPoint tempVer) {
         int index = 0;
         for (WayPoint mainVertex : this.wayPointLinkedList) {
-            if (mainVertex.isMatch(tempVer)) {
+            if (mainVertex.isMatchById(tempVer)) {
                 return index;
             }
             index++;

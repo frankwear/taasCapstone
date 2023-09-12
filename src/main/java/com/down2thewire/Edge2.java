@@ -26,10 +26,12 @@ public class Edge2 <T extends Node> {
     public T getStart() {
         return start;
     }
+    public void setStart(T v) {this.start = v;}
 
     public T getEnd() {
         return end;
     }
+    public void setEnd(T v) {this.end = v;}
 
     public String getMode() {
         return this.mode;

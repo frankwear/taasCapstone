@@ -120,12 +120,6 @@ class Edge {
 
 
 
-    public Vertex2 getNeighbor(Location location) {
-        if (location.isMatch(start.location)) {
-            return end;
-        }
-        return start;
-    }
 
 
 }
