@@ -4,7 +4,7 @@ abstract class Node<T extends Node> {
     Location location;
     String description;
     Long id;
-    Edge edge;
+    Edge2 edge;
 
 
 
@@ -26,11 +26,11 @@ abstract class Node<T extends Node> {
     }
 
     public Double getLongitude (){
-        return this.location.longitude;
+        return this.location.getLongitude();
     }
 
     public Double getLatitude (){
-        return this.location.latitude;
+        return this.location.getLatitude();
     }
 
     public void setDescription (String description){
@@ -46,7 +46,7 @@ abstract class Node<T extends Node> {
     }
 
     public Long getId() {
-        return this.location.generateUniqueID();
+        return id;
     }
 
     public Boolean isNear(Node<T> node, int feet){
@@ -57,8 +57,10 @@ abstract class Node<T extends Node> {
         if (node.getId().equals(this.id)){return Boolean.TRUE;}
         else return Boolean.FALSE;
     }
-    public Object getOutgoingEdges (){
-        return edge;
+
+    public Boolean isMatchById(Long id) {
+        if (this.getId().equals(id)) {return Boolean.TRUE;}
+        else return Boolean.FALSE;
     }
 }
 

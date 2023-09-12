@@ -1,8 +1,8 @@
 package com.down2thewire;
 
 public class Location {
-    double longitude;
-    double latitude;
+    private double longitude;
+    private double latitude;
 
 
     public Location(double la, double lo) {
@@ -40,14 +40,12 @@ public class Location {
     }
 
     public Long generateUniqueID() {
-        //todo
-
         double tempLat = (this.latitude + 90) * 10000;
         double tempLong = (this.longitude + 180) * 10000;
         long tempLat2 = (long) tempLat;
         long tempLong2 = (long) tempLong;
-
         long id = 0;
+
         for (int i = 7; i > 0; i--) {
             long r = (long) (tempLong2 / Math.pow(10, (i - 1)));
             r = (long) (r * (Math.pow(10, (2*i -1))));

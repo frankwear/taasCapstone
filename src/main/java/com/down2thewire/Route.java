@@ -56,7 +56,7 @@ public class Route {
         return wayPointLinkedList.get(i);  // may return out of bounds if vertex doesn't exist
     }
 
-    public int getVertexIndex(WayPoint v) {
+    public int getWaypointIndex(WayPoint v) {
         ListIterator<WayPoint> vertexIterator = (ListIterator<WayPoint>) wayPointLinkedList.iterator();
         while (vertexIterator.hasNext()) {
             if (vertexIterator.next() == v) {
@@ -66,22 +66,24 @@ public class Route {
         return -1; // return -1 if not found
     }
 
-    public int getVertexIndex(String s) {
-        ListIterator<WayPoint> vertexIterator = (ListIterator<WayPoint>) wayPointLinkedList.iterator();
-        while (vertexIterator.hasNext()) {
-            if (vertexIterator.next().description.contains(s)) {
-                return vertexIterator.previousIndex();
+    public int getWaypointIndex(String s) {
+        ListIterator<WayPoint> wayPointListIterator = (ListIterator<WayPoint>) wayPointLinkedList.iterator();
+        while (wayPointListIterator.hasNext()) {
+            if (wayPointListIterator.next().description.contains(s)) {
+                return wayPointListIterator.previousIndex();
             } //TODO Figure out what this means, maybe at an iterator ++
         }   //vertexIterator++;
         return -1; // return -1 if not found
+
     }
 
-    public WayPoint getVertex(String s) {
-        int vIndex = getVertexIndex(s);
-        if (vIndex >= 0) {
-            return this.wayPointLinkedList.get(vIndex);
+    public WayPoint getWaypoint(String s) {
+        int wIndex = getWaypointIndex(s);
+        if (wIndex >= 0) {
+            return this.wayPointLinkedList.get(wIndex);
         } else {return null;}
     }
+
 
 
         // make Vertex mode true at source and destination of the edge
@@ -122,23 +124,45 @@ public class Route {
         return route;
     }
 
+    public void removeAdjacentSameModeEdges() {  // considering routes non-branching
+//todo - Correct logic on this to have edge as part of vertex.
+
+        int listSize = wayPointLinkedList.size();
+        for (int i = listSize - 2; i > 0; i--) {  // last index (size - 1) doesn't have an edge
+            // If do two adjacent edges have the same mode, combine them
+            if (wayPointLinkedList.get(i).getEdge().getMode().equals(wayPointLinkedList.get(i-1).getEdge().getMode())) {
+                Edge2 priorEdge = wayPointLinkedList.get(i-1).getEdge();
+                Edge2 currentEdge = wayPointLinkedList.get(i).getEdge();
+                priorEdge.setDistance(priorEdge.getDistance() + currentEdge.getDistance());
+                priorEdge.setDuration(priorEdge.getDuration() + currentEdge.getDuration());
+                priorEdge.setCost(priorEdge.getCost() + currentEdge.getCost());
+                priorEdge.setEnd(currentEdge.getEnd());
+                wayPointLinkedList.get(i-1).setEdge(priorEdge);
+                wayPointLinkedList.remove(i);
+            }
+        }
+    }
+
+    public int getWaypointListSize() {
+        return wayPointLinkedList.size();
+    }
+
 
 
     public void printGraph(){
         Iterator<WayPoint> waypointIterator = wayPointLinkedList.iterator();
         while (waypointIterator.hasNext()) {
             WayPoint tempWaypoint = waypointIterator.next();
-            System.out.println(tempWaypoint.location.longitude + "  " + tempWaypoint.location.latitude + "  " +
-                    tempWaypoint.description);
-
+            System.out.println(tempWaypoint.getLongitude() + "  " + tempWaypoint.getLatitude() + "  " +
+                    tempWaypoint.getDescription());
         }
         Iterator<Edge2> edgeIterator = edgeList.iterator();
         while (edgeIterator.hasNext()) {
             Edge2 tempEdge = edgeIterator.next();
-            System.out.println("\n\nFrom: " + tempEdge.start.description + "\nTo " + tempEdge.end.description +
-                    "\nMode: " + tempEdge.mode + "\nDistance: " + tempEdge.distance +
-                    "\nDuration: " + tempEdge.duration +
-                    "\nCost: " + tempEdge.cost);
+            System.out.println("\n\nFrom: " + tempEdge.getStart().getDescription() + "\nTo " + tempEdge.getEnd().getDescription() +
+                    "\nMode: " + tempEdge.getMode() + "\nDistance: " + tempEdge.getDistance() +
+                    "\nDuration: " + tempEdge.getDuration() +
+                    "\nCost: " + tempEdge.getCost());
         }
     }
 
@@ -223,5 +247,6 @@ public class Route {
        // graph.loadTestGraphDunMacysToPiedmont(graph);
         graph.printGraph();
     }
+
 
 }

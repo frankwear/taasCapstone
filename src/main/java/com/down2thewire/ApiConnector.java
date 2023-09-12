@@ -12,8 +12,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 
 public class ApiConnector {
-    String apiKey = ApiKeys.getGoogleKey();
-    String url;
+    private String apiKey = ApiKeys.getGoogleKey();
+    private String url;
 
 
 

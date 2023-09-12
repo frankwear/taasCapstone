@@ -2,12 +2,12 @@ package com.down2thewire;
 
 public class Edge2 <T extends Node> {
     // todo - The Vertex in the Edge Class need to be a <generic Node> rather than Vertex or Waypoint
-    T start;
-    T end;
-    String mode;
-    Integer duration;
-    Double cost;
-    Integer distance;
+    private T start;
+    private T end;
+    private String mode;
+    private Integer duration;
+    private Double cost;
+    private Integer distance;
 
 
     public Edge2(T s, T e, String mode, Integer duration, Double cost, Integer distance) {
@@ -36,16 +36,44 @@ public class Edge2 <T extends Node> {
     public String getMode() {
         return this.mode;
     }
+    public void setMode(String mode) { this.mode = mode;}
+    static public String getModeFromInt(int i) {
+        switch (i) {
+            case 0:
+                return "walking";
+            case 1:
+                return "driving";
+            case 2:
+                return "rideshare";
+            case 3:
+                return "carrental";
+            case 4:
+                return "bicycling";
+            case 5:
+                return "scooter";
+            case 6:
+                return "transit";
+            case 7:
+                return "bus";
+            case 8:
+                return "airplane";
+            default:
+                return " ";
+        }
+    }
 
+    public void setDuration(int duration) {this.duration = duration;}
     public Integer getDuration() {
         return this.duration;
     }
 
-    public double getCost() {
+    public void setCost(double cost) {this.cost = cost;}
+    public Double getCost() {
         return this.cost;
     }
 
-
+    public Integer getDistance() { return this.distance;}
+    public void setDistance(int distance) { this.distance = distance;}
 
     /*
     private Double estimateCost() {
@@ -89,9 +117,7 @@ public class Edge2 <T extends Node> {
         return start;
     }
 
-    public String getMode() {
-        return mode;
-    }
+
 
     public double getCost() {
         return cost;
@@ -122,60 +148,10 @@ public class Edge2 <T extends Node> {
         }
     }
 
-    static public int getMode(String mode) {
-        switch (mode) {
-            case "walking":
-                return 0;
-            case "driving":
-                return 1;
-            case "rideshare":
-                return 2;
-            case "carrental":
-                return 3;
-            case "bicycling":
-                return 4;
-            case "scooter":
-                return 5;
-            case "transit":
-                return 6;
-            case "bus":
-                return 7;
-            case "airplane":
-                return 8;
-            default:
-                return -1;
-        }
-    }
 
-    static public String getMode(int i) {
-        switch (i) {
-            case 0:
-                return "walking";
-            case 1:
-                return "driving";
-            case 2:
-                return "rideshare";
-            case 3:
-                return "carrental";
-            case 4:
-                return "bicycling";
-            case 5:
-                return "scooter";
-            case 6:
-                return "transit";
-            case 7:
-                return "bus";
-            case 8:
-                return "airplane";
-            default:
-                return " ";
-        }
-    }
-
-    public Vertex getEnd() {
-        return end;
-    }
 */
+
+
     public Edge2 clone() {
         Edge2 tempEdge = new Edge2();
         tempEdge.start = this.start;
@@ -190,4 +166,7 @@ public class Edge2 <T extends Node> {
     public Node getNeighbor() {
         return this.end;
     }
+
+
+
 }

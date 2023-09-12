@@ -3,14 +3,11 @@ package com.down2thewire;
 import java.util.*;
 
 public class GeographicModel {
-    LinkedList<Vertex2> vertexList;
+    private LinkedList<Vertex2> vertexList;
 
     public GeographicModel() {
         this.vertexList = new LinkedList<>();
     }
-
-
-
 
     public Vertex2 addVertex(Vertex2 v) {
         if(isUnique(v)) {
@@ -18,7 +15,7 @@ public class GeographicModel {
             return v;
         } else {
             System.out.println("Duplicate Vertex " + v.getId() + " not added.");  // Remove comment for debugging
-            return vertexList.get(findMatchById(v));
+            return vertexList.get(findMatchById(v.getId()));
         }
     }
 
@@ -65,10 +62,10 @@ public class GeographicModel {
         return Boolean.TRUE;
     }
 
-    public int findMatchById(Vertex2 tempVertex) {
+    public int findMatchById(Long id) {
         int index = 0;
-        for (Vertex2 mainVertex : this.vertexList) {
-            if (mainVertex.isMatchById(tempVertex)) {
+        for (Vertex2 mainVertex : vertexList) {
+            if (mainVertex.isMatchById(id)) {
                 return index;
             }
             index++;
@@ -87,7 +84,7 @@ public class GeographicModel {
         LinkedList<Vertex2> matchingList = new LinkedList<>();
         ListIterator<Vertex2> vertexIterator = (ListIterator<Vertex2>) vertexList.iterator();
         while (vertexIterator.hasNext()) {
-            if (vertexIterator.next().description.contains(s)) {
+            if (vertexIterator.next().getDescription().contains(s)) {
                 matchingList.addLast(vertexIterator.next());
             } //TODO Figure out what this means, maybe at an iterator ++
         }
@@ -139,7 +136,9 @@ public class GeographicModel {
         vertexList.sort(Comparator.comparing(Vertex2::getId));
     }
 
-
+    public LinkedList<Vertex2> cloneVertexList(){
+        return (LinkedList<Vertex2>) vertexList.clone();
+    }
 
 
     public void printGraph(){
