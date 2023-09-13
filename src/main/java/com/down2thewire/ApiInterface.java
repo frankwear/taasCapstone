@@ -90,7 +90,7 @@ public class ApiInterface {
                     Vertex2 destination = new Vertex2(new Location(eLatitude, eLongitude));
 
                     source.addEdge(source, destination, mode, duration, 0.0, distance);
-                    if (geographicModel.vertexList.size() > 30) {break;}
+                    if (geographicModel.getVertexListSize() > 30) {break;}
                     startVertexHumanName = endVertexHumanName; // prep for next iteration
                 }
             }

@@ -10,16 +10,15 @@
 
 package com.down2thewire;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 
-public class Vertex2 extends Node<Vertex2> {
-    Location location;
-    String description;
-    Long id;
-
-    LinkedList<Edge2> outgoingEdges = new LinkedList<>();
+public class Vertex2 extends Node {
+    private Location location;
+    private String description;
+    private Long id;
+    private LinkedList<Edge2> outgoingEdges = new LinkedList<>();
+    private double tentativeDistance;
 
     // 0-walk, 1-drive, 2-rideshare, 3-carRental, 4-bicycle, 5-scooter, 6-transit, 7-bus, 8-airplane, 9-unused
     /*
@@ -32,7 +31,7 @@ public class Vertex2 extends Node<Vertex2> {
      * Scooter Rental Locations - where you can rent a scooter.
      */
 
-    private double tentativeDistance;
+
 
     public Vertex2(Location location, Long uniqueNameId) {
         super();
@@ -40,25 +39,42 @@ public class Vertex2 extends Node<Vertex2> {
         this.id = uniqueNameId;
         //       this.tentativeDistance = Double.POSITIVE_INFINITY;
     }
+
     public Vertex2(Location location) {
         this.location = location;
         this.id = location.generateUniqueID();
-        super.location = location;
+//        super.location = location;
     }
-
-    public Location getLocation (){
-        return this.location;
-    }
-    public Vertex2(WayPoint wayPoint){
+    public Vertex2(WayPoint wayPoint) {
         Vertex2 vertex = new Vertex2(wayPoint.getLocation());
         vertex.id = wayPoint.getId();
         vertex.outgoingEdges.add(wayPoint.getEdge());
         vertex.description = wayPoint.getDescription();
     }
-    static Vertex2 waypointToVertex(WayPoint wayPoint){
+
+    public Location getLocation() {
+        return this.location;
+    }
+    public Double getLongitude() {
+        return this.location.getLongitude();
+    }
+    public Double getLatitude() {
+        return this.location.getLatitude();
+    }
+
+
+    public void setId() {
+        this.id = location.generateUniqueID();
+    }
+    @Override
+    public Long getId() { return this.id;}
+
+
+
+    static Vertex2 waypointToVertex(WayPoint wayPoint) {
         Vertex2 vertex = new Vertex2(wayPoint.getLocation());
         vertex.id = wayPoint.getId();
- //       vertex.outgoingEdges.add(wayPoint.getEdge());
+        //       vertex.outgoingEdges.add(wayPoint.getEdge());
         vertex.description = wayPoint.getDescription();
         return vertex;
     }
@@ -67,160 +83,52 @@ public class Vertex2 extends Node<Vertex2> {
 //    }
 
     public void addEdge(Edge2<Vertex2> e) {
-        addEdge(e.getStart(), e.getEnd(), e.getMode(), e.getDuration(), e.getCost(), e.distance);
+        addEdge(e.getStart(), e.getEnd(), e.getMode(), e.getDuration(), e.getCost(), e.getDistance());
     }
 
     public void addEdge(Vertex2 start, Vertex2 end, String mode, Integer duration, double cost, Integer distance) {
         Edge2<Vertex2> tempEdge = new Edge2<>();
-        tempEdge.start = this;
-        tempEdge.end = end;
-        tempEdge.mode = mode;
-        tempEdge.duration = duration;
-        tempEdge.cost = cost;
-        tempEdge.distance = distance;
+        tempEdge.setStart(this);
+        tempEdge.setEnd(end);
+        tempEdge.setMode(mode);
+        tempEdge.setDuration(duration);
+        tempEdge.setCost(cost);
+        tempEdge.setDistance(distance);
         outgoingEdges.add(tempEdge);
 
         // note see next few lines for code from Route
     }
+    public Edge2 getEdge(Integer index) {
+        return outgoingEdges.get(index);
+    }
+    public LinkedList<Edge2> getOutgoingEdges(){
+        return outgoingEdges;
+    }
 
-/*
-    public Edge2 addEdge(WayPoint start, WayPoint end, String mode, Integer duration, Double cost, Integer distance)
-    {
-
-        if (isUnique(start)){
-            start = addWaypoint(start);
-        } else {
-            start = this.wayPointLinkedList.get(findMatch(start));
+    public void printEdges(){
+        Iterator<Edge2> edge2Iterator = outgoingEdges.iterator();
+        for (Edge2 edge : outgoingEdges ){
+            System.out.println("Destination: " + edge.getEnd().getId().toString() + "\nMode: " + edge.getMode() +
+                    "\nDistance: " + edge.getDistance());
         }
-        if (isUnique(end)){
-            end = addWaypoint(end);
-        } else {
-            end = this.wayPointLinkedList.get(findMatch(end));
+//        while (edge2Iterator.hasNext()){
+//            Edge2<Vertex2> tempEdge = edge2Iterator.next();
+//            System.out.println("Destination: " + tempEdge.getEnd().getId().toString() + "\nMode: " + tempEdge.getMode() +
+//                    "\nDistance: " + tempEdge.distance);
+//        }
+    }
+
+    public int getEdgeListSize() {
+        return outgoingEdges.size();
+    }
+
+    // This method is normally in preparation for deleting this vertex, so oldNeighbor would be this Vertex2
+    public void updateNeighborsEdges(Vertex2 oldNeighbor, Vertex2 newNeighbor) {
+        for (Edge2<Vertex2> edge  : outgoingEdges){
+            if (edge.getEnd().getId().equals(oldNeighbor.getId())){
+                edge.setEnd(newNeighbor);
+            }
         }
-        this.edgeList.addLast(new Edge2(start, end, mode, duration, cost, distance));
-
-        // make Vertex mode true at source and destination of the edge
-        // todo - alter vertex mode list when edge is added.  Resolve
-/*        int sIndex = getVertexIndex(start.vertexName);
-        this.vertexList.get(sIndex).modes[Edge.getMode(mode)] = true;
-        int dIndex = getVertexIndex(end.vertexName);
-        this.vertexList.get(dIndex).modes[Edge.getMode(mode)] = true;
-        return this.edgeList.getLast();*/
-
-    //
+    }
 }
 
-
-    /*
-
-        public Double getLongitude() {
-            return this.location.getLongitude();
-        }
-
-        public Double getLatitude() {
-            return this.location.getLatitude();
-        }
-
-        public void autoVertexName() {
-            // Get Location Name from GoogleLocation API
-            // ToDo
-        }
-
-        public void setWalk(boolean tf) {
-            modes[0] = tf;
-        }
-
-        public void setCarPark(boolean tf) {
-            modes[1] = tf;
-        }
-
-        public void setRideShare(boolean tf) {
-            modes[2] = tf;
-        }
-
-        public void setCarRental(boolean tf) {
-            modes[3] = tf;
-        }
-
-        public void setBikeRack(boolean tf) {
-            modes[4] = tf;
-        }
-
-        public void setScooterRental(boolean tf) {
-            modes[5] = tf;
-        }
-
-        public void setTransit(boolean tf) {
-            modes[6] = tf;
-        }
-
-        public void setBusStop(boolean tf) {
-            modes[7] = tf;
-        }
-
-        public boolean getWalk() {
-            return modes[0];
-        }
-
-        public boolean getCarPark() {
-            return modes[1];
-        }
-
-        public boolean getRideShare() {
-            return modes[2];
-        }
-
-        public boolean getCarRental() {
-            return modes[3];
-        }
-
-        public boolean getBikeRack() {
-            return modes[4];
-        }
-
-        public boolean getScooterRental() {
-            return modes[5];
-        }
-
-        public boolean getTransit() {
-            return modes[6];
-        }
-
-        public boolean getBusStop() {
-            return modes[7];
-        }
-
-        public double getTentativeDistance() {
-            return tentativeDistance;
-        }
-
-        public void setTentativeDistance(double tentativeDistance) {
-            this.tentativeDistance = tentativeDistance;
-        }
-
-        public List<Edge2> getOutgoingEdges(List<Edge2> edgeList) {
-
-            return this.outgoingEdges;
-        }
-
-        public void addEdge(Edge2 edge){
-
-        }
-
-        public boolean isMatch(com.down2thewire.Vertex tempVer) {
-            // match rounded to 4 decimal places - about 10 meters, so 20-meter square box around location
-            if (this.location.isMatch(tempVer.location)) {
-                return Boolean.TRUE;
-            }
-            return Boolean.FALSE;
-        }
-
-    public static void main (String[] Args){
-        Location l = new Location(34.5567898, -89.346566);
-        Vertex2 v = new Vertex2<>(l, l.generateUniqueID());
-        Location l2 = new Location(35.5567898, -88.346566);
-        Vertex2 v2 = new Vertex2<>(l2, l2.generateUniqueID());
-        Edge2 e = new Edge2(v, v2, "My Walk", 300, 5.00, 234);
-        System.out.println("  ");
-    }
-*/

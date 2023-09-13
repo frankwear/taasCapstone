@@ -36,12 +36,9 @@ public class WayPoint extends Node {
     public Location getLocation (){
         return this.location;
     }
-
-
     public Double getLongitude() {
         return this.location.getLongitude();
     }
-
     public Double getLatitude() {
         return this.location.getLatitude();
     }

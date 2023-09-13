@@ -92,7 +92,7 @@ public class RouteRequest {
         LinkedList<String> preferredModes = new LinkedList<>();
         for (int i = 0; i < modePref.length; i++){
             if (modePref[i] != 0){
-                preferredModes.addLast(Edge.getMode(i));
+                preferredModes.addLast(Edge2.getModeFromInt(i));
             }
         }
         return preferredModes;
