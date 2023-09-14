@@ -17,6 +17,7 @@ public class Vertex2 extends Node {
     private Location location;
     private String description;
     private Long id;
+    private String thirdPartyId;
     private LinkedList<Edge2> outgoingEdges = new LinkedList<>();
     private double tentativeDistance;
 
@@ -62,6 +63,12 @@ public class Vertex2 extends Node {
         return this.location.getLatitude();
     }
 
+    public void setDescription (String d) {
+        this.description = d;
+    }
+    public String getDescription() {
+        return this.description;
+    }
 
     public void setId() {
         this.id = location.generateUniqueID();
@@ -69,7 +76,12 @@ public class Vertex2 extends Node {
     @Override
     public Long getId() { return this.id;}
 
-
+    public String getThirdPartyId() {
+        return thirdPartyId;
+    }
+    public void setThirdPartyId(String thirdPartyId) {
+        this.thirdPartyId = thirdPartyId;
+    }
 
     static Vertex2 waypointToVertex(WayPoint wayPoint) {
         Vertex2 vertex = new Vertex2(wayPoint.getLocation());
