@@ -21,7 +21,7 @@ public class DistanceMatrixApi {
     public DistanceMatrixApi(HashMap<String, String> parameters) {
         this.parameters = parameters;
         PlacesApi placesApi = new PlacesApi(parameters);
-        this.geoModel = placesApi.constructGeoModel();
+        this.geoModel = placesApi.buildPlacesFromApiCall();
         String jsonURLString = buildDistanceUrl();
         this.jsonURL = jsonURLString;
         addEdgesToGeoModel(saveJsonToString());
@@ -31,6 +31,7 @@ public class DistanceMatrixApi {
         String jsonURLString = buildDistanceUrl();
         this.jsonURL = jsonURLString;
     }
+
 
     public void addEdgesToGeoModel(String jsonResult) {
         //GeographicModel apiGm = new GeographicModel();

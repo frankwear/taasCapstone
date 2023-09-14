@@ -18,14 +18,12 @@ public class DistanceMatrixApiTest {
         //PlacesApi placesApi = new PlacesApi(myParameters);
     }
     @Test
-    void test1(){
+    void constructGeoModelWithEdges(){
         HashMap<String, String> myParameters = new HashMap<>();
         myParameters.put("location=", "33.8876001,-84.3142002");
         myParameters.put("&type=", "transit_station");
         myParameters.put("&radius=","2000");
-        PlacesApi placesApi = new PlacesApi(myParameters);
-        System.out.println(placesApi.urlAsString);
-        GeographicModel testGM = placesApi.constructGeoModel();
+        GeographicModel testGM = PlacesApi.buildPlacesFromApiCall(myParameters);
         DistanceMatrixApi myDM = new DistanceMatrixApi(testGM);
         myDM.saveJsonToString();
         myDM.addEdgesToGeoModel(myDM.jsonResultString);

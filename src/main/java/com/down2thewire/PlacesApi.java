@@ -12,35 +12,61 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
 public class PlacesApi {
-    private String apiKey = ApiKeys.getGoogleKey();
-    String urlAsString;
+    private static final String apiKey = ApiKeys.getGoogleKey();
+    private String urlAsString;
+    private String apiResponse;
 
     public PlacesApi(HashMap<String, String> parameters) {
-        this.urlAsString = buildPlacesUrl(parameters);
+        this.urlAsString = buildUrl(parameters);
     }
-
-    public GeographicModel constructGeoModel() {
-        String jsonAsString = saveJsonToString();
-        GeographicModel apiGeoModelResult = new GeographicModel();
-        apiGeoModelResult = constructGeoModel(jsonAsString);
-        return apiGeoModelResult;
-    }
-
-    private String buildPlacesUrl(HashMap<String, String> parameters) {
+    private String buildUrl(HashMap<String, String> parameters) {
         String myUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
-//        Iterator<Map.Entry<String, String>> parametersIterator = parameters.entrySet().iterator();
-//        while (parametersIterator.hasNext()) {
-//            HashMap.Entry<String, String> tempEntry = (Map.Entry) parametersIterator.next();
-//            if (parametersIterator.next() == )
         for (String key : parameters.keySet()) {
             myUrl = myUrl + key + parameters.get(key) + "&";
         }
         myUrl = myUrl + "key=" + apiKey;
         return myUrl;
-
     }
 
-    public String saveJsonToString() {
+    static GeographicModel buildPlacesFromApiCall(HashMap<String, String> parameters) {
+        PlacesApi tempPlaces = new PlacesApi(parameters);
+        return tempPlaces.buildVertexFrameworkFromApiCall();
+    }
+    public GeographicModel buildPlacesFromApiCall(){
+        if(apiResponse.isBlank()){
+            this.apiResponse = getJsonStringFromApi();
+        }
+        return constructGeoModel(this.apiResponse);
+    }
+    private GeographicModel buildVertexFrameworkFromApiCall() {
+        this.apiResponse = getJsonStringFromApi();
+        GeographicModel locationsOnly = constructGeoModel(apiResponse);
+        return locationsOnly;
+    }
+
+    public String getUrlAsString(){
+        return this.urlAsString;
+    }
+
+    public String getApiResponse() {
+        if(apiResponse.isBlank()){
+            this.apiResponse = getJsonStringFromApi();
+            if(apiResponse.isBlank()){
+                System.out.println("PlacesApi.getApiResponse() no response.  Check Url.");
+            }
+        }
+        return apiResponse;
+    }
+
+    public URL getUrl(){
+        try {
+            return new URL(this.urlAsString);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String getJsonStringFromApi() {
         URL apiEndpoint;
         String jsonText;
         HttpURLConnection connection;
@@ -63,7 +89,11 @@ public class PlacesApi {
         return jsonText;
     }
 
-    public GeographicModel constructGeoModel(String json) {
+    private GeographicModel constructGeoModel(String json) {
+        if (json == null || json.isBlank()){
+            System.out.println("PlacesApi.constructGeoModel() could not create a GeographicMap.  String is blank.");
+            return new GeographicModel();
+        }
         GeographicModel apiGm = new GeographicModel();
         JSONObject placesJsonObject = new JSONObject(json);
         JSONArray resultsArray = placesJsonObject.getJSONArray("results");
@@ -72,12 +102,10 @@ public class PlacesApi {
                 JSONObject apiResult = resultsArray.getJSONObject(i);
                 double lat = apiResult.getJSONObject("geometry").getJSONObject("location").getDouble("lat");
                 double lng = apiResult.getJSONObject("geometry").getJSONObject("location").getDouble("lng");
-                String name = apiResult.getString("name");
-                String placeID = apiResult.getString("place_id");
-                Vertex2 tempVert = apiGm.addVertex(lat, lng);
+                Vertex2 tempVert = new Vertex2(new Location(lat, lng));
+                tempVert.setDescription(apiResult.getString("name"));
+                tempVert.setThirdPartyId(apiResult.getString("place_id"));
                 tempVert.setId();
-                tempVert.setDescription(name);
-                tempVert.setThirdPartyId(placeID);
                 apiGm.addVertex(tempVert);
             }
         }
