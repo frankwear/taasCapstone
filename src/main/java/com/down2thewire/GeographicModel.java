@@ -145,7 +145,8 @@ public class GeographicModel {
         Iterator<Vertex2> vertexIterator = vertexList.iterator();
         while (vertexIterator.hasNext()) {
             Vertex2 tempVertex = vertexIterator.next();
-            System.out.println("\nVertex: " + tempVertex.getLongitude() + "  " + tempVertex.getLatitude() + "  " +
+            System.out.println("\nName: " + tempVertex.getDescription());
+            System.out.println("Vertex: " + tempVertex.getLongitude() + "  " + tempVertex.getLatitude() + "  " +
                     tempVertex.getId());
             tempVertex.printEdges();
         }

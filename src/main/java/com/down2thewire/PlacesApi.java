@@ -13,8 +13,8 @@ import java.util.HashMap;
 
 public class PlacesApi {
     private static final String apiKey = ApiKeys.getGoogleKey();
-    private String urlAsString;
-    private String apiResponse;
+    private String urlAsString = "";
+    private String apiResponseAsString = "";
 
     public PlacesApi(HashMap<String, String> parameters) {
         this.urlAsString = buildUrl(parameters);
@@ -28,43 +28,34 @@ public class PlacesApi {
         return myUrl;
     }
 
+
+    //****** Static Implementation *****//
     static GeographicModel buildPlacesFromApiCall(HashMap<String, String> parameters) {
         PlacesApi tempPlaces = new PlacesApi(parameters);
-        return tempPlaces.buildVertexFrameworkFromApiCall();
+        return tempPlaces.getApiResponseAsGeoModel();
     }
-    public GeographicModel buildPlacesFromApiCall(){
-        if(apiResponse.isBlank()){
-            this.apiResponse = getJsonStringFromApi();
-        }
-        return constructGeoModel(this.apiResponse);
-    }
-    private GeographicModel buildVertexFrameworkFromApiCall() {
-        this.apiResponse = getJsonStringFromApi();
-        GeographicModel locationsOnly = constructGeoModel(apiResponse);
-        return locationsOnly;
-    }
+    //**************//
 
-    public String getUrlAsString(){
-        return this.urlAsString;
-    }
 
-    public String getApiResponse() {
-        if(apiResponse.isBlank()){
-            this.apiResponse = getJsonStringFromApi();
-            if(apiResponse.isBlank()){
+    public String getApiResponseAsString() {
+        if(apiResponseAsString.isBlank()){
+            this.apiResponseAsString = getJsonStringFromApi();
+            if(apiResponseAsString.isBlank()){
                 System.out.println("PlacesApi.getApiResponse() no response.  Check Url.");
             }
         }
-        return apiResponse;
+        return apiResponseAsString;
     }
 
-    public URL getUrl(){
-        try {
-            return new URL(this.urlAsString);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+    public GeographicModel getApiResponseAsGeoModel(){
+        if(apiResponseAsString.isBlank()){
+            this.apiResponseAsString = getJsonStringFromApi();
         }
+        GeographicModel locationsOnly = constructGeoModel(apiResponseAsString);
+        return locationsOnly;
     }
+
+
 
     private String getJsonStringFromApi() {
         URL apiEndpoint;
