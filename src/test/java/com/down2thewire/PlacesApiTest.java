@@ -11,7 +11,7 @@ class PlacesApiTest {
         myParameters.put("location=", "33.8876001,-84.3142002");
         myParameters.put("&type=", "transit_station");
         myParameters.put("&radius=","7500");
-        GeographicModel testGM = PlacesApi.buildPlacesFromApiCall(myParameters);
+        BranchGeoModel testGM = PlacesApi.buildPlacesFromApiCall(myParameters);
         testGM.printGraph();
     }
 }

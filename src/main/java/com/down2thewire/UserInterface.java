@@ -10,8 +10,8 @@ public class UserInterface {
 
         // from local/frank on a second commit
     }
-    public RouteRequest getRequest() {
-        RouteRequest sessionRequest = new RouteRequest();
+    public UserRouteRequest getRequest() {
+        UserRouteRequest sessionRequest = new UserRouteRequest();
         System.out.println("Welcome to TaaS" +
                 "\nTransportation as a Service helps you find new ways to get where you want to go.\n\n");
         int userResponse = menu1Input();

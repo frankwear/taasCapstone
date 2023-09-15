@@ -2,15 +2,13 @@ package com.down2thewire;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.InvalidClassException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-public class RouteTest {
+public class LinearRouteTest {
     @Test
     void AddVertexAndDuplicate(){
-    Route route = new Route();
-    WayPoint w1 = new WayPoint(new Location(34.0380828, -84.584152));
+    LinearRoute route = new LinearRoute();
+    LinearWayPoint w1 = new LinearWayPoint(new Location(34.0380828, -84.584152));
     //Vertex v2 = new Vertex(new Location(34.0380828, -84.584152), "Marietta");
 
     assertTrue(route.isUnique(w1));
@@ -19,8 +17,8 @@ public class RouteTest {
     }
     @Test
     void VertexLocation(){
-        Route route = new Route();
-        WayPoint w1 = new WayPoint(new Location(0.0, 0.0));
+        LinearRoute route = new LinearRoute();
+        LinearWayPoint w1 = new LinearWayPoint(new Location(0.0, 0.0));
         assertTrue(route.isUnique(w1));
     }
 }

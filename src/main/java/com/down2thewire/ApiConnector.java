@@ -25,10 +25,10 @@ public class ApiConnector {
         this.url = buildDirectionsUrl(origin, destination, mode, apiKey, alternatives);
     }
 
-    public ApiConnector(Vertex2 originVertex, Vertex2 destinationVertex, String mode){
+    public ApiConnector(BranchVertex originVertex, BranchVertex destinationVertex, String mode){
         this.url = buildDirectionsUrl(originVertex.getLocation().AsString(), destinationVertex.getLocation().AsString(), mode, apiKey);
     }
-    public ApiConnector(WayPoint originWayPoint, WayPoint destinationWayPoint, String mode){
+    public ApiConnector(LinearWayPoint originWayPoint, LinearWayPoint destinationWayPoint, String mode){
         this.url = buildDirectionsUrl(originWayPoint.location.AsString(), destinationWayPoint.location.AsString(), mode, apiKey);
     }
 
@@ -71,8 +71,8 @@ public class ApiConnector {
         return jsonText;
     }
 
-    public LinkedList<Route> constructRouteList(String json) {
-        LinkedList<Route> routes = new LinkedList<>();
+    public LinkedList<LinearRoute> constructRouteList(String json) {
+        LinkedList<LinearRoute> routes = new LinkedList<>();
 
         JSONObject apiDirectionsJson = new JSONObject(json);
         JSONArray routesArray = apiDirectionsJson.getJSONArray("routes");
@@ -83,8 +83,8 @@ public class ApiConnector {
                 JSONObject leg = legsArray.getJSONObject(i);
                 JSONArray apiEdgesArray = leg.getJSONArray("steps");
                 String startVertexHumanName = "";
-                WayPoint lastLegDestination = new WayPoint(new Location(0.00,0.00));
-                Route route = new Route();
+                LinearWayPoint lastLegDestination = new LinearWayPoint(new Location(0.00,0.00));
+                LinearRoute route = new LinearRoute();
                 for (int j = 0; j < apiEdgesArray.length(); j++) {
                     JSONObject step = apiEdgesArray.getJSONObject(j);
 
@@ -109,15 +109,15 @@ public class ApiConnector {
 //                    String endVertexHumanName = nameGenerator.getHumanReadableName(eLatitude, eLongitude);
 
                     // Create vertices with human-readable names
-                    WayPoint source = new WayPoint(start);
-                    WayPoint destination = new WayPoint(end);
+                    LinearWayPoint source = new LinearWayPoint(start);
+                    LinearWayPoint destination = new LinearWayPoint(end);
 
                     if(j == 0){  //first iteration, normally
                         route.addWaypoint(source);
                     } else {
                         source = lastLegDestination;
                     }
-                    source.setEdge(new Edge2(source, destination, mode, duration, 0.00, distance));
+                    source.setEdge(new Edge(source, destination, mode, duration, 0.00, distance));
                     route.addWaypoint(destination);
 
                     if (route.wayPointLinkedList.size() > 30) {break;}
@@ -138,8 +138,8 @@ public class ApiConnector {
         return routes;
     }
 
-    public Route constructRoute(String json) {
-        Route route = new Route();
+    public LinearRoute constructRoute(String json) {
+        LinearRoute route = new LinearRoute();
 
 
         JSONObject directionsJson = new JSONObject(json);
@@ -153,7 +153,7 @@ public class ApiConnector {
 
                 JSONArray stepsArray = leg.getJSONArray("steps");
                 String startVertexHumanName = "";
-                WayPoint lastLegDestination = new WayPoint(new Location(0.00,0.00));
+                LinearWayPoint lastLegDestination = new LinearWayPoint(new Location(0.00,0.00));
                 for (int j = 0; j < stepsArray.length(); j++) {
                     JSONObject step = stepsArray.getJSONObject(j);
 
@@ -179,15 +179,15 @@ public class ApiConnector {
 //                    String endVertexHumanName = nameGenerator.getHumanReadableName(eLatitude, eLongitude);
 
                     // Create vertices with human-readable names
-                    WayPoint source = new WayPoint(start);
-                    WayPoint destination = new WayPoint(end);
+                    LinearWayPoint source = new LinearWayPoint(start);
+                    LinearWayPoint destination = new LinearWayPoint(end);
 
                     if(j == 0){  //first iteration, normally
                         route.addWaypoint(source);
                     } else {
                         source = lastLegDestination;
                     }
-                    source.setEdge(new Edge2(source, destination, mode, duration, 0.00, distance));
+                    source.setEdge(new Edge(source, destination, mode, duration, 0.00, distance));
                     route.addWaypoint(destination);
 
                     if (route.wayPointLinkedList.size() > 30) {break;}

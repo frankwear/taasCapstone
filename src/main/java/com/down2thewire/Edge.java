@@ -1,6 +1,6 @@
 package com.down2thewire;
 
-public class Edge2 <T extends Node> {
+public class Edge<T extends Node> {
     // todo - The Vertex in the Edge Class need to be a <generic Node> rather than Vertex or Waypoint
     private T start;
     private T end;
@@ -10,7 +10,7 @@ public class Edge2 <T extends Node> {
     private Integer distance;
 
 
-    public Edge2(T s, T e, String mode, Integer duration, Double cost, Integer distance) {
+    public Edge(T s, T e, String mode, Integer duration, Double cost, Integer distance) {
         this.start = s;
         this.end = e;
         this.mode = mode;
@@ -22,7 +22,7 @@ public class Edge2 <T extends Node> {
         //          this.cost = estimateCost();
         //     }
     }
-    public Edge2(){}
+    public Edge(){}
     public T getStart() {
         return start;
     }
@@ -152,8 +152,8 @@ public class Edge2 <T extends Node> {
 */
 
 
-    public Edge2 clone() {
-        Edge2 tempEdge = new Edge2();
+    public Edge clone() {
+        Edge tempEdge = new Edge();
         tempEdge.start = this.start;
         tempEdge.end = this.end;
         tempEdge.duration = this.duration;

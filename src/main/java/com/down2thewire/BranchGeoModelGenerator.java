@@ -5,32 +5,34 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class GeoModelAnalyzer {
-    GeographicModel geographicMap = new GeographicModel();
-    List<Route> routeList = new ArrayList<>();
-    WayPoint originWayPoint;
+public class BranchGeoModelGenerator {
+    BranchGeoModel geographicMap = new BranchGeoModel();
+    List<LinearRoute> routeList = new ArrayList<>();
+    LinearWayPoint originWayPoint;
 
-    WayPoint destinationWayPoint;
-    RouteRequest modelRouteRequest;
+    LinearWayPoint destinationWayPoint;
+    UserRouteRequest modelRouteRequest;
 
 
 
-    public GeoModelAnalyzer() {
+    public BranchGeoModelGenerator() {
     }
-    public GeoModelAnalyzer(RouteRequest rr) {
+    public BranchGeoModelGenerator(UserRouteRequest rr) {
         modelRouteRequest = rr;
     }
+    public BranchGeoModelGenerator(Location center, Integer radiusInFeet, String mode) {
+
+    }
 
 
-
-    public GeographicModel generateGeoModel(){
+    public BranchGeoModel generateGeoModel(){
         String origin = modelRouteRequest.getOrigin();
         String destination = modelRouteRequest.getDestination();
  //       List<String> modes = modelRouteRequest.getModePrefAsList();
-        RouteRequest tempRequest = new RouteRequest();
+        UserRouteRequest tempRequest = new UserRouteRequest();
 //        Route coreRoute = tempRequest.getRouteFromApi(origin, destination, "transit");
 
-        LinkedList<Route> coreRoute = tempRequest.getRoutesFromApi(origin, destination, "transit", Boolean.TRUE);
+        LinkedList<LinearRoute> coreRoute = tempRequest.getRoutesFromApi(origin, destination, "transit", Boolean.TRUE);
 
         this.originWayPoint = coreRoute.get(0).wayPointLinkedList.getFirst();
         this.destinationWayPoint = coreRoute.get(0).wayPointLinkedList.getLast();
@@ -42,24 +44,24 @@ public class GeoModelAnalyzer {
             this.routeList.add(coreRoute.get(j));
             this.geographicMap.addGraph(convertRouteToGeoModel(coreRoute.get(j)));
         }
-        LinkedList<Vertex2> tempVertices= new LinkedList<>();
-        tempVertices= (LinkedList<Vertex2>) geographicMap.cloneVertexList();
+        LinkedList<BranchVertex> tempVertices= new LinkedList<>();
+        tempVertices= (LinkedList<BranchVertex>) geographicMap.cloneVertexList();
         for (int i = 1; i < tempVertices.size(); i++) {
-            Vertex2 legStart = tempVertices.get(i-1);
-            Vertex2 legEnd = tempVertices.get(i);
+            BranchVertex legStart = tempVertices.get(i-1);
+            BranchVertex legEnd = tempVertices.get(i);
             // todo - Set up repetitive lookup to a nexted loop
 
 
             List<String> modes= Arrays.asList("driving", "bicycling", "transit", "walking");
 
             for (String loopMode : modes) {
-                Route legRoute = tempRequest.getRouteFromApi(legStart, legEnd, loopMode);
+                LinearRoute legRoute = tempRequest.getRouteFromApi(legStart, legEnd, loopMode);
                 legRoute.removeAdjacentSameModeEdges();
 
                 // todo add to geographic model
                 //create a bug and add to sprint
                 this.routeList.add(legRoute);
-                GeographicModel tempGeoModel = convertRouteToGeoModel(legRoute);
+                BranchGeoModel tempGeoModel = convertRouteToGeoModel(legRoute);
                 geographicMap.addGraph(tempGeoModel);
             }
         }
@@ -68,24 +70,24 @@ public class GeoModelAnalyzer {
         return geographicMap;
     }
 
-    public GeographicModel convertRouteToGeoModel (Route route) {
-            GeographicModel tempGeoModel = new GeographicModel();
+    public BranchGeoModel convertRouteToGeoModel (LinearRoute route) {
+            BranchGeoModel tempGeoModel = new BranchGeoModel();
             int size = route.wayPointLinkedList.size();
-            Vertex2 lastLegDestination = new Vertex2(new Location(0.0d, 0.0d));
+            BranchVertex lastLegDestination = new BranchVertex(new Location(0.0d, 0.0d));
             for (int j = 0; j < size-1; j++){
-                WayPoint w1 = route.wayPointLinkedList.get(j);
-                Vertex2 v1 = new Vertex2(new Location(0.0,0.0));
+                LinearWayPoint w1 = route.wayPointLinkedList.get(j);
+                BranchVertex v1 = new BranchVertex(new Location(0.0,0.0));
                 if (j==0) {
-                    v1 = Vertex2.waypointToVertex(w1);
+                    v1 = BranchVertex.waypointToVertex(w1);
                 } else {
                     v1 = lastLegDestination;
                 }
-                Edge2<WayPoint> e1 = w1.getEdge();
-                WayPoint w2 = route.wayPointLinkedList.get(j+1);
-                Vertex2 v2 = Vertex2.waypointToVertex(w2);
-                Edge2<Vertex2> forward = new Edge2<>(v1, v2, e1.getMode(), e1.getDuration(), e1.getCost(), e1.getDistance());
+                Edge<LinearWayPoint> e1 = w1.getEdge();
+                LinearWayPoint w2 = route.wayPointLinkedList.get(j+1);
+                BranchVertex v2 = BranchVertex.waypointToVertex(w2);
+                Edge<BranchVertex> forward = new Edge<>(v1, v2, e1.getMode(), e1.getDuration(), e1.getCost(), e1.getDistance());
                 v1.addEdge(forward);
-                Edge2<Vertex2> backward = new Edge2<>(v2, v1, e1.getMode(), e1.getDuration(), e1.getCost(), e1.getDistance());
+                Edge<BranchVertex> backward = new Edge<>(v2, v1, e1.getMode(), e1.getDuration(), e1.getCost(), e1.getDistance());
                 v2.addEdge(backward);
                 tempGeoModel.addVertex(v1);
                 if (j == size-2){

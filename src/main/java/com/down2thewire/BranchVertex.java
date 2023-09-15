@@ -13,12 +13,12 @@ package com.down2thewire;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class Vertex2 extends Node {
+public class BranchVertex extends Node {
     private Location location;
     private String description;
     private Long id;
     private String thirdPartyId;
-    private LinkedList<Edge2> outgoingEdges = new LinkedList<>();
+    private LinkedList<Edge> outgoingEdges = new LinkedList<>();
     private double tentativeDistance;
 
     // 0-walk, 1-drive, 2-rideshare, 3-carRental, 4-bicycle, 5-scooter, 6-transit, 7-bus, 8-airplane, 9-unused
@@ -34,20 +34,20 @@ public class Vertex2 extends Node {
 
 
 
-    public Vertex2(Location location, Long uniqueNameId) {
+    public BranchVertex(Location location, Long uniqueNameId) {
         super();
         this.location = location;
         this.id = uniqueNameId;
         //       this.tentativeDistance = Double.POSITIVE_INFINITY;
     }
 
-    public Vertex2(Location location) {
+    public BranchVertex(Location location) {
         this.location = location;
         this.id = location.generateUniqueID();
 //        super.location = location;
     }
-    public Vertex2(WayPoint wayPoint) {
-        Vertex2 vertex = new Vertex2(wayPoint.getLocation());
+    public BranchVertex(LinearWayPoint wayPoint) {
+        BranchVertex vertex = new BranchVertex(wayPoint.getLocation());
         vertex.id = wayPoint.getId();
         vertex.outgoingEdges.add(wayPoint.getEdge());
         vertex.description = wayPoint.getDescription();
@@ -83,8 +83,8 @@ public class Vertex2 extends Node {
         this.thirdPartyId = thirdPartyId;
     }
 
-    static Vertex2 waypointToVertex(WayPoint wayPoint) {
-        Vertex2 vertex = new Vertex2(wayPoint.getLocation());
+    static BranchVertex waypointToVertex(LinearWayPoint wayPoint) {
+        BranchVertex vertex = new BranchVertex(wayPoint.getLocation());
         vertex.id = wayPoint.getId();
         //       vertex.outgoingEdges.add(wayPoint.getEdge());
         vertex.description = wayPoint.getDescription();
@@ -94,12 +94,12 @@ public class Vertex2 extends Node {
 //        super();
 //    }
 
-    public void addEdge(Edge2<Vertex2> e) {
+    public void addEdge(Edge<BranchVertex> e) {
         addEdge(e.getStart(), e.getEnd(), e.getMode(), e.getDuration(), e.getCost(), e.getDistance());
     }
 
-    public void addEdge(Vertex2 start, Vertex2 end, String mode, Integer duration, double cost, Integer distance) {
-        Edge2<Vertex2> tempEdge = new Edge2<>();
+    public void addEdge(BranchVertex start, BranchVertex end, String mode, Integer duration, double cost, Integer distance) {
+        Edge<BranchVertex> tempEdge = new Edge<>();
         tempEdge.setStart(this);
         tempEdge.setEnd(end);
         tempEdge.setMode(mode);
@@ -110,16 +110,16 @@ public class Vertex2 extends Node {
 
         // note see next few lines for code from Route
     }
-    public Edge2 getEdge(Integer index) {
+    public Edge getEdge(Integer index) {
         return outgoingEdges.get(index);
     }
-    public LinkedList<Edge2> getOutgoingEdges(){
+    public LinkedList<Edge> getOutgoingEdges(){
         return outgoingEdges;
     }
 
     public void printEdges(){
-        Iterator<Edge2> edge2Iterator = outgoingEdges.iterator();
-        for (Edge2 edge : outgoingEdges ){
+        Iterator<Edge> edge2Iterator = outgoingEdges.iterator();
+        for (Edge edge : outgoingEdges ){
             System.out.println("Destination: " + edge.getEnd().getId().toString() + "\nMode: " + edge.getMode() +
                     "\nDistance: " + edge.getDistance());
         }
@@ -135,8 +135,8 @@ public class Vertex2 extends Node {
     }
 
     // This method is normally in preparation for deleting this vertex, so oldNeighbor would be this Vertex2
-    public void updateNeighborsEdges(Vertex2 oldNeighbor, Vertex2 newNeighbor) {
-        for (Edge2<Vertex2> edge  : outgoingEdges){
+    public void updateNeighborsEdges(BranchVertex oldNeighbor, BranchVertex newNeighbor) {
+        for (Edge<BranchVertex> edge  : outgoingEdges){
             if (edge.getEnd().getId().equals(oldNeighbor.getId())){
                 edge.setEnd(newNeighbor);
             }

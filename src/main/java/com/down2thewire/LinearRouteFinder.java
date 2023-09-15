@@ -1,10 +1,6 @@
 package com.down2thewire;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
-public class RouteAnalyzer {
+public class LinearRouteFinder {
 
 //    static GeographicModel routeModel = new GeographicModel();
 //    RouteRequest userRequest = new RouteRequest();

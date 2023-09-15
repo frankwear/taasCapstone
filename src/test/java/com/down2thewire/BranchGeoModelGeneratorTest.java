@@ -2,9 +2,7 @@ package com.down2thewire;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class GeoModelAnalyzerTest {
+class BranchGeoModelGeneratorTest {
 
     @Test
     void generateGeoModel() {
@@ -18,29 +16,29 @@ class GeoModelAnalyzerTest {
 ////        assertEquals(4, testRoute.edgeList.size());
 //    }
 
-    private Route createTestGraphWithUnchangedMode() {
-        Route route = new Route();
+    private LinearRoute createTestGraphWithUnchangedMode() {
+        LinearRoute route = new LinearRoute();
         Location tempLocation = new Location(33.9228732,-84.3418493);
-        WayPoint v1 = route.addWaypoint(new WayPoint(tempLocation));
+        LinearWayPoint v1 = route.addWaypoint(new LinearWayPoint(tempLocation));
         tempLocation = new Location(33.921227,-84.344398);
-        WayPoint v2 = route.addWaypoint(new WayPoint(tempLocation));
+        LinearWayPoint v2 = route.addWaypoint(new LinearWayPoint(tempLocation));
         tempLocation = new Location(33.789112,-84.387383);
-        WayPoint v3 = route.addWaypoint(new WayPoint(tempLocation));
+        LinearWayPoint v3 = route.addWaypoint(new LinearWayPoint(tempLocation));
         tempLocation = new Location(33.7892632,-84.3873414);
-        WayPoint v4 = route.addWaypoint(new WayPoint(tempLocation));
+        LinearWayPoint v4 = route.addWaypoint(new LinearWayPoint(tempLocation));
         tempLocation = new Location(33.8082253,-84.3934548);
-        WayPoint v5 = route.addWaypoint(new WayPoint(tempLocation ));
+        LinearWayPoint v5 = route.addWaypoint(new LinearWayPoint(tempLocation ));
         tempLocation = new Location(33.8085817,-84.3943387);
-        WayPoint v6 = route.addWaypoint(new WayPoint(tempLocation));
+        LinearWayPoint v6 = route.addWaypoint(new LinearWayPoint(tempLocation));
 
         // add edges
         // for testing clarity, making each vertex a separate variable
 
-        v1.setEdge(new Edge2(v1, v2, "WALKING", 271, 0.00, 347));
-        v2.setEdge(new Edge2(v2, v3, "TRANSIT", 900, 0.00, 17083));
-        v3.setEdge(new Edge2(v3, v4, "TRANSIT", 18, 0.00, 17));
-        v4.setEdge(new Edge2(v4, v5, "WALKING", 699, 0.00, 3083));
-        v5.setEdge(new Edge2(v5, v6, "TRANSIT", 103, 0.00, 121));
+        v1.setEdge(new Edge(v1, v2, "WALKING", 271, 0.00, 347));
+        v2.setEdge(new Edge(v2, v3, "TRANSIT", 900, 0.00, 17083));
+        v3.setEdge(new Edge(v3, v4, "TRANSIT", 18, 0.00, 17));
+        v4.setEdge(new Edge(v4, v5, "WALKING", 699, 0.00, 3083));
+        v5.setEdge(new Edge(v5, v6, "TRANSIT", 103, 0.00, 121));
 
         return route;
     }
@@ -54,34 +52,34 @@ class GeoModelAnalyzerTest {
 //        testGeoModel.printGraph();
 //    }
 
-    private GeographicModel createTestGraphWithDuplicateVertices() {
+    private BranchGeoModel createTestGraphWithDuplicateVertices() {
         // add vertices from two routes
         // route 1  - Walking and Transit
-        GeographicModel graph = new GeographicModel();
+        BranchGeoModel graph = new BranchGeoModel();
         Location tempLocation = new Location(33.9228732,-84.3418493);
-        Vertex2 v01 = graph.addVertex(33.9228732,-84.3418493);
+        BranchVertex v01 = graph.addVertex(33.9228732,-84.3418493);
         tempLocation = new Location(33.921227,-84.344398);
-        Vertex2 v02 = graph.addVertex(33.921227,-84.344398);;
+        BranchVertex v02 = graph.addVertex(33.921227,-84.344398);;
         tempLocation = new Location(33.789112,-84.387383);
-        Vertex2 v03 = graph.addVertex(33.789112,-84.387383);
+        BranchVertex v03 = graph.addVertex(33.789112,-84.387383);
         tempLocation = new Location(33.7892632,-84.3873414);
-        Vertex2 v04 = graph.addVertex(33.7892632,-84.3873414);
+        BranchVertex v04 = graph.addVertex(33.7892632,-84.3873414);
         tempLocation = new Location(33.8082253,-84.3934548);
-        Vertex2 v05 = graph.addVertex(33.8082253,-84.3934548);
+        BranchVertex v05 = graph.addVertex(33.8082253,-84.3934548);
         tempLocation = new Location(33.8085817,-84.3943387);
-        Vertex2 v06 = graph.addVertex(33.8085817,-84.3943387);
+        BranchVertex v06 = graph.addVertex(33.8085817,-84.3943387);
 
         // route 2   - Driving and Transit
         tempLocation = new Location(33.9228732,-84.3418493);
-        Vertex2 v07 = graph.addVertex(33.9228732,-84.3418493);  // duplicate
+        BranchVertex v07 = graph.addVertex(33.9228732,-84.3418493);  // duplicate
         tempLocation = new Location (33.9251111,-84.3401111);
-        Vertex2 v08 = graph.addVertex(33.9251111,-84.3401111);  // unique - parking lot vs. station
+        BranchVertex v08 = graph.addVertex(33.9251111,-84.3401111);  // unique - parking lot vs. station
         tempLocation = new Location(33.921227,-84.344398);
-        Vertex2 v09 = graph.addVertex(33.921227,-84.344398);
-        Vertex2 v10 = graph.addVertex(33.789114,-84.387384);  // duplicate by proximity
-        Vertex2 v11 = graph.addVertex(33.7892632,-84.3873414);  // duplicate
-        Vertex2 v12 = graph.addVertex(33.8082253,-84.3934548);  // duplicate
-        Vertex2 v13 = graph.addVertex(33.8085817,-84.3943387);  // duplicate
+        BranchVertex v09 = graph.addVertex(33.921227,-84.344398);
+        BranchVertex v10 = graph.addVertex(33.789114,-84.387384);  // duplicate by proximity
+        BranchVertex v11 = graph.addVertex(33.7892632,-84.3873414);  // duplicate
+        BranchVertex v12 = graph.addVertex(33.8082253,-84.3934548);  // duplicate
+        BranchVertex v13 = graph.addVertex(33.8085817,-84.3943387);  // duplicate
 
 
         // add edges from two routes

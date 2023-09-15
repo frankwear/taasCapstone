@@ -4,7 +4,7 @@ abstract class Node<T extends Node> {
     Location location;
     String description;
     Long id;
-    Edge2 edge;
+    Edge edge;
 
 
 
