@@ -1,5 +1,7 @@
 package com.down2thewire;
 
+import java.util.HashMap;
+
 public class Edge<T extends Node> {
     // todo - The Vertex in the Edge Class need to be a <generic Node> rather than Vertex or Waypoint
     private T start;
@@ -74,6 +76,65 @@ public class Edge<T extends Node> {
 
     public Integer getDistance() { return this.distance;}
     public void setDistance(int distance) { this.distance = distance;}
+
+    // 9/16/23 Created method to estimate metrics.  It only changes the metrics is they are unset or zero
+    // This is necessary to estimate the distance, duration, and cost for a single use route request
+    public Integer estimateDistance(){
+
+        if (this.distance != null && this.distance != 0L) {
+            return this.distance;
+        }
+        //** note:  Google Distance Value from DistanceMatrix is in meters, so we will match that here **//
+        Double latDifferenceInDegrees = Math.abs(this.start.getLatitude() - this.end.getLatitude());  // in degrees
+        // one degree lat is about 69 miles, or 111,000 meters and is fairly consistent over the globe.
+        Double latDistanceInMeters = latDifferenceInDegrees * 111000.0d;
+
+        // The longitude distance depends on the latitude.  As you go away from the equator, the distance becomes
+        // shorter proportionally to cosine(latitude)
+        Double lngDifferenceInDegrees = Math.abs(this.start.getLongitude() - this.end.getLongitude());
+        Double lngDistanceInMeters = lngDifferenceInDegrees * 111000.0d * Math.cos(Math.toRadians(start.getLatitude()));
+        Double distenceEstimate =
+                Math.max(latDistanceInMeters, lngDistanceInMeters) +
+                Math.min(latDistanceInMeters, lngDistanceInMeters)/1.414d; // estimating based on short leg at 45 degrees
+        this.distance =  distenceEstimate.intValue();
+        return this.distance;
+    }
+
+    public Integer estimateDuration(Integer distance){
+        double factor;
+        double offset;
+        if (this.duration != null && this.duration != 0L) {
+            return this.duration;
+        }
+        switch (this.mode) {
+            // Check Google Estimates Duration for Distance give factor of .844 s/m
+            case "walking":
+                factor = .844d;
+                offset = 0.0;
+                break;
+            // Check Google Estimates Duration for Distance gives factor of .244 s/m
+            case "bicycling":
+                factor = .244d;
+                offset = 250.0;
+                break;
+            // Rough estimate of driving speed varies significantly with traffic, time of day, road type.
+            // This is only a rough guideline and has a standard deviation higher than the value.  .06
+            case "driving":
+                factor = .06;
+                offset = 420.0;
+                break;
+            // Transit can not be predicted due to train/bus schedules, leave time, and all factors from driving
+            default:
+                factor = 0.0;
+                offset = 0.0;
+                break;
+        }
+        Double durationEstimateDouble = offset + (distance.doubleValue() * factor);
+        Integer durationEstimate = durationEstimateDouble.intValue();
+        this.duration = durationEstimate;
+        return durationEstimate;
+    }
+
 
     /*
     private Double estimateCost() {

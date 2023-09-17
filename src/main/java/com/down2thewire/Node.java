@@ -62,5 +62,6 @@ abstract class Node<T extends Node> {
         if (this.getId().equals(id)) {return Boolean.TRUE;}
         else return Boolean.FALSE;
     }
+
 }
 

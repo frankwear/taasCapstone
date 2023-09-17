@@ -6,10 +6,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class BranchGeoModelGenerator {
+
     BranchGeoModel geographicMap = new BranchGeoModel();
     List<LinearRoute> routeList = new ArrayList<>();
     LinearWayPoint originWayPoint;
-
     LinearWayPoint destinationWayPoint;
     UserRouteRequest modelRouteRequest;
 
