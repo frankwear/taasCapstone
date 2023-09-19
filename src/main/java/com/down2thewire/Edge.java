@@ -87,15 +87,15 @@ public class Edge<T extends Node> {
         //** note:  Google Distance Value from DistanceMatrix is in meters, so we will match that here **//
         Double latDifferenceInDegrees = Math.abs(this.start.getLatitude() - this.end.getLatitude());  // in degrees
         // one degree lat is about 69 miles, or 111,000 meters and is fairly consistent over the globe.
-        Double latDistanceInMeters = latDifferenceInDegrees * 111000.0d;
+        Double latDistanceInMeters = latDifferenceInDegrees * 111000.0D;
 
         // The longitude distance depends on the latitude.  As you go away from the equator, the distance becomes
         // shorter proportionally to cosine(latitude)
         Double lngDifferenceInDegrees = Math.abs(this.start.getLongitude() - this.end.getLongitude());
-        Double lngDistanceInMeters = lngDifferenceInDegrees * 111000.0d * Math.cos(Math.toRadians(start.getLatitude()));
+        Double lngDistanceInMeters = lngDifferenceInDegrees * 111000.0D * Math.cos(Math.toRadians(start.getLatitude()));
         Double distenceEstimate =
                 Math.max(latDistanceInMeters, lngDistanceInMeters) +
-                Math.min(latDistanceInMeters, lngDistanceInMeters)/1.414d; // estimating based on short leg at 45 degrees
+                Math.min(latDistanceInMeters, lngDistanceInMeters)/1.414D; // estimating based on short leg at 45 degrees
         this.distance =  distenceEstimate.intValue();
         return this.distance;
     }
@@ -109,30 +109,48 @@ public class Edge<T extends Node> {
         switch (this.mode) {
             // Check Google Estimates Duration for Distance give factor of .844 s/m
             case "walking":
-                factor = .844d;
-                offset = 0.0;
+                factor = .844D;
+                offset = 0.0D;
                 break;
             // Check Google Estimates Duration for Distance gives factor of .244 s/m
             case "bicycling":
-                factor = .244d;
-                offset = 250.0;
+                factor = .244D;
+                offset = 250.0D;
                 break;
             // Rough estimate of driving speed varies significantly with traffic, time of day, road type.
             // This is only a rough guideline and has a standard deviation higher than the value.  .06
             case "driving":
-                factor = .06;
-                offset = 420.0;
+                factor = .06D;
+                offset = 420.0D;
                 break;
             // Transit can not be predicted due to train/bus schedules, leave time, and all factors from driving
             default:
-                factor = 0.0;
-                offset = 0.0;
+                factor = 0.0D;
+                offset = 0.0D;
                 break;
         }
         Double durationEstimateDouble = offset + (distance.doubleValue() * factor);
         Integer durationEstimate = durationEstimateDouble.intValue();
         this.duration = durationEstimate;
         return durationEstimate;
+    }
+
+    public double estimateCost(){
+        if (this.cost != null && this.cost != 0D) {
+            return this.duration;
+        }
+        if (this.mode.equals("transit")){
+            this.cost = 2.50D;
+            return this.cost;
+        }
+        if (this.mode.equals("driving")){
+            // AAA estimates $.64/mile https://newsroom.aaa.com/wp-content/uploads/2021/08/2021-YDC-Brochure-Live.pdf
+            // US Tax allows $.655/mile  --> we will use $.65 until updated, or until we find a better way to estimate
+            this.cost = .65D * this.distance.doubleValue();
+            return this.cost;
+        }
+        // walking and bicycling have negligible cash cost
+        return 0D;
     }
 
 

@@ -11,17 +11,19 @@ public class LinearRouteFinder {
     private BranchVertex userRequestDestinationVertex;
 
     // 9-16-23 added origin and destination to constructor as Vertices to work with findRoutesFromHere()
-    public LinearRouteFinder (BranchGeoModel localNodes, UserRouteRequest userRouteRequest){
+    public LinearRouteFinder(BranchGeoModel localNodes, UserRouteRequest userRouteRequest) {
         this.localNodes = localNodes;
         this.userRouteRequest = userRouteRequest;
         BranchVertex tempOrigin = new BranchVertex(userRouteRequest.originWaypoint);
-        tempOrigin = addTerminalEdges(tempOrigin, 5);
+        tempOrigin = addNearbyEdges(tempOrigin, 5);
         this.userRequestOriginVertex = tempOrigin;
-        this.userRequestDestinationVertex = new BranchVertex(userRouteRequest.destinationWaypoint);
+        tempOrigin = new BranchVertex(userRouteRequest.destinationWaypoint);
+        tempOrigin = addNearbyEdges(tempOrigin, 5);
+        this.userRequestDestinationVertex = tempOrigin;
     }
 
     // 9-16-23 added method to integrate origin and destination into known GeoModel
-    private BranchVertex addTerminalEdges(BranchVertex v, int howMany) {
+    private BranchVertex addNearbyEdges(BranchVertex v, int howMany) {
         LinkedList<BranchVertex> nearList = new LinkedList<>();  // List sorted by distance to v
         Long threshold = 0l;
 
@@ -41,41 +43,68 @@ public class LinearRouteFinder {
 
         // add the closest edges
         for (int i = 0; i < howMany; i++) {
-            Edge<BranchVertex> tempEdge = new Edge(this.userRequestOriginVertex, nearList.get(i), "walking",0, 0.0, 0);
+            Edge<BranchVertex> tempEdge = new Edge(this.userRequestOriginVertex, nearList.get(i), "walking", 0, 0.0, 0);
             Integer tempDistance = tempEdge.estimateDistance();
             tempEdge.estimateDuration(tempDistance);
-            v.addEdge(v, nearList.get(i), );
+            tempEdge.estimateCost();
+            v.addEdge(tempEdge);
         }
-    }
-
-    private HashMap<String, Integer> estimateMetrics(String mode, Location start, Location end) {
-
+        return v;
     }
 
 
+//    public LinkedList<LinearRoute> generateAllViableRoutes (){
+//        return findRoutesFromHere(userRequestOriginVertex, userRequestDestinationVertex, new LinkedList<LinearRoute>(), new LinearRoute());
+//    }
 
 
-                if (nearList.size() > 5) {
-                    Long largest = 0l;
-                    for (BranchVertex )
-                }
-                for (BranchVertex nearVertex : nearList){
-                    if
+    /* variable scope and type:
+        GeoModel localNodes scope: Class and final: final can not be enforced because GeoModel variables are not final
+        Stack<WayPoints> path scope: Class
+            WayPoints pathStep scope: created to add to path
+        LinkedList<Route> knownPaths scope: Class
+
+    */
+/*
+
+    private void findRouteSimplePseudo(Vertex currentVertex){
+        For(edges in CurrentVertex){
+            if(edge.getEnd() == userRequestDestinationVertex){
+                add path to list as route;  //*** route must not be same instance as path (clone or change type)***
+                continue to next edge for current vertex;
+            } else {
+                if(you can rule out the route){
+                    continue to next edge for current vertex;
                 }
             }
+            findRouteSimplePseudo(edge.getEnd());
 
         }
-    return something;
     }
 
+    private LinkedList<LinearRoute> findRoutesPseudoCode(BranchVertex currentVertex){
+        if(isDestination(currentNode)){
+            addToListOfRoute(deepCloneCurrentPath());
+            removeLastFromPath();
+        }
+        if(isInViolationOfRules:,
+            isVisitedInPath,
+            isSecondInstanceOfDriving,
+            pathDistancePlusRemainingLongerThanTwiceBirdPath,
+            newLegDoublesRemainingDistance){
+                then MarkVisited and GoBackOneAndCheckNextEdge
+        }
+        //??
+        if(hitsAVertexThatIsComplete){
+            addAllPathsFromThatVertexToPath
+        }
 
-    public LinkedList<LinearRoute> generateAllViableRoutes (){
-        BranchVertex tempOrigin = addEdgeToEndpoint
 
-        return findRoutesFromHere(userRequestOriginVertex, userRequestDestinationVertex, new LinkedList<LinearRoute>(), new LinearRoute());
     }
+}
 
     private LinkedList<LinearRoute> findRoutesFromHere(BranchVertex currentVertex, BranchVertex destinationVertex, LinkedList<LinearRoute> currentList, LinearRoute currentPath){
+
         // prepare localNodes sort and remove duplicates
         localNodes.removeDuplicateVertices();
         LinearWayPoint tempWaypoint = new LinearWayPoint(currentVertex.getLocation());
@@ -84,7 +113,8 @@ public class LinearRouteFinder {
 
         // add vertex and metrics to current route from current edge
         if (currentID.equals(destinationID)){
-            return currentList.add(pathToHere);
+            return currentList.add(currentPath.deepClone());
+
             //add route with metrics to LinkedList, step back one
         }
         foreach (edge in current vertex edges){
@@ -98,7 +128,7 @@ public class LinearRouteFinder {
         }
     }
 
-
+*/
 
 //    static GeographicModel routeModel = new GeographicModel();
 //    RouteRequest userRequest = new RouteRequest();
@@ -399,5 +429,5 @@ public class LinearRouteFinder {
 //*/
 //
 
-
+}
 

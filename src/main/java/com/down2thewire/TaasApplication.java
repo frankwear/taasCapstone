@@ -3,7 +3,7 @@ package com.down2thewire;
 import java.util.LinkedList;
 
 public class TaasApplication {
-    static BranchGeoModelGenerator instanceGmAnalyzer;
+    static BranchVertex.BranchGeoModelGenerator instanceGmAnalyzer;
 //    static RouteAnalyzer instanceRA;
     static UserRouteRequest instanceRR;
     static LinkedList<BranchGeoModel> instanceRouteOffering;
@@ -40,7 +40,7 @@ public class TaasApplication {
         session.instanceUI = new UserInterface();
         session.instanceRR = session.instanceUI.getRequest();
 
-        session.instanceGmAnalyzer = new BranchGeoModelGenerator(session.instanceRR);
+        session.instanceGmAnalyzer = new BranchVertex.BranchGeoModelGenerator(session.instanceRR);
         session.instanceGmAnalyzer.generateGeoModel();
         session.instanceGmAnalyzer.geographicMap.printGraph();
 //        session.instanceRA = new RouteAnalyzer(session.instanceGM.geographicMap, session.instanceRR); // comment

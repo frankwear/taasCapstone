@@ -78,7 +78,7 @@ class LinearUserRouteRequestTest {
         testRR.setPriority(testUser.getPriority());
         testRR.setOrigin("Dunwoody Marta Station");
         testRR.setDestination("Piedmont Atlanta Hospital");
-        BranchGeoModelGenerator testModel = new BranchGeoModelGenerator(testRR);
+        BranchVertex.BranchGeoModelGenerator testModel = new BranchVertex.BranchGeoModelGenerator(testRR);
         BranchGeoModel resultingGraph = testModel.generateGeoModel();
         resultingGraph.printGraph();
     }
