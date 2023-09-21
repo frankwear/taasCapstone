@@ -4,9 +4,13 @@ import java.util.*;
 
 public class GeographicModel {
     private LinkedList<Vertex2> vertexList;
+   private List<Edge2<Vertex2>> edges;
+    private List<Vertex2> vertices;
+
 
     public GeographicModel() {
         this.vertexList = new LinkedList<>();
+        vertices = new ArrayList<>();
     }
 
     public Vertex2 addVertex(Vertex2 v) {
@@ -18,13 +22,28 @@ public class GeographicModel {
             return vertexList.get(findMatchById(v.getId()));
         }
     }
-
+    public void addEdge(Edge2<Vertex2> edge) {
+        // Add the edge to the list of edges
+        edges.add(edge);
+    }
     public Vertex2 addVertex(Double latitude, Double longitude) {
         Location tempLocation = new Location (latitude, longitude);
         Vertex2 tempVertex = new Vertex2(tempLocation, tempLocation.generateUniqueID());
         return addVertex(tempVertex);  // only adds a vertex is it is unique
     }
 
+    // Add a method to get the list of vertices
+    public List<Vertex2> getVertices() {
+        return vertices;
+    }
+    public Vertex2 findVertexByAddress(String address) {
+        for (Vertex2 vertex : vertices) {
+            if (vertex.getLocation().equals(address)) {
+                return vertex;
+            }
+        }
+        return null; // Return null if the vertex with the specified address is not found
+    }
     //////// Warning - this method removes the vertex from the linkedList regardless of other edges that may
     // refer to is as start or end.  Only use after validating that it is not referenced.  ////////
     private void removeVertexAndEdgesHard(int i){
