@@ -1,6 +1,6 @@
 package com.down2thewire;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class LinearRouteFinder {
@@ -14,19 +14,18 @@ public class LinearRouteFinder {
     public LinearRouteFinder(BranchGeoModel localNodes, UserRouteRequest userRouteRequest) {
         this.localNodes = localNodes;
         this.userRouteRequest = userRouteRequest;
-        BranchVertex tempOrigin = new BranchVertex(userRouteRequest.originWaypoint);
-        tempOrigin = addNearbyEdges(tempOrigin, 5);
+        BranchVertex tempOrigin = new BranchVertex(userRouteRequest.originWaypoint);  //create a vertex from a waypoint
+        tempOrigin = addCloseNeighbors(tempOrigin, 5, "walking");  //todo - loop for all modes?
         this.userRequestOriginVertex = tempOrigin;
         tempOrigin = new BranchVertex(userRouteRequest.destinationWaypoint);
-        tempOrigin = addNearbyEdges(tempOrigin, 5);
+        tempOrigin = addCloseNeighbors(tempOrigin, 5, "walking");
         this.userRequestDestinationVertex = tempOrigin;
     }
 
     // 9-16-23 added method to integrate origin and destination into known GeoModel
-    private BranchVertex addNearbyEdges(BranchVertex v, int howMany) {
+    private BranchVertex addCloseNeighbors(BranchVertex v, int howMany, String mode) {
         LinkedList<BranchVertex> nearList = new LinkedList<>();  // List sorted by distance to v
         Long threshold = 0l;
-
         // create a list of vertices sorted by distance
         for (BranchVertex nodeVertex : localNodes.cloneVertexList()) {
             Long distanceToNode = Math.abs(v.getId() - nodeVertex.getId());
@@ -43,7 +42,7 @@ public class LinearRouteFinder {
 
         // add the closest edges
         for (int i = 0; i < howMany; i++) {
-            Edge<BranchVertex> tempEdge = new Edge(this.userRequestOriginVertex, nearList.get(i), "walking", 0, 0.0, 0);
+            Edge<BranchVertex> tempEdge = new Edge(this.userRequestOriginVertex, nearList.get(i), mode, 0, 0.0, 0);
             Integer tempDistance = tempEdge.estimateDistance();
             tempEdge.estimateDuration(tempDistance);
             tempEdge.estimateCost();
@@ -51,6 +50,22 @@ public class LinearRouteFinder {
         }
         return v;
     }
+
+    // 9-20-23 attempting Dijkstra algorithm
+//    public LinearRoute findDijkstraRoute (String mode, String metric) {
+//        // localNodes, origin, and destination from "this".
+// //       ArrayList<DNode> dijkNodes = new ArrayList<>[];
+//    }
+
+    class DNode extends Node{
+        // DNode is a specializedVertex for the Dijkstra algorithm
+        public DNode (BranchVertex vertex) {
+
+        }
+    }
+
+
+
 
 
 //    public LinkedList<LinearRoute> generateAllViableRoutes (){
