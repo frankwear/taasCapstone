@@ -28,8 +28,7 @@ public class DistanceMatrixApi {
     }
     public DistanceMatrixApi(GeographicModel geographicModel) {
         this.geoModel = geographicModel;
-        String jsonURLString = buildDistanceUrl();
-        this.jsonURL = jsonURLString;
+        this.jsonURLString = buildDistanceUrl();
     }
 //    public String getOriginFromGeomodel(){
 //        this.geoModel.getVertices();
@@ -183,8 +182,11 @@ public class DistanceMatrixApi {
         String origin = "";
 
         for (int i = 0; i < geoModel.getVertexListSize(); i++) {
+            String tempOrigin = "";
             origin = origin + geoModel.getVertex(i).getLatitude() + "," +
                     geoModel.getVertex(i).getLongitude() + "|";
+            this.origins.add(geoModel.getVertex(i).getLatitude() + "," +
+                    geoModel.getVertex(i).getLongitude());
         }
         origin = origin.substring(0, origin.length() - 1);
         myUrl = myUrl + "origins=" + origin.toString() + "&destinations=" + origin.toString();
