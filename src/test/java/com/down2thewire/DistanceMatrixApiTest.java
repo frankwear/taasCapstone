@@ -31,7 +31,7 @@ public class DistanceMatrixApiTest {
         GeographicModel testGM = PlacesApi.buildPlacesFromApiCall(myParameters);
         DistanceMatrixApi myDM = new DistanceMatrixApi(testGM);
         myDM.jsonToGeomodel();
-        myDM.addEdgesToGeoModelSquare(myDM.jsonResultString);
+        myDM.addEdgesToGeoModelSquare(myDM.apiResponseAsString);
         myDM.geoModel.printGraph();
     }
 }

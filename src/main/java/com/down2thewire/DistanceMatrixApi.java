@@ -3,7 +3,6 @@ package com.down2thewire;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.print.DocFlavor;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -17,9 +16,9 @@ public class DistanceMatrixApi {
     GeographicModel geoModel;
     List<String> origins;
     List<String> destinations;
-    String jsonURLString;
+    String urlAsString;
     private String apiKey = ApiKeys.getGoogleKey();
-    public String jsonResultString;
+    public String apiResponseAsString;
 
     public DistanceMatrixApi(List<String> origins, List<String> destinations, GeographicModel geographicModel) {
         this.origins = origins;
@@ -28,7 +27,7 @@ public class DistanceMatrixApi {
     }
     public DistanceMatrixApi(GeographicModel geographicModel) {
         this.geoModel = geographicModel;
-        this.jsonURLString = buildDistanceUrl();
+        this.urlAsString = buildDistanceUrl();
     }
 //    public String getOriginFromGeomodel(){
 //        this.geoModel.getVertices();
@@ -174,7 +173,7 @@ public class DistanceMatrixApi {
             throw new RuntimeException(e);
         }
         connection.disconnect();
-        this.jsonResultString = jsonText;
+        this.apiResponseAsString = jsonText;
         return jsonText;
     }
     public String buildDistanceUrl() {
