@@ -1,9 +1,8 @@
 package com.down2thewire;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class LinearRouteFinder {
+public class RouteFinder {
 
     private BranchGeoModel localNodes;
     private UserRouteRequest userRouteRequest;
@@ -11,7 +10,7 @@ public class LinearRouteFinder {
     private BranchVertex userRequestDestinationVertex;
 
     // 9-16-23 added origin and destination to constructor as Vertices to work with findRoutesFromHere()
-    public LinearRouteFinder(BranchGeoModel localNodes, UserRouteRequest userRouteRequest) {
+    public RouteFinder(BranchGeoModel localNodes, UserRouteRequest userRouteRequest) {
         this.localNodes = localNodes;
         this.userRouteRequest = userRouteRequest;
         BranchVertex tempOrigin = new BranchVertex(userRouteRequest.originWaypoint);  //create a vertex from a waypoint

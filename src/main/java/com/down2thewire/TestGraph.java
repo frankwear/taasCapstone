@@ -51,10 +51,10 @@ public class TestGraph {
         return lowestDistanceNode;
     }
     private static void calculateMinimumDistance(TestNode evaluationNode,
-                                                 Integer edgeWeigh, TestNode sourceNode) {
+                                                 Integer edgeWeight, TestNode sourceNode) {
         Integer sourceDistance = sourceNode.getDistance();
-        if (sourceDistance + edgeWeigh < evaluationNode.getDistance()) {
-            evaluationNode.setDistance(sourceDistance + edgeWeigh);
+        if (sourceDistance + edgeWeight < evaluationNode.getDistance()) {
+            evaluationNode.setDistance(sourceDistance + edgeWeight);
             LinkedList<TestNode> shortestPath = new LinkedList<>(sourceNode.getShortestPath());
             shortestPath.add(sourceNode);
             evaluationNode.setShortestPath(shortestPath);

@@ -52,7 +52,7 @@ class BranchGeoModelGeneratorTest {
 //        testGeoModel.printGraph();
 //    }
 
-    private BranchGeoModel createTestGraphWithDuplicateVertices() {
+    public static BranchGeoModel createTestGraphWithDuplicateVertices() {
         // add vertices from two routes
         // route 1  - Walking and Transit
         BranchGeoModel graph = new BranchGeoModel();

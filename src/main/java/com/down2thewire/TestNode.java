@@ -11,13 +11,14 @@ public class TestNode {
 
     Map<TestNode, Integer> adjacentNodes = new HashMap<>();
 
+    public TestNode(String name) {
+        this.name = name;
+    }
+
     public void addDestination(TestNode destination, int distance) {
         adjacentNodes.put(destination, distance);
     }
 
-    public TestNode(String name) {
-        this.name = name;
-    }
     public void setDistance (Integer d){
         this.distance = d;
     }
