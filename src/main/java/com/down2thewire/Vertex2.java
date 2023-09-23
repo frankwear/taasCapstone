@@ -93,6 +93,15 @@ public class Vertex2 extends Node {
 //    public Vertex2() {
 //        super();
 //    }
+//created for DistancematrixAPI
+    public boolean hasEdgeTo(Vertex2 destination) {
+    for (Edge2<Vertex2> edge : outgoingEdges) {
+        if (edge.getEnd() == destination) {
+            return true;
+        }
+    }
+    return false;
+}
 
     public void addEdge(Edge2<Vertex2> e) {
         addEdge(e.getStart(), e.getEnd(), e.getMode(), e.getDuration(), e.getCost(), e.getDistance());

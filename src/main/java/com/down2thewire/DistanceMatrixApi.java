@@ -2,161 +2,164 @@ package com.down2thewire;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import javax.print.DocFlavor;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DistanceMatrixApi {
-    GeographicModel geoModel;
-    List<String> origins;
-    List<String> destinations;
-    String jsonURLString;
-    private String apiKey = ApiKeys.getGoogleKey();
-    public String jsonResultString;
-
-    public DistanceMatrixApi(List<String> origins, List<String> destinations, GeographicModel geographicModel) {
-        this.origins = origins;
-        this.destinations = destinations;
-        this.geoModel = geographicModel;
+    private final GeographicModel localGeography;
+    private static final String apiKey = ApiKeys.getGoogleKey();
+    private String jsonResultString;
+    public DistanceMatrixApi(GeographicModel localGeography) {
+        this.localGeography = localGeography;
     }
-    public DistanceMatrixApi(GeographicModel geographicModel) {
-        this.geoModel = geographicModel;
-        this.jsonURLString = buildDistanceUrl();
+    public GeographicModel getLocalGeography() {
+        //logic
+        return localGeography;
     }
-//    public String getOriginFromGeomodel(){
-//        this.geoModel.getVertices();
-//        for(int i = 0 ; i<this.geoModel.getVertexListSize();i++){
-//
-//        }
-//
+//    public GeographicModel addEdgesToGeomodelFromApi(GeographicModel gm,String startLocation, String endLocations, String mode) {
+//        String locationString = createStringOfLocation(startLocation, endLocations.toString());
+//        String jsonUrlString = createUrl(locationString, mode);
+//        String jsonResponseString = getJsonResponseString(jsonUrlString);
+//        //addEdgesToGeoModelRectangular(jsonResponseString);
+//        return localGeography;
 //    }
-    public GeographicModel jsonToGeomodel() {
-        int maxRows = 100 / origins.size();
+public GeographicModel addEdgesToGeomodelFromApi(GeographicModel gm, String startLocation, String endLocations, String mode) {
+    String locationString = createStringOfLocation(startLocation, endLocations.toString());
+    //manageQuerymethod goes here
+    String jsonUrlString = createUrl(locationString, mode);
+    String jsonResponseString = getJsonResponseString(jsonUrlString);
+    // Parse the JSON response & add edges to the geomodel
+    addEdgesFromJsonResponse(gm, jsonResponseString);
+    return gm;
+}
+    private void addEdgesFromJsonResponse(GeographicModel gm, String jsonResponse) {
+        // Parse the JSON response and add edges to gm
+        JSONObject jsonObject = new JSONObject(jsonResponse);
+        JSONArray rowsArray = jsonObject.getJSONArray("rows");
 
-        for (int i = 0; i < destinations.size(); i += maxRows) {
-            List<String> subDestinations = new LinkedList<>();
-            for (int j = i; j < (i + maxRows); j++) {
-                subDestinations.add(destinations.get(j));
-            }
-            String jsonURLString = buildDistanceUrl(origins, subDestinations);
-            addEdgesToGeoModelRectangular(saveJsonToString(jsonURLString));
-        }
-        return this.geoModel;
-    }
-    public void addEdgesToGeoModelSquare(String jsonResult) { //duplicate method for  rectangular from square
-        JSONObject rowsJSONObject = new JSONObject(jsonResult);
-        JSONArray rowsJsonArray = rowsJSONObject.getJSONArray("rows");
+        for (int i = 0; i < rowsArray.length(); i++) {
+            JSONArray elementsArray = rowsArray.getJSONObject(i).getJSONArray("elements");
+            for (int j = 0; j < elementsArray.length(); j++) {
+                JSONObject element = elementsArray.getJSONObject(j);
 
-        if (rowsJsonArray.length() > 0) {
-            for (int i = 0; i < rowsJsonArray.length(); i++) {
-                JSONObject row = rowsJsonArray.getJSONObject(i);
-                JSONArray elements = row.getJSONArray("elements");
-                for (int j = 0; j < elements.length(); j++) {
-                    JSONObject element = elements.getJSONObject(j);
-                    if (element.getJSONObject("distance").getInt("value") > 30) {
-                        Edge2<Vertex2> tempEdge = new Edge2<>();
-                        Vertex2 startVertex = geoModel.getVertex(i);
-                        Vertex2 endVertex = geoModel.getVertex(j);
+                // Extract --> information (e.g., distance, duration, mode) from JSON element
+                double distance = element.getJSONObject("distance").getDouble("value");
+                int duration = element.getJSONObject("duration").getInt("value");
+                String travelMode = "walking"; // todo replace with actual mode later
 
-                        if (startVertex != null && endVertex != null) {
-                            tempEdge.setStart(startVertex);
-                            tempEdge.setEnd(endVertex);
-                            try {
+                // Check --> distance is > 0.0 before adding the edge
+                if (distance > 0.0) {
+                    Vertex2 startVertex = gm.getVertex(i);
+                    Vertex2 endVertex = gm.getVertex(j);
 
-                                    tempEdge.setCost(element.getJSONObject("fare").getDouble("value"));
-                                }
-                            catch (Exception e){
-                                tempEdge.setCost(0.00);
-                            }
-                            tempEdge.setDuration(element.getJSONObject("duration").getInt("value"));
-                            tempEdge.setDistance(element.getJSONObject("distance").getInt("value"));
-                            startVertex.addEdge(tempEdge);
+                    // Check if the edge already exists before adding it
+                    if (!startVertex.hasEdgeTo(endVertex)) {
+                        // Add the edge to the geographic model
+                        startVertex.addEdge(startVertex, endVertex, travelMode, duration, 0.00, (int) distance);
 
-                            Edge2<Vertex2> tempEdge1 = new Edge2<>();
-                            tempEdge1.setStart(endVertex);
-                            tempEdge1.setEnd(startVertex);
-                            tempEdge1.setDuration(element.getJSONObject("duration").getInt("value"));
-                            tempEdge1.setDistance(element.getJSONObject("distance").getInt("value"));
-                            //tempEdge1.setCost(element.getJSONObject("fare").getDouble("value"));
-                                try {
-                                    tempEdge1.setCost(element.getJSONObject("fare").getDouble("value"));
-
-                                }
-                                catch (Exception ex) {
-                                    tempEdge1.setCost(0.00);;
-                                }
-                            endVertex.addEdge(tempEdge1);
-                        }
+                        // Print debug information
+                        System.out.println("Added Edge: " + startVertex.getId() + " -> " + endVertex.getId() + " (Distance: " + distance + ")");
+                        System.out.println("Start Location: " + startVertex.getLocation());
+                        System.out.println("End Location: " + endVertex.getLocation());
                     }
                 }
             }
         }
     }
-    public void addEdgesToGeoModelRectangular(String jsonResult) {
-        JSONObject response = new JSONObject(jsonResult);
 
-        JSONArray originAddresses = response.getJSONArray("origin_addresses");
-        JSONArray destinationAddresses = response.getJSONArray("destination_addresses");
-        JSONArray rows = response.getJSONArray("rows");
+    private String createStringOfLocation(String startLocation, String endLocations) {
+        return startLocation + "|" + endLocations;
+    }
+    private String createStringOfLocation(GeographicModel geoModel) {
+        StringBuilder locationString = new StringBuilder();
+        for (int i = 0; i < geoModel.getVertexListSize(); i++) {
+            Vertex2 vertex = geoModel.getVertex(i);
+            Location location = vertex.getLocation();
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
 
-        for (int i = 0; i < originAddresses.length(); i++) {
-            String originAddress = originAddresses.getString(i);
+            // Append the location to the string in the required format
+            locationString.append(latitude).append(",").append(longitude);
 
-            for (int j = 0; j < destinationAddresses.length(); j++) {
-                String destinationAddress = destinationAddresses.getString(j);
-                JSONObject element = rows.getJSONObject(i).getJSONArray("elements").getJSONObject(j);
+            if (i < geoModel.getVertexListSize() - 1) {
+                locationString.append("|");
+            }
+        }
+        return locationString.toString();
 
-                // Checking if the distance value is greater than 30
-                int distanceValue = element.getJSONObject("distance").getInt("value");
-                if (distanceValue > 30) {
-                    Vertex2 startVertex = geoModel.findVertexByAddress(originAddress);
-                    Vertex2 endVertex = geoModel.findVertexByAddress(destinationAddress);
+    }
+    private String createStringOfLocation(List<Location> locations) {
 
-                    if (startVertex != null && endVertex != null) {
-                        Edge2<Vertex2> tempEdge = new Edge2<>();
-                        tempEdge.setStart(startVertex);
-                        tempEdge.setEnd(endVertex);
+        StringBuilder locationString = new StringBuilder();
 
-                        try {
-                            tempEdge.setCost(element.getJSONObject("fare").getDouble("value"));
-                        } catch (Exception e) {
-                            tempEdge.setCost(0.00);
-                        }
+        for (int i = 0; i < locations.size(); i++) {
+            Location location = locations.get(i);
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
 
-                        tempEdge.setDuration(element.getJSONObject("duration").getInt("value"));
-                        tempEdge.setDistance(distanceValue);
+            // add location to string
+            locationString.append(latitude).append(",").append(longitude);
 
-                        // Adding the edge to the vertices
-                        startVertex.addEdge(tempEdge);
+            if (i < locations.size() - 1) {
+                locationString.append("|");
+            }
+        }
 
-                        Edge2<Vertex2> tempEdge1 = new Edge2<>();
-                        tempEdge1.setStart(endVertex);
-                        tempEdge1.setEnd(startVertex);
-                        tempEdge1.setDuration(element.getJSONObject("duration").getInt("value"));
-                        tempEdge1.setDistance(distanceValue);
+        return locationString.toString();
+    }
+    private List<String> manageQuerySize(List<String> origins, List<String> destinations) {
+        //List<String> listOfUsableURLs=new ArrayList<>();
+        // manage query size
+        // split and should return a list of usable mini URLs
+        List<String> listOfUsableURLs = new ArrayList<>();
 
-                        try {
-                            tempEdge1.setCost(element.getJSONObject("fare").getDouble("value"));
-                        } catch (Exception e) {
-                            tempEdge1.setCost(0.00);
-                        }
+        // vertices elements calculation -Calculating the number of elements - need to modify:
+        int totalElements = origins.size() * destinations.size();
 
-                        endVertex.addEdge(tempEdge1);
-                    }
+        // Checking  total number of elements exceeds the maximum limit (100)
+        if (totalElements <= 100) {
+            // if The request is within limits,add
+            String url = createUrl(origins.toString(), destinations.toString());
+            listOfUsableURLs.add(url);
+        } else {
+            // Split the request -small size
+            List<List<String>> originBatches = splitIntoBatches(origins, 25);
+            List<List<String>> destinationBatches = splitIntoBatches(destinations, 25);
+
+            // Generate requests for each batch
+            for (List<String> originBatch : originBatches) {
+                for (List<String> destinationBatch : destinationBatches) {
+                    String url = createUrl(originBatch.toString(), destinationBatch.toString());
+                    listOfUsableURLs.add(url);
                 }
             }
         }
+
+        return listOfUsableURLs;
     }
-    public String saveJsonToString(String jsonUrlString) {
+    private List<List<String>> splitIntoBatches(List<String> list, int batchSize) {
+        List<List<String>> batches = new ArrayList<>();
+        for (int i = 0; i < list.size(); i += batchSize) {
+            int endIndex = Math.min(i + batchSize, list.size());
+            batches.add(list.subList(i, endIndex));
+        }
+        return batches;
+    }
+    private String createUrl(String locations, String mode) {
+            String myUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?";
+            myUrl += "origins=" + locations + "&destinations=" + locations;
+            myUrl += "&units=imperial" + "&mode=" + mode + "&key=" + apiKey;
+            return myUrl;
+    }
+    private String getJsonResponseString(String jsonUrlString) {
         URL apiEndpoint;
-        String jsonText;
+        String jsonText="";
         HttpURLConnection connection;
         try {
             apiEndpoint = new URL(jsonUrlString);
@@ -176,38 +179,5 @@ public class DistanceMatrixApi {
         connection.disconnect();
         this.jsonResultString = jsonText;
         return jsonText;
-    }
-    public String buildDistanceUrl() {
-        String myUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?";
-        String origin = "";
-
-        for (int i = 0; i < geoModel.getVertexListSize(); i++) {
-            String tempOrigin = "";
-            origin = origin + geoModel.getVertex(i).getLatitude() + "," +
-                    geoModel.getVertex(i).getLongitude() + "|";
-            this.origins.add(geoModel.getVertex(i).getLatitude() + "," +
-                    geoModel.getVertex(i).getLongitude());
-        }
-        origin = origin.substring(0, origin.length() - 1);
-        myUrl = myUrl + "origins=" + origin.toString() + "&destinations=" + origin.toString();
-        myUrl = myUrl + "&units=imperial" + "&mode=walking" + "&key=" + apiKey;
-        return myUrl;
-    }
-
-    public String buildDistanceUrl(List<String> subOrigins, List<String> subDestinations) {
-        String myUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?";
-        String originsStr = "";
-        String destinationsStr = "";
-
-        if (subOrigins != null && !subOrigins.isEmpty()) {
-            originsStr = String.join("|", subOrigins);
-        }
-        if (subDestinations != null && !subDestinations.isEmpty()) {
-            destinationsStr = String.join("|", subDestinations);
-        }
-        myUrl = myUrl + "origins=" + originsStr + "&destinations=" + destinationsStr;
-        myUrl = myUrl + "&units=imperial" + "&mode=walking" + "&key=" + apiKey;
-        //mode needs to me modified ;
-        return myUrl;
     }
 }
