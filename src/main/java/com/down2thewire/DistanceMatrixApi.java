@@ -12,7 +12,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 public class DistanceMatrixApi {
-    GeographicModel geoModel;
+    BranchGeoModel geoModel;
     HashMap<String, String> parameters;
     String jsonURL;
     private String apiKey = ApiKeys.getGoogleKey();
@@ -26,7 +26,7 @@ public class DistanceMatrixApi {
         this.jsonURL = jsonURLString;
         addEdgesToGeoModel(saveJsonToString());
     }
-    public DistanceMatrixApi(GeographicModel geographicModel){
+    public DistanceMatrixApi(BranchGeoModel geographicModel){
         this.geoModel = geographicModel;
         String jsonURLString = buildDistanceUrl();
         this.jsonURL = jsonURLString;
@@ -45,7 +45,7 @@ public class DistanceMatrixApi {
                 for (int j = 0; j < elements.length(); j++) {
                     JSONObject element = elements.getJSONObject(j);
                     if (element.getJSONObject("distance").getInt("value") > 30) {
-                        Edge2<Vertex2> tempEdge = new Edge2<>();
+                        Edge<BranchVertex> tempEdge = new Edge<>();
                         tempEdge.setStart(geoModel.getVertex(i));
                         tempEdge.setEnd(geoModel.getVertex(j));
                         tempEdge.setMode(parameters.get("&mode="));
@@ -53,7 +53,7 @@ public class DistanceMatrixApi {
                         tempEdge.setDistance(element.getJSONObject("distance").getInt("value"));
                         geoModel.getVertex(i).addEdge(tempEdge);
 
-                        Edge2<Vertex2> tempEdge1 = new Edge2<>();
+                        Edge<BranchVertex> tempEdge1 = new Edge<>();
                         tempEdge1.setEnd(geoModel.getVertex(i));
                         tempEdge1.setStart(geoModel.getVertex(j));
                         tempEdge1.setMode(parameters.get("&mode="));
@@ -65,6 +65,8 @@ public class DistanceMatrixApi {
             }
         }
     }
+
+
 
     public void addEdges() {
 

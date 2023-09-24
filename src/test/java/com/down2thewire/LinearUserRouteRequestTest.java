@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RouteRequestTest {
+class LinearUserRouteRequestTest {
 
     @Test
     void setPriority() {
-        RouteRequest testRR = new RouteRequest();
+        UserRouteRequest testRR = new UserRouteRequest();
         testRR.setPriority("CHEAP");
         assertTrue(testRR.priority == "CHEAP");
         testRR.setPriority("WILD PARTY");
@@ -73,13 +73,13 @@ class RouteRequestTest {
         testUser.initializeTransitUser();  // Transit Mode and CHEAP priority
 
         // Get settings from user account
-        RouteRequest testRR = new RouteRequest();
+        UserRouteRequest testRR = new UserRouteRequest();
         testRR.setModePrefFromAccount(testUser);
         testRR.setPriority(testUser.getPriority());
         testRR.setOrigin("Dunwoody Marta Station");
         testRR.setDestination("Piedmont Atlanta Hospital");
-        GeoModelAnalyzer testModel = new GeoModelAnalyzer(testRR);
-        GeographicModel resultingGraph = testModel.generateGeoModel();
+        BranchVertex.BranchGeoModelGenerator testModel = new BranchVertex.BranchGeoModelGenerator(testRR);
+        BranchGeoModel resultingGraph = testModel.generateGeoModel();
         resultingGraph.printGraph();
     }
 }

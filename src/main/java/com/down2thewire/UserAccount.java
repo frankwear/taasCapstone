@@ -21,7 +21,7 @@ public class UserAccount {
         return this.accountID;
     }
     public void setPriority(String p) {
-        this.priority = RouteRequest.validatePriority(p);
+        this.priority = UserRouteRequest.validatePriority(p);
     }
     public String getPriority(){
         return this.priority;

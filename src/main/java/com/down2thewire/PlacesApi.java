@@ -30,7 +30,7 @@ public class PlacesApi {
 
 
     //****** Static Implementation *****//
-    static GeographicModel buildPlacesFromApiCall(HashMap<String, String> parameters) {
+    static BranchGeoModel buildPlacesFromApiCall(HashMap<String, String> parameters) {
         PlacesApi tempPlaces = new PlacesApi(parameters);
         return tempPlaces.getApiResponseAsGeoModel();
     }
@@ -47,11 +47,11 @@ public class PlacesApi {
         return apiResponseAsString;
     }
 
-    public GeographicModel getApiResponseAsGeoModel(){
+    public BranchGeoModel getApiResponseAsGeoModel(){
         if(apiResponseAsString.isBlank()){
             this.apiResponseAsString = getJsonStringFromApi();
         }
-        GeographicModel locationsOnly = constructGeoModel(apiResponseAsString);
+        BranchGeoModel locationsOnly = constructGeoModel(apiResponseAsString);
         return locationsOnly;
     }
 
@@ -80,12 +80,12 @@ public class PlacesApi {
         return jsonText;
     }
 
-    private GeographicModel constructGeoModel(String json) {
+    private BranchGeoModel constructGeoModel(String json) {
         if (json == null || json.isBlank()){
             System.out.println("PlacesApi.constructGeoModel() could not create a GeographicMap.  String is blank.");
-            return new GeographicModel();
+            return new BranchGeoModel();
         }
-        GeographicModel apiGm = new GeographicModel();
+        BranchGeoModel apiGm = new BranchGeoModel();
         JSONObject placesJsonObject = new JSONObject(json);
         JSONArray resultsArray = placesJsonObject.getJSONArray("results");
         if (resultsArray.length() > 0) {
@@ -93,7 +93,7 @@ public class PlacesApi {
                 JSONObject apiResult = resultsArray.getJSONObject(i);
                 double lat = apiResult.getJSONObject("geometry").getJSONObject("location").getDouble("lat");
                 double lng = apiResult.getJSONObject("geometry").getJSONObject("location").getDouble("lng");
-                Vertex2 tempVert = new Vertex2(new Location(lat, lng));
+                BranchVertex tempVert = new BranchVertex(new Location(lat, lng));
                 tempVert.setDescription(apiResult.getString("name"));
                 tempVert.setThirdPartyId(apiResult.getString("place_id"));
                 tempVert.setId();

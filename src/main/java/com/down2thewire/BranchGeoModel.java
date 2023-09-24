@@ -2,14 +2,17 @@ package com.down2thewire;
 
 import java.util.*;
 
-public class GeographicModel {
-    private LinkedList<Vertex2> vertexList;
+public class BranchGeoModel {
+    private LinkedList<BranchVertex> vertexList;
 
-    public GeographicModel() {
+    public BranchGeoModel() {
         this.vertexList = new LinkedList<>();
     }
+    public BranchGeoModel(LinearRoute route){
+        convertRouteToGeoModel(route);
+    }
 
-    public Vertex2 addVertex(Vertex2 v) {
+    public BranchVertex addVertex(BranchVertex v) {
         if(isUnique(v)) {
             vertexList.addLast(v);
             return v;
@@ -19,9 +22,9 @@ public class GeographicModel {
         }
     }
 
-    public Vertex2 addVertex(Double latitude, Double longitude) {
+    public BranchVertex addVertex(Double latitude, Double longitude) {
         Location tempLocation = new Location (latitude, longitude);
-        Vertex2 tempVertex = new Vertex2(tempLocation, tempLocation.generateUniqueID());
+        BranchVertex tempVertex = new BranchVertex(tempLocation, tempLocation.generateUniqueID());
         return addVertex(tempVertex);  // only adds a vertex is it is unique
     }
 
@@ -37,8 +40,8 @@ public class GeographicModel {
 
         sortVertexList();
         for (int i = getVertexListSize() - 1; i > 0; i--) {
-            Vertex2 currentVertex = getVertex(i);
-            Vertex2 priorVertex = getVertex(i - 1);
+            BranchVertex currentVertex = getVertex(i);
+            BranchVertex priorVertex = getVertex(i - 1);
 
             if (currentVertex.getId().equals(priorVertex.getId())) {
                 currentVertex.updateNeighborsEdges(currentVertex, priorVertex);
@@ -53,8 +56,8 @@ public class GeographicModel {
         }
     }
 
-    public Boolean isUnique(Vertex2 v){
-        for (Vertex2 mainVertex : this.vertexList) {
+    public Boolean isUnique(BranchVertex v){
+        for (BranchVertex mainVertex : this.vertexList) {
             if (mainVertex.getId().equals(v.getId())) {
                 return Boolean.FALSE;
             }
@@ -64,7 +67,7 @@ public class GeographicModel {
 
     public int findMatchById(Long id) {
         int index = 0;
-        for (Vertex2 mainVertex : vertexList) {
+        for (BranchVertex mainVertex : vertexList) {
             if (mainVertex.isMatchById(id)) {
                 return index;
             }
@@ -76,13 +79,13 @@ public class GeographicModel {
     public int getVertexListSize(){
         return vertexList.size();
     }
-    public Vertex2 getVertex(int i) {
+    public BranchVertex getVertex(int i) {
         return vertexList.get(i);  // may return out of bounds if vertex doesn't exist
     }
 
-    public LinkedList<Vertex2> getMatchingVertexNames(String s) {
-        LinkedList<Vertex2> matchingList = new LinkedList<>();
-        ListIterator<Vertex2> vertexIterator = (ListIterator<Vertex2>) vertexList.iterator();
+    public LinkedList<BranchVertex> getMatchingVertexNames(String s) {
+        LinkedList<BranchVertex> matchingList = new LinkedList<>();
+        ListIterator<BranchVertex> vertexIterator = (ListIterator<BranchVertex>) vertexList.iterator();
         while (vertexIterator.hasNext()) {
             if (vertexIterator.next().getDescription().contains(s)) {
                 matchingList.addLast(vertexIterator.next());
@@ -91,8 +94,8 @@ public class GeographicModel {
         return matchingList;
     }
 
-    public int getVertexIndexById(Vertex2 v) {
-        ListIterator<Vertex2> vertexIterator = (ListIterator<Vertex2>) vertexList.iterator();
+    public int getVertexIndexById(BranchVertex v) {
+        ListIterator<BranchVertex> vertexIterator = (ListIterator<BranchVertex>) vertexList.iterator();
         while (vertexIterator.hasNext()) {
             if (vertexIterator.next().getId() == v.getId()) {
                 return vertexIterator.previousIndex();
@@ -101,7 +104,31 @@ public class GeographicModel {
         return -1; // return -1 if not found
     }
 
-
+    private void convertRouteToGeoModel (LinearRoute route) {
+        int size = route.wayPointLinkedList.size();
+        BranchVertex lastLegDestination = new BranchVertex(new Location(0.0d, 0.0d));
+        for (int j = 0; j < size-1; j++){
+            LinearWayPoint w1 = route.wayPointLinkedList.get(j);
+            BranchVertex v1 = new BranchVertex(new Location(0.0,0.0));
+            if (j==0) {
+                v1 = BranchVertex.waypointToVertex(w1);
+            } else {
+                v1 = lastLegDestination;
+            }
+            Edge<LinearWayPoint> e1 = w1.getEdge();
+            LinearWayPoint w2 = route.wayPointLinkedList.get(j+1);
+            BranchVertex v2 = BranchVertex.waypointToVertex(w2);
+            Edge<BranchVertex> forward = new Edge<>(v1, v2, e1.getMode(), e1.getDuration(), e1.getCost(), e1.getDistance());
+            v1.addEdge(forward);
+            Edge<BranchVertex> backward = new Edge<>(v2, v1, e1.getMode(), e1.getDuration(), e1.getCost(), e1.getDistance());
+            v2.addEdge(backward);
+            addVertex(v1);
+            if (j == size-2){
+                addVertex(v2);
+            }
+            lastLegDestination = v2;
+        }
+    }
 
 
 
@@ -110,22 +137,22 @@ public class GeographicModel {
     }
 
 
-    public Vertex2 convertToVertex (WayPoint wayPoint){
-        Vertex2 tempVertex = new Vertex2(wayPoint.location, wayPoint.getId());
+    public BranchVertex convertToVertex (LinearWayPoint wayPoint){
+        BranchVertex tempVertex = new BranchVertex(wayPoint.location, wayPoint.getId());
         return tempVertex;
     }
 
-    public void addGraph(Route route) {
+    public void addGraph(LinearRoute route) {
 
         // iterate over edges of argument g - adding an edge adds if vertices if they are unique
-        ListIterator<WayPoint> wayPointListIteratorIterator = route.wayPointLinkedList.listIterator();
+        ListIterator<LinearWayPoint> wayPointListIteratorIterator = route.wayPointLinkedList.listIterator();
         while (wayPointListIteratorIterator.hasNext()) {
             vertexList.add(convertToVertex(wayPointListIteratorIterator.next()));
         }
     }
-    public GeographicModel addGraph(GeographicModel tempGeoModel) {
-        LinkedList<Vertex2> tempVertexList = new LinkedList<>(tempGeoModel.vertexList);
-        ListIterator<Vertex2> vertex2ListIterator = tempVertexList.listIterator();
+    public BranchGeoModel addGraph(BranchGeoModel tempGeoModel) {
+        LinkedList<BranchVertex> tempVertexList = new LinkedList<>(tempGeoModel.vertexList);
+        ListIterator<BranchVertex> vertex2ListIterator = tempVertexList.listIterator();
         while (vertex2ListIterator.hasNext()) {
             this.vertexList.add(vertex2ListIterator.next());
         }
@@ -133,18 +160,18 @@ public class GeographicModel {
     }
 
     public void sortVertexList(){
-        vertexList.sort(Comparator.comparing(Vertex2::getId));
+        vertexList.sort(Comparator.comparing(BranchVertex::getId));
     }
 
-    public LinkedList<Vertex2> cloneVertexList(){
-        return (LinkedList<Vertex2>) vertexList.clone();
+    public LinkedList<BranchVertex> cloneVertexList(){
+        return (LinkedList<BranchVertex>) vertexList.clone();
     }
 
 
     public void printGraph(){
-        Iterator<Vertex2> vertexIterator = vertexList.iterator();
+        Iterator<BranchVertex> vertexIterator = vertexList.iterator();
         while (vertexIterator.hasNext()) {
-            Vertex2 tempVertex = vertexIterator.next();
+            BranchVertex tempVertex = vertexIterator.next();
             System.out.println("\nName: " + tempVertex.getDescription());
             System.out.println("Vertex: " + tempVertex.getLongitude() + "  " + tempVertex.getLatitude() + "  " +
                     tempVertex.getId());

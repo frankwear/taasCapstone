@@ -2,7 +2,7 @@ package com.down2thewire;
 
 import java.util.LinkedList;
 
-public class RouteRequest {
+public class UserRouteRequest {
     // preference is 0-4 as:
     // 0 means can't - imperative not to use this mode
     // 1 means can if necessary
@@ -12,12 +12,12 @@ public class RouteRequest {
     int[] modePref = {2,2,2,2,2,2,2,2,0,0};
     String origin;
     String destination;
-    WayPoint originWaypoint;
+    LinearWayPoint originWaypoint;
 
-    WayPoint destinationWaypoint;
+    LinearWayPoint destinationWaypoint;
 
     String priority;  //QUICK, CHEAP, FREE, COMFORTABLE, PERSONALIZED, EASY, EXERCISE
-    public RouteRequest() {
+    public UserRouteRequest() {
     }
     public void setPriority(String p) {
         this.priority = validatePriority(p);
@@ -92,7 +92,7 @@ public class RouteRequest {
         LinkedList<String> preferredModes = new LinkedList<>();
         for (int i = 0; i < modePref.length; i++){
             if (modePref[i] != 0){
-                preferredModes.addLast(Edge2.getModeFromInt(i));
+                preferredModes.addLast(Edge.getModeFromInt(i));
             }
         }
         return preferredModes;
@@ -137,39 +137,39 @@ public class RouteRequest {
         setDestination("King Queen Building, 5 Concourse Pkwy, Sandy Springs, GA 30328");
     }
 
-    public Route getRouteFromApi(WayPoint origin, WayPoint destination, String mode) {
+    public LinearRoute getRouteFromApi(LinearWayPoint origin, LinearWayPoint destination, String mode) {
         // todo - complete getAPIWeightedGraph() method
         // create connector
         ApiConnector googleConnector = new ApiConnector(origin, destination, mode);
         String jsonOutput = googleConnector.saveJsonToString();
-        Route apiRoute;
+        LinearRoute apiRoute;
         apiRoute = googleConnector.constructRoute(jsonOutput);
         return apiRoute;
     }
-    public Route getRouteFromApi(Vertex2 origin, Vertex2 destination, String mode) {
+    public LinearRoute getRouteFromApi(BranchVertex origin, BranchVertex destination, String mode) {
         // todo - complete getAPIWeightedGraph() method
         // create connector
         ApiConnector googleConnector = new ApiConnector(origin, destination, mode);
         String jsonOutput = googleConnector.saveJsonToString();
-        Route geographicRoute;
+        LinearRoute geographicRoute;
         geographicRoute = googleConnector.constructRoute(jsonOutput);
         return geographicRoute;
     }
-    public Route getRouteFromApi(String origin, String destination, String mode) {
+    public LinearRoute getRouteFromApi(String origin, String destination, String mode) {
         // todo - complete getAPIWeightedGraph() method
         // create connector
         ApiConnector googleConnector = new ApiConnector(origin, destination, mode);
         String jsonOutput = googleConnector.saveJsonToString();
-        Route geographicRoute;
+        LinearRoute geographicRoute;
         geographicRoute = googleConnector.constructRoute(jsonOutput);
         return geographicRoute;
     }
-    public LinkedList<Route> getRoutesFromApi(String origin, String destination, String mode, Boolean alternatives) {
+    public LinkedList<LinearRoute> getRoutesFromApi(String origin, String destination, String mode, Boolean alternatives) {
         // todo - complete getAPIWeightedGraph() method
         // create connector
         ApiConnector googleConnector = new ApiConnector(origin, destination, mode, Boolean.TRUE);
         String jsonOutput = googleConnector.saveJsonToString();
-        LinkedList<Route> areaRoutes = new LinkedList<>();
+        LinkedList<LinearRoute> areaRoutes = new LinkedList<>();
         areaRoutes = googleConnector.constructRouteList(jsonOutput);
         return areaRoutes;
     }
