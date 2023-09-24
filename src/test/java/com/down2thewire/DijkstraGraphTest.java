@@ -33,12 +33,12 @@ class DijkstraGraphTest {
         v02.addEdge(v02, v06, "TRANSIT", 900, 0.00, 17083);
 
         v03.addEdge(v03, v01, "TRANSIT", 900, 0.00, 17010);
-        v03.addEdge(v03, v02, "TRANSIT", 900, 0.00, 17083);
+        v03.addEdge(v03, v02, "WALKING", 900, 0.00, 17083);
         v03.addEdge(v03, v04, "WALKING", 18, 0.00, 17);
         v03.addEdge(v03, v05, "WALKING", 18, 0.00, 122);
 
         v04.addEdge(v04, v01, "WALKING", 18, 0.00, 100);
-        v04.addEdge(v04, v02, "TRANSIT", 699, 0.00, 3083);
+        v04.addEdge(v04, v05, "WALKING", 699, 0.00, 3083);
         v04.addEdge(v04, v03, "WALKING", 18, 0.00, 17);
         v04.addEdge(v04, v05, "TRANSIT", 699, 0.00, 3028);
 
@@ -56,8 +56,8 @@ class DijkstraGraphTest {
 
         DijkstraGraph transitShortestPaths = new DijkstraGraph(graph, userRouteRequest, "TRANSIT");
         DijkstraGraph walkingShortestPaths = new DijkstraGraph(graph, userRouteRequest, "WALKING");
-        transitShortestPaths = transitShortestPaths.calculateShortestPathFromSource(v01.getId());
-        walkingShortestPaths = walkingShortestPaths.calculateShortestPathFromSource(v01.getId());
+//        transitShortestPaths = transitShortestPaths.calculateShortestPathFromSource(v01.getId());
+        walkingShortestPaths = walkingShortestPaths.calculateShortestPathFromSource(v06.getId());
         System.out.println("done");
     }
 }
