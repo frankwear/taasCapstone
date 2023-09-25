@@ -94,14 +94,23 @@ public class BranchGeoModel {
         return matchingList;
     }
 
-    public int getVertexIndexById(BranchVertex v) {
+    public int getVertexIndexById(Long id) {
         ListIterator<BranchVertex> vertexIterator = (ListIterator<BranchVertex>) vertexList.iterator();
         while (vertexIterator.hasNext()) {
-            if (vertexIterator.next().getId() == v.getId()) {
+            if (vertexIterator.next().getId().equals(id)) {
                 return vertexIterator.previousIndex();
             } //TODO Figure out what this means, maybe at an iterator ++
         }   //vertexIterator++;
         return -1; // return -1 if not found
+    }
+
+    // 9-24-23 added method to get vertex locations as a list of lat/lng strings
+    public LinkedList<String> getLocationsAsListOfString(){
+        LinkedList<String> tempVertices = new LinkedList<>();
+        for(BranchVertex vertex : vertexList) {
+            tempVertices.add(vertex.getLocationAsString());
+        }
+        return tempVertices;
     }
 
     private void convertRouteToGeoModel (LinearRoute route) {

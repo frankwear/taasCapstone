@@ -55,6 +55,12 @@ public class BranchVertex extends Node {
     public Location getLocation() {
         return this.location;
     }
+
+    // 9-24-23 Added GetLocationAsString to facilitate API lookups using lat/lng
+    public String getLocationAsString() {
+        String locationString = getLatitude().toString() + "," + getLongitude().toString();
+        return locationString;
+    }
     public Double getLongitude() {
         return this.location.getLongitude();
     }
