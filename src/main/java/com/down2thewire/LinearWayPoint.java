@@ -1,14 +1,11 @@
 package com.down2thewire;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class WayPoint extends Node {
+public class LinearWayPoint extends Node {
 
     Location location;
     String wayPointName;
     Long wayPointID;
-    Edge2 edge;
+    Edge edge;
     // 0-walk, 1-drive, 2-rideshare, 3-carRental, 4-bicycle, 5-scooter, 6-transit, 7-bus, 8-airplane, 9-unused
     /*
      * Walking is allowed in most places with stops. It is not allowed on the Interstate
@@ -23,12 +20,12 @@ public class WayPoint extends Node {
 //    private boolean[] modes = {false, false, false, false, false, false, false, false, false, false};
 
 
-    public WayPoint(Location location, String uniqueName) {
+    public LinearWayPoint(Location location, String uniqueName) {
         this.location = location;
         this.wayPointName = uniqueName;
         this.wayPointID = location.generateUniqueID();
     }
-    public WayPoint(Location location) {
+    public LinearWayPoint(Location location) {
         this.location = location;
         this.wayPointID = location.generateUniqueID();
     }
@@ -43,7 +40,7 @@ public class WayPoint extends Node {
         return this.location.getLatitude();
     }
 
-    public Edge2<WayPoint> getEdge(){
+    public Edge<LinearWayPoint> getEdge(){
         return this.edge;
     }
 
@@ -118,8 +115,8 @@ public class WayPoint extends Node {
         this.wayPointName = name;
     }
 
-    public void setEdge (Edge2 edge) {
-        Edge2 newEdge;
+    public void setEdge (Edge edge) {
+        Edge newEdge;
         newEdge = edge.clone();
         this.edge = newEdge;
     }

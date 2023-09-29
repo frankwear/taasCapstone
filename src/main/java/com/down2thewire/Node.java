@@ -4,7 +4,7 @@ abstract class Node<T extends Node> {
     Location location;
     String description;
     Long id;
-    Edge2 edge;
+    Edge edge;
 
 
 
@@ -62,5 +62,6 @@ abstract class Node<T extends Node> {
         if (this.getId().equals(id)) {return Boolean.TRUE;}
         else return Boolean.FALSE;
     }
+
 }
 

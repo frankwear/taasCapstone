@@ -3,14 +3,45 @@ package com.down2thewire;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 public class DistanceMatrixApiTest {
 
-//    void testAddEdgesToGeoModelFromApi() {
+
+    @Test
+    void buildEdgeFromPlacesTest() {
+        HashMap<String, String> myParameters = new HashMap<>();
+        myParameters.put("location=", "33.8876001,-84.3142002");
+        myParameters.put("&type=", "transit_station");
+        myParameters.put("&radius=", "2000");
+        BranchGeoModel testGM = PlacesApi.buildPlacesFromApiCall(myParameters);
+        testGM.printGraph();
+
+        DistanceMatrixApi distanceMatrixApi = new DistanceMatrixApi(testGM);
+
+
+        distanceMatrixApi.updateGeoModel("walking");
+        distanceMatrixApi.getCurrentGeoModel().printGraph();
+    }
+
+
+    @Test
+    void constructGeoModelWithEdges(){
+        BranchGeoModel graph = new BranchGeoModel();
+        BranchVertex v01 = graph.addVertex(33.9228732,-84.3418493);
+        BranchVertex v02 = graph.addVertex(33.921227,-84.344398);;
+        BranchVertex v03 = graph.addVertex(33.789112,-84.387383);
+        BranchVertex v04 = graph.addVertex(33.7892632,-84.3873414);
+        BranchVertex v05 = graph.addVertex(33.8082253,-84.3934548);
+        BranchVertex v06 = graph.addVertex(33.8085817,-84.3943387);
+
+        DistanceMatrixApi myDM = new DistanceMatrixApi(graph);
+        myDM.updateGeoModel("driving");
+        myDM.getCurrentGeoModel().printGraph();
+    }
+
+//    @Test
+//    void name() {
+//    }
+    //    void testAddEdgesToGeoModelFromApi() {
 //        // Create a GeographicModel with some vertices for testing
 //        GeographicModel testGeoModel = createTestGeoModel();
 //        // Create an instance of DistanceMatrixApi
@@ -80,38 +111,4 @@ public class DistanceMatrixApiTest {
 //
 //        return geoModel;
 //    }
-    @Test
-    void buildEdgeTest() {
-        String origins = "33.8876001,-84.3142002|33.9383904,-84.5210259|33.7532211,-84.3931609";
-        String destinations = "33.8876001,-84.3142002|33.9383904,-84.5210259|33.7532211,-84.3931609";
-        HashMap<String, String> myParameters = new HashMap<>();
-        myParameters.put("location=", "33.8876001,-84.3142002");
-        myParameters.put("&type=", "transit_station");
-        myParameters.put("&radius=","2000");
-        GeographicModel testGM = PlacesApi.buildPlacesFromApiCall(myParameters);
-        //testGM.printGraph();
-        DistanceMatrixApi distanceMatrixApi = new DistanceMatrixApi(testGM);
-        GeographicModel updatedGeoModel = distanceMatrixApi.addEdgesToGeomodelFromApi(testGM, origins, destinations, "walking");
-        distanceMatrixApi.getLocalGeography(); //.printGraph();
-        //System.out.println(distanceMatrixApi.buildDistanceUrl());
-        //PlacesApi placesApi = new PlacesApi(myParameters);
-    }
 }
-//
-//public class DistanceMatrixApiTest {
-//
-
-//
-//    @Test
-//    void constructGeoModelWithEdges(){
-//        HashMap<String, String> myParameters = new HashMap<>();
-//        myParameters.put("location=", "33.8876001,-84.3142002");
-//        myParameters.put("type=", "transit_station");
-//        myParameters.put("radius=","2000");
-//        GeographicModel testGM = PlacesApi.buildPlacesFromApiCall(myParameters);
-//        DistanceMatrixApi myDM = new DistanceMatrixApi(testGM);
-//        myDM.jsonToGeomodel();
-//        myDM.addEdgesToGeoModelSquare(myDM.jsonResultString);
-//        myDM.geoModel.printGraph();
-//    }
-//}

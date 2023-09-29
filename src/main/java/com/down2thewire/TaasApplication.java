@@ -3,11 +3,11 @@ package com.down2thewire;
 import java.util.LinkedList;
 
 public class TaasApplication {
-    static GeoModelAnalyzer instanceGmAnalyzer;
+    static BranchVertex.BranchGeoModelGenerator instanceGmAnalyzer;
 //    static RouteAnalyzer instanceRA;
-    static RouteRequest instanceRR;
-    static LinkedList<GeographicModel> instanceRouteOffering;
-    static GeographicModel chosenRoute;
+    static UserRouteRequest instanceRR;
+    static LinkedList<BranchGeoModel> instanceRouteOffering;
+    static BranchGeoModel chosenRoute;
     static UserInterface instanceUI;
 
 
@@ -31,7 +31,7 @@ public class TaasApplication {
             testRR.setDestination("Piedmont Atlanta Hospital");
             return testRR;
         }  */
-    private static RouteRequest getUserRequest() {
+    private static UserRouteRequest getUserRequest() {
         UserInterface instanceUI = new UserInterface();
         instanceRR = instanceUI.getRequest();
         return instanceRR;
@@ -40,7 +40,7 @@ public class TaasApplication {
         session.instanceUI = new UserInterface();
         session.instanceRR = session.instanceUI.getRequest();
 
-        session.instanceGmAnalyzer = new GeoModelAnalyzer(session.instanceRR);
+        session.instanceGmAnalyzer = new BranchVertex.BranchGeoModelGenerator(session.instanceRR);
         session.instanceGmAnalyzer.generateGeoModel();
         session.instanceGmAnalyzer.geographicMap.printGraph();
 //        session.instanceRA = new RouteAnalyzer(session.instanceGM.geographicMap, session.instanceRR); // comment
