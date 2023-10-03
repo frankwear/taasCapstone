@@ -2,13 +2,16 @@ package com.down2thewire;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.LinkedList;
 
 public class ApiConnector {
@@ -70,6 +73,45 @@ public class ApiConnector {
         connection.disconnect();
         return jsonText;
     }
+
+    // 10-3-23 added saveJsonToFile() method for ApiBypassJsonTest
+    public void saveJsonToFile(String fileName) throws IOException {
+        URL apiEndpoint;
+        String jsonText;
+        HttpURLConnection connection;
+        try {
+            apiEndpoint = new URL(this.url);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            connection = (HttpURLConnection) apiEndpoint.openConnection();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try (InputStream inputStream = connection.getInputStream()) {
+            fileName = "src/test/resources/" + fileName + ".json";
+            Path filePath = Path.of(fileName);
+            saveResponseToFile(inputStream,filePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        connection.disconnect();
+    }
+
+    // 10-3-23 added saveResponseToFile() method for ApiBypassJsonTest
+    private void saveResponseToFile(InputStream inputStream, Path filePath) throws IOException {
+
+        try (BufferedWriter writer = Files.newBufferedWriter(filePath, StandardOpenOption.CREATE)) {
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                writer.write(new String(buffer, 0, bytesRead));
+            }
+        }
+    }
+
 
     public LinkedList<LinearRoute> constructRouteList(String json) {
         LinkedList<LinearRoute> routes = new LinkedList<>();
