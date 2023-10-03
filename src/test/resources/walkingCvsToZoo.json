@@ -1,0 +1,804 @@
+{
+   "geocoded_waypoints" : 
+   [
+      {
+         "geocoder_status" : "OK",
+         "place_id" : "ChIJJbO5TygO9YgRz3SI5-fAqko",
+         "types" : 
+         [
+            "premise"
+         ]
+      },
+      {
+         "geocoder_status" : "OK",
+         "place_id" : "ChIJ44N_acAD9YgR3rJ-P061J8o",
+         "types" : 
+         [
+            "premise"
+         ]
+      }
+   ],
+   "routes" : 
+   [
+      {
+         "bounds" : 
+         {
+            "northeast" : 
+            {
+               "lat" : 33.9052845,
+               "lng" : -84.3657102
+            },
+            "southwest" : 
+            {
+               "lat" : 33.7337262,
+               "lng" : -84.4361509
+            }
+         },
+         "copyrights" : "Map data ©2023 Google",
+         "legs" : 
+         [
+            {
+               "distance" : 
+               {
+                  "text" : "14.9 mi",
+                  "value" : 24025
+               },
+               "duration" : 
+               {
+                  "text" : "5 hours 42 mins",
+                  "value" : 20548
+               },
+               "end_address" : "416 Augusta Ave SE, Atlanta, GA 30315, USA",
+               "end_location" : 
+               {
+                  "lat" : 33.7337356,
+                  "lng" : -84.3742366
+               },
+               "start_address" : "817 Creekgarden Court, Sandy Springs, GA 30339, USA",
+               "start_location" : 
+               {
+                  "lat" : 33.9035477,
+                  "lng" : -84.4361509
+               },
+               "steps" : 
+               [
+                  {
+                     "distance" : 
+                     {
+                        "text" : "0.3 mi",
+                        "value" : 559
+                     },
+                     "duration" : 
+                     {
+                        "text" : "8 mins",
+                        "value" : 505
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.9049701,
+                        "lng" : -84.43061279999999
+                     },
+                     "html_instructions" : "Head \u003cb\u003eeast\u003c/b\u003e on \u003cb\u003ePowers Ferry Rd NW\u003c/b\u003e",
+                     "polyline" : 
+                     {
+                        "points" : "ex|mE|ljbOEQIk@Ic@?ECe@Ca@?MA]?s@@m@?M?iA@e@A_@AS?OC_@Ca@C[AICSGc@G_@COEQQu@K]Qk@e@gAQ_@Qa@GIOUU]SWOQ"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.9035477,
+                        "lng" : -84.4361509
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "0.3 mi",
+                        "value" : 477
+                     },
+                     "duration" : 
+                     {
+                        "text" : "9 mins",
+                        "value" : 513
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.9016129,
+                        "lng" : -84.4274721
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eNorthside Dr NW\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : 
+                     {
+                        "points" : "aa}mEhjibOHKbA}AX_@PSLOHI^_@NKh@m@n@k@XWb@]Z[VWZ_@FEX]d@g@NOBCLMHEDCPKFAHEVGLEp@Q"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.9049701,
+                        "lng" : -84.43061279999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "0.6 mi",
+                        "value" : 1046
+                     },
+                     "duration" : 
+                     {
+                        "text" : "16 mins",
+                        "value" : 934
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.9052845,
+                        "lng" : -84.4174359
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eOld Powers Ferry Rd NW\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : 
+                     {
+                        "points" : "al|mEtvhbOCO?KAGCGAGIOKO[YECu@{@U[QYgA}Be@gAy@mB]y@e@iAw@oBc@gASe@Qc@c@eAYk@Uq@Su@Km@Gw@Ey@IqA?CAk@A]@wFAME_BGq@W_AMg@I]"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.9016129,
+                        "lng" : -84.4274721
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "295 ft",
+                        "value" : 90
+                     },
+                     "duration" : 
+                     {
+                        "text" : "1 min",
+                        "value" : 73
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.9045163,
+                        "lng" : -84.4174154
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eDupree Dr NW\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : 
+                     {
+                        "points" : "_c}mE~wfbORCLAHAb@A`@@V@L@"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.9052845,
+                        "lng" : -84.4174359
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "4.3 mi",
+                        "value" : 6907
+                     },
+                     "duration" : 
+                     {
+                        "text" : "1 hour 36 mins",
+                        "value" : 5743
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.8560186,
+                        "lng" : -84.3829145
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003ePowers Ferry Rd NW\u003c/b\u003e",
+                     "polyline" : 
+                     {
+                        "points" : "g~|mEzwfbOR?R@N@n@D\\@h@B\\APAREPEh@Qr@[p@[j@]`@[VOvAy@l@OpAUXIXMLIRSFIRSDENQNSLSVs@z@sCTw@L[N[Xg@LSXa@Za@x@cALONMJI`DeCt@e@xAw@x@[`@O`@M?Ad@Kz@SDAt@Ox@MZKFAPIPK^WTQx@o@tAgAZ_@NQFOBCDOJ]Fc@@a@?Q?WEg@CWG]Os@Qy@CMG[Kc@EQCS@K?OBO@EDSfBsFNa@V{@Ja@F]|@gEBMBIHSHWJQNYNUhB_D^m@R_@j@cAnBiDh@eAFINUR]@CTc@vAqClA_CPYNSDEHIBCJKNKZSXOJG~@e@fAi@x@c@l@[xA@N?`F?~E@bE?X?J?zB?z@@rA?V?b@?b@?b@@`@?B?`@@p@?v@?bB@NDj@?@?`@?@?x@@jA@LCfA?T?NBX?H?T@F@PBr@Df@Dd@BL@?EFBBUTF^D?ALBr@PD@F@LBRFLDLDd@LB@PD~@`@PDNHRHD@JBPBNDB?DALCJCLKVKZODCJK@APQNS?ABCLUDERWR[j@w@LOhA_BCCBCNQBDFI@AHKDGFIFIHIHIHMV]TYHKRWJOPQb@k@NQFIFIPOTSJKHERKHCFCXKb@OLE|@YJCLEh@QbA[vC}@rAc@t@Uf@QVIlA_@x@Y|@[JE|@YLIFCn@UNC~Bw@JGNERGZK\\KBAb@MDALEhBk@J@HEFABADAHE^OTKJGHCPKJGJEJGLGFELGLIVUDCDEJIBCDCFIBCLOBADELOJOl@o@FIRULKPU@APQFGRSLMBCLQnAiAZYr@m@NKLKNODENIb@c@ZYZ[ZYr@m@HKpAgA?AZYHGBCIA@O?EN@?GJC?F?@p@k@`@_@JIFGFGDGFIDILQLYRc@Vm@RKLUHSFKBGFMHQ@WDIBCHMDGNSPUVYHKz@eABENQ^c@JE@Kn@u@DAJOLOHK"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.9045163,
+                        "lng" : -84.4174154
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "0.1 mi",
+                        "value" : 217
+                     },
+                     "duration" : 
+                     {
+                        "text" : "4 mins",
+                        "value" : 211
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.8543713,
+                        "lng" : -84.3825542
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eRoswell Rd\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : 
+                     {
+                        "points" : "cosmEd``bOCUAEB?J@AGHQB[X?l@?^AP?XAH?H?b@?D?l@HL@N?T?"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.8560186,
+                        "lng" : -84.3829145
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "4.3 mi",
+                        "value" : 6984
+                     },
+                     "duration" : 
+                     {
+                        "text" : "1 hour 39 mins",
+                        "value" : 5916
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7972805,
+                        "lng" : -84.368966
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003ePiedmont Rd NE\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003ePass by Chipotle Mexican Grill (on the right in 0.7 mi)\u003c/div\u003e",
+                     "maneuver" : "turn-slight-left",
+                     "polyline" : 
+                     {
+                        "points" : "ydsmE|}_bOPQPSJKLOBCDKZYRQNQLMd@g@AEPSBDZ_@HMNORMb@g@LOFGNONQVWHIPQRUVYPOJMVUZ_@XYv@y@NQHIP^JKJKDEDGXYT]FMBEDGJOLYVe@NYNSL]F]BGJQPKDMNYTi@BGPg@R_@H[DOJYHUH]BGPm@DQH[DKDQHW@GFWBGHYJa@L_@Pk@J[BI@CHSa@u@HILQFKRUPQNKn@g@DC\\GN@HERIn@U^MRKHCh@SBARIv@Y?@ZMAAPGZMVQLELG?ANGBBLIb@Qf@SJEXOLGZKDCJEDKFCRKh@Ub@CHCLCCEn@e@DCDLRGTEBALEPGPG^QFAFEXMNELG`Bq@TKVKLEtAi@JEXM`Aa@LEbBs@PGnBw@VK?A@API?Br@WNGTKTKxB}@`Aa@LEPGJETKAA@?VK?@VIHE@?HCPGLCHA^IJALAf@ElB?L?tA?N@V?J?D?`B?TGtA?PBT?b@@RBP?J?T?P?~C?P@`D@@C^??Bf@?XI@@LA`@En@Gf@Gr@I`@ENCNCB?NCb@Eb@EB?B?X@JAPEFALEHAPEn@QLCd@MLCLCNEAEBAL??CDA?@@ATOBC@DDATEFANAb@E`AGV@b@?N?HAr@BTHh@@L@P?AKp@@D?D?l@BF?j@BVE\\@P?CDD@CDEDX@N?JMb@?Z@R@ZL|@B?CD@\\@j@BL?N@H?P?T@P@R@L?P@`@BVBF?J@D?R@H@N@f@BP?V@V@B@RBJ@^@bAFT@T@d@AVATMJALCJCh@KZ@RERIBAFALCAETC?AZG\\EREDA\\EZBPA`@Gx@IAGB?VCB?@DHANAt@IVCJAp@IHCDALAVCLCL?`AKLANCLC?Bd@ER?TAB?B?B?N?NAR?N?FAPFREP@\\@L?F?L@^KdABx@BF?b@BD?B?F?P@\\@D?F?L@P?h@BXF`@@RBJ@L?F?N?d@BB??A\\B?B`@?HARATCBAHANCHANEJCLEDALGNGNINKPKDCHKTMHGDCRKJEDCNGLEBCPED?TGLA?ALA?CNCRBH?H?L?L?DBB?P?V?b@@B@p@HZ@B@DGJDADD??@Df@@FD?NBLDZL`@RRJXLNHJFNHNc@@CLBRJPJRN^RPNRBRJFJLJf@DLj@PU@@THB@PJADVFJ@ZDF?L@B?P?h@CTAFAb@IJCD?\\Gv@M\\EBAVAHALAh@?V@L?t@Hb@Db@DHBTB\\Dj@FZBNFH?H@P@RBG^TDb@F`@F^D?@H@n@FN@\\FXBJBP@TBp@JPDR@PBRDH@l@NRHF@NDJ@PDPDJBF@VDJBFDLDRHTLRJPLZTn@b@"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.8543713,
+                        "lng" : -84.3825542
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "0.8 mi",
+                        "value" : 1294
+                     },
+                     "duration" : 
+                     {
+                        "text" : "19 mins",
+                        "value" : 1120
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7859226,
+                        "lng" : -84.36746889999999
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e after Smoothie King (on the right)",
+                     "maneuver" : "turn-left",
+                     "polyline" : 
+                     {
+                        "points" : "_`hmE`i}aO^UB@DEJK`@YVSDETOTSTQRS@A@?LMBA?@RQVQLOPMXWDETQJIFEFCDA?CDANC?@JALAb@ELCN?JChAI\\EXC\\C@?TCzBOLA?A`AIb@CpAKFAL?N?L?L?XFRBX@l@FL@VBXBT@D@r@DL@hAHH?`ABV?\\NP?XNh@?N?~@?N?r@?T??@r@AN@Z?b@Ap@@LAB?N??@H?F?D?`@?^?\\Cb@F^Jj@H"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7972805,
+                        "lng" : -84.368966
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "121 ft",
+                        "value" : 37
+                     },
+                     "duration" : 
+                     {
+                        "text" : "1 min",
+                        "value" : 27
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7856822,
+                        "lng" : -84.3677639
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e toward \u003cb\u003eMonroe Dr NE\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : 
+                     {
+                        "points" : "_yemEt_}aOXr@TD"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7859226,
+                        "lng" : -84.36746889999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "115 ft",
+                        "value" : 35
+                     },
+                     "duration" : 
+                     {
+                        "text" : "1 min",
+                        "value" : 29
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7855081,
+                        "lng" : -84.36760870000001
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e at \u003cb\u003ePark Dr NE\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : 
+                     {
+                        "points" : "owemEna}aOFGDEHGDEBA"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7856822,
+                        "lng" : -84.3677639
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "0.8 mi",
+                        "value" : 1356
+                     },
+                     "duration" : 
+                     {
+                        "text" : "19 mins",
+                        "value" : 1161
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7737365,
+                        "lng" : -84.3710227
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eMonroe Dr NE\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : 
+                     {
+                        "points" : "mvemEp`}aOhCh@D?NDB??B`Dp@?A@@PDB@PDh@Lt@N`@Fx@Pb@HND\\FNDD@LBHBD@RDD@TF?DXB?C\\HNDVFPDxBf@^FXFRFVFTHTDVDh@L?@@?TB`@Jh@LT@ZHXFPHPDLBt@RPBx@RLBZHJBn@RTLr@NH?V@h@JDBxDz@TN|@PF@H@D@D@B?D?D?L@rA?PCH?HAVDH?LAR@H?B?F?D@?CDB"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7855081,
+                        "lng" : -84.36760870000001
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "1.5 mi",
+                        "value" : 2338
+                     },
+                     "duration" : 
+                     {
+                        "text" : "35 mins",
+                        "value" : 2111
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7528731,
+                        "lng" : -84.37153819999999
+                     },
+                     "html_instructions" : "Continue onto \u003cb\u003eBoulevard NE\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003ePass by Popeyes Louisiana Kitchen (on the left in 130 ft)\u003c/div\u003e",
+                     "polyline" : 
+                     {
+                        "points" : "{lcmEzu}aOn@ZB@AId@Lh@PTFPFFBB?PDHB@@t@TPDTDLDPDB@NDPDVD^F@@P@RBB?L@?@@?b@HD??GV@h@@VB`A@|@@P?`BBT@fA@T?TBp@@RAtABH?fB@VB|C@ACX@?AV@jB@J?P?nA@RAD?H?D?@??@R?|@?N?B@PAr@??@\\@?Ap@@XAZ@L?V@z@@H?F?@o@B?D?P?N@D?|@?\\BF?ZAjABN@X?~@@H?J?H@N?P?R?t@?h@BX?N@LCLAZ@RBF??@\\B?@L?N?D?Z?\\?X@r@?F?X?F?T?H?B?P?Z@L?X??Bl@?T@LAr@?T@N?zA?\\?h@?J??@|@??AB?T?D??BtA@TAV@H?z@A?AZ@?LPAZCRCFANCFK\\KTQVI\\SXKJUZ@DA"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7737365,
+                        "lng" : -84.3710227
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "0.2 mi",
+                        "value" : 253
+                     },
+                     "duration" : 
+                     {
+                        "text" : "3 mins",
+                        "value" : 196
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7508667,
+                        "lng" : -84.37071139999999
+                     },
+                     "html_instructions" : "Take the crosswalk",
+                     "polyline" : 
+                     {
+                        "points" : "mj_mEby}aOBNb@O`@Mf@Qz@Yf@S^Kp@UtAk@JEDC"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7528731,
+                        "lng" : -84.37153819999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "0.6 mi",
+                        "value" : 918
+                     },
+                     "duration" : 
+                     {
+                        "text" : "13 mins",
+                        "value" : 802
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7431772,
+                        "lng" : -84.36828939999999
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eBoulevard SE\u003c/b\u003e",
+                     "maneuver" : "turn-slight-left",
+                     "polyline" : 
+                     {
+                        "points" : "}}~lE|s}aOPInAo@JEJGPGJG^QTKLIRUNWTGDEDEHIDGZWHMj@k@DGLK@AHI@ADEFIJKFGJOHSBCFIHKt@kABCC?BCLOLKNC`@AL?F?VBF?L?x@@b@?P??C@?\\@?@T?D?\\@l@@@?L??@~A?@EB?RA?FZ?V?f@@r@Cn@@J@l@CTOBPHh@@HF??AR@?AV?l@AB?T?P?P?"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7508667,
+                        "lng" : -84.37071139999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "0.4 mi",
+                        "value" : 684
+                     },
+                     "duration" : 
+                     {
+                        "text" : "9 mins",
+                        "value" : 534
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.73723349999999,
+                        "lng" : -84.36828249999999
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e to stay on \u003cb\u003eBoulevard SE\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : 
+                     {
+                        "points" : "{m}lExd}aOF@N?RBR??AV??@L?^ETIH?ZAFARBD?PBlAAxA??@B?TA?AzC?R@j@??@B?R@?Ah@?PAl@?X?Z?V@f@@B?R??A|@?D?V?~@?RDpAA"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7431772,
+                        "lng" : -84.36828939999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "0.1 mi",
+                        "value" : 166
+                     },
+                     "duration" : 
+                     {
+                        "text" : "2 mins",
+                        "value" : 127
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7371261,
+                        "lng" : -84.36997099999999
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eBerne St SE\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : 
+                     {
+                        "points" : "uh|lEvd}aOC`B@P?vC?X@??FA^?BNWDN?F"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.73723349999999,
+                        "lng" : -84.36828249999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "322 ft",
+                        "value" : 98
+                     },
+                     "duration" : 
+                     {
+                        "text" : "1 min",
+                        "value" : 70
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7363273,
+                        "lng" : -84.3702923
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e toward \u003cb\u003eGrant Pk Trl\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : 
+                     {
+                        "points" : "ah|lEho}aOR@HDJJDDBDFHFDFDH@LBV@TDLC"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7371261,
+                        "lng" : -84.36997099999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "381 ft",
+                        "value" : 116
+                     },
+                     "duration" : 
+                     {
+                        "text" : "1 min",
+                        "value" : 86
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7357647,
+                        "lng" : -84.3713147
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eGrant Pk Trl\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : 
+                     {
+                        "points" : "ac|lEhq}aOLPl@`ATb@@BFJHLDNBJ@N?H"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7363273,
+                        "lng" : -84.3702923
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "377 ft",
+                        "value" : 115
+                     },
+                     "duration" : 
+                     {
+                        "text" : "1 min",
+                        "value" : 82
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7348453,
+                        "lng" : -84.37165999999999
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e to stay on \u003cb\u003eGrant Pk Trl\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : 
+                     {
+                        "points" : "o_|lEtw}aOPDPJLLJLFFBDFBHB\\?JA@@@?@?HDFD@?@??@@?@?@AFGDA"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7357647,
+                        "lng" : -84.3713147
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "420 ft",
+                        "value" : 128
+                     },
+                     "duration" : 
+                     {
+                        "text" : "2 mins",
+                        "value" : 106
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7341202,
+                        "lng" : -84.37257129999999
+                     },
+                     "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eGrant Park Trail\u003c/b\u003e",
+                     "maneuver" : "turn-slight-right",
+                     "polyline" : 
+                     {
+                        "points" : "yy{lEzy}aONFJN?H@JBHBLBFLRJRHPDLJPFHDBB?F?V?"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7348453,
+                        "lng" : -84.37165999999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "161 ft",
+                        "value" : 49
+                     },
+                     "duration" : 
+                     {
+                        "text" : "1 min",
+                        "value" : 50
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7341169,
+                        "lng" : -84.3731026
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e toward \u003cb\u003eCherokee Ave SE\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : 
+                     {
+                        "points" : "gu{lEp_~aO?R?F?D?R?r@"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7341202,
+                        "lng" : -84.37257129999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "72 ft",
+                        "value" : 22
+                     },
+                     "duration" : 
+                     {
+                        "text" : "1 min",
+                        "value" : 18
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7339157,
+                        "lng" : -84.37310149999999
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e toward \u003cb\u003eCherokee Ave SE\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : 
+                     {
+                        "points" : "gu{lEzb~aON?V?"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7341169,
+                        "lng" : -84.3731026
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "161 ft",
+                        "value" : 49
+                     },
+                     "duration" : 
+                     {
+                        "text" : "1 min",
+                        "value" : 52
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7339214,
+                        "lng" : -84.3735702
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e toward \u003cb\u003eCherokee Ave SE\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : 
+                     {
+                        "points" : "_t{lEzb~aO?l@?F?f@"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7339157,
+                        "lng" : -84.37310149999999
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "102 ft",
+                        "value" : 31
+                     },
+                     "duration" : 
+                     {
+                        "text" : "1 min",
+                        "value" : 24
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7338021,
+                        "lng" : -84.37357
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eCherokee Ave SE\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : 
+                     {
+                        "points" : "_t{lExe~aOV?"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7339214,
+                        "lng" : -84.3735702
+                     },
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "184 ft",
+                        "value" : 56
+                     },
+                     "duration" : 
+                     {
+                        "text" : "1 min",
+                        "value" : 58
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7337356,
+                        "lng" : -84.3742366
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eAugusta Ave SE\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eDestination will be on the right\u003c/div\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : 
+                     {
+                        "points" : "gs{lExe~aO?\\?DL??Z?T?P?JAP"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7338021,
+                        "lng" : -84.37357
+                     },
+                     "travel_mode" : "WALKING"
+                  }
+               ],
+               "traffic_speed_entry" : [],
+               "via_waypoint" : []
+            }
+         ],
+         "overview_polyline" : 
+         {
+            "points" : "ex|mE|ljbOYgBIsB?cHe@oEu@qCqAsCiA}AxB}C~EuEjDsDn@c@v@Up@QCOAS[o@wAyAuC{FcHyPoAaEWgECoIMqCe@gBI]RCVC|A@zEN`B_@rDqBnBiA~Be@tAu@p@u@\\g@rAgElAwC|B{CjEmDnC}AzAk@bCo@tB_@t@W`CeB`CyB\\aAHoBa@qCi@gCGaAnD{LnAsFt@yAzJaQxFkKjDwB`CmAl@[xA@pF?bL@|E@jB?dFBvHH`GBtBPr@?JQt@LfAT`Cn@hDjAjBu@fAuAzDuFVQ^e@|BuC`CgCzDsA|MgEtIyC|FkBbEiAxBcA`BcAvD}DrAwA`FqEzDkDvBoBLKGQNCJK?HrAkA`@a@h@_Aj@qA`@a@\\u@Tw@p@_A~CyDnAwAFg@HELm@xBApAApAJf@Q\\_@r@y@vAyANY^YpAsAt@y@tCwC|BeCHIP^VWz@eA\\k@dAmBd@uA|@}Ar@kBjAaEx@yCn@qB@CHSa@u@V[Za@vAiAjAUlBs@dDoA~GwCjAq@l@GHIt@i@DLRGXG^M`Aa@xCmAfGcC|QoHzAm@nB_@rHCvBGfBB~ADhL?f@BZGfCWlDa@dACr@OjDy@VMXSFBl@I`DKbBJv@BNK|@@xB@n@@@FIJh@@JMb@?n@BxAPDAhADtBFfCL`H^rAAz@WdAIf@OVMnASrAIr@Iv@Q`@@tDc@`D[hBGbAA~@@`ABdBG`ABt@B|@BrDT`CHjBWnB}@zA_A|Ac@p@En@?hDRHEHJLp@~CnAZPPg@fAj@xAr@TVf@DLj@RSXJf@XrCBtDm@xAE~BPxDf@x@FG^TDdANh@HvBTpDf@tFvAvA|@n@b@^UHCjA_AtAiAnAcAhBsA`BUrE_@hIo@x@?tBT|CTlDLn@NbANrC?hA?bD?zCDjATXr@TDLMNMrCf@tDz@hCj@pE|@h@LTLX?vA\\fE~@|Cp@hE`AnCn@lBn@~B\\rG`Bz@H|D?T?z@\\@GnA^r@RzCx@dCb@RBh@HVE`EHpEFpILfNBhKFHo@H?dB@vDFvID|AJfE@hKFlC?nE@Z@?Ll@EZEVOhB{@d@a@`@?BNb@OhA_@tDoArFeCnAo@~@{@zB}Bz@aAxAaCZ[p@Et@B|C@vBDxBGzAH|CCTOBPJr@ZA~AAzBBbAM`A?xE?|GBnMBApINWDNRH^\\`@VhAFnBpD@Xb@Pd@h@`AFVLPKZV@TXr@f@dAXLV??R?L?fAf@??t@?f@V??b@L??Z?f@A\\"
+         },
+         "summary" : "Powers Ferry Rd NW and Piedmont Rd NE",
+         "warnings" : 
+         [
+            "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+         ],
+         "waypoint_order" : []
+      }
+   ],
+   "status" : "OK"
+}
