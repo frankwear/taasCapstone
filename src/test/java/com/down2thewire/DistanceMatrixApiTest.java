@@ -36,6 +36,8 @@ public class DistanceMatrixApiTest {
         DistanceMatrixApi myDM = new DistanceMatrixApi(graph);
         myDM.updateGeoModel("driving");
         myDM.getCurrentGeoModel().printGraph();
+        DataConnection dmdata= new DataConnection();
+        //dmdata.insertDistanceMatrixData();
     }
 
 //    @Test

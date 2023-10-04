@@ -32,6 +32,7 @@ public class PlacesApi {
     //****** Static Implementation *****//
     static BranchGeoModel buildPlacesFromApiCall(HashMap<String, String> parameters) {
         PlacesApi tempPlaces = new PlacesApi(parameters);
+        String jsonResponsesString= tempPlaces.getApiResponseAsString();
         return tempPlaces.getApiResponseAsGeoModel();
     }
     //**************//
