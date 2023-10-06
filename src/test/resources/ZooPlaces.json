@@ -1,0 +1,900 @@
+{
+   "html_attributions" : [],
+   "next_page_token" : "ATJ83zisDalH3TEYhSPwJUYiR4FlpYV-KYt7Gyt5h5O5poyV2CBKO1-_dwskvCrDZETanTDokbBiyS2xyZ1K6wls5DCtRKsAxgIx_xhbEx6M-OGNjHx5GINSrVhKPzqiCnMTxt9n5x80xhy4qd_I1I8VCoKmR4oe7_VUlurk51QYCpNAVpbzqoM0D-yIeCSOqxhjftHbvmB5Us27Tz6SmA9d8LqwqpquBxdPInNZ_QTCjitRLvvP32xOQOeE5VBYijkLmew9QYH7y598hevdWalMKGNsGlrTT0CB-eDYIKl4F7A07qWq6FIP8_pvhcy9aWzull9FmRGiCqtkrjKXYBQWDKQHfx-JK9IlI38hvmtnpor7331pIJuFmMQr1FkYaLIk9zKgfGoLCiQRe_dFwz1YPlzAqVwKjGf-6kfTLidGuwGcRBtAktq-p1u0_9dwJ9gGErg",
+   "results" : 
+   [
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.7502577,
+               "lng" : -84.3862663
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.7512653302915,
+                  "lng" : -84.3844465697085
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.7485673697085,
+                  "lng" : -84.38714453029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/train-71.png",
+         "icon_background_color" : "#10BDFF",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/train_rail_1_pinlet",
+         "name" : "Georgia State Marta Station",
+         "photos" : 
+         [
+            {
+               "height" : 4032,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/115877978413442170575\"\u003eLourdes Delvalle\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATJ83zjJlPZRXGbejMBwPykBtrEj_gd5IA1GLX-Ig1RAOCZNRfMfGlJh2r9kOCk4u43uie6ziFutEYVCnBwVd-QIb51qsBntAaTkxF7e1GF3cJj8jiQhgB1CBgwnDCSqhYLsBLNCAcfCoH2bW006nT9Obe254Um8Tac55gF8-AwTNA7R4ZI",
+               "width" : 3024
+            }
+         ],
+         "place_id" : "ChIJuURpO3YE9YgRMmW5G7YbReA",
+         "plus_code" : 
+         {
+            "compound_code" : "QJ27+4F Atlanta, GA, USA",
+            "global_code" : "865QQJ27+4F"
+         },
+         "rating" : 4.1,
+         "reference" : "ChIJuURpO3YE9YgRMmW5G7YbReA",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "train_station",
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 20,
+         "vicinity" : "170 Piedmont Avenue Southeast, Atlanta"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.7499506,
+               "lng" : -84.37558629999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.7515103302915,
+                  "lng" : -84.3739904697085
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.7488123697085,
+                  "lng" : -84.37668843029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "King Memorial",
+         "photos" : 
+         [
+            {
+               "height" : 4624,
+               "html_attributions" : 
+               [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/117225794387288359029\"\u003eChris Dantzler\u003c/a\u003e"
+               ],
+               "photo_reference" : "ATJ83zjCWGesXaZao7ZQduBqSGmBBdNdazj-txxbNGcoVsxql9XUiyB_XIlNEH7Hb3ITxbYsGuRbm57tAnBfLi5SmgMXnkchM9zgniU_9wXxeRie4Kfc0sPpqgNe7xCB-S5bAn3wvvv0syzHbLJqWt69pNAMfyzAIylWSM132KhXFVCc69Pq",
+               "width" : 3468
+            }
+         ],
+         "place_id" : "ChIJ0RsX5IwD9YgR6J2NIxeB5Yg",
+         "plus_code" : 
+         {
+            "compound_code" : "PJXF+XQ Atlanta, GA, USA",
+            "global_code" : "865QPJXF+XQ"
+         },
+         "rating" : 3.8,
+         "reference" : "ChIJ0RsX5IwD9YgR6J2NIxeB5Yg",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "subway_station",
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 41,
+         "vicinity" : "377 Decatur St SE & Grant Street, Atlanta"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.7504165,
+               "lng" : -84.3891727
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.7517951302915,
+                  "lng" : -84.3878002197085
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.7490971697085,
+                  "lng" : -84.3904981802915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "MARTA",
+         "place_id" : "ChIJJ7myR4QD9YgR4asdUoRIVWk",
+         "plus_code" : 
+         {
+            "compound_code" : "QJ26+58 Atlanta, GA, USA",
+            "global_code" : "865QQJ26+58"
+         },
+         "rating" : 3,
+         "reference" : "ChIJJ7myR4QD9YgR4asdUoRIVWk",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 13,
+         "vicinity" : "Central Avenue Southwest, Atlanta"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.73369199999999,
+               "lng" : -84.3736095
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.7350410302915,
+                  "lng" : -84.3722481697085
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.7323430697085,
+                  "lng" : -84.37494613029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Cherokee Ave SE @ Augusta Ave SE",
+         "place_id" : "ChIJvU6JQ8AD9YgR8UJZiVDrmwE",
+         "plus_code" : 
+         {
+            "compound_code" : "PJMG+FH Atlanta, GA, USA",
+            "global_code" : "865QPJMG+FH"
+         },
+         "reference" : "ChIJvU6JQ8AD9YgR8UJZiVDrmwE",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.73484699999999,
+               "lng" : -84.3735995
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.7361959802915,
+                  "lng" : -84.3722502697085
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.7334980197085,
+                  "lng" : -84.37494823029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Cherokee Ave SE @ Bass St SE",
+         "place_id" : "ChIJt9aqPMAD9YgRCiuFhctEPow",
+         "plus_code" : 
+         {
+            "compound_code" : "PJMG+WH Atlanta, GA, USA",
+            "global_code" : "865QPJMG+WH"
+         },
+         "reference" : "ChIJt9aqPMAD9YgRCiuFhctEPow",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.731321,
+               "lng" : -84.3735925
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.7326700302915,
+                  "lng" : -84.37224146970848
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.7299720697085,
+                  "lng" : -84.37493943029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Cherokee Ave @ Ormond St",
+         "place_id" : "ChIJ-_r3wcAD9YgRQ-PQS9lEa0I",
+         "plus_code" : 
+         {
+            "compound_code" : "PJJG+GH Atlanta, GA, USA",
+            "global_code" : "865QPJJG+GH"
+         },
+         "reference" : "ChIJ-_r3wcAD9YgRQ-PQS9lEa0I",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.73666299999999,
+               "lng" : -84.3761935
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.73802798029149,
+                  "lng" : -84.37484406970849
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.73533001970849,
+                  "lng" : -84.37754203029149
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Georgia Ave SE @ Grant St SE",
+         "place_id" : "ChIJ914PRJUD9YgRoBiYUJZKYWU",
+         "plus_code" : 
+         {
+            "compound_code" : "PJPF+MG Atlanta, GA, USA",
+            "global_code" : "865QPJPF+MG"
+         },
+         "reference" : "ChIJ914PRJUD9YgRoBiYUJZKYWU",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.7367025,
+               "lng" : -84.379862
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.73806413029151,
+                  "lng" : -84.37848241970849
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.73536616970851,
+                  "lng" : -84.3811803802915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Georgia Ave SE @ Grant Ter SE",
+         "place_id" : "ChIJ33yC5ZUD9YgRIYX6txkt06E",
+         "plus_code" : 
+         {
+            "compound_code" : "PJPC+M3 Atlanta, GA, USA",
+            "global_code" : "865QPJPC+M3"
+         },
+         "reference" : "ChIJ33yC5ZUD9YgRIYX6txkt06E",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.7303129,
+               "lng" : -84.368591
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.7316618802915,
+                  "lng" : -84.36724201970848
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.7289639197085,
+                  "lng" : -84.36993998029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Boulevard SE@Atlanta Ave SE",
+         "place_id" : "ChIJo9U8jcMD9YgR6kDEwO6Nhmc",
+         "plus_code" : 
+         {
+            "compound_code" : "PJJJ+4H Atlanta, GA, USA",
+            "global_code" : "865QPJJJ+4H"
+         },
+         "reference" : "ChIJo9U8jcMD9YgR6kDEwO6Nhmc",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.728503,
+               "lng" : -84.3785085
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.72985183029149,
+                  "lng" : -84.37714236970849
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.72715386970849,
+                  "lng" : -84.3798403302915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Hill St SE @ Tuskegee St SE",
+         "place_id" : "ChIJ29niGbkD9YgRq-DohVwdwEE",
+         "plus_code" : 
+         {
+            "compound_code" : "PJHC+CH Atlanta, GA, USA",
+            "global_code" : "865QPJHC+CH"
+         },
+         "reference" : "ChIJ29niGbkD9YgRq-DohVwdwEE",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.736746,
+               "lng" : -84.38200399999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.7380829802915,
+                  "lng" : -84.38065521970849
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.7353850197085,
+                  "lng" : -84.38335318029149
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Georgia Ave SE @ Ami St SE",
+         "place_id" : "ChIJ5W3lPJYD9YgRWO5ZU9CtbVI",
+         "plus_code" : 
+         {
+            "compound_code" : "PJP9+M5 Atlanta, GA, USA",
+            "global_code" : "865QPJP9+M5"
+         },
+         "reference" : "ChIJ5W3lPJYD9YgRWO5ZU9CtbVI",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.7303676,
+               "lng" : -84.3654707
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.7316982802915,
+                  "lng" : -84.36412206970849
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.7290003197085,
+                  "lng" : -84.36682003029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Atlanta Ave SE @ Marion Ave SE",
+         "place_id" : "ChIJy9Y-RcMD9YgR4LSU3_vP6Qg",
+         "plus_code" : 
+         {
+            "compound_code" : "PJJM+4R Atlanta, GA, USA",
+            "global_code" : "865QPJJM+4R"
+         },
+         "reference" : "ChIJy9Y-RcMD9YgR4LSU3_vP6Qg",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.726511,
+               "lng" : -84.3785395
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.7278599802915,
+                  "lng" : -84.3771671697085
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.7251620197085,
+                  "lng" : -84.37986513029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Hill St SE @ Farrington Ave",
+         "place_id" : "ChIJi9R7urkD9YgR869tixkeQ-8",
+         "plus_code" : 
+         {
+            "compound_code" : "PJGC+JH Atlanta, GA, USA",
+            "global_code" : "865QPJGC+JH"
+         },
+         "reference" : "ChIJi9R7urkD9YgR869tixkeQ-8",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.7368025,
+               "lng" : -84.384106
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.73817828029149,
+                  "lng" : -84.38275636970849
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.73548031970849,
+                  "lng" : -84.38545433029149
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Georgia Ave SE@Martin St SE",
+         "place_id" : "ChIJ2ehfw5cD9YgRkR6wx5aT-jo",
+         "plus_code" : 
+         {
+            "compound_code" : "PJP8+P9 Atlanta, GA, USA",
+            "global_code" : "865QPJP8+P9"
+         },
+         "reference" : "ChIJ2ehfw5cD9YgRkR6wx5aT-jo",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.736846,
+               "lng" : -84.38634499999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.7381951302915,
+                  "lng" : -84.38495576970848
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.7354971697085,
+                  "lng" : -84.3876537302915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Georgia Ave SE @ Fraser St SE",
+         "place_id" : "ChIJlWmxGpgD9YgR8c8JnAZM874",
+         "plus_code" : 
+         {
+            "compound_code" : "PJP7+PF Atlanta, GA, USA",
+            "global_code" : "865QPJP7+PF"
+         },
+         "reference" : "ChIJlWmxGpgD9YgR8c8JnAZM874",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.7331145,
+               "lng" : -84.3879285
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.7344633302915,
+                  "lng" : -84.3866168697085
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.7317653697085,
+                  "lng" : -84.38931483029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Hank Aaron Dr SW @ Little St SE",
+         "place_id" : "ChIJzVGQA6MD9YgR65VDi0wV-lI",
+         "plus_code" : 
+         {
+            "compound_code" : "PJM6+6R Atlanta, GA, USA",
+            "global_code" : "865QPJM6+6R"
+         },
+         "reference" : "ChIJzVGQA6MD9YgR65VDi0wV-lI",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.731476,
+               "lng" : -84.387883
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.73282508029151,
+                  "lng" : -84.38655106970849
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.73012711970851,
+                  "lng" : -84.3892490302915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Hank Aaron Dr@Ormond St SE",
+         "place_id" : "ChIJrUb_cKMD9YgRr-W9iiN30Ws",
+         "plus_code" : 
+         {
+            "compound_code" : "PJJ6+HR Atlanta, GA, USA",
+            "global_code" : "865QPJJ6+HR"
+         },
+         "reference" : "ChIJrUb_cKMD9YgRr-W9iiN30Ws",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.7303205,
+               "lng" : -84.38775649999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.7317109802915,
+                  "lng" : -84.38640676970849
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.7290130197085,
+                  "lng" : -84.38910473029149
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Hank Aaron Dr@Atlanta Ave SE",
+         "place_id" : "ChIJ_WJFg6QD9YgRetMSxv5cBzk",
+         "plus_code" : 
+         {
+            "compound_code" : "PJJ6+4V Atlanta, GA, USA",
+            "global_code" : "865QPJJ6+4V"
+         },
+         "reference" : "ChIJ_WJFg6QD9YgRetMSxv5cBzk",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.7290745,
+               "lng" : -84.3879925
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.73042368029149,
+                  "lng" : -84.38666766970849
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.72772571970849,
+                  "lng" : -84.38936563029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Hank Aaron Dr@Vanira Ave SE",
+         "place_id" : "ChIJ-wJ386QD9YgRT6tdtejy7Qg",
+         "plus_code" : 
+         {
+            "compound_code" : "PJH6+JR Atlanta, GA, USA",
+            "global_code" : "865QPJH6+JR"
+         },
+         "reference" : "ChIJ-wJ386QD9YgRT6tdtejy7Qg",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.745595,
+               "lng" : -84.37928599999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.7469164802915,
+                  "lng" : -84.37793736970849
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.7442185197085,
+                  "lng" : -84.38063533029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Hill St SE @ Woodward Ave SE",
+         "place_id" : "ChIJh31vFZID9YgRHAf7MwKWmEA",
+         "plus_code" : 
+         {
+            "compound_code" : "PJWC+67 Atlanta, GA, USA",
+            "global_code" : "865QPJWC+67"
+         },
+         "reference" : "ChIJh31vFZID9YgRHAf7MwKWmEA",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      }
+   ],
+   "status" : "OK"
+}

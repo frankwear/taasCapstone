@@ -5,12 +5,17 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.xml.crypto.dsig.keyinfo.KeyValue;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
@@ -92,9 +97,12 @@ public class DistanceMatrixApi {
                 throw new RuntimeException(e);
             }
             String loopJsonAsString = getJsonFileAsString(tempUrl);
+            if(apiKey.isEmpty()){
+                //todo;
+            } else {
             HashMap<String, Integer>[][] metricsTable = getJsonFileAsTable(loopJsonAsString);
             for (int row = 0; row < originStrings.size(); row++){
-                for (int col = 0; col < destinationStrings.size(); col++){
+                for (int col = 0; col < destinationStrings.size(); col++) {
                     Integer edgeDuration = metricsTable[row][col].get("duration");
                     Integer edgeDistance = metricsTable[row][col].get("distance");
                     if (edgeDistance != 0) {
@@ -108,9 +116,55 @@ public class DistanceMatrixApi {
                                 edgeDistance);
                         origVertex.addEdge(loopEdge);
                     }
+                  }
                 }
             }
         }
+    }
+
+
+
+
+
+    public void divideAndQueryAsFile(String mode, String filename) {
+        //List<String> listOfUsableURLs=new ArrayList<>();
+        // manage query size
+        // split and should return a list of usable mini URLs
+
+
+        // Split the request -small size
+        Integer maxDestinationRows = 100/originStrings.size();
+        if (maxDestinationRows > 25){ maxDestinationRows = 25;}
+        if (maxDestinationRows > destinationStrings.size()) {maxDestinationRows = destinationStrings.size();}
+        int k = 1;
+        for (int i = 0; i < destinationStrings.size(); i = i + maxDestinationRows) {
+            LinkedList<String> loopDestinations = new LinkedList<>();
+            for (int j = 0; j < maxDestinationRows; j++) {
+                if (i < destinationStrings.size()) {  // to prevent going out of bounds
+                    loopDestinations.addLast(destinationStrings.get(j));
+                }
+            }
+            String tempOrigins = createStringOfLocations(originStrings);
+            String tempDestinationsString = createStringOfLocations(loopDestinations);
+            String urlAsString = createUrlAsString(tempOrigins, tempDestinationsString, mode);
+            URL tempUrl;
+            try {
+                tempUrl = new URL(urlAsString);
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+            String loopJsonAsString = getJsonFileAsString(tempUrl);
+            filename = filename.concat(String.valueOf(k));
+            filename = "src/test/resources/" + filename + ".json";
+            try {
+                saveJsonToFile(loopJsonAsString, filename);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            k++;
+        }
+
+
     }
 
 //****** This is the method working from 9-25 - renamed to "divideAndQuery()" in new code *****//
@@ -213,6 +267,15 @@ public class DistanceMatrixApi {
         }
         return metricsTable;
     }
+
+
+    public void saveJsonToFile(String jsonResponseAsString, String filename) throws IOException {
+        PrintWriter out = new PrintWriter(filename);
+        out.println(jsonResponseAsString);
+        out.close();
+    }
+
+
 
 
 //****** This is the method working from 9-25 *****//

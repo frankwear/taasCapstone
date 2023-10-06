@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 class ApiBypassJsonTest {
     String location1Name = new String();
@@ -37,5 +38,38 @@ class ApiBypassJsonTest {
         String mode = "transit";
         ApiConnector directionsApi = new ApiConnector(location2LatLng, location1LatLng, mode);
         directionsApi.saveJsonToFile("transitZooToCvs");
+    }
+
+    @Test
+    void createPlacesJsonFileCVS() throws IOException{
+        HashMap<String, String> myParameters = new HashMap<>();
+        myParameters.put("location=", location1LatLng);
+        myParameters.put("&type=", "transit_station");
+        myParameters.put("&radius=","7500");
+        PlacesApi placesApi = new PlacesApi(myParameters);
+        placesApi.saveJsonToFile("CVSPlaces");
+    }
+
+    @Test
+    void createPlacesJsonFileZoo() throws IOException{
+        HashMap<String, String> myParameters = new HashMap<>();
+        myParameters.put("location=", location2LatLng);
+        myParameters.put("&type=", "transit_station");
+        myParameters.put("&radius=","7500");
+        PlacesApi placesApi = new PlacesApi(myParameters);
+        placesApi.saveJsonToFile("ZooPlaces");
+    }
+
+    @Test
+    void createDistanceMatrixJsonFileCVS() throws IOException {
+        BranchGeoModel graph = new BranchGeoModel();
+        HashMap<String, String> myParameters = new HashMap<>();
+        myParameters.put("location=", location1LatLng);
+        myParameters.put("&type=", "transit_station");
+        myParameters.put("&radius=","7500");
+        PlacesApi placesApi = new PlacesApi(myParameters);
+        graph = placesApi.getApiResponseAsGeoModel();
+        DistanceMatrixApi distanceMatrixApi = new DistanceMatrixApi(graph);
+        distanceMatrixApi.divideAndQueryAsFile("driving","CVSDistanceMatrix");
     }
 }
