@@ -141,7 +141,7 @@ public class UserRouteRequest {
         // todo - complete getAPIWeightedGraph() method
         // create connector
         ApiConnector googleConnector = new ApiConnector(origin, destination, mode);
-        String jsonOutput = googleConnector.saveJsonToString();
+        String jsonOutput = googleConnector.getJsonStringFromApi();
         LinearRoute apiRoute;
         apiRoute = googleConnector.constructRoute(jsonOutput);
         return apiRoute;
@@ -150,7 +150,7 @@ public class UserRouteRequest {
         // todo - complete getAPIWeightedGraph() method
         // create connector
         ApiConnector googleConnector = new ApiConnector(origin, destination, mode);
-        String jsonOutput = googleConnector.saveJsonToString();
+        String jsonOutput = googleConnector.getJsonStringFromApi();
         LinearRoute geographicRoute;
         geographicRoute = googleConnector.constructRoute(jsonOutput);
         return geographicRoute;
@@ -159,7 +159,7 @@ public class UserRouteRequest {
         // todo - complete getAPIWeightedGraph() method
         // create connector
         ApiConnector googleConnector = new ApiConnector(origin, destination, mode);
-        String jsonOutput = googleConnector.saveJsonToString();
+        String jsonOutput = googleConnector.getJsonStringFromApi();
         LinearRoute geographicRoute;
         geographicRoute = googleConnector.constructRoute(jsonOutput);
         return geographicRoute;
@@ -168,7 +168,7 @@ public class UserRouteRequest {
         // todo - complete getAPIWeightedGraph() method
         // create connector
         ApiConnector googleConnector = new ApiConnector(origin, destination, mode, Boolean.TRUE);
-        String jsonOutput = googleConnector.saveJsonToString();
+        String jsonOutput = googleConnector.getJsonStringFromApi();
         LinkedList<LinearRoute> areaRoutes = new LinkedList<>();
         areaRoutes = googleConnector.constructRouteList(jsonOutput);
         return areaRoutes;

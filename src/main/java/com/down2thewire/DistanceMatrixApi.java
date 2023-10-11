@@ -96,11 +96,23 @@ public class DistanceMatrixApi {
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             }
-            String loopJsonAsString = getJsonFileAsString(tempUrl);
+            String loopJsonAsString;
+
+
             if(apiKey.isEmpty()){
-                //todo;
+                System.out.println("API Key is empty");
+                String tempFileName = "CVSDistanceMatrix" + Integer.toString(i + 1) + ".json";
+                try {
+                    loopJsonAsString = readJsonFromFileApi(tempFileName);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             } else {
+                loopJsonAsString = getJsonFileAsString(tempUrl);
+
+            }
             HashMap<String, Integer>[][] metricsTable = getJsonFileAsTable(loopJsonAsString);
+
             for (int row = 0; row < originStrings.size(); row++){
                 for (int col = 0; col < destinationStrings.size(); col++) {
                     Integer edgeDuration = metricsTable[row][col].get("duration");
@@ -120,13 +132,13 @@ public class DistanceMatrixApi {
                 }
             }
         }
-    }
 
 
 
 
 
-    public void divideAndQueryAsFile(String mode, String filename) {
+
+    public void divideAndQueryAsFile(String mode, String baseFilename) {
         //List<String> listOfUsableURLs=new ArrayList<>();
         // manage query size
         // split and should return a list of usable mini URLs
@@ -154,8 +166,8 @@ public class DistanceMatrixApi {
                 throw new RuntimeException(e);
             }
             String loopJsonAsString = getJsonFileAsString(tempUrl);
-            filename = filename.concat(String.valueOf(k));
-            filename = "src/test/resources/" + filename + ".json";
+            //filename = filename.concat(String.valueOf(k));
+            String filename = "src/test/resources/" + baseFilename + k + ".json";
             try {
                 saveJsonToFile(loopJsonAsString, filename);
             } catch (IOException e) {
@@ -166,6 +178,15 @@ public class DistanceMatrixApi {
 
 
     }
+
+    public String readJsonFromFileApi(String fileName) throws IOException {
+        fileName = "src/test/resources/" + fileName;
+        Path filePath = Path.of(fileName);
+
+        return new String(Files.readAllBytes(filePath), StandardCharsets.UTF_8);
+    }
+
+
 
 //****** This is the method working from 9-25 - renamed to "divideAndQuery()" in new code *****//
 //
