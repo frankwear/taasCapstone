@@ -4,9 +4,9 @@ import java.sql.DriverManager;
 //import java.sql.PreparedStatement;
 import java.sql.SQLException;
 public class DataConnection {
-    private static final String db_URL = "jdbc:postgresql://localhost:5432/honey";
+    private static final String db_URL = "jdbc:postgresql://localhost:5432/postgres";
     private static final String db_USER = "postgres";
-    private static final String db_PASSWORD = "database";
+    private static final String db_PASSWORD = "postgres";
     // maven dependency added
     public static void main(String[] args) {
         try (Connection connection = DriverManager.getConnection(db_URL, db_USER, db_PASSWORD)) {
