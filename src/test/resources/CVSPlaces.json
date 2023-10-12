@@ -1,0 +1,870 @@
+{
+   "html_attributions" : [],
+   "next_page_token" : "ATJ83zhviKWKX2B0sPJQx3Q-TienxqsYyHenfShJVicbm4dHhakkFtp2v5VCesCiFsLMA9qH5xtA_BXiBb8kAKcUiNoXHRAfwZbZ01MzlPYSNT4GkW_d0TPm5S203itdcOYUgIa6xQTSsiJA1Wa56P6uWWH77l_LpyI-nhPOUg6hMDnjdZTuBO-iSXiKn-coIVmYJqlmSk66v6X-gIZ0ATVMoa8C02vfTa9TY5mBRXiOtyr4zCAbBueQ4aWhMQjDKl4YGGkT77GIlB4643xZWLhugMDATyGRqFJIeeZLplx4zT9034ewMa_t81csctIgYuBJT--wC1-_mkAbY-jFdbqzu9sLytaQbhYtR8LrUAsPpBuMd8Uf4pDC5KSb6gCZivLTgiM0eIMBQ9YjurklXRrNqtfnqhJ4puJzFz5tvIKd6MtTtEDnwdWkB0mu7WDUwC2tUL0",
+   "results" : 
+   [
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.905818,
+               "lng" : -84.42925749999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.9071587802915,
+                  "lng" : -84.42790236970848
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.9044608197085,
+                  "lng" : -84.4306003302915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Powers Ferry Rd NW @ New Northside Dr NW",
+         "place_id" : "ChIJY9X0aCUO9YgRw8RjhMJ2CWk",
+         "plus_code" : 
+         {
+            "compound_code" : "WH4C+87 Sandy Springs, GA, USA",
+            "global_code" : "865QWH4C+87"
+         },
+         "reference" : "ChIJY9X0aCUO9YgRw8RjhMJ2CWk",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.898585,
+               "lng" : -84.44769000000001
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.8999236302915,
+                  "lng" : -84.44632831970848
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.8972256697085,
+                  "lng" : -84.44902628029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Akers Mill Rd & Powers Ferry Rd (Food Store)",
+         "place_id" : "ChIJQb7ea9IR9YgRpxGRxzY6s0I",
+         "plus_code" : 
+         {
+            "compound_code" : "VHX2+CW Cumberland, Vinings, GA, USA",
+            "global_code" : "865QVHX2+CW"
+         },
+         "reference" : "ChIJQb7ea9IR9YgRpxGRxzY6s0I",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.896915,
+               "lng" : -84.449685
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.89827088029149,
+                  "lng" : -84.44834511970848
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.89557291970849,
+                  "lng" : -84.45104308029148
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Akers Mill Rd & Walton on the Chattahoochee",
+         "place_id" : "ChIJ5TQebs0R9YgRuIbzLVPHhDU",
+         "plus_code" : 
+         {
+            "compound_code" : "VHW2+Q4 Cumberland, Vinings, GA, USA",
+            "global_code" : "865QVHW2+Q4"
+         },
+         "rating" : 1,
+         "reference" : "ChIJ5TQebs0R9YgRuIbzLVPHhDU",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total" : 1,
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.90934900000001,
+               "lng" : -84.4123455
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.91069598029149,
+                  "lng" : -84.4110038197085
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.9079980197085,
+                  "lng" : -84.4137017802915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "MT Vernon Hwy NW @ Powers Ferry Rd NW",
+         "place_id" : "ChIJn7nSrkYO9YgRCuYMOq5z4pw",
+         "plus_code" : 
+         {
+            "compound_code" : "WH5Q+P3 Sandy Springs, GA, USA",
+            "global_code" : "865QWH5Q+P3"
+         },
+         "reference" : "ChIJn7nSrkYO9YgRCuYMOq5z4pw",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.91109350000001,
+               "lng" : -84.46019199999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.9124538302915,
+                  "lng" : -84.4588446197085
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.9097558697085,
+                  "lng" : -84.46154258029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Windy Hill Rd + Wildwood Pkwy",
+         "place_id" : "ChIJYUrJu7gR9YgRgSBStf6eNhc",
+         "plus_code" : 
+         {
+            "compound_code" : "WG6Q+CW Cumberland, Vinings, GA, USA",
+            "global_code" : "865QWG6Q+CW"
+         },
+         "reference" : "ChIJYUrJu7gR9YgRgSBStf6eNhc",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.905065,
+               "lng" : -84.46341500000001
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.9064398802915,
+                  "lng" : -84.46204751970851
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.9037419197085,
+                  "lng" : -84.46474548029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Powers Ferry Rd + Windy Hill Rd",
+         "place_id" : "ChIJpc4RP7cR9YgRgnUxbRcb5TI",
+         "plus_code" : 
+         {
+            "compound_code" : "WG4P+2J Cumberland, Vinings, GA, USA",
+            "global_code" : "865QWG4P+2J"
+         },
+         "reference" : "ChIJpc4RP7cR9YgRgnUxbRcb5TI",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.9014485,
+               "lng" : -84.46594399999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.9027989802915,
+                  "lng" : -84.46459826970849
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.9001010197085,
+                  "lng" : -84.46729623029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Interstate North Pkwy + 150 Building",
+         "place_id" : "ChIJF2POYLER9YgR7cV66AsSLwk",
+         "plus_code" : 
+         {
+            "compound_code" : "WG2M+HJ Cumberland, Vinings, GA, USA",
+            "global_code" : "865QWG2M+HJ"
+         },
+         "reference" : "ChIJF2POYLER9YgR7cV66AsSLwk",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.913385,
+               "lng" : -84.4652
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.91473523029149,
+                  "lng" : -84.4638337197085
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.9120372697085,
+                  "lng" : -84.46653168029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Powers Ferry Rd + Wildwood Pkwy",
+         "place_id" : "ChIJJ7ZkF7wR9YgRZ7xR86WKySc",
+         "plus_code" : 
+         {
+            "compound_code" : "WG7M+9W Cumberland, Vinings, GA, USA",
+            "global_code" : "865QWG7M+9W"
+         },
+         "reference" : "ChIJJ7ZkF7wR9YgRZ7xR86WKySc",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.911296,
+               "lng" : -84.40506549999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.9126363802915,
+                  "lng" : -84.40370116970848
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.9099384197085,
+                  "lng" : -84.4063991302915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "MT Vernon Hwy NW @ Glen Errol Rd NW",
+         "place_id" : "ChIJCbC77lwO9YgRn_tzmGud_aM",
+         "plus_code" : 
+         {
+            "compound_code" : "WH6V+GX Sandy Springs, GA, USA",
+            "global_code" : "865QWH6V+GX"
+         },
+         "reference" : "ChIJCbC77lwO9YgRn_tzmGud_aM",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.90772809999999,
+               "lng" : -84.43803729999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.90909493029149,
+                  "lng" : -84.43673806970848
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.90639696970849,
+                  "lng" : -84.4394360302915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Riveredge Pkwy NW & 1600",
+         "place_id" : "ChIJKXjjhicO9YgRGw14XC4OftA",
+         "plus_code" : 
+         {
+            "compound_code" : "WH56+3Q Sandy Springs, GA, USA",
+            "global_code" : "865QWH56+3Q"
+         },
+         "reference" : "ChIJKXjjhicO9YgRGw14XC4OftA",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "1808 Riveredge Parkway, Sandy Springs"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.907809,
+               "lng" : -84.43371499999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.9091317802915,
+                  "lng" : -84.43232086970848
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.9064338197085,
+                  "lng" : -84.4350188302915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Interstate North Pkwy & 5500",
+         "place_id" : "ChIJ35svYyYO9YgRAF_f28YtELc",
+         "plus_code" : 
+         {
+            "compound_code" : "WH58+4G Sandy Springs, GA, USA",
+            "global_code" : "865QWH58+4G"
+         },
+         "reference" : "ChIJ35svYyYO9YgRAF_f28YtELc",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.908414,
+               "lng" : -84.43303999999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.9096977302915,
+                  "lng" : -84.43170721970849
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.9069997697085,
+                  "lng" : -84.43440518029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Northside Dr & Interstate North Pkwy",
+         "place_id" : "ChIJM2QLgiYO9YgRdt3PcAoGMvM",
+         "plus_code" : 
+         {
+            "compound_code" : "WH58+9Q Sandy Springs, GA, USA",
+            "global_code" : "865QWH58+9Q"
+         },
+         "reference" : "ChIJM2QLgiYO9YgRdt3PcAoGMvM",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.9093743,
+               "lng" : -84.43876279999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.9107125802915,
+                  "lng" : -84.43744091970849
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.9080146197085,
+                  "lng" : -84.44013888029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Riveredge Pkwy NW & 2100",
+         "place_id" : "ChIJgTGfmdgR9YgRuQBccZfYtFw",
+         "plus_code" : 
+         {
+            "compound_code" : "WH56+PF Sandy Springs, GA, USA",
+            "global_code" : "865QWH56+PF"
+         },
+         "reference" : "ChIJgTGfmdgR9YgRuQBccZfYtFw",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "2100 Riveredge Parkway, Sandy Springs"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.90564799999999,
+               "lng" : -84.42945300000001
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.9069978802915,
+                  "lng" : -84.42808071970849
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.9042999197085,
+                  "lng" : -84.4307786802915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Powers Ferry Rd NW & New Northside Dr NW",
+         "place_id" : "ChIJWbTCZSUO9YgR0REBbHVuF88",
+         "plus_code" : 
+         {
+            "compound_code" : "WH4C+76 Sandy Springs, GA, USA",
+            "global_code" : "865QWH4C+76"
+         },
+         "reference" : "ChIJWbTCZSUO9YgR0REBbHVuF88",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.90600200000001,
+               "lng" : -84.429107
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.9073188302915,
+                  "lng" : -84.4277607697085
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.90462086970851,
+                  "lng" : -84.43045873029151
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Powers Ferry Rd NW & New Northside Dr NW",
+         "place_id" : "ChIJg58MQiUO9YgRQUK4Zfnf9k4",
+         "plus_code" : 
+         {
+            "compound_code" : "WH4C+C9 Sandy Springs, GA, USA",
+            "global_code" : "865QWH4C+C9"
+         },
+         "reference" : "ChIJg58MQiUO9YgRQUK4Zfnf9k4",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.8954945,
+               "lng" : -84.468598
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.8968159302915,
+                  "lng" : -84.46726966970849
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.8941179697085,
+                  "lng" : -84.46996763029149
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Circle 75 Pkwy + Herodian Way",
+         "place_id" : "ChIJryBUSk0Q9YgRq2TZr9oBD_U",
+         "plus_code" : 
+         {
+            "compound_code" : "VGWJ+5H Cumberland, Vinings, GA, USA",
+            "global_code" : "865QVGWJ+5H"
+         },
+         "reference" : "ChIJryBUSk0Q9YgRq2TZr9oBD_U",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.90935899999999,
+               "lng" : -84.43174599999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.9107000302915,
+                  "lng" : -84.43037736970849
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.9080020697085,
+                  "lng" : -84.4330753302915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Interstate North Pkwy & 5665",
+         "place_id" : "ChIJYW5WayQO9YgRN_OJKXb6gV4",
+         "plus_code" : 
+         {
+            "compound_code" : "WH59+P8 Sandy Springs, GA, USA",
+            "global_code" : "865QWH59+P8"
+         },
+         "reference" : "ChIJYW5WayQO9YgRN_OJKXb6gV4",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.90770799999999,
+               "lng" : -84.42731929999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.90903593029149,
+                  "lng" : -84.42592236970849
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.9063379697085,
+                  "lng" : -84.42862033029149
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Powers Ferry Rd & Brickstone Dr",
+         "place_id" : "ChIJM8wt1joO9YgRpNi6r8BqoRM",
+         "plus_code" : 
+         {
+            "compound_code" : "WH5F+33 Sandy Springs, GA, USA",
+            "global_code" : "865QWH5F+33"
+         },
+         "reference" : "ChIJM8wt1joO9YgRpNi6r8BqoRM",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "Sandy Springs"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.907914,
+               "lng" : -84.426951
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.90928368029149,
+                  "lng" : -84.4256474197085
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.9065857197085,
+                  "lng" : -84.4283453802915
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Powers Ferry Rd NW & Brickstone Dr NW",
+         "place_id" : "ChIJwTK41zoO9YgR7Q6rZc918Xo",
+         "plus_code" : 
+         {
+            "compound_code" : "WH5F+56 Sandy Springs, GA, USA",
+            "global_code" : "865QWH5F+56"
+         },
+         "reference" : "ChIJwTK41zoO9YgR7Q6rZc918Xo",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : 
+         {
+            "location" : 
+            {
+               "lat" : 33.898661,
+               "lng" : -84.44746099999999
+            },
+            "viewport" : 
+            {
+               "northeast" : 
+               {
+                  "lat" : 33.9000447302915,
+                  "lng" : -84.44615481970848
+               },
+               "southwest" : 
+               {
+                  "lat" : 33.8973467697085,
+                  "lng" : -84.44885278029149
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Akers Mill Rd at Powers Ferry Rd",
+         "place_id" : "ChIJeVMtQNIR9YgRs4sYH3N79TI",
+         "plus_code" : 
+         {
+            "compound_code" : "VHX3+F2 Cumberland, Vinings, GA, USA",
+            "global_code" : "865QVHX3+F2"
+         },
+         "reference" : "ChIJeVMtQNIR9YgRs4sYH3N79TI",
+         "scope" : "GOOGLE",
+         "types" : 
+         [
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity" : "United States"
+      }
+   ],
+   "status" : "OK"
+}

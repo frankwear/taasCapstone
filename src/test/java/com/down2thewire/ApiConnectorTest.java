@@ -22,14 +22,14 @@ public class ApiConnectorTest {
     @Test
     void testSaveJsonToString() {
         // Test whether saveJsonToString() returns a non-null string
-        String json = apiConnector.saveJsonToString();
+        String json = apiConnector.getJsonStringFromApi();
         assertNotNull(json);
     }
 
     @Test
     void testConstructRouteList() {
         // Test whether constructRouteList() returns a non-empty list of routes
-        String json = apiConnector.saveJsonToString();
+        String json = apiConnector.getJsonStringFromApi();
         LinkedList<LinearRoute> routes = apiConnector.constructRouteList(json);
         assertFalse(routes.isEmpty());
     }
@@ -37,7 +37,7 @@ public class ApiConnectorTest {
     @Test
     void testConstructRoute() {
         // Test whether constructRoute() returns a non-null route
-        String json = apiConnector.saveJsonToString();
+        String json = apiConnector.getJsonStringFromApi();
         LinearRoute route = apiConnector.constructRoute(json);
         assertNotNull(route);
     }

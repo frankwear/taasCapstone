@@ -6,10 +6,12 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 
 public class DataConnection {
+
     static String[] credentials = ApiKeys.dbConnection();
     private static final String db_URL = credentials[0];
     private static final String db_USER = credentials[1];
     private static final String db_PASSWORD = credentials[2];//"database";
+
 
 
     // maven dependency added
