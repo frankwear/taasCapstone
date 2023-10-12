@@ -25,6 +25,7 @@ public class PlacesApi {
     public PlacesApi(HashMap<String, String> parameters) {
         this.urlAsString = buildUrl(parameters);
     }
+
     private String buildUrl(HashMap<String, String> parameters) {
         String myUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
         for (String key : parameters.keySet()) {
@@ -38,24 +39,24 @@ public class PlacesApi {
     //****** Static Implementation *****//
     static BranchGeoModel buildPlacesFromApiCall(HashMap<String, String> parameters) {
         PlacesApi tempPlaces = new PlacesApi(parameters);
-        String jsonResponsesString= tempPlaces.getApiResponseAsString();
+        String jsonResponsesString = tempPlaces.getApiResponseAsString();
         return tempPlaces.getApiResponseAsGeoModel();
     }
     //**************//
 
 
     public String getApiResponseAsString() {
-        if(apiResponseAsString.isBlank()){
+        if (apiResponseAsString.isBlank()) {
             this.apiResponseAsString = getJsonStringFromApi();
-            if(apiResponseAsString.isBlank()){
+            if (apiResponseAsString.isBlank()) {
                 System.out.println("PlacesApi.getApiResponse() no response.  Check Url.");
             }
         }
         return apiResponseAsString;
     }
 
-    public BranchGeoModel getApiResponseAsGeoModel(){
-        if(apiResponseAsString.isBlank()){
+    public BranchGeoModel getApiResponseAsGeoModel() {
+        if (apiResponseAsString.isBlank()) {
             this.apiResponseAsString = getJsonStringFromApi();
         }
         BranchGeoModel locationsOnly = constructGeoModel(apiResponseAsString);
@@ -63,29 +64,34 @@ public class PlacesApi {
     }
 
 
-
     private String getJsonStringFromApi() {
-        URL apiEndpoint;
         String jsonText;
-        HttpURLConnection connection;
-        try {
-            apiEndpoint = new URL(this.urlAsString);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+        if (apiKey.isEmpty()) {
+            System.out.println("API Key is empty");
+            jsonText = "";
+        } else {
+            URL apiEndpoint;
+            HttpURLConnection connection;
+            try {
+                apiEndpoint = new URL(this.urlAsString);
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                connection = (HttpURLConnection) apiEndpoint.openConnection();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            try (InputStream inputStream = connection.getInputStream()) {
+                jsonText = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            connection.disconnect();
         }
-        try {
-            connection = (HttpURLConnection) apiEndpoint.openConnection();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try (InputStream inputStream = connection.getInputStream()) {
-            jsonText = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        connection.disconnect();
         return jsonText;
     }
+
 
     private BranchGeoModel constructGeoModel(String json) {
         if (json == null || json.isBlank()){
@@ -131,6 +137,13 @@ public class PlacesApi {
             throw new RuntimeException(e);
         }
         connection.disconnect();
+    }
+
+    public String readJsonFromFileApi(String fileName) throws IOException {
+        fileName = "src/test/resources/" + fileName + ".json";
+        Path filePath = Path.of(fileName);
+
+        return new String(Files.readAllBytes(filePath), StandardCharsets.UTF_8);
     }
 
     // 10-3-23 added saveResponseToFile() method for ApiBypassJsonTest

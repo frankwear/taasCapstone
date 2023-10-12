@@ -3,6 +3,7 @@ package com.down2thewire;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -51,26 +52,34 @@ public class ApiConnector {
                 "&key=" + apiKey;
     }
 
-    public String saveJsonToString() {
-        URL apiEndpoint;
+
+    //10-10-2023, we refactored the name from saveJsonToString to get getJsonStringFromApi to match the PlacesApi.
+    public String getJsonStringFromApi() {
         String jsonText;
-        HttpURLConnection connection;
-        try {
-            apiEndpoint = new URL(this.url);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+        if (apiKey.isEmpty()) {
+            System.out.println("API Key is empty");
+            jsonText = "";
+        } else {
+            URL apiEndpoint;
+            HttpURLConnection connection;
+            try {
+                apiEndpoint = new URL(this.url);
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                connection = (HttpURLConnection) apiEndpoint.openConnection();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            try (InputStream inputStream = connection.getInputStream()) {
+                jsonText = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            connection.disconnect();
+
         }
-        try {
-            connection = (HttpURLConnection) apiEndpoint.openConnection();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try (InputStream inputStream = connection.getInputStream()) {
-            jsonText = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        connection.disconnect();
         return jsonText;
     }
 
@@ -110,6 +119,13 @@ public class ApiConnector {
                 writer.write(new String(buffer, 0, bytesRead));
             }
         }
+    }
+
+    public String readJsonFromFileApi(String fileName) throws IOException {
+        fileName = "src/test/resources/" + fileName + ".json";
+        Path filePath = Path.of(fileName);
+
+        return new String(Files.readAllBytes(filePath), StandardCharsets.UTF_8);
     }
 
 
