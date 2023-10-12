@@ -10,11 +10,43 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class RoutesAPI {
     private static final String apiKey = ApiKeys.getGoogleKey();
     private String urlAsString = "";
     private String apiResponseAsString = "";
+
+    private BranchGeoModel currentGeography = new BranchGeoModel();
+    private LinkedList<String> originStrings = new LinkedList<>();
+    private HashMap<String, BranchVertex> origin_VertexMap = new HashMap<>();
+    private LinkedList<String> destinationStrings = new LinkedList<>();
+    private HashMap<String, BranchVertex> destination_VertexMap = new HashMap<>();
+
+
+    public RoutesAPI(BranchGeoModel initialGeography, LinkedList<String> originStrings, LinkedList<String> destinationStrings) {
+        this.originStrings = originStrings;
+        this.destinationStrings = destinationStrings;
+        this.currentGeography = initialGeography;
+        this.origin_VertexMap = getHashmap(originStrings);  //also adds unknown locations to currentGeography
+        this.destination_VertexMap = getHashmap(destinationStrings);
+    }
+    public RoutesAPI(BranchGeoModel initialGeography){
+
+        // **** Assume the user wants a complete graph from the Geomodel of 25 or less locations *****//
+        this.currentGeography = initialGeography;
+        this.originStrings = initialGeography.getLocationsAsListOfString();
+        this.destinationStrings = this.originStrings;
+        this.origin_VertexMap = getHashmap(originStrings);
+        this.destination_VertexMap = getHashmap(destinationStrings);
+    }
+    public RoutesAPI(LinkedList<String> originStrings, LinkedList<String> destinationStrings){
+        this.originStrings = originStrings;
+        this.destinationStrings = destinationStrings;
+        this.currentGeography = new BranchGeoModel();
+        this.origin_VertexMap = getHashmap(originStrings);
+        this.destination_VertexMap = getHashmap(destinationStrings);
+    }
 
     public RoutesAPI(HashMap<String, String> parameters) {
         this.urlAsString = buildUrl(parameters);
