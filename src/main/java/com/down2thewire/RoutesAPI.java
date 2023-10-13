@@ -13,128 +13,128 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class RoutesAPI {
-    private static final String apiKey = ApiKeys.getGoogleKey();
-    private String urlAsString = "";
-    private String apiResponseAsString = "";
-
-    private BranchGeoModel currentGeography = new BranchGeoModel();
-    private LinkedList<String> originStrings = new LinkedList<>();
-    private HashMap<String, BranchVertex> origin_VertexMap = new HashMap<>();
-    private LinkedList<String> destinationStrings = new LinkedList<>();
-    private HashMap<String, BranchVertex> destination_VertexMap = new HashMap<>();
-
-
-    public RoutesAPI(BranchGeoModel initialGeography, LinkedList<String> originStrings, LinkedList<String> destinationStrings) {
-        this.originStrings = originStrings;
-        this.destinationStrings = destinationStrings;
-        this.currentGeography = initialGeography;
-        this.origin_VertexMap = getHashmap(originStrings);  //also adds unknown locations to currentGeography
-        this.destination_VertexMap = getHashmap(destinationStrings);
-    }
-    public RoutesAPI(BranchGeoModel initialGeography){
-
-        // **** Assume the user wants a complete graph from the Geomodel of 25 or less locations *****//
-        this.currentGeography = initialGeography;
-        this.originStrings = initialGeography.getLocationsAsListOfString();
-        this.destinationStrings = this.originStrings;
-        this.origin_VertexMap = getHashmap(originStrings);
-        this.destination_VertexMap = getHashmap(destinationStrings);
-    }
-    public RoutesAPI(LinkedList<String> originStrings, LinkedList<String> destinationStrings){
-        this.originStrings = originStrings;
-        this.destinationStrings = destinationStrings;
-        this.currentGeography = new BranchGeoModel();
-        this.origin_VertexMap = getHashmap(originStrings);
-        this.destination_VertexMap = getHashmap(destinationStrings);
-    }
-
-    public RoutesAPI(HashMap<String, String> parameters) {
-        this.urlAsString = buildUrl(parameters);
-    }
-    private String buildUrl(HashMap<String, String> parameters) {
-        String myUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
-        for (String key : parameters.keySet()) {
-            myUrl = myUrl + key + parameters.get(key) + "&";
-        }
-        myUrl = myUrl + "key=" + apiKey;
-        return myUrl;
-    }
-
-
-    //****** Static Implementation *****//
-    static BranchGeoModel buildPlacesFromApiCall(HashMap<String, String> parameters) {
-        RoutesAPI tempPlaces = new RoutesAPI(parameters);
-        String jsonResponsesString= tempPlaces.getApiResponseAsString();
-        return tempPlaces.getApiResponseAsGeoModel();
-    }
-    //**************//
-
-
-    public String getApiResponseAsString() {
-        if(apiResponseAsString.isBlank()){
-            this.apiResponseAsString = getJsonStringFromApi();
-            if(apiResponseAsString.isBlank()){
-                System.out.println("PlacesApi.getApiResponse() no response.  Check Url.");
-            }
-        }
-        return apiResponseAsString;
-    }
-
-    public BranchGeoModel getApiResponseAsGeoModel(){
-        if(apiResponseAsString.isBlank()){
-            this.apiResponseAsString = getJsonStringFromApi();
-        }
-        BranchGeoModel locationsOnly = constructGeoModel(apiResponseAsString);
-        return locationsOnly;
-    }
-
-
-
-    private String getJsonStringFromApi() {
-        URL apiEndpoint;
-        String jsonText;
-        HttpURLConnection connection;
-        try {
-            apiEndpoint = new URL(this.urlAsString);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            connection = (HttpURLConnection) apiEndpoint.openConnection();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try (InputStream inputStream = connection.getInputStream()) {
-            jsonText = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        connection.disconnect();
-        return jsonText;
-    }
-
-    private BranchGeoModel constructGeoModel(String json) {
-        if (json == null || json.isBlank()){
-            System.out.println("PlacesApi.constructGeoModel() could not create a GeographicMap.  String is blank.");
-            return new BranchGeoModel();
-        }
-        BranchGeoModel apiGm = new BranchGeoModel();
-        JSONObject placesJsonObject = new JSONObject(json);
-        JSONArray resultsArray = placesJsonObject.getJSONArray("results");
-        if (resultsArray.length() > 0) {
-            for (int i = 0; i < resultsArray.length(); i++) {
-                JSONObject apiResult = resultsArray.getJSONObject(i);
-                double lat = apiResult.getJSONObject("geometry").getJSONObject("location").getDouble("lat");
-                double lng = apiResult.getJSONObject("geometry").getJSONObject("location").getDouble("lng");
-                BranchVertex tempVert = new BranchVertex(new Location(lat, lng));
-                tempVert.setDescription(apiResult.getString("name"));
-                tempVert.setThirdPartyId(apiResult.getString("place_id"));
-                tempVert.setId();
-                apiGm.addVertex(tempVert);
-            }
-        }
-        return apiGm;
-    }
+//    private static final String apiKey = ApiKeys.getGoogleKey();
+//    private String urlAsString = "";
+//    private String apiResponseAsString = "";
+//
+//    private BranchGeoModel currentGeography = new BranchGeoModel();
+//    private LinkedList<String> originStrings = new LinkedList<>();
+//    private HashMap<String, BranchVertex> origin_VertexMap = new HashMap<>();
+//    private LinkedList<String> destinationStrings = new LinkedList<>();
+//    private HashMap<String, BranchVertex> destination_VertexMap = new HashMap<>();
+//
+//
+//    public RoutesAPI(BranchGeoModel initialGeography, LinkedList<String> originStrings, LinkedList<String> destinationStrings) {
+//        this.originStrings = originStrings;
+//        this.destinationStrings = destinationStrings;
+//        this.currentGeography = initialGeography;
+//        this.origin_VertexMap = getHashmap(originStrings);  //also adds unknown locations to currentGeography
+//        this.destination_VertexMap = getHashmap(destinationStrings);
+//    }
+//    public RoutesAPI(BranchGeoModel initialGeography){
+//
+//        // **** Assume the user wants a complete graph from the Geomodel of 25 or less locations *****//
+//        this.currentGeography = initialGeography;
+//        this.originStrings = initialGeography.getLocationsAsListOfString();
+//        this.destinationStrings = this.originStrings;
+//        this.origin_VertexMap = getHashmap(originStrings);
+//        this.destination_VertexMap = getHashmap(destinationStrings);
+//    }
+//    public RoutesAPI(LinkedList<String> originStrings, LinkedList<String> destinationStrings){
+//        this.originStrings = originStrings;
+//        this.destinationStrings = destinationStrings;
+//        this.currentGeography = new BranchGeoModel();
+//        this.origin_VertexMap = getHashmap(originStrings);
+//        this.destination_VertexMap = getHashmap(destinationStrings);
+//    }
+//
+//    public RoutesAPI(HashMap<String, String> parameters) {
+//        this.urlAsString = buildUrl(parameters);
+//    }
+//    private String buildUrl(HashMap<String, String> parameters) {
+//        String myUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
+//        for (String key : parameters.keySet()) {
+//            myUrl = myUrl + key + parameters.get(key) + "&";
+//        }
+//        myUrl = myUrl + "key=" + apiKey;
+//        return myUrl;
+//    }
+//
+//
+//    //****** Static Implementation *****//
+//    static BranchGeoModel buildPlacesFromApiCall(HashMap<String, String> parameters) {
+//        RoutesAPI tempPlaces = new RoutesAPI(parameters);
+//        String jsonResponsesString= tempPlaces.getApiResponseAsString();
+//        return tempPlaces.getApiResponseAsGeoModel();
+//    }
+//    //**************//
+//
+//
+//    public String getApiResponseAsString() {
+//        if(apiResponseAsString.isBlank()){
+//            this.apiResponseAsString = getJsonStringFromApi();
+//            if(apiResponseAsString.isBlank()){
+//                System.out.println("PlacesApi.getApiResponse() no response.  Check Url.");
+//            }
+//        }
+//        return apiResponseAsString;
+//    }
+//
+//    public BranchGeoModel getApiResponseAsGeoModel(){
+//        if(apiResponseAsString.isBlank()){
+//            this.apiResponseAsString = getJsonStringFromApi();
+//        }
+//        BranchGeoModel locationsOnly = constructGeoModel(apiResponseAsString);
+//        return locationsOnly;
+//    }
+//
+//
+//
+//    private String getJsonStringFromApi() {
+//        URL apiEndpoint;
+//        String jsonText;
+//        HttpURLConnection connection;
+//        try {
+//            apiEndpoint = new URL(this.urlAsString);
+//        } catch (MalformedURLException e) {
+//            throw new RuntimeException(e);
+//        }
+//        try {
+//            connection = (HttpURLConnection) apiEndpoint.openConnection();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        try (InputStream inputStream = connection.getInputStream()) {
+//            jsonText = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        connection.disconnect();
+//        return jsonText;
+//    }
+//
+//    private BranchGeoModel constructGeoModel(String json) {
+//        if (json == null || json.isBlank()){
+//            System.out.println("PlacesApi.constructGeoModel() could not create a GeographicMap.  String is blank.");
+//            return new BranchGeoModel();
+//        }
+//        BranchGeoModel apiGm = new BranchGeoModel();
+//        JSONObject placesJsonObject = new JSONObject(json);
+//        JSONArray resultsArray = placesJsonObject.getJSONArray("results");
+//        if (resultsArray.length() > 0) {
+//            for (int i = 0; i < resultsArray.length(); i++) {
+//                JSONObject apiResult = resultsArray.getJSONObject(i);
+//                double lat = apiResult.getJSONObject("geometry").getJSONObject("location").getDouble("lat");
+//                double lng = apiResult.getJSONObject("geometry").getJSONObject("location").getDouble("lng");
+//                BranchVertex tempVert = new BranchVertex(new Location(lat, lng));
+//                tempVert.setDescription(apiResult.getString("name"));
+//                tempVert.setThirdPartyId(apiResult.getString("place_id"));
+//                tempVert.setId();
+//                apiGm.addVertex(tempVert);
+//            }
+//        }
+//        return apiGm;
+//    }
 }
 
 //
