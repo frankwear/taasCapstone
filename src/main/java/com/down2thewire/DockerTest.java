@@ -1,16 +1,9 @@
 package com.down2thewire;
 
-import org.junit.jupiter.api.Test;
+public class DockerTest {
 
-class DijkstraGraphTest {
-
-
-
-
-    @Test
-    void myDijkstraTest() {
+    public static void main(String[] args){
         BranchGeoModel graph = new BranchGeoModel();
-
 //        Location tempLocation = new Location(33.9228732,-84.3418493);
         BranchVertex v01 = graph.addVertex(33.9228732,-84.3418493);
 //        tempLocation = new Location(33.921227,-84.344398);
@@ -61,4 +54,5 @@ class DijkstraGraphTest {
         graph.printGraph();
         System.out.println("done");
     }
+
 }
