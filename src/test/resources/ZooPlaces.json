@@ -1,6 +1,9 @@
 {
+   "error_message" : "You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started",
    "html_attributions" : [],
-   "next_page_token" : "ATJ83zhzXjx4gg1Rv53u6hZhoybQ1dc3-Ny_kJfgCHkai18qZIJoR2wZeJsh1bX57HGDApneLpvg_DetGzNl4-umA62Z8w5dWYDEpEqIfO5zUR9Ud4CNOoh5ZowgCAUBxAh_i04UDQYQ0ep1kEma_EeMH_yywSw4DZ19MHFByf2GL-sjOrpIPyMmRteqnFTpUrczQMAdIP_VAt-mPGU8q52ChgUmMl2W5Rg3-XxDfiA3L7gRtSNlElCol3-gew3Etea_SZIKItqVEJBpt3shhRVnMQtZ6GXsQ-AoMNUoyPKZhp5wakhaUQmpuJmubWOOxXLKiLiYUzCCufvG0E6xPIxRD4Px4HMr6oFCIFk1PDqrFUDgj0RmPlvAvgyefvrhImMtjW6M9hf1DAYEREBi-sPzBWXkqMVUlWpnzvK_Qfe0vKfRtPLYbd7_eo9V1LBXQMBHhP0",
+   "results" : [],
+   "status" : "REQUEST_DENIED"
+}3-XxDfiA3L7gRtSNlElCol3-gew3Etea_SZIKItqVEJBpt3shhRVnMQtZ6GXsQ-AoMNUoyPKZhp5wakhaUQmpuJmubWOOxXLKiLiYUzCCufvG0E6xPIxRD4Px4HMr6oFCIFk1PDqrFUDgj0RmPlvAvgyefvrhImMtjW6M9hf1DAYEREBi-sPzBWXkqMVUlWpnzvK_Qfe0vKfRtPLYbd7_eo9V1LBXQMBHhP0",
    "results" : 
    [
       {

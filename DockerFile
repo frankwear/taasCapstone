@@ -1,0 +1,45 @@
+## Use the official maven image from Dockerhub
+#
+#FROM maven:3.8.2-jdk-11 as build
+#
+## Set the current working directory inside the image
+#WORKDIR /app
+#
+## Copy the pom.xml file into our app directory
+#COPY pom.xml .
+#
+## Download all required dependencies
+#RUN mvn dependency:go-offline -B
+#
+## Copy the src code into our app directory
+#COPY src /app/src
+#
+## Build the application
+#RUN mvn clean package
+#
+## Start with a base image containing Java runtime
+#FROM openjdk:11-jre-slim
+#
+## Set the working directory
+#WORKDIR /app
+#
+## Copy the jar file from build image to the production image
+#COPY --from=build /app/target/taasCapstone-1.0-SNAPSHOT.jar /app/app.jar
+#
+## Expose the port the app runs on
+#EXPOSE 8080
+#
+## Set the application's jar file as the entry point of the container
+#CMD ["java", "-jar", "/app/app.jar"]
+
+
+FROM maven:3.8.2-jdk-11 as build
+COPY src /app/src
+COPY pom.xml /app/src
+RUN mvn -f /IdeaProjects/taasCapstone/pom.xml clean package
+
+FROM openjdk:11-jre-slim
+COPY --from=build /app/target/taasCapstone-1.0-SNAPSHOT.jar /app/app.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/app/target/taasCapstone-1.0-SNAPSHOT.jar"]
+
