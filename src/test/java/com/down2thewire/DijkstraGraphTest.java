@@ -11,18 +11,18 @@ class DijkstraGraphTest {
     void myDijkstraTest() {
         BranchGeoModel graph = new BranchGeoModel();
 
-//        Location tempLocation = new Location(33.9228732,-84.3418493);
         BranchVertex v01 = graph.addVertex(33.9228732,-84.3418493);
-//        tempLocation = new Location(33.921227,-84.344398);
+        v01.setDescription("Biltmore Hotel");
         BranchVertex v02 = graph.addVertex(33.921227,-84.344398);;
-//        tempLocation = new Location(33.789112,-84.387383);
+        v02.setDescription("10th St Marta Station");
         BranchVertex v03 = graph.addVertex(33.789112,-84.387383);
-//        tempLocation = new Location(33.7892632,-84.3873414);
+        v03.setDescription("Zoo Atlanta");
         BranchVertex v04 = graph.addVertex(33.7892632,-84.3873414);
-//        tempLocation = new Location(33.8082253,-84.3934548);
+        v04.setDescription("Kroger - 100 Kim Rogers Ave");
         BranchVertex v05 = graph.addVertex(33.8082253,-84.3934548);
-//        tempLocation = new Location(33.8085817,-84.3943387);
+        v05.setDescription("KSU Marietta Campus");
         BranchVertex v06 = graph.addVertex(33.8085817,-84.3943387);
+        v06.setDescription("Never-Never Land");
 
         v01.addEdge(v01, v02, "WALKING", 271, 0.00, 347);
         v01.addEdge(v01, v04, "WALKING", 271, 0.00, 500);
