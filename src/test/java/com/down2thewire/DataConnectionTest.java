@@ -2,13 +2,14 @@ package com.down2thewire;
 
 import org.junit.jupiter.api.Test;
 
-class DijkstraGraphTest {
+import java.sql.SQLException;
 
+import static org.junit.jupiter.api.Assertions.*;
 
-
+class DataConnectionTest {
 
     @Test
-    void myDijkstraTest() {
+    void insertVertexData() throws SQLException {
         BranchGeoModel graph = new BranchGeoModel();
 
 //        Location tempLocation = new Location(33.9228732,-84.3418493);
@@ -41,7 +42,7 @@ class DijkstraGraphTest {
         v04.addEdge(v04, v01, "WALKING", 18, 0.00, 100);
         v04.addEdge(v04, v05, "WALKING", 699, 0.00, 3083);
         v04.addEdge(v04, v03, "WALKING", 18, 0.00, 17);
-        v04.addEdge(v04, v05, "TRANSIT", 699, 0.00, 3028);
+        v04.addEdge(v04, v05, "TRANSIT", 699, 10.00, 3028);
 
         v05.addEdge(v05, v01, "WALKING", 103, 0.00, 121);
         v05.addEdge(v05, v02, "TRANSIT", 699, 0.00, 3060);
@@ -50,16 +51,13 @@ class DijkstraGraphTest {
 
         v06.addEdge(v06, v04, "WALKING", 103, 0.00, 103);
         v06.addEdge(v06, v05, "WALKING", 103, 0.00, 121);
+        DataConnection dc = new DataConnection();
+        //dc.insertVertexData(v01);
+        //dc.insertVertexData(v02);
+        //dc.insertVertexData(v03);
+        dc.insertVertexData(v04);
+        //dc.insertVertexData(v05);
+        //dc.insertVertexData(v06);
 
-        UserRouteRequest userRouteRequest = new UserRouteRequest();
-        userRouteRequest.setOrigin("155 Peachtree Ave, Atlanta, GA");
-        userRouteRequest.setDestination("Hartsfield Airport");
-
-        DijkstraGraph transitShortestPaths = new DijkstraGraph(graph, userRouteRequest, "TRANSIT");
-        DijkstraGraph walkingShortestPaths = new DijkstraGraph(graph, userRouteRequest, "WALKING");
-//        transitShortestPaths = transitShortestPaths.calculateShortestPathFromSource(v01.getId());
-        walkingShortestPaths = walkingShortestPaths.calculateShortestPathFromSource(v06.getId());
-
-        System.out.println("done");
     }
 }
