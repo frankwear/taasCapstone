@@ -1,28 +1,21 @@
 package com.down2thewire;
 
-import org.junit.jupiter.api.Test;
+public class DockerTest {
 
-class DijkstraGraphTest {
-
-
-
-
-    @Test
-    void myDijkstraTest() {
+    public static void main(String[] args){
         BranchGeoModel graph = new BranchGeoModel();
-
+//        Location tempLocation = new Location(33.9228732,-84.3418493);
         BranchVertex v01 = graph.addVertex(33.9228732,-84.3418493);
-        v01.setDescription("Biltmore Hotel");
+//        tempLocation = new Location(33.921227,-84.344398);
         BranchVertex v02 = graph.addVertex(33.921227,-84.344398);;
-        v02.setDescription("10th St Marta Station");
+//        tempLocation = new Location(33.789112,-84.387383);
         BranchVertex v03 = graph.addVertex(33.789112,-84.387383);
-        v03.setDescription("Zoo Atlanta");
+//        tempLocation = new Location(33.7892632,-84.3873414);
         BranchVertex v04 = graph.addVertex(33.7892632,-84.3873414);
-        v04.setDescription("Kroger - 100 Kim Rogers Ave");
+//        tempLocation = new Location(33.8082253,-84.3934548);
         BranchVertex v05 = graph.addVertex(33.8082253,-84.3934548);
-        v05.setDescription("KSU Marietta Campus");
+//        tempLocation = new Location(33.8085817,-84.3943387);
         BranchVertex v06 = graph.addVertex(33.8085817,-84.3943387);
-        v06.setDescription("Never-Never Land");
 
         v01.addEdge(v01, v02, "WALKING", 271, 0.00, 347);
         v01.addEdge(v01, v04, "WALKING", 271, 0.00, 500);
@@ -61,4 +54,5 @@ class DijkstraGraphTest {
         graph.printGraph();
         System.out.println("done");
     }
+
 }
