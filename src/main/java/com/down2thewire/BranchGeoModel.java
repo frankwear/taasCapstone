@@ -94,6 +94,8 @@ public class BranchGeoModel {
         return matchingList;
     }
 
+
+    //todo - merge methods getVertexIndexById and findMatchByID - same functionality
     public int getVertexIndexById(Long id) {
         ListIterator<BranchVertex> vertexIterator = (ListIterator<BranchVertex>) vertexList.iterator();
         while (vertexIterator.hasNext()) {
@@ -145,7 +147,7 @@ public class BranchGeoModel {
         vertexList.removeLast();
     }
 
-
+    // todo - Move this to the Waypoint class as getAsVertex() and refactor
     public BranchVertex convertToVertex (LinearWayPoint wayPoint){
         BranchVertex tempVertex = new BranchVertex(wayPoint.location, wayPoint.getId());
         return tempVertex;
