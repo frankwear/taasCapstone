@@ -2,6 +2,7 @@ package com.down2thewire;
 
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 public class DistanceMatrixApiTest {
 
@@ -24,7 +25,7 @@ public class DistanceMatrixApiTest {
 
 
     @Test
-    void constructGeoModelWithEdges(){
+    void constructGeoModelWithEdges() throws SQLException {
         BranchGeoModel graph = new BranchGeoModel();
         BranchVertex v01 = graph.addVertex(33.9228732,-84.3418493);
         BranchVertex v02 = graph.addVertex(33.921227,-84.344398);;
@@ -37,7 +38,7 @@ public class DistanceMatrixApiTest {
         myDM.updateGeoModel("driving");
         myDM.getCurrentGeoModel().printGraph();
         DataConnection dmdata= new DataConnection();
-        //dmdata.insertDistanceMatrixData();
+        dmdata.insertGeomodelData(myDM.getCurrentGeoModel());
     }
 
 //    @Test
