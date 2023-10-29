@@ -55,8 +55,9 @@ class DataConnectionTest {
         //dc.insertVertexData(v01);
         //dc.insertVertexData(v02);
         //dc.insertVertexData(v03);
-        dc.insertVertexData(v04);
-        //dc.insertVertexData(v05);
+       //dc.insertVertexData(v04);
+        dc.insertVertexData(v05);
+
         //dc.insertVertexData(v06);
 
     }

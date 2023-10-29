@@ -11,7 +11,6 @@ class DijkstraGraphTest {
     void myDijkstraTest() {
         BranchGeoModel graph = new BranchGeoModel();
 
-//        Location tempLocation = new Location(33.9228732,-84.3418493);
         BranchVertex v01 = graph.addVertex(33.9228732,-84.3418493);
         v01.setDescription("Biltmore Hotel");
         BranchVertex v02 = graph.addVertex(33.921227,-84.344398);;
@@ -59,6 +58,8 @@ class DijkstraGraphTest {
         DijkstraGraph walkingShortestPaths = new DijkstraGraph(graph, userRouteRequest, "WALKING");
 //        transitShortestPaths = transitShortestPaths.calculateShortestPathFromSource(v01.getId());
         walkingShortestPaths = walkingShortestPaths.calculateShortestPathFromSource(v06.getId());
+
+        graph.printGraph();
 
         System.out.println("done");
     }

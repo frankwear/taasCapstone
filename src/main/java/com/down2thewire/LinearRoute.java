@@ -52,7 +52,7 @@ public class LinearRoute {
         }
         return -1;
     }
-    private LinearWayPoint getVertex(int i) {
+    private LinearWayPoint getWaypoint(int i) {
         return wayPointLinkedList.get(i);  // may return out of bounds if vertex doesn't exist
     }
 
@@ -126,6 +126,7 @@ public class LinearRoute {
 
     public void removeAdjacentSameModeEdges() {  // considering routes non-branching
 //todo - Correct logic on this to have edge as part of vertex.
+// todo depricated
 
         int listSize = wayPointLinkedList.size();
         for (int i = listSize - 2; i > 0; i--) {  // last index (size - 1) doesn't have an edge
