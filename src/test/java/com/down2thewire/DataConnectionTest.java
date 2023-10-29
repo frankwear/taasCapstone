@@ -53,10 +53,10 @@ class DataConnectionTest {
         v06.addEdge(v06, v05, "WALKING", 103, 0.00, 121);
         DataConnection dc = new DataConnection();
         //dc.insertVertexData(v01);
-        dc.insertVertexData(v02);
-        dc.insertVertexData(v03);
-        dc.insertVertexData(v04);
-        //dc.insertVertexData(v05);
+        //dc.insertVertexData(v02);
+        //dc.insertVertexData(v03);
+       //dc.insertVertexData(v04);
+        dc.insertVertexData(v05);
         //dc.insertVertexData(v06);
 
     }

@@ -1,0 +1,13 @@
+version: "3"
+services:
+  my-web-app-db:
+    image: postgres
+    environment:
+      - POSTGRE_ROOT_PASSWORD = postgres
+      - POSTGRE_DATABASE = postgres
+  my-web-app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - my-web-app-db
