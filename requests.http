@@ -1,0 +1,2 @@
+#POST http://localhost:8081/webapp_war_exploded/HelloServlet/harini
+#USE THIS T0 SEND REQUESTS TO PAGE
