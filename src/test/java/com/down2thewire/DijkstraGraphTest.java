@@ -54,10 +54,11 @@ class DijkstraGraphTest {
         userRouteRequest.setOrigin("155 Peachtree Ave, Atlanta, GA");
         userRouteRequest.setDestination("Hartsfield Airport");
 
-        DijkstraGraph transitShortestPaths = new DijkstraGraph(graph, userRouteRequest, "TRANSIT");
-        DijkstraGraph walkingShortestPaths = new DijkstraGraph(graph, userRouteRequest, "WALKING");
+        DijkstraGraph transitShortestPaths = new DijkstraGraph(graph, userRouteRequest, "TRANSIT", "distance");
+        transitShortestPaths = transitShortestPaths.calculateShortestPathFromSource(v02.getId());
+        DijkstraGraph walkingShortestPaths = new DijkstraGraph(graph, userRouteRequest, "WALKING", "distance");
 //        transitShortestPaths = transitShortestPaths.calculateShortestPathFromSource(v01.getId());
-        walkingShortestPaths = walkingShortestPaths.calculateShortestPathFromSource(v06.getId());
+        walkingShortestPaths = walkingShortestPaths.calculateShortestPathFromSource(v04.getId());
 
         graph.printGraph();
 
