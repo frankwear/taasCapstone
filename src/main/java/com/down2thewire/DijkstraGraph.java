@@ -7,16 +7,12 @@ public class DijkstraGraph {
     private UserRouteRequest routeRequested;
 
 
-    public DijkstraGraph(BranchGeoModel gm, UserRouteRequest request, String mode){
+    public DijkstraGraph(BranchGeoModel gm, UserRouteRequest request, String mode, String metric){
         this.routeRequested = request;
-        setNodesFromGeoModel(gm, mode);
+        setNodesFromGeoModel(gm, mode, metric);
         System.out.println("nodes created.");
     }
-
-    public DijkstraGraph(BranchGeoModel geoModel) {
-    }
-
-    public void setNodesFromGeoModel(BranchGeoModel gm, String mode) {
+    private void setNodesFromGeoModel(BranchGeoModel gm, String mode, String metric) {
         //***** add nodes without neighbors, use HashMap to associate Nodes with Vertices *****//
         Map<DijkstraNode, BranchVertex> nodeToVertexAssn = new HashMap<>();
         Map<BranchVertex, DijkstraNode> vertexToNodeAssn = new HashMap<>();
@@ -40,8 +36,21 @@ public class DijkstraGraph {
                 if(tempEdge.getMode().equals(mode)) {
                     BranchVertex tempNeighborVert = tempEdge.getEnd();
                     DijkstraNode neighborNode = vertexToNodeAssn.get(tempNeighborVert);
-                    int neighborDistance = tempEdge.getDistance();
-                    loopNode.addNeighbor(neighborNode, neighborDistance);
+                    int neighborMetric;
+                    if (metric.equals("distance")){
+                        neighborMetric = tempEdge.getDistance();
+                    } else if (metric.equals("duration")){
+                        neighborMetric = tempEdge.getDuration();
+                    } else if (metric.equals("cost")) {
+                        double dCost = tempEdge.getCost()*100.0;
+                        int iCost = (int) dCost;
+                        neighborMetric = iCost;
+                    } else {
+                        neighborMetric = tempEdge.getDistance();
+                        System.out.println("Error - method DijkstraGraph.setNodesFromGeomodel calls for an invalid\n +" +
+                                "metric.  Metric set to distance.");
+                    }
+                    loopNode.addNeighbor(neighborNode, neighborMetric);
                 }
             }
         }
@@ -107,13 +116,5 @@ public class DijkstraGraph {
             shortestPath.add(sourceNode);
             evaluationNode.setShortestPath(shortestPath);
         }
-    }
-
-    public LinearRoute findBestRoute(UserRouteRequest routeRequest, String primaryMode, String secondaryMode, String priority, int maxDistanceOfSecondaryMode) {
-        return null;
-    }
-
-    public LinearRoute findAlternativeRoute(UserRouteRequest routeRequest, String primaryMode, String secondaryMode, String priority, String changeAtVertex) {
-        return null;
     }
 }

@@ -5,6 +5,7 @@ abstract class Node<T extends Node> {
     String description;
     Long id;
     Edge edge;
+    String thirdPartyId;
 
 
 
@@ -49,6 +50,12 @@ abstract class Node<T extends Node> {
         return id;
     }
 
+    public String getThirdPartyId() {
+        return thirdPartyId;
+    }
+    public void setThirdPartyId(String thirdPartyId) {
+        this.thirdPartyId = thirdPartyId;
+    }
     public Boolean isNear(Node<T> node, int feet){
         return node.location.isNear(this.location, feet);
     }
