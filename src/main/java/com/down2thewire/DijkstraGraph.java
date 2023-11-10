@@ -12,6 +12,10 @@ public class DijkstraGraph {
         setNodesFromGeoModel(gm, mode);
         System.out.println("nodes created.");
     }
+
+    public DijkstraGraph(BranchGeoModel geoModel) {
+    }
+
     public void setNodesFromGeoModel(BranchGeoModel gm, String mode) {
         //***** add nodes without neighbors, use HashMap to associate Nodes with Vertices *****//
         Map<DijkstraNode, BranchVertex> nodeToVertexAssn = new HashMap<>();
@@ -103,5 +107,13 @@ public class DijkstraGraph {
             shortestPath.add(sourceNode);
             evaluationNode.setShortestPath(shortestPath);
         }
+    }
+
+    public LinearRoute findBestRoute(UserRouteRequest routeRequest, String primaryMode, String secondaryMode, String priority, int maxDistanceOfSecondaryMode) {
+        return null;
+    }
+
+    public LinearRoute findAlternativeRoute(UserRouteRequest routeRequest, String primaryMode, String secondaryMode, String priority, String changeAtVertex) {
+        return null;
     }
 }
