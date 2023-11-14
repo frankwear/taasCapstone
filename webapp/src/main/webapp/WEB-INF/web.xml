@@ -12,4 +12,12 @@
         <servlet-name>CaptureDataServlet</servlet-name>
         <url-pattern>/CaptureDataServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>RouteOptionServlet</servlet-name>
+        <servlet-class>com.down2thewire.webapp.RouteOptionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RouteOptionServlet</servlet-name>
+        <url-pattern>/RouteOptionServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
