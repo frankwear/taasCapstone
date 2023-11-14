@@ -7,6 +7,9 @@ public class ProposedRoute {
 
     public ProposedRoute(LinearRoute pr) {
         Leg summaryLeg = new Leg(new Edge<>());
+        summaryLeg.distance = 0;
+        summaryLeg.duration = 0;
+        summaryLeg.cost = 0.0;
         summaryLeg.mode = "Summary";
         if (pr.wayPointLinkedList != null) {
             //LinearWayPoint wayPoint;
@@ -17,6 +20,7 @@ public class ProposedRoute {
                 summaryLeg.cost += pr.wayPointLinkedList.get(i).getEdge().getCost();
             }
         }
+        //System.out.println(summaryLeg.distance);
         legs.addFirst(summaryLeg);
     }
 
