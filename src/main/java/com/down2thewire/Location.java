@@ -9,6 +9,11 @@ public class Location {
         this.longitude = lo;
         this.latitude = la;
     }
+
+    public Location() {
+
+    }
+
     public boolean isNear(Location tempLoc, int approximateFeet) {
         // .0001 degrees is about 10 meters, 10 yards, 30 ft - rough estimates 15% error expected at 33 lat
         // "near" means in a box of size 2*approximateFeet, roughly, and doesn't mean the locations have the same ID

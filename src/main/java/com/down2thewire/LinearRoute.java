@@ -77,6 +77,16 @@ public class LinearRoute {
 
     }
 
+    public int getWaypointIndex(Long id) {
+        ListIterator<LinearWayPoint> wayPointListIterator = wayPointLinkedList.listIterator();
+        while (wayPointListIterator.hasNext()) {
+            if (wayPointListIterator.next().getId().equals(id)) {
+                return wayPointListIterator.previousIndex();
+            }
+        }
+        return -1; // return -1 if not found
+    }
+
     public LinearWayPoint getWaypoint(String s) {
         int wIndex = getWaypointIndex(s);
         if (wIndex >= 0) {
