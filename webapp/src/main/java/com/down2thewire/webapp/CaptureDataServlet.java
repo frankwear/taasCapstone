@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 @WebServlet(name = "CaptureDataServlet", value = "/CaptureDataServlet")
 public class CaptureDataServlet extends HttpServlet {
@@ -39,11 +40,22 @@ public class CaptureDataServlet extends HttpServlet {
             System.out.println("Priority for Transit: " + transit);
             System.out.println("Preference is: " + selectedOption);
             // send a response back to the client as per need
-            response.getWriter().write("Data received in backend");
+            JsonObject jsonResponse = new JsonObject();
+            jsonResponse.addProperty("message", "Data received in backend");
+            response.setContentType("application/json");
+            response.getWriter().write(jsonResponse.toString());
+//            response.getWriter().write("Data received in backend");
         } catch (Exception e) {
             // handle any exception, log an error, or send an error response
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+            // Send an error response to the client
+            JsonObject errorResponse = new JsonObject();
+            errorResponse.addProperty("error", "Internal Server Error");
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.setContentType("application/json");
+            response.getWriter().write(errorResponse.toString());
+
+//            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
         }
     }
     // FormData class  represents the structure of the formdata sent by FE
