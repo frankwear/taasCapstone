@@ -10,7 +10,7 @@ function handleGoButtonClick() {
     // Call submitForm
     submitForm();
 }
-document.getElementById('submit').addEventListener('click', handleGoButtonClick);
+//document.getElementById('submit').addEventListener('click', handleGoButtonClick);
 
 // Function to handle form submission
 function submitForm() {
@@ -69,19 +69,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     // Function to populate the dropdown with routes
-    function populateDropdown(data) {
-        var dropdown = document.getElementById('dropdownMenu');
-
+    function populateDropdown(routes) {
+        var dropdown = document.getElementById('optionsDropdown');
         // Clear any existing options
         dropdown.innerHTML = '';
-
         // Add each route as an option
-        data.forEach(function (route, index) {
-            var option = document.createElement('option');
-            option.value = index; // Store the entire route JSON as the value
-            option.text = 'Option ' + (index+1); // have to adjust this based on  route object structure
-
-            dropdown.appendChild(option);
+        routes.forEach(function (route, index) {
+            route.legs.forEach(function (leg, legIndex) {
+                const option = document.createElement('option');
+                option.value = index + '-' + legIndex; // Store the entire route and leg index as the value
+                option.text = 'Option ' + (index + 1) + '-' + (legIndex + 1) +
+                    ' (Distance: ' + leg.distance + ', Duration: ' + leg.duration +
+                    ', Cost: ' + leg.cost + ', Mode: ' + leg.mode + ')';
+                dropdown.appendChild(option);
+            });
         });
     }
 
