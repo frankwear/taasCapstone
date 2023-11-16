@@ -3,12 +3,13 @@ package com.down2thewire;
 import java.util.LinkedList;
 
 public class TaasApplication {
-    static GeoModel instanceGM;
-    static RouteAnalyzer instanceRA;
-    static RouteRequest instanceRR;
-    static LinkedList<WeightedGraph> instanceRouteOffering;
-    static WeightedGraph chosenRoute;
+    static BranchVertex.BranchGeoModelGenerator instanceGmAnalyzer;
+//    static RouteAnalyzer instanceRA;
+    static UserRouteRequest instanceRR;
+    static LinkedList<BranchGeoModel> instanceRouteOffering;
+    static BranchGeoModel chosenRoute;
     static UserInterface instanceUI;
+
 
     // Todo - interface with UI
 //    UserInterface instanceUI = new UserInterface();
@@ -30,7 +31,7 @@ public class TaasApplication {
             testRR.setDestination("Piedmont Atlanta Hospital");
             return testRR;
         }  */
-    private static RouteRequest getUserRequest() {
+    private static UserRouteRequest getUserRequest() {
         UserInterface instanceUI = new UserInterface();
         instanceRR = instanceUI.getRequest();
         return instanceRR;
@@ -38,11 +39,12 @@ public class TaasApplication {
     private static void manageSession(TaasApplication session){
         session.instanceUI = new UserInterface();
         session.instanceRR = session.instanceUI.getRequest();
-        session.instanceGM = new GeoModel(session.instanceRR);
-        session.instanceGM.generateGeoModel();
-        session.instanceGM.geographicMap.printGraph();
-        session.instanceRA = new RouteAnalyzer(session.instanceGM.geographicMap, session.instanceRR); // comment
-        session.instanceRA.getAllPaths();
+
+        session.instanceGmAnalyzer = new BranchVertex.BranchGeoModelGenerator(session.instanceRR);
+        session.instanceGmAnalyzer.generateGeoModel();
+        session.instanceGmAnalyzer.geographicMap.printGraph();
+//        session.instanceRA = new RouteAnalyzer(session.instanceGM.geographicMap, session.instanceRR); // comment
+//        session.instanceRA.getAllPaths();
 
 //        session.instanceRouteOffering = session.instanceRA.getBest4UserRoutes(); // comment
         System.out.println("Done");

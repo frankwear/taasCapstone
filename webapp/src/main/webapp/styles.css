@@ -1,0 +1,283 @@
+/* Reset Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #71b7e6, white);
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Navbar Styles */
+/* Navbar Styles */
+.navbar {
+    background: #71b7e6;
+    overflow: hidden;
+    padding: 10px 0; /* Add padding to the navbar */
+    position: relative;
+}
+
+.navbar ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.navbar li {
+    float: left;
+}
+
+.navbar a {
+    display: block;
+    color: black;
+    font-weight: bolder;
+    font-size: larger;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background-color: #555;
+}
+
+.logout {
+    float: right;
+}
+
+
+/* Main Content Styles */
+main {
+    margin: 20px 0;
+}
+
+/* Form Styles */
+form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    margin-left: 20px; /* Adjust the left margin */
+    margin-right: 20px; /* Adjust the right margin */
+}
+
+.form-row-horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px;
+}
+
+.form-row {
+    flex: 1;
+    margin: 10px;
+}
+
+.form-row label {
+    margin-bottom: 8px;
+    display: block;
+    font-weight: bold;
+}
+
+.form-row input[type="text"],
+.form-row input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    color: #333;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+/* Radio Button Styles */
+.radio-options-horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.radio-options-horizontal label {
+    margin-right: 25px; /* Adjust the spacing between radio buttons */
+}
+
+/* Button Styles */
+button[type="submit"] {
+    padding: 12px 24px;
+    background-color: #0056b3;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Map Placeholder Styles */
+.map-placeholder {
+    background-color: #f9f9f9;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    color: #555;
+    margin-top: 20px;
+    overflow: hidden;
+    max-height: 50vh;
+    margin-left: 20px; /* Adjust the left margin */
+    margin-right: 20px; /* Adjust the right margin */
+    box-sizing: border-box; /* Ensure padding and border don't affect the max-height */
+    transition: max-height 0.3s ease; /* Add transition for smoother height changes */
+}
+
+.map-placeholder.active {
+    max-height: 200px; /* Adjust the value based on your preference */
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 600px) {
+    .form-row {
+        flex: 1 0 100%;
+    }
+}
+/* Add these styles to your existing CSS file */
+
+/* Style for the "Go" button */
+.submit-btn {
+    padding: 12px 24px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-btn:hover {
+    background-color: #71b7e6;
+    transform: scale(1.05);
+}
+/* Add these styles to your existing CSS file */
+
+/* Styling for the dropdown menu */
+.stylish-dropdown {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.stylish-dropdown select {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: #f5f5f5;
+    font-size: 16px;
+    color: #333;
+}
+
+.stylish-dropdown button {
+    padding: 10px 20px;
+    background-color: #71b7e6;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.stylish-dropdown button:hover {
+    background-color: #0056b3;
+}
+
+/* Form Styles */
+form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-row-horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px;
+}
+
+.form-row {
+    flex: 1;
+    margin: 10px;
+}
+
+.form-row label {
+    margin-bottom: 8px;
+    display: block;
+    font-weight: bold;
+}
+
+.form-row input[type="text"],
+.form-row input[type="number"] {
+    width: 100%;
+    padding: 15px; /* Increased padding for better visibility and touch-friendly */
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    color: #333;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease;
+}
+
+.form-row input[type="text"]:focus,
+.form-row input[type="number"]:focus {
+    border-color: #71b7e6; /* Highlight border color on focus */
+}
+
+/* Radio Button Styles */
+.radio-options-horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px; /* Increased margin for better spacing */
+}
+
+.radio-options-horizontal label {
+    margin-right: 25px;
+    font-size: 16px; /* Increased font size for better readability */
+}
+
+/* Button Styles */
+button[type="button"] {
+    padding: 10px 20px; /* Increased padding for better visibility and touch-friendly */
+    background-color: #71b7e6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px; /* Increased font size for better readability */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[type="button"]:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}

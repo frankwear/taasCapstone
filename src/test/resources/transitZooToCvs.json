@@ -1,0 +1,1043 @@
+{
+   "geocoded_waypoints" : 
+   [
+      {
+         "geocoder_status" : "OK",
+         "place_id" : "ChIJJbO5TygO9YgRz3SI5-fAqko",
+         "types" : 
+         [
+            "premise"
+         ]
+      },
+      {
+         "geocoder_status" : "OK",
+         "place_id" : "ChIJ44N_acAD9YgR3rJ-P061J8o",
+         "types" : 
+         [
+            "premise"
+         ]
+      }
+   ],
+   "routes" : 
+   [
+      {
+         "bounds" : 
+         {
+            "northeast" : 
+            {
+               "lat" : 33.9035298,
+               "lng" : -84.3732643
+            },
+            "southwest" : 
+            {
+               "lat" : 33.7337262,
+               "lng" : -84.4765695
+            }
+         },
+         "copyrights" : "Map data ©2023 Google",
+         "legs" : 
+         [
+            {
+               "arrival_time" : 
+               {
+                  "text" : "12:45 AM",
+                  "time_zone" : "America/New_York",
+                  "value" : 1696999522
+               },
+               "departure_time" : 
+               {
+                  "text" : "10:10 PM",
+                  "time_zone" : "America/New_York",
+                  "value" : 1696990219
+               },
+               "distance" : 
+               {
+                  "text" : "20.2 mi",
+                  "value" : 32588
+               },
+               "duration" : 
+               {
+                  "text" : "2 hours 35 mins",
+                  "value" : 9303
+               },
+               "end_address" : "416 Augusta Ave SE, Atlanta, GA 30315, USA",
+               "end_location" : 
+               {
+                  "lat" : 33.7337356,
+                  "lng" : -84.3742366
+               },
+               "start_address" : "817 Creekgarden Court, Sandy Springs, GA 30339, USA",
+               "start_location" : 
+               {
+                  "lat" : 33.9035298,
+                  "lng" : -84.43620820000001
+               },
+               "steps" : 
+               [
+                  {
+                     "distance" : 
+                     {
+                        "text" : "0.8 mi",
+                        "value" : 1230
+                     },
+                     "duration" : 
+                     {
+                        "text" : "17 mins",
+                        "value" : 1036
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.8984585,
+                        "lng" : -84.4479432
+                     },
+                     "html_instructions" : "Walk to Akers Mill Rd at Powers Ferry Rd",
+                     "polyline" : 
+                     {
+                        "points" : "ax|mEhmjbOH\\j@xBf@pBt@rCDT`@|AFVFVJ^Jb@f@jBJ`@ZnATx@XdAFXl@zBLf@Lf@Rp@ZnAFTDRFRf@vBH`@d@lBNj@Nf@J^BHb@dAHN\\p@\\r@HLNVFNJPLTJHT`@RZT`@LNRV~@hA\\b@"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.9035298,
+                        "lng" : -84.43620820000001
+                     },
+                     "steps" : 
+                     [
+                        {
+                           "distance" : 
+                           {
+                              "text" : "0.7 mi",
+                              "value" : 1047
+                           },
+                           "duration" : 
+                           {
+                              "text" : "14 mins",
+                              "value" : 851
+                           },
+                           "end_location" : 
+                           {
+                              "lat" : 33.8996052,
+                              "lng" : -84.4464634
+                           },
+                           "html_instructions" : "Head \u003cb\u003ewest\u003c/b\u003e on \u003cb\u003ePowers Ferry Rd NW\u003c/b\u003e toward \u003cb\u003eRiversgate Dr\u003c/b\u003e",
+                           "polyline" : 
+                           {
+                              "points" : "ax|mEhmjbOH\\j@xBf@pBt@rCDT`@|AFVFVJ^Jb@f@jBJ`@ZnATx@XdAFXl@zBLf@Lf@Rp@ZnAFTDRFRf@vBH`@d@lBNj@Nf@J^BHb@dAHN\\p@\\r@HLNVFN"
+                           },
+                           "start_location" : 
+                           {
+                              "lat" : 33.9035298,
+                              "lng" : -84.43620820000001
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : 
+                           {
+                              "text" : "0.1 mi",
+                              "value" : 183
+                           },
+                           "duration" : 
+                           {
+                              "text" : "3 mins",
+                              "value" : 185
+                           },
+                           "end_location" : 
+                           {
+                              "lat" : 33.8984585,
+                              "lng" : -84.4479432
+                           },
+                           "html_instructions" : "Continue onto \u003cb\u003eAkers Mill Rd SE\u003c/b\u003e",
+                           "polyline" : 
+                           {
+                              "points" : "q_|mEjmlbOJPLTJHT`@RZT`@LNRV~@hA\\b@"
+                           },
+                           "start_location" : 
+                           {
+                              "lat" : 33.8996052,
+                              "lng" : -84.4464634
+                           },
+                           "travel_mode" : "WALKING"
+                        }
+                     ],
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "3.2 mi",
+                        "value" : 5213
+                     },
+                     "duration" : 
+                     {
+                        "text" : "7 mins",
+                        "value" : 444
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.8676889,
+                        "lng" : -84.4645184
+                     },
+                     "html_instructions" : "Bus towards Cumberland Transfer Center",
+                     "polyline" : 
+                     {
+                        "points" : "ix{mEvvlbOFG^d@BBX\\d@j@r@|@lAxAZ^PRz@`ALPX\\t@z@jAxAr@z@HJNPJLHJf@n@jAzAJJRVlAvATX\\`@b@b@l@p@n@n@NLPNh@`@XRB@|@j@|@j@B?`Al@^Rh@\\RL^R^THDb@ZXTTTRR@NHVFXF\\PEB?b@A^CB?H?H?b@A`@GTCf@Kh@INCLCb@G^GXIB?`@MJCTGTIRIXKJZNf@Nd@BJHZPj@JZHTRb@LZFPh@bAh@bABFBD`@t@j@bAZf@l@|@LRPRFHn@p@hAlANRf@z@^p@BDl@~@LPV^Xd@JPJPFJFHHJv@nANRn@`ANVl@|@X^VX`@\\DDNHLFf@X\\LXL~Aj@D@`@JF_AHeABc@Bm@JoAHsALmADQPaAFYLg@J]Tm@DK`@y@bA{Bd@aA`@y@Xm@Zq@LY\\y@BG\\q@DG\\m@JMRYl@q@PMPQl@e@f@a@PIJGj@Ul@Ux@UXGRCb@I^CRCNANALAF?R?T?X@L@R@^Dr@Fb@HTBN@zANT@\\Db@DbALt@Hb@DhABf@@F?H?d@CH?HANAJALCHATCPXRZh@r@V\\NTVZNXHNN\\Pb@v@nBTj@Pd@d@hAJTXt@DPJVDPDPBLBLDb@BR@R?JBZ?N@\\?\\@L@N?N@P@LF\\H`@JZT`@HNLLRPTJTRv@r@ZZTRDFh@j@X\\t@x@f@l@X`@HHJNFLFJBF@FBLDPeARE?G@EAEAECAAACAGAG?G?I_BM"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.89844600000001,
+                        "lng" : -84.447964
+                     },
+                     "transit_details" : 
+                     {
+                        "arrival_stop" : 
+                        {
+                           "location" : 
+                           {
+                              "lat" : 33.8676889,
+                              "lng" : -84.4645184
+                           },
+                           "name" : "Akers Mill & Cumberland Blvd"
+                        },
+                        "arrival_time" : 
+                        {
+                           "text" : "10:35 PM",
+                           "time_zone" : "America/New_York",
+                           "value" : 1696991700
+                        },
+                        "departure_stop" : 
+                        {
+                           "location" : 
+                           {
+                              "lat" : 33.89844600000001,
+                              "lng" : -84.447964
+                           },
+                           "name" : "Akers Mill Rd at Powers Ferry Rd"
+                        },
+                        "departure_time" : 
+                        {
+                           "text" : "10:27 PM",
+                           "time_zone" : "America/New_York",
+                           "value" : 1696991256
+                        },
+                        "headsign" : "Cumberland Transfer Center",
+                        "line" : 
+                        {
+                           "agencies" : 
+                           [
+                              {
+                                 "name" : "CobbLinc",
+                                 "phone" : "1 (770) 427-4444",
+                                 "url" : "https://www.atltransit.org/about/agencies/cobblinc/"
+                              }
+                           ],
+                           "color" : "#f2cb00",
+                           "name" : "CTC - MTC via Powers Ferry",
+                           "short_name" : "50",
+                           "text_color" : "#0f4780",
+                           "vehicle" : 
+                           {
+                              "icon" : "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png",
+                              "name" : "Bus",
+                              "type" : "BUS"
+                           }
+                        },
+                        "num_stops" : 6
+                     },
+                     "travel_mode" : "TRANSIT"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "11.1 mi",
+                        "value" : 17882
+                     },
+                     "duration" : 
+                     {
+                        "text" : "34 mins",
+                        "value" : 2029
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.781531,
+                        "lng" : -84.412936
+                     },
+                     "html_instructions" : "Bus towards Cumberland Transfer Center",
+                     "polyline" : 
+                     {
+                        "points" : "axumEf~obO~AL?C@E@G@GBEDEBCb@_@HHJNFLFJBF@FBLDPn@dEBPDL?DDV@j@?VBT?F@F@H?H@FFb@@LNnAFb@\\hCJx@@F?PCRCTGH?@ABC\\AJA\\JnABz@LZLr@@FNhALbAPtBJtBGZ@x@@VDp@Bj@Bh@@`@BhB@FJTAf@AZE`@Cj@IdAOl@C`@APAj@Yb@KLIHSPu@IOA]ASAE?O@c@Bc@Bc@DC?U@S?SASCK?e@Km@Su@e@m@e@SQs@k@gA_AAA{@m@_Ae@g@Si@QMCqAWi@Ee@EoA?I?mBF]@c@@c@?U@MAy@AeAGOAaAMA@A?EBgAQOEQCc@Ka@Ia@Iy@QKEk@OSEo@WSK]SWO]MUOg@_@YY[Y[[KKOMGEMMGCw@g@YQWMGIYSc@Y[SSIWk@GGEGEEACAEAGAGAG?C?GDG^s@Zs@FORm@La@Ls@Fc@B]DqA?Q?QA}AAQ@K?GDaAJ{AHw@Fs@Hw@B{@?a@?[Ai@EwA?OAu@AO@]@a@@SFg@]?eA@W@]?a@?IAYAk@ASAo@CG?KAKAWAIAa@EQCs@MSGeAYF_AHeABc@Bm@JoAHsALmADQPaAFYLg@DODMTm@DK`@y@bA{Bd@aA`@y@Xm@Zq@LY\\y@BG\\q@DG\\m@JMRYb@g@HIPMPQl@e@f@a@PIJGj@Ul@Ux@UXGRCb@I^CRCNANALAF?R?T?X@L@R@^Dr@Fb@HTBN@zANT@\\Db@DNBr@Ht@Hb@DhABf@@F?H?d@CH?HANAJALCHATC^IPEhA[n@S`@Md@WFCd@Uh@_@lA_Ax@q@tAoATWZYZWvAmArAkA@Aj@g@dA_Af@c@x@u@`BwA@AJO^i@t@}@l@}@`@u@DGRk@BIPg@J]H]@ILe@?AH_@DW?CJ{@@U@E?CB[Dw@@GDw@FqADkAHsB@YFyADcAJaCDkA?ABc@D}@F}AFaBD_AFiA@i@Be@@UPyDJkCHuADaA@}@BOH_BFcA@O@QF]?AD]Fg@Jc@DSTw@HWHYDMHUfA{B|@sAx@u@HI@AFETOhAy@x@k@`@UBCjAw@\\WTQFCh@_@ROZUp@e@XSp@g@n@e@\\SLINKLKXSTOXUrA}@B?@?@?@?BADCn@c@v@g@lA{@^QNIPIBAXMh@QPGFALCf@KhAObAKXCHAXEHA@?VCLAv@GbBU@?HCz@MzAWTEPAh@ILEPCLCNCxASP?t@GVCn@GLC`@K@?BETCZEF?`@G~@O\\ELA\\GDAPCZEp@IZG`@I\\I`@OZMTI`@UVONMXQBAJKJGHITSTSFGPQJKLSX]FKVc@RYZi@\\[ZXt@v@RXv@~@@BFFFDFDHBF@F@@?D@H?JADAJC@?f@U\\MZMRIRGDC^KHCLED?@A^KdAW|@WD?\\IVG^ILCRGNC\\GDANENCl@O\\IB?j@OTELEFAXKLEDA^Q@?DCRGPQb@a@@CLOLQHKHMHMLS@ELSDIBIHW@U?G?I?M?O?I?C?K?K?I@G?I?I?SXqANg@Ja@BMBEH]`@wAPq@Rs@Jg@Ni@@CZmAl@eBBGPe@L]@CJSLWDIPW`@q@l@aA?AV_@BERYRM^Sf@W@Ar@[ZIVENCPCZCh@Gh@GVCPCDA\\EPCr@ERC`@EVETANEHAFAFCFAFAFCJCLELGLKROLKHELOPOLODCPQXWPM^WVO\\[@Ax@c@\\WBAp@e@HGDCVQ@?XSt@e@XQZSPIJGTK~@[hC_ATIj@W@?VMFC^U^ONGPBt@NVHD@RJ~Av@RHLDb@N^Jv@N`AP\\DZD\\DT@N?F?VCTCVEXIXIHAVI`@K`@MdAYHCFAVIXIFAx@UNCNCDABAd@IJCFAJAJAXCf@C^CTAf@?R?J?J?J@L@H@l@J`APd@JLBPDJDRHB@\\LB@\\P@@B@PHDBp@\\PHXNj@XJFLFFBHBVBV@T?XCTEHAJCHELIJGDEDEHIJMHOX_@r@kABCDGDE@A@CDCBC@?BCDAFE`@Ed@GRAtAM~@KNAfAKj@G@?dAKtAMn@KPANCNC\\ETGJEb@QjBy@FCxAq@n@YJEHEd@Ub@OLGHEJEJGNIPMRMROFC^[FETYFIDGDIDGNYP[NSJGLGDCFAJENA@?XAF?L?B?hANf@HPBx@JX@N?L?H?L?D?PAHA@?dAKZEx@IREDAV?J?h@BRBN@XBXBB?R@l@Fn@FlAN^FTHPDDBVP~@ZB@`@LNDB@ZJj@JZHxAd@\\PVNPJVLRLTNRLRJLHZP@BPJDBVN\\RVNRLTLHFD@^TVPRJn@^VNFBPLNFHDHDDBNDdATb@Hj@BV@d@@V@j@@Z?v@BZBP?P@X@p@Br@Br@BJ?R@h@@P?Z?l@Cx@Mz@OB?@AXEn@Qb@M^MBAlAk@\\Q`@UFCVMfAm@FCbAi@t@c@\\O~@g@z@g@TMLGFELIj@_@ZUb@YFGXQVUl@c@rAeADCXS`@[ZUTMJGZQ?ALGJEHENAHAH?JARAB?VAXAd@CL?rBIJ?dAEF?F?\\AF?VAB?HAPAj@?lAG^C\\Cb@EVATABAf@AZAr@CN?D?N?N@\\BP@h@Dx@HV@L@^D~@HVBT?V??J?D?BBL@BDLr@vAJTP^d@fAPVPPLHBBNH@?NBB?F@D?T?D?\\Ab@Ar@CL?d@GPCLCDADCFC?]?cAF?"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.8676889,
+                        "lng" : -84.4645184
+                     },
+                     "transit_details" : 
+                     {
+                        "arrival_stop" : 
+                        {
+                           "location" : 
+                           {
+                              "lat" : 33.781531,
+                              "lng" : -84.412936
+                           },
+                           "name" : "10th St & Brady Ave"
+                        },
+                        "arrival_time" : 
+                        {
+                           "text" : "11:41 PM",
+                           "time_zone" : "America/New_York",
+                           "value" : 1696995680
+                        },
+                        "departure_stop" : 
+                        {
+                           "location" : 
+                           {
+                              "lat" : 33.8676889,
+                              "lng" : -84.4645184
+                           },
+                           "name" : "Akers Mill & Cumberland Blvd"
+                        },
+                        "departure_time" : 
+                        {
+                           "text" : "11:07 PM",
+                           "time_zone" : "America/New_York",
+                           "value" : 1696993651
+                        },
+                        "headsign" : "Cumberland Transfer Center",
+                        "line" : 
+                        {
+                           "agencies" : 
+                           [
+                              {
+                                 "name" : "MARTA",
+                                 "phone" : "1 (404) 848-5000",
+                                 "url" : "http://www.itsmarta.com/"
+                              }
+                           ],
+                           "color" : "#f200f2",
+                           "name" : "Howell Mill Road / Cumberland",
+                           "short_name" : "12",
+                           "text_color" : "#000000",
+                           "url" : "https://itsmarta.com/12.aspx",
+                           "vehicle" : 
+                           {
+                              "icon" : "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png",
+                              "name" : "Bus",
+                              "type" : "BUS"
+                           }
+                        },
+                        "num_stops" : 35
+                     },
+                     "travel_mode" : "TRANSIT"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "0.2 mi",
+                        "value" : 330
+                     },
+                     "duration" : 
+                     {
+                        "text" : "5 mins",
+                        "value" : 288
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7797767,
+                        "lng" : -84.4122995
+                     },
+                     "html_instructions" : "Walk to W Marietta St & Brady Ave",
+                     "polyline" : 
+                     {
+                        "points" : "q}dmEz{ebO?l@DPPONMHI\\YXYVU^[DETYJGLMJKf@a@LODCPMBABCBADAB?FAAKRQ@??B?F?FL]@@HJMn@I\\CTAHAJ"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7815299,
+                        "lng" : -84.412936
+                     },
+                     "steps" : 
+                     [
+                        {
+                           "distance" : 
+                           {
+                              "text" : "148 ft",
+                              "value" : 45
+                           },
+                           "duration" : 
+                           {
+                              "text" : "1 min",
+                              "value" : 32
+                           },
+                           "end_location" : 
+                           {
+                              "lat" : 33.7815299,
+                              "lng" : -84.41317359999999
+                           },
+                           "html_instructions" : "Head \u003cb\u003ewest\u003c/b\u003e on \u003cb\u003e10th St NW\u003c/b\u003e toward \u003cb\u003eBrady Ave NW\u003c/b\u003e",
+                           "polyline" : 
+                           {
+                              "points" : "q}dmEz{ebO?l@"
+                           },
+                           "start_location" : 
+                           {
+                              "lat" : 33.7815299,
+                              "lng" : -84.412936
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : 
+                           {
+                              "text" : "0.2 mi",
+                              "value" : 248
+                           },
+                           "duration" : 
+                           {
+                              "text" : "4 mins",
+                              "value" : 212
+                           },
+                           "end_location" : 
+                           {
+                              "lat" : 33.7796188,
+                              "lng" : -84.41168900000001
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eBrady Ave NW\u003c/b\u003e",
+                           "maneuver" : "turn-left",
+                           "polyline" : 
+                           {
+                              "points" : "q}dmEh}ebODPPONMHI\\YXYVU^[DETYJGLMJKf@a@LODCPMBABCBADAB?FAAKRQ@??B?F?FL]@@HJ"
+                           },
+                           "start_location" : 
+                           {
+                              "lat" : 33.7815299,
+                              "lng" : -84.41317359999999
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : 
+                           {
+                              "text" : "121 ft",
+                              "value" : 37
+                           },
+                           "duration" : 
+                           {
+                              "text" : "1 min",
+                              "value" : 44
+                           },
+                           "end_location" : 
+                           {
+                              "lat" : 33.7797767,
+                              "lng" : -84.4122995
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eWest Marietta St NW\u003c/b\u003e",
+                           "maneuver" : "turn-right",
+                           "polyline" : 
+                           {
+                              "points" : "sqdmE`tebOMn@I\\CTAHAJ"
+                           },
+                           "start_location" : 
+                           {
+                              "lat" : 33.7796188,
+                              "lng" : -84.41168900000001
+                           },
+                           "travel_mode" : "WALKING"
+                        }
+                     ],
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "2.4 mi",
+                        "value" : 3814
+                     },
+                     "duration" : 
+                     {
+                        "text" : "11 mins",
+                        "value" : 662
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.753505,
+                        "lng" : -84.39197299999999
+                     },
+                     "html_instructions" : "Bus towards Five Points Station via Carver Hills",
+                     "polyline" : 
+                     {
+                        "points" : "urdmEzwebOKA@KFa@F_@|@sCHS\\gA^mATs@Vm@V[b@a@@A`@_@t@s@ZYNOFGFG`@_@LM^]JIPOVUTS`@_@bA}@JILMVSJKNMXWLOPO~@a@DCZO\\MBAZONGTKJGDCHE^YLKHIJMFGFIJMLSDIR_@DKDKFM@EBGDMHWJ]BI@ERi@H[Le@BIDKXmATgA@EPw@FWBKH]Pk@DKHUDMLUBEb@y@NYLUBEPYbBqBFGFGfAoA`@e@HK^a@HKDEBEBCDEBCBCDElAwAZ]LOd@_@?Ad@WXM@?FERGFC@?`@MXI`@MLERGp@QdA[fCu@TItA_@JCHCPGz@Wh@MLC\\CVAZCLAN?DAH?f@CZCZAr@EXAh@C^CT?XC~@EF?z@EB?j@MlA_@XKJELGTKNILIf@[VOt@e@DCn@a@HGDCPSdAgAv@s@p@m@p@Y`A_@HCRKVMZMd@STKHEFCPGj@YPELK\\WDCZY\\WZWBCr@k@TUXUZYx@q@`AcAh@i@p@s@PSb@e@`@c@`AcAv@pARZZb@VZNLB@^V^TJFRLFDl@^N_@f@gAFOBIHD"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.779786,
+                        "lng" : -84.41229799999999
+                     },
+                     "transit_details" : 
+                     {
+                        "arrival_stop" : 
+                        {
+                           "location" : 
+                           {
+                              "lat" : 33.753505,
+                              "lng" : -84.39197299999999
+                           },
+                           "name" : "Alabama St & Broad St"
+                        },
+                        "arrival_time" : 
+                        {
+                           "text" : "12:05 AM",
+                           "time_zone" : "America/New_York",
+                           "value" : 1696997100
+                        },
+                        "departure_stop" : 
+                        {
+                           "location" : 
+                           {
+                              "lat" : 33.779786,
+                              "lng" : -84.41229799999999
+                           },
+                           "name" : "W Marietta St & Brady Ave"
+                        },
+                        "departure_time" : 
+                        {
+                           "text" : "11:53 PM",
+                           "time_zone" : "America/New_York",
+                           "value" : 1696996438
+                        },
+                        "headsign" : "Five Points Station via Carver Hills",
+                        "line" : 
+                        {
+                           "agencies" : 
+                           [
+                              {
+                                 "name" : "MARTA",
+                                 "phone" : "1 (404) 848-5000",
+                                 "url" : "http://www.itsmarta.com/"
+                              }
+                           ],
+                           "color" : "#008080",
+                           "name" : "Marietta Street / Perry Boulevard",
+                           "short_name" : "26",
+                           "text_color" : "#000000",
+                           "url" : "https://itsmarta.com/26.aspx",
+                           "vehicle" : 
+                           {
+                              "icon" : "//maps.gstatic.com/mapfiles/transit/iw2/6/bus2.png",
+                              "name" : "Bus",
+                              "type" : "BUS"
+                           }
+                        },
+                        "num_stops" : 15
+                     },
+                     "travel_mode" : "TRANSIT"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "233 ft",
+                        "value" : 71
+                     },
+                     "duration" : 
+                     {
+                        "text" : "1 min",
+                        "value" : 68
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.753838,
+                        "lng" : -84.391396
+                     },
+                     "html_instructions" : "Walk to Five Points",
+                     "polyline" : 
+                     {
+                        "points" : "cn_mEhxabOIEADUOGGGECAUaA"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.7534625,
+                        "lng" : -84.39189429999999
+                     },
+                     "steps" : 
+                     [
+                        {
+                           "distance" : 
+                           {
+                              "text" : "20 ft",
+                              "value" : 6
+                           },
+                           "duration" : 
+                           {
+                              "text" : "1 min",
+                              "value" : 5
+                           },
+                           "end_location" : 
+                           {
+                              "lat" : 33.75350630000001,
+                              "lng" : -84.3918601
+                           },
+                           "html_instructions" : "Head \u003cb\u003enortheast\u003c/b\u003e on \u003cb\u003eBroad St SW\u003c/b\u003e toward \u003cb\u003eAlabama St SW\u003c/b\u003e",
+                           "polyline" : 
+                           {
+                              "points" : "cn_mEhxabOIE"
+                           },
+                           "start_location" : 
+                           {
+                              "lat" : 33.7534625,
+                              "lng" : -84.39189429999999
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : 
+                           {
+                              "text" : "20 ft",
+                              "value" : 6
+                           },
+                           "duration" : 
+                           {
+                              "text" : "1 min",
+                              "value" : 4
+                           },
+                           "end_location" : 
+                           {
+                              "lat" : 33.75350630000001,
+                              "lng" : -84.3918601
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eAlabama St SW\u003c/b\u003e",
+                           "maneuver" : "turn-right",
+                           "polyline" : 
+                           {
+                              "points" : "mn_mEbxabO"
+                           },
+                           "start_location" : 
+                           {
+                              "lat" : 33.75350630000001,
+                              "lng" : -84.3918601
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : 
+                           {
+                              "text" : "85 ft",
+                              "value" : 26
+                           },
+                           "duration" : 
+                           {
+                              "text" : "1 min",
+                              "value" : 25
+                           },
+                           "end_location" : 
+                           {
+                              "lat" : 33.7537113,
+                              "lng" : -84.39173570000001
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eTake the stairs\u003c/div\u003e",
+                           "maneuver" : "turn-left",
+                           "polyline" : 
+                           {
+                              "points" : "mn_mEbxabOADUOGGGE"
+                           },
+                           "start_location" : 
+                           {
+                              "lat" : 33.75350630000001,
+                              "lng" : -84.3918601
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : 
+                           {
+                              "text" : "108 ft",
+                              "value" : 33
+                           },
+                           "duration" : 
+                           {
+                              "text" : "1 min",
+                              "value" : 34
+                           },
+                           "end_location" : 
+                           {
+                              "lat" : 33.753838,
+                              "lng" : -84.391396
+                           },
+                           "html_instructions" : "Take entrance \u003cspan class=\"location\"\u003eAlabama Street\u003c/span\u003e",
+                           "polyline" : 
+                           {
+                              "points" : "yo_mEhwabOUaA"
+                           },
+                           "start_location" : 
+                           {
+                              "lat" : 33.753727,
+                              "lng" : -84.39173099999999
+                           },
+                           "travel_mode" : "WALKING"
+                        }
+                     ],
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "1.1 mi",
+                        "value" : 1726
+                     },
+                     "duration" : 
+                     {
+                        "text" : "3 mins",
+                        "value" : 180
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.749973,
+                        "lng" : -84.37541999999999
+                     },
+                     "html_instructions" : "Metro rail towards Indian Creek Station",
+                     "polyline" : 
+                     {
+                        "points" : "op_mEfuabOLW^u@\\u@HO?A@A?A@??A@A?A@A@A?A@A?A@A?A@??A?A@??A@??A?A@A?ABC?A@A?A@A@??A?A@A@A?A@??A@A?A@A?A@??A@A?A@??A@A?A@??A@??A?A@??A@A@A?A@A@A?A@??A@A@A?A@A@A@A?A@??A@??A?A@A@??A@A@A?A@??A@??A@A@??A?A@A@??A@A?A@??A@??A@?@A?A@??A@A?A@?@A?A@??A@??A@??A@A@??A@A?A@??A@??A@??A@A@??A@A?A@?@A?A@A@??A@A@A@??A@A?A@??A@A@??A?A@?@??A?A@A@?@A?A?A@?@A?A@A@A@A@A?A@?@A?A?A@?@A?A@A@??A@A?A@A@A?A@A@??A?A@A@??A@A?A@??A@??A?A@??A@??A@A?A@??A@A?A@??A@A?A@??A@A?A@??A@A?A@??A@??A?A@A@A?A@A@A?A@A@A?A@A@AN[\\o@@??A@A?A@??A@??A@A?A@A?A@A@A?A?A@?@A?A@A?A@A?A@??A@A?A@A?A@A?A@??A?A@A@A?A?A@?Xo@BG@A@A?A?A@??A?A@A@A?A@A?A@??A@??A?A@A@A?A@A?A@A@A?A?A@A@??A?A@A?A@A?A@??A@A?A@??A@A?A@??A@A?A?A@?@A?A@A@A?A?A@?@A?A@A@A?A?A@??A@??A@A?A@?@A?A?A@??A@A@A?A@??A@A@A?A@A@A?A@??A?A@?@A?A@Ad@s@`@q@b@q@NUHJ@AV_@Va@V_@V_@T_@Va@BEP[Ta@Ta@Re@Pc@DMTm@BOH[BMDYBOFi@?ABg@Bi@?i@?A?c@?GCw@AM?OAU?WAIAe@?CAk@AS?KA_@Cm@?CBe@?GAqA?k@?SEu@?OAYCi@MuAC_@Q}AGe@?Eg@cDOu@Ou@Ow@CKQu@c@uBAAMD"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.753838,
+                        "lng" : -84.391396
+                     },
+                     "transit_details" : 
+                     {
+                        "arrival_stop" : 
+                        {
+                           "location" : 
+                           {
+                              "lat" : 33.749973,
+                              "lng" : -84.37541999999999
+                           },
+                           "name" : "King Memorial"
+                        },
+                        "arrival_time" : 
+                        {
+                           "text" : "12:14 AM",
+                           "time_zone" : "America/New_York",
+                           "value" : 1696997640
+                        },
+                        "departure_stop" : 
+                        {
+                           "location" : 
+                           {
+                              "lat" : 33.753838,
+                              "lng" : -84.391396
+                           },
+                           "name" : "Five Points"
+                        },
+                        "departure_time" : 
+                        {
+                           "text" : "12:11 AM",
+                           "time_zone" : "America/New_York",
+                           "value" : 1696997460
+                        },
+                        "headsign" : "Indian Creek Station",
+                        "line" : 
+                        {
+                           "agencies" : 
+                           [
+                              {
+                                 "name" : "MARTA",
+                                 "phone" : "1 (404) 848-5000",
+                                 "url" : "http://www.itsmarta.com/"
+                              }
+                           ],
+                           "color" : "#028bb3",
+                           "name" : "Blue",
+                           "text_color" : "#000000",
+                           "url" : "https://itsmarta.com/Blue-Line.aspx",
+                           "vehicle" : 
+                           {
+                              "icon" : "//maps.gstatic.com/mapfiles/transit/iw2/6/metro.png",
+                              "name" : "Metro rail",
+                              "type" : "SUBWAY"
+                           }
+                        },
+                        "num_stops" : 2
+                     },
+                     "travel_mode" : "TRANSIT"
+                  },
+                  {
+                     "distance" : 
+                     {
+                        "text" : "1.4 mi",
+                        "value" : 2322
+                     },
+                     "duration" : 
+                     {
+                        "text" : "31 mins",
+                        "value" : 1882
+                     },
+                     "end_location" : 
+                     {
+                        "lat" : 33.7337356,
+                        "lng" : -84.3742366
+                     },
+                     "html_instructions" : "Walk to 416 Augusta Ave SE, Atlanta, GA 30315, USA",
+                     "polyline" : 
+                     {
+                        "points" : "ix~lEjq~aOWbAR`A@@@@RHI\\CACAC@C?CBABAB?D@HB@GNJHHDD?^?LARBZAb@ALAD?`B?J?F?lA@RAT?zA@?AZ??@^?z@??O?]?U@w@?GAW@_B?M?E@U@?@c@?Y?c@?g@?Q@Q?eA?S?E@Q?}@CSD@VBD?T?V@FEN@b@?Z?N@NAn@A?@X@^?^AR?Z?TAL?Z?p@?X?D??Ax@BX?RCl@Af@AL@T?NBB??Av@?dA?B?L@H@`Bb@D@?@B?R??Bd@@X?ZBPAV?b@?b@?b@?x@@VAX?N?R?b@?b@@D?RAH?f@?VDPAJ?X?|@?\\Bd@?XFJ?B?rA?n@AZ@T?D?B@H??KL??HB?R?p@?N?f@?v@?\\?@?fB?D?LAB?N?N?v@?^?b@?PIV@D??\\?DL??Z?T?P?JAP"
+                     },
+                     "start_location" : 
+                     {
+                        "lat" : 33.749973,
+                        "lng" : -84.37541999999999
+                     },
+                     "steps" : 
+                     [
+                        {
+                           "distance" : 
+                           {
+                              "text" : "112 ft",
+                              "value" : 34
+                           },
+                           "duration" : 
+                           {
+                              "text" : "1 min",
+                              "value" : 35
+                           },
+                           "end_location" : 
+                           {
+                              "lat" : 33.750092,
+                              "lng" : -84.37576299999999
+                           },
+                           "html_instructions" : "Take exit \u003cspan class=\"location\"\u003eDecatur Street\u003c/span\u003e",
+                           "polyline" : 
+                           {
+                              "points" : "ix~lEjq~aOWbA"
+                           },
+                           "start_location" : 
+                           {
+                              "lat" : 33.749973,
+                              "lng" : -84.37541999999999
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : 
+                           {
+                              "text" : "157 ft",
+                              "value" : 48
+                           },
+                           "duration" : 
+                           {
+                              "text" : "1 min",
+                              "value" : 36
+                           },
+                           "end_location" : 
+                           {
+                              "lat" : 33.7498694,
+                              "lng" : -84.3761612
+                           },
+                           "html_instructions" : "Head \u003cb\u003ewest\u003c/b\u003e",
+                           "polyline" : 
+                           {
+                              "points" : "ay~lEns~aOR`A@@@@RH"
+                           },
+                           "start_location" : 
+                           {
+                              "lat" : 33.7500882,
+                              "lng" : -84.3757571
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : 
+                           {
+                              "text" : "46 ft",
+                              "value" : 14
+                           },
+                           "duration" : 
+                           {
+                              "text" : "1 min",
+                              "value" : 12
+                           },
+                           "end_location" : 
+                           {
+                              "lat" : 33.7499152,
+                              "lng" : -84.3763058
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e toward \u003cb\u003eGrant St SE\u003c/b\u003e",
+                           "maneuver" : "turn-right",
+                           "polyline" : 
+                           {
+                              "points" : "uw~lE~u~aOI\\"
+                           },
+                           "start_location" : 
+                           {
+                              "lat" : 33.7498694,
+                              "lng" : -84.3761612
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : 
+                           {
+                              "text" : "128 ft",
+                              "value" : 39
+                           },
+                           "duration" : 
+                           {
+                              "text" : "1 min",
+                              "value" : 29
+                           },
+                           "end_location" : 
+                           {
+                              "lat" : 33.750049,
+                              "lng" : -84.3765272
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e toward \u003cb\u003eGrant St SE\u003c/b\u003e",
+                           "maneuver" : "turn-right",
+                           "polyline" : 
+                           {
+                              "points" : "_x~lE|v~aOCACAC@C?CBABAB?D@HB@GN"
+                           },
+                           "start_location" : 
+                           {
+                              "lat" : 33.7499152,
+                              "lng" : -84.3763058
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : 
+                           {
+                              "text" : "0.2 mi",
+                              "value" : 363
+                           },
+                           "duration" : 
+                           {
+                              "text" : "5 mins",
+                              "value" : 320
+                           },
+                           "end_location" : 
+                           {
+                              "lat" : 33.7469134,
+                              "lng" : -84.3765983
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eGrant St SE\u003c/b\u003e",
+                           "maneuver" : "turn-left",
+                           "polyline" : 
+                           {
+                              "points" : "yx~lEhx~aOJHHDD?^?LARBZAb@ALAD?`B?J?F?lA@RAT?zA@?AZ??@^?z@?"
+                           },
+                           "start_location" : 
+                           {
+                              "lat" : 33.750049,
+                              "lng" : -84.3765272
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : 
+                           {
+                              "text" : "0.2 mi",
+                              "value" : 304
+                           },
+                           "duration" : 
+                           {
+                              "text" : "4 mins",
+                              "value" : 254
+                           },
+                           "end_location" : 
+                           {
+                              "lat" : 33.7468425,
+                              "lng" : -84.37328769999999
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eMemorial Dr SE\u003c/b\u003e",
+                           "maneuver" : "turn-left",
+                           "polyline" : 
+                           {
+                              "points" : "ee~lEvx~aO?O?]?U@w@?GAW@_B?M?E@U@?@c@?Y?c@?g@?Q@Q?eA?S?E@Q?}@CSD@"
+                           },
+                           "start_location" : 
+                           {
+                              "lat" : 33.7469134,
+                              "lng" : -84.3765983
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : 
+                           {
+                              "text" : "0.9 mi",
+                              "value" : 1464
+                           },
+                           "duration" : 
+                           {
+                              "text" : "19 mins",
+                              "value" : 1138
+                           },
+                           "end_location" : 
+                           {
+                              "lat" : 33.7338021,
+                              "lng" : -84.37357
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eCherokee Ave SE\u003c/b\u003e",
+                           "maneuver" : "turn-right",
+                           "polyline" : 
+                           {
+                              "points" : "wd~lE`d~aOVBD?T?V@FEN@b@?Z?N@NAn@A?@X@^?^AR?Z?TAL?Z?p@?X?D??Ax@BX?RCl@Af@AL@T?NBB??Av@?dA?B?L@H@`Bb@D@?@B?R??Bd@@X?ZBPAV?b@?b@?b@?x@@VAX?N?R?b@?b@@D?RAH?f@?VDPAJ?X?|@?\\Bd@?XFJ?B?rA?n@AZ@T?D?B@H??KL??HB?R?p@?N?f@?v@?\\?@?fB?D?LAB?N?N?v@?^?b@?PIV@D?"
+                           },
+                           "start_location" : 
+                           {
+                              "lat" : 33.7468425,
+                              "lng" : -84.37328769999999
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : 
+                           {
+                              "text" : "184 ft",
+                              "value" : 56
+                           },
+                           "duration" : 
+                           {
+                              "text" : "1 min",
+                              "value" : 58
+                           },
+                           "end_location" : 
+                           {
+                              "lat" : 33.7337356,
+                              "lng" : -84.3742366
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eAugusta Ave SE\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eDestination will be on the right\u003c/div\u003e",
+                           "maneuver" : "turn-right",
+                           "polyline" : 
+                           {
+                              "points" : "gs{lExe~aO?\\?DL??Z?T?P?JAP"
+                           },
+                           "start_location" : 
+                           {
+                              "lat" : 33.7338021,
+                              "lng" : -84.37357
+                           },
+                           "travel_mode" : "WALKING"
+                        }
+                     ],
+                     "travel_mode" : "WALKING"
+                  }
+               ],
+               "traffic_speed_entry" : [],
+               "via_waypoint" : []
+            }
+         ],
+         "overview_polyline" : 
+         {
+            "points" : "ax|mEhmjbOjJ|^nCjKjDjM`CrEjE~Fl@d@`E`FfIvJbEfFdHvHnN~Ih@h@Jf@FXF\\PEf@Ab@Cv@AjFy@dDcA`BnFdCfFvC~EvAbBxFfIrCnEfCvDnAfAlB|@dBl@`@JF_ALiBN}Bn@uFv@mCpCcGjDoHjBgCxBgBvB}@jCk@|BM~E`@`J|@lEAx@KfBfCzClGjCbH\\`DHxCr@|Bj@n@~BnB~AdB`DdEDTDPeARM@KCKQAO_BW~AHBMNWb@_@HHR\\Ph@~@vFF`BRrB`AvHEbAMl@JtDl@`D^xDBpCLnDJ|DH|@G|@a@`EC|@e@p@]ZeAKgAAoBLqACq@KcBy@}DcDeDiBsDs@mF@yGGkAGmCg@mGeBiBaAyBoBcDyBaBkAy@eAOs@hA_Cv@gDFwGp@{LEkHFg@]?}ABcBCqDO{B_@eAYF_ALiBf@_Hl@uCtEiKfDcHfEaEvB}@jCk@|BM|OxA`FDdEy@~B}@vEgD|J}IhGqFbByBhBgD`@oAt@gE\\eG~Aca@t@aQj@kHjAeEdCoEbA_AhBqAfFkDdHaFrKgHzCoAhGy@pNoBhNiBlDg@|Bq@~A}@rBaBtCcE\\[ZXhApAhApAr@NnGsBdLiCdDcAnBeBdAiBJkBZcDtByHjCuIbCgEbAmA|BiA|Eo@`H}@nBoAzCcCzJqGbI{C~@e@`@CfBf@`CfA|D|@|CNbLsCjB[~DMdEn@bC|@fDbBj@V~A@zAo@|BeD`@YtJ_A|Gu@nIoDrCqAfCuB`@s@z@_AzAOxFj@|CUjBQxAHvGp@zDvAfBb@`DrAtCdBxCfBrDvBh@VdDh@bGNnGRtCQzAWlGgChPkJrJyGvWeAtD@`Gf@l@??PJb@vBtEp@r@lARnEWRg@FcA?l@DPPOXWnBeB|BwBn@YRY?NN[Cz@Mr@QRnAaF|A}EtAmBbC}BtCkChEwDxByAbAc@jC{AdAuA|@yBrDqNhBuD|FcHhFyFhCeArJsCnG}AdDQbH[rBS`Cy@~EwCfBgBhBaBrBy@pAk@lAi@zDaCzGcGpCwCbBgBjAlBfAnA~AbAt@d@v@gBJYPIi@Wa@iAvAyCLW\\o@\\i@~@iA|@mArDcHv@yAZg@j@{@dAcBXIhAcBfCgExAyERyDIyDQgNg@}F_AeGu@oDe@wBe@hAVdARHMZOBAVCPTNfA@vGC|F?@iGDmKrGD~LIxDBvCn@nMDrE@lGJh@@LKBH|B?~D?rDAh@GD\\LD?p@An@"
+         },
+         "summary" : "",
+         "warnings" : 
+         [
+            "Walking directions are in beta. Use caution – This route may be missing sidewalks or pedestrian paths."
+         ],
+         "waypoint_order" : []
+      }
+   ],
+   "status" : "OK"
+}
