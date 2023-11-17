@@ -67,8 +67,9 @@
         <button type="button" id="submit" onclick="handleGoButtonClick()" class="submit-btn">Go</button>
         <!-- Dropdown menu -->
         <div id="dropdownDiv" class="dropdown-menu stylish-dropdown" style="display: none;">
-            <label for="optionsDropdown"></label><select id="optionsDropdown"></select>
-            <button onclick="selectOption()">Select</button>
+            <label for="optionsDropdown"></label>
+            <select id="optionsDropdown"></select>
+<%--            <button onclick="selectOption()">Select</button>--%>
         </div>
     </div>
 

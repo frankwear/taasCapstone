@@ -11,21 +11,28 @@ function setSelectedOption(radio) {
 //Function to handle Go button submission
 function handleGoButtonClick(){
     // selectOption();
-    toggleDropdown();//toggle is displayed
+    toggleDropdown();
     submitForm();
-
     //populateDropdown(routes); // Populate the dropdown with data from the JSON response
 }
 
 // Listening here for a change in the dropdown selection
+// document.getElementById('optionsDropdown').addEventListener('change', function () {
+//     const selectedIndex = this.value.split('-');
+//     const routeIndex = parseInt(selectedIndex[0]);
+//     const legIndex = parseInt(selectedIndex[1]);
+//
+//     const selectedRoute = routes[routeIndex].legs[legIndex];
+//     console.log('Selected Route:', selectedRoute);
+//     // calling method to display selected route information in selectedDetails div
+//     displayRouteDetails(selectedRoute);
+// });
 document.getElementById('optionsDropdown').addEventListener('change', function () {
-    const selectedIndex = this.value.split('-');
-    const routeIndex = parseInt(selectedIndex[0]);
-    const legIndex = parseInt(selectedIndex[1]);
-
-    const selectedRoute = routes[routeIndex].legs[legIndex];
+    const selectedIndex = this.value;
+    console.log('SelectedIndex is', selectedIndex);
+    const selectedRoute = routes[selectedIndex]; // Assuming 'routes' is a global variable
     console.log('Selected Route:', selectedRoute);
-    // calling method to display selected route information in selectedDetails div
+    // Further actions based on the selected route
     displayRouteDetails(selectedRoute);
 });
 function submitForm() {
@@ -71,7 +78,6 @@ function submitForm() {
     // populateDropdown('hi');
 
 }
-
 // Fetch data from the server
 document.addEventListener('DOMContentLoaded', function() {
     fetch('RouteOptionServlet')
@@ -82,35 +88,24 @@ document.addEventListener('DOMContentLoaded', function() {
             // Handle the response
             console.log(data);//testing display
             populateDropdown(routes);
-
         })
         .catch(error => {
             console.error('Error:', error);
         });
     function populateDropdown(routes) {
         var dropdown = document.getElementById('optionsDropdown');
-
         // Clear any existing options
         dropdown.innerHTML = '';
-
-        // Add specific options based on the JSON array
+        // Adding specific options based on the JSON array
         for (let i = 0; i < 3; i++) {
             const option = document.createElement('option');
-            option.value = i+ '.0'; // Store the index as the value
+            option.value = i;//+ '.0'; // Store the index as the value
             option.text = 'Option ' + i;
 
             dropdown.appendChild(option);
         }
     }
     // Listening here for a change in the dropdown selection
-    document.getElementById('optionsDropdown').addEventListener('change', function () {
-        const selectedIndex = this.value;
-
-        const selectedRoute = routes[selectedIndex]; // Assuming 'routes' is a global variable
-        console.log('Selected Route:', selectedRoute);
-        // Further actions based on the selected route
-        displayRouteDetails(selectedRoute);
-    });
 
     // Function to display the details of the selected route
     // function displayRouteDetails(selectedRoute) {
@@ -205,52 +200,3 @@ function selectOption() {
         console.error("Selected route does not have the expected structure.");
     }
 }
-
-// angular.module('routeApp', [])
-//     .controller('RouteController', function ($scope, $http) {
-//         // Simulate receiving routes from the backend
-//         $scope.routes = [];
-//
-//         // Initialize selectedRoute
-//         $scope.selectedRoute = null;
-//
-//         // Function to get route details from the backend
-//         $scope.getRouteDetails = function () {
-//             if ($scope.selectedRoute) {
-//                 // Make an HTTP request to your back-end servlet
-//                 $http.get('/YourProjectName/RouteOptionServlet?routeId=' + $scope.selectedRoute.routeId)
-//                     .then(function (response) {
-//                         // Update route details based on the response from the servlet
-//                         // Example: $scope.selectedRoute.details = response.data.details;
-//                     })
-//                     .catch(function (error) {
-//                         console.error('Error fetching route details:', error);
-//                     });
-//             }
-//         };
-//
-//         // Simulate loading routes from the backend initially
-//         $http.get('RouteOptionServlet')
-//             .then(function (response) {
-//                 $scope.routes = response.data;
-//                 // Initialize selectedRoute
-//                 $scope.selectedRoute = $scope.routes[0];
-//             })
-//             .catch(function (error) {
-//                 console.error('Error fetching routes:', error);
-//             });
-//     });
-
-// angular.module('routeApp', [])
-//     .controller('RouteController', function ($scope) {
-//         // Simulate receiving routes from the backend
-//         $scope.routes = [
-//             { routeDescription: 'Route 1' },
-//             { routeDescription: 'Route 2' },
-//             { routeDescription: 'Route 3' }
-//             // Add more routes as needed
-//         ];
-//
-//         // Initialize selectedRoute
-//         $scope.selectedRoute = $scope.routes[0];
-//     });
