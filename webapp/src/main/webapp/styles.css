@@ -281,3 +281,27 @@ button[type="button"]:hover {
     background-color: #0056b3;
     transform: scale(1.05);
 }
+.option-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.option-tile {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.option-tile:hover {
+    background-color: #f0f0f0;
+}
+
+.details-container {
+    display: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+}

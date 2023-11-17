@@ -67,19 +67,24 @@
         <button type="button" id="submit" onclick="handleGoButtonClick()" class="submit-btn">Go</button>
         <!-- Dropdown menu -->
         <div id="dropdownDiv" class="dropdown-menu stylish-dropdown" style="display: none;">
-            <label for="optionsDropdown"></label>
-            <select id="optionsDropdown"></select>
-<%--            <button onclick="selectOption()">Select</button>--%>
+            <label for="optionsDropdown"></label><select id="optionsDropdown" onchange="selectOption()"></select>
+            <%--                <button onclick="selectOption()">Select</button>--%>
         </div>
     </div>
+    <div id="routeContainer" style="display: none;">
+        <!-- Div container for options -->
+        <div id="optionsContainer" class="option-container"></div>
 
-    <%--  div to display the selected route details--%>
-    <div id="selectedDetails"></div>
-    <!-- Map placeholder -->
+        <!-- Div container for details -->
+        <div id="detailsContainer" class="details-container"></div>
+        <%--  div to display the selected route details--%>
+        <div id="selectedDetails"></div>
+    </div>
     <div class="map-placeholder">
         <img src="map_placeholder_image.jpeg" alt="Map placeholder" width="100%" height="100%">
     </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="script.js"></script>
