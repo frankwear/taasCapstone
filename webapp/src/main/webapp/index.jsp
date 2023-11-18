@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="java.util.Random" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +19,7 @@
 <h1 align="center">Transportation Selection Form</h1>
 <div class="container">
     <form action="CaptureDataServlet" method="post" enctype="multipart/form-data">
+
         <div class="form-row-horizontal">
             <div class="form-row">
                 <label for="origin">Origin:</label>
@@ -61,24 +61,30 @@
                 <label><input type="radio" name="option" value="fewer-transfers" onclick="setSelectedOption(this)">Fewer transfers</label>
             </div>
         </div>
-
+    </form>
         <div>
             <!-- Button to toggle the dropdown -->
             <button type="button" id="submit" onclick="handleGoButtonClick()" class="submit-btn">Go</button>
-
             <!-- Dropdown menu -->
             <div id="dropdownDiv" class="dropdown-menu stylish-dropdown" style="display: none;">
-                <label for="optionsDropdown"></label><select id="optionsDropdown"></select>
-                <button onclick="selectOption()">Select</button>
+                <label for="optionsDropdown"></label><select id="optionsDropdown" onchange="selectOption()"></select>
+<%--                <button onclick="selectOption()">Select</button>--%>
             </div>
         </div>
-    </form>
+    <div id="routeContainer" style="display: none;">
+    <!-- Div container for options -->
+    <div id="optionsContainer" class="option-container"></div>
 
-    <!-- Map placeholder -->
+    <!-- Div container for details -->
+    <div id="detailsContainer" class="details-container"></div>
+<%--  div to display the selected route details--%>
+    <div id="selectedDetails" ></div>
+    </div>
     <div class="map-placeholder">
         <img src="map_placeholder_image.jpeg" alt="Map placeholder" width="100%" height="100%">
     </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="script.js"></script>

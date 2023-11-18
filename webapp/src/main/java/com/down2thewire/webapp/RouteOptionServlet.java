@@ -15,19 +15,15 @@ public class RouteOptionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Create three routes for demonstration
         List<ProposedRoute> proposedRoutes = createProposedRoutes();
-
         // Now you can access proposedRoutes using the 'proposedRoutes' list
-        for (ProposedRoute proposedRoute : proposedRoutes) {
-            // each route can be used for example print details
-            System.out.println(proposedRoute.toString());
-        }
-
+//        for (ProposedRoute proposedRoute : proposedRoutes) {
+//            // each route can be used for example print details
+//            System.out.println(proposedRoute.toString());
+//        }
         // Convert the list to JSON
         String jsonData = new Gson().toJson(proposedRoutes);
-
         // Log the JSON data
         System.out.println("Data to be sent to frontend: " + jsonData);
-
         // Set content type and write the JSON data to the response
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -40,14 +36,12 @@ public class RouteOptionServlet extends HttpServlet {
 
         for (LinearRoute linearRoute : linearRoutes) {
             proposedRoutes.add(new ProposedRoute(linearRoute));
-            System.out.println(proposedRoutes);
+            //System.out.println(proposedRoutes);
         }
-
         return proposedRoutes;
     }
     private List<LinearRoute> createLinearRoute(){
         //ProposedRoute pr;
-
     List<LinearRoute> routes = new ArrayList<>();
         // Primary Route
         LinearRoute route1 = new LinearRoute();

@@ -3,29 +3,35 @@ var routes;
 // Global variable to store the selected option value
 var selectedOption;
 // Function to handle radio button selection
-//Below is to capture dropdown value and display it in place of map image.
-
 function setSelectedOption(radio) {
     selectedOption = radio.value;
-    console.log("Selected Option: " + selectedOption);
+   // console.log("Selected Option: " + selectedOption);
 }
 
-//Function to handle form submission
+//Function to handle Go button submission
 function handleGoButtonClick(){
    // selectOption();
     toggleDropdown();
     submitForm();
    //populateDropdown(routes); // Populate the dropdown with data from the JSON response
 }
-document.getElementById('submit').addEventListener('click', handleGoButtonClick);
-// Listening here for a change in the dropdown selection
-document.getElementById('optionsDropdown').addEventListener('change', function () {
-    const selectedIndex = this.value.split('-');
-    const routeIndex = parseInt(selectedIndex[0]);
-    const legIndex = parseInt(selectedIndex[1]);
 
-    const selectedRoute = routes[routeIndex].legs[legIndex];
-    console.log('Selected Route:', selectedRoute);
+// Listening here for a change in the dropdown selection
+// document.getElementById('optionsDropdown').addEventListener('change', function () {
+//     const selectedIndex = this.value.split('-');
+//     const routeIndex = parseInt(selectedIndex[0]);
+//     const legIndex = parseInt(selectedIndex[1]);
+//
+//     const selectedRoute = routes[routeIndex].legs[legIndex];
+//     console.log('Selected Route:', selectedRoute);
+//     // calling method to display selected route information in selectedDetails div
+//     displayRouteDetails(selectedRoute);
+// });
+document.getElementById('optionsDropdown').addEventListener('change', function () {
+    const selectedIndex = this.value;
+    //console.log('SelectedIndex is', selectedIndex);
+    const selectedRoute = routes[selectedIndex]; // Assuming 'routes' is a global variable
+    //console.log('Selected Route:', selectedRoute);
     // Further actions based on the selected route
     displayRouteDetails(selectedRoute);
 });
@@ -72,7 +78,6 @@ function submitForm() {
    // populateDropdown('hi');
 
 }
-
 // Fetch data from the server
 document.addEventListener('DOMContentLoaded', function() {
     fetch('RouteOptionServlet')
@@ -80,53 +85,130 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             // Set routes as the received data
             routes = data;
-            // Handle the response
-            console.log(data);//testing display
-            populateDropdown(routes);
-
+            // Handling  the response
+            //console.log(data);//testing display
+            //populateDropdown(routes);
+            populateDiv(routes);// tile display for 3 routes
         })
         .catch(error => {
             console.error('Error:', error);
         });
     function populateDropdown(routes) {
-
         var dropdown = document.getElementById('optionsDropdown');
-
         // Clear any existing options
         dropdown.innerHTML = '';
 
-        // Add each route as an option
-        routes.forEach(function (route, index) {
-            route.legs.forEach(function (leg, legIndex) {
-                const option = document.createElement('option');
-                option.value = index + '-' + legIndex; // Store the entire route and leg index as the value
-                option.text = 'Option ' + (index + 1) + '-' + (legIndex + 1) +
-                    ' (Distance: ' + leg.distance + ', Duration: ' + leg.duration +
-                    ', Cost: ' + leg.cost + ', Mode: ' + leg.mode + ')';
+        // Adding specific options based on the JSON array
+        for (let i = 0; i < 3; i++) {
+            const option = document.createElement('option');
 
-                dropdown.appendChild(option);
+            option.value = i + '.0'; // Store the index as the value
+
+            if (routes[i] && routes[i].legs && routes[i].legs.length > 0) {
+                // Format the text for each option
+                const leg = routes[i].legs[0];
+                option.text = `Option ${i + 1} - Distance is ${leg.distance}, Duration is ${leg.duration}, Cost is ${leg.cost}, Mode is ${leg.mode}`;
+            } else {
+                option.text = `Option ${i + 1} - No data available`;
+            }
+
+            dropdown.appendChild(option);
+        }
+    }
+    // Listening here for a change in the dropdown selection
+    function populateDiv(routes) {
+        var divContainer = document.getElementById('optionsContainer');
+        // Clear any existing content
+        divContainer.innerHTML = '';
+        // Adding specific options based on the JSON array
+        for (let i = 0; i < routes.length; i++) {
+            // Create a new tile or section for each option
+            const optionTile = document.createElement('div');
+            optionTile.classList.add('option-tile'); // Add a class for styling
+            // Set the content of the tile or section
+            optionTile.innerHTML = `Option ${i + 1} - Distance: ${routes[i].legs[0].distance}, Duration: ${routes[i].legs[0].duration}, Cost: ${routes[i].legs[0].cost}, Mode: ${routes[i].legs[0].mode}`;
+            // Add a click event listener to show more details on click
+            optionTile.addEventListener('click', function () {
+                displayAdditionalDetails(routes[i]);
             });
-        });
 
+            // Add the tile or section to the container
+            divContainer.appendChild(optionTile);
+        }
     }
 
-    // Listening here for a change in the dropdown selection
-    document.getElementById('optionsDropdown').addEventListener('change', function () {
-        const selectedIndex = this.value;
+    function displayAdditionalDetails(route) {
+        var detailsContainer = document.getElementById('detailsContainer');
 
-        const selectedRoute = routes[selectedIndex]; // Assuming 'routes' is a global variable
-        console.log('Selected Route:', selectedRoute);
-        // Further actions based on the selected route
-        displayRouteDetails(selectedRoute);
-    });
+        // Clear previous details
+        detailsContainer.innerHTML = '';
+
+        // Check if the selected route has 'legs' property
+        if (route && route.legs && route.legs.length > 0) {
+            route.legs.forEach(function (leg, legIndex) {
+                // Create a new element for each leg's details
+                var legDetails = document.createElement('div');
+                legDetails.textContent = `Leg ${legIndex + 1} - Distance: ${leg.distance}, Duration: ${leg.duration}, Cost: ${leg.cost}, Mode: ${leg.mode}`;
+                legDetails.style.fontSize = '16px';
+                legDetails.style.marginTop = '10px';
+
+                // Add the new leg details to the details container
+                detailsContainer.appendChild(legDetails);
+            });
+
+            // Show the details container
+            detailsContainer.style.display = 'block';
+        } else {
+            console.error("Selected route does not have the expected structure.");
+        }
+    }
 
     // Function to display the details of the selected route
-    function displayRouteDetails(routes) {
-        // Assuming there's an element with id 'routeDetails' to display the details
-        var routeDetailsElement = document.getElementById('routeDetails');
-        routeDetailsElement.innerHTML = JSON.stringify(route, null, 2); // Beautify the JSON string
-    }
+    // function displayRouteDetails(selectedRoute) {
+    //     // Assuming there's an element with id 'routeDetails' to display the details
+    //     var selectedDetailsElement = document.getElementById('selectedDetails');
+    //     //routeDetailsElement.innerHTML = JSON.stringify(routes, null, 2); // Beautify the JSON string
+    //     selectedDetailsElement.innerHTML='';
+    //     // Check if the selected route has 'legs' property
+    //     if (selectedRoute && selectedRoute.legs && selectedRoute.legs.length > 0) {
+    //         selectedRoute.legs.forEach(function (leg, legIndex) {
+    //             // Create a new element for each leg's details
+    //             var legDetails = document.createElement('div');
+    //             legDetails.textContent = 'Leg ' + (legIndex + 1) +
+    //                 ': Distance: ' + leg.distance + ', Duration: ' + leg.duration +
+    //                 ', Cost: ' + leg.cost + ', Mode: ' + leg.mode;
+    //             legDetails.style.fontSize = '16px';
+    //             legDetails.style.marginTop = '10px';
+    //
+    //             // Add the new leg details to the selected details element
+    //             selectedDetailsElement.appendChild(legDetails);
+    //         });
+    //     } else {
+    //         console.error("Selected route does not have the expected structure.");
+    //     }
+    // }
 });
+function displayRouteDetails(selectedRoute) {
+    var selectedDetailsElement = document.getElementById('selectedDetails');
+    // Clear previous details
+    selectedDetailsElement.innerHTML = '';
+
+    //checking if the selected route is defined and has the expected structure
+    if (selectedRoute && Array.isArray(selectedRoute) && selectedRoute.length > 0) {
+        selectedRoute.forEach(function (leg, legIndex) {
+            // Creating a new element for each leg's details
+            var legDetails = document.createElement('div');
+            legDetails.textContent = `Option ${legIndex + 1} - [${JSON.stringify(leg)}]`;
+            legDetails.style.fontSize = '16px';
+            legDetails.style.marginTop = '10px';
+
+            // Add the new leg details to the selected details element
+            selectedDetailsElement.appendChild(legDetails);
+        });
+    } else {
+        console.error("Selected route does not have the expected structure or is undefined.");
+    }
+}
 // Function to show/hide the dropdown menu
 function toggleDropdown() {
     // Check if the mandatory fields (origin and destination) are filled
@@ -137,55 +219,46 @@ function toggleDropdown() {
         // If not filled, alert the user or provide any feedback
         alert("Please fill in the mandatory fields: Origin and Destination.");
     } else {
-        // If filled, proceed to toggle the dropdown visibility
-        var dropdown = document.getElementById("optionsDropdown");
+        // If filled, toggle the routeContainer visibility
+        var routeContainer = document.getElementById("routeContainer");
 
-        if (dropdown.style.display === "block") {
-            dropdown.style.display = "none"; // Hide the dropdown when it's already open
+        if (routeContainer.style.display === "block") {
+            routeContainer.style.display = "none"; // Hide the routeContainer when it's already open
         } else {
-            dropdown.style.display = "block"; // Show the dropdown when the "Go" button is clicked
+            routeContainer.style.display = "block"; // Show the routeContainer when the "Go" button is clicked
         }
     }
 }
 //replaces populating Dropdown; image with the selected option information from the drowpdown
-// Replaces populating Dropdown; image with the selected option information from the dropdown
+function selectOption() {
+    var dropdown = document.getElementById("optionsDropdown");
+    var selectedOptionIndex = dropdown.options[dropdown.selectedIndex].value.split('.')[0];
 
-    function selectOption() {
-        var dropdown = document.getElementById("optionsDropdown");
-        var selectedOptionIndex = dropdown.options[dropdown.selectedIndex].value;
+    // \ there's an element with id 'selectedDetails' to display the details
+    var selectedDetailsElement = document.getElementById('selectedDetails');
 
-        console.log("Selected Option: " + selectedOptionIndex);
+    // Clear previous details
+    selectedDetailsElement.innerHTML = '';
 
-        // Remove the previous option text and image if they exist
-        const previousOptionText = document.querySelector('.map-placeholder .option-text');
-        if (previousOptionText) {
-            previousOptionText.remove();
-        }
+    // Check if the selected route has 'legs' property
+    if (routes[selectedOptionIndex] && routes[selectedOptionIndex].legs && routes[selectedOptionIndex].legs.length > 0) {
+        routes[selectedOptionIndex].legs.forEach(function (leg, legIndex) {
+            // Creating a new element for each leg's details
+            var legDetails = document.createElement('div');
+            legDetails.textContent = 'Leg ' + (legIndex + 1) +
+                ': Distance: ' + leg.distance + ', Duration: ' + leg.duration +
+                ', Cost: ' + leg.cost + ', Mode: ' + leg.mode;
+            legDetails.style.fontSize = '16px';
+            legDetails.style.marginTop = '10px';
 
-        // Check if the selected route has 'legs' property
-        if (routes[selectedOptionIndex].legs && routes[selectedOptionIndex].legs.length > 0) {
-            var legs = routes[selectedOptionIndex].legs[0];
-
-            // Create a new element for the selected option text
-            var optionText = document.createElement('div');
-            optionText.textContent = "Time: " + (legs.duration || 0) + " mins, Distance: " + (legs.distance || 0) + " miles, Transits: " + (legs.transits || 0);
-            optionText.className = "option-text";
-            optionText.style.fontSize = "16px";
-            optionText.style.textAlign = "center";
-            optionText.style.marginTop = "20px";
-
-            // Add the new option text to the map placeholder
-            var mapPlaceholder = document.querySelector('.map-placeholder');
-            mapPlaceholder.appendChild(optionText);
-        } else {
-            console.error("Selected route does not have the expected structure.");
-        }
-
-        // Hide the dropdown after selection
-        var dropdownHide = document.getElementById("dropdownDiv");
-        dropdownHide.style.display = "none";
-
+            // Add the new leg details to the selected details element
+            selectedDetailsElement.appendChild(legDetails);
+        });
+    } else {
+        console.error("Selected route does not have the expected structure.");
+    }
 }
+
 // angular.module('routeApp', [])
 //     .controller('RouteController', function ($scope, $http) {
 //         // Simulate receiving routes from the backend
