@@ -3,7 +3,7 @@ package com.down2thewire;
 public class LinearWayPoint extends Node {
 
     Location location;
-    String wayPointName;
+    String wPDescription;
     Long wayPointID;
     Edge edge;
     // 0-walk, 1-drive, 2-rideshare, 3-carRental, 4-bicycle, 5-scooter, 6-transit, 7-bus, 8-airplane, 9-unused
@@ -20,9 +20,9 @@ public class LinearWayPoint extends Node {
 //    private boolean[] modes = {false, false, false, false, false, false, false, false, false, false};
 
 
-    public LinearWayPoint(Location location, String uniqueName) {
+    public LinearWayPoint(Location location, String wPName) {
         this.location = location;
-        this.wayPointName = uniqueName;
+        this.wPDescription = wPName;
         this.wayPointID = location.generateUniqueID();
     }
     public LinearWayPoint(Location location) {
@@ -111,8 +111,8 @@ public class LinearWayPoint extends Node {
     }
 */
 
-    public void setWayPointName (String name){
-        this.wayPointName = name;
+    public void setwPDescription(String name){
+        this.wPDescription = name;
     }
 
     public void setEdge (Edge edge) {
