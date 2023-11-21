@@ -77,13 +77,6 @@ public class DijkstraGraph {
         return nearbyNodes;
     }
 
-    private int calculateDistanceToDestination(DijkstraNode node, Long destinationId) {
-        // Implement the logic to calculate the distance from `node` to the node with `destinationId`
-        // This could involve running a Dijkstra algorithm from `node` to the destination
-        // Return the calculated distance
-        return 0; // Placeholder, replace with actual distance calculation
-    }
-
     public DijkstraNode getNodeFromID(Long nodeId) {
         for(DijkstraNode loopNode: nodes){
             if (loopNode.getNodeId().equals(nodeId)){
@@ -169,6 +162,7 @@ public class DijkstraGraph {
 //        return new LinearWayPoint(node.getNodeId(), location);
 //    }
     public LinearWayPoint convertNodeToWayPoint(DijkstraNode node) {
+        // todo DijkstraGraph.convertNodeToWaypoint() may not be functional
         // Fetch the Location object corresponding to the DijkstraNode
         Location location = getLocationForNode(node); // Implement this method based on your data model
 
@@ -199,6 +193,7 @@ public class DijkstraGraph {
     }
 
     private Edge getEdgeForNode(DijkstraNode node) {
+        // todo complete method DijkstraGraph.getEdgeForNode() or delete
         // Implement logic to get an Edge related to the node, if necessary
         return null; // or a valid Edge
     }

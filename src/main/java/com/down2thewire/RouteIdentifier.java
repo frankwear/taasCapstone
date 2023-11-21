@@ -18,14 +18,14 @@ public class RouteIdentifier {
 
     // Method to add an operation to the list
     public void addGraph(Boolean isOrigin, String mode, String metric, DijkstraGraph graph){
-        String graphName = getKey(isOrigin, mode, metric);
+        String graphName = createMapKey(isOrigin, mode, metric);
         graphList.put(graphName,graph);
     }
     public void addGraph(String graphName, DijkstraGraph graph){
         graphList.put(graphName,graph);
     }
 
-    private String getKey(Boolean fromOrigin, String mode, String metric) {
+    private String createMapKey(Boolean fromOrigin, String mode, String metric) {
         Set<String> validModes = new HashSet<>(Arrays.asList("DRIVING", "WALKING", "BICYCLING", "TRANSIT"));
         Set<String> validMetrics = new HashSet<>(Arrays.asList("duration", "cost", "distance"));
         String tempKey = new String("");
@@ -59,41 +59,89 @@ public class RouteIdentifier {
         // Create and Save primary and secondary graphs based on origin and destination respectively.
         DijkstraGraph primaryGraph;
         DijkstraGraph secondaryGraph;
-        String tempKey = getKey(Boolean.TRUE, primaryMode, metric);
-        if (graphList.containsKey(tempKey)){
-            primaryGraph = graphList.get(tempKey);
-        } else {
-            primaryGraph = new DijkstraGraph(geoModel, routeRequest, primaryMode, metric);
-            primaryGraph = primaryGraph.calculateShortestPathFromSource(routeRequest.originWaypoint.getId());
-            addGraph(tempKey, primaryGraph);
-        }
-        tempKey = getKey(Boolean.FALSE, secondaryMode, metric);
-        if (graphList.containsKey(tempKey)){
-            secondaryGraph = graphList.get(tempKey);
-        } else {
-            secondaryGraph = new DijkstraGraph(geoModel, routeRequest, secondaryMode, metric);
-            secondaryGraph = secondaryGraph.calculateShortestPathFromSource(routeRequest.destinationWaypoint.getId());
-            addGraph(tempKey, secondaryGraph);
-        }
+        primaryGraph = discoverGraph(Boolean.TRUE, primaryMode, metric);
+        secondaryGraph = discoverGraph(Boolean.FALSE, secondaryMode, metric);
 
 
         HashMap<Long, Integer> nearbyNodes = secondaryGraph.getNearBy(routeRequest.destinationWaypoint.getId(), maxDistanceOfSecondaryMode);
         if (nearbyNodes.isEmpty()) {
-            Long destinationId = routeRequest.destinationWaypoint.getId();
-            //todo Create handling for no path to destination primaryGraph
-            DijkstraNode destinationNode = primaryGraph.getNodeFromID(destinationId);
-            List<DijkstraNode> shortestPath = destinationNode.getShortestPath();
-            LinearRoute shortestRoute = getRouteFromPath(shortestPath, primaryMode);
-            return shortestRoute;
+            LinearRoute route = getRouteToNode(primaryGraph, routeRequest.destinationWaypoint.getId(), primaryMode);
+            if (route.wayPointLinkedList.isEmpty()){
+                System.out.println("No nearby node found Found.  Need to query API.");
+            }
+            return route;
         }
+
+        Long closestNodeId = findClosestSharedNode(nearbyNodes, primaryGraph);
+        if (closestNodeId.equals(0L)){  // because there is no matching ID
+            LinearRoute route = getRouteToNode(primaryGraph, routeRequest.destinationWaypoint.getId(), primaryMode);
+            if (route.wayPointLinkedList.isEmpty()){
+                System.out.println("No Route Found.  Need to query API");
+            }
+            return route;
+        } else {
+            LinearRoute route = getRouteToNode(primaryGraph, closestNodeId, primaryMode);
+            LinearRoute fromDestination = getRouteToNode(secondaryGraph, closestNodeId, secondaryMode);
+            LinearRoute toDesination = LinearRoute.reverseRoute(fromDestination);
+            // todo check edge handling to combine routes
+            route.combineRoutes(toDesination);
+        }
+        int shortestDistance = primaryGraph.getNodeFromID(closestNodeId).getDistance();
+
+
+
+
+
+//        for (DijkstraNode node : primaryGraph)
 
 
 
         //return dijkstraGraph.findBestRoute(routeRequest, primaryMode, secondaryMode, priority, maxDistanceOfSecondaryMode);
-        LinearRoute combinedRoute = combineRoutes(primaryGraph, secondaryGraph, maxDistanceOfSecondaryMode, nearbyNodes);
+ //       LinearRoute combinedRoute = combineRoutes(primaryGraph, secondaryGraph, maxDistanceOfSecondaryMode, nearbyNodes);
 
-        return combinedRoute;
+        return new LinearRoute();
 
+    }
+
+    private Long findClosestSharedNode(HashMap<Long, Integer> nodes, DijkstraGraph graph) {
+        // Ticket #193 - Identify Connecting Vertex with Shortest Distance from Origin
+        Long closestSharedNodeId = 0L;
+        Integer distance = Integer.MAX_VALUE;
+        for (Long nodeID: nodes.keySet()) {
+
+            // getNodeFromId returns a node with ID 0 if the node doesn't exist in graph.
+            if (!graph.getNodeFromID(nodeID).getNodeId().equals(0L)) {
+                if (graph.getNodeFromID(nodeID).getDistance() < distance) {
+                    distance = graph.getNodeFromID(nodeID).getDistance();
+                    closestSharedNodeId = nodeID;
+                }
+            }
+        }
+        return closestSharedNodeId;
+    }
+
+    private DijkstraGraph discoverGraph(Boolean fromOrigin, String mode, String metric) {
+        DijkstraGraph graph;
+        String tempKey = createMapKey(fromOrigin, mode, metric);
+        if (graphList.containsKey(tempKey)){
+            graph = graphList.get(tempKey);
+        } else {
+            graph = new DijkstraGraph(geoModel, routeRequest, mode, metric);
+            graph = graph.calculateShortestPathFromSource(routeRequest.originWaypoint.getId());
+            addGraph(tempKey, graph);
+        }
+        return graph;
+    }
+
+    private LinearRoute getRouteToNode(DijkstraGraph graph, Long id, String mode) {
+        DijkstraNode destinationNode = graph.getNodeFromID(id);
+        List<DijkstraNode> shortestPath = destinationNode.getShortestPath();
+        if (shortestPath.isEmpty()){
+            // todo handling for no path found - get direct route from API
+            return new LinearRoute();
+        }
+        LinearRoute shortestRoute = getRouteFromPath(shortestPath, mode);
+        return shortestRoute;
     }
 
     private LinearRoute getRouteFromPath(List<DijkstraNode> shortestPath, String mode){
