@@ -1,5 +1,7 @@
-FROM tomcat:10.1.15-jre11-temurin-jammy
-COPY . .
-WORKDIR app/webapp
-CMD ["catalina.sh", "run"]
+FROM tomcat:latest
+RUN addgroup taas && adduser --system --ingroup taas taas
+USER taas
+WORKDIR /usr/local/tomcat/webapps
+COPY . /usr/local/tomcat/webapps
 EXPOSE 8080
+CMD ["catalina.sh", "run"]

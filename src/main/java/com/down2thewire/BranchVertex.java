@@ -148,6 +148,18 @@ public class BranchVertex extends Node {
         }
     }
 
+    public Edge<BranchVertex> matchEdge(BranchVertex endVertex, String mode) {
+        for (int i = 0; i < outgoingEdges.size(); i++) {
+            if (outgoingEdges.get(i).getEnd().getId().equals(endVertex.getId())){
+                if (outgoingEdges.get(i).getMode().equals(mode)){
+                    return outgoingEdges.get(i);
+                }
+            }
+        }
+        System.out.println("Edge not found BranchVertex.matchEdge()");
+        return null;
+    }
+
     public static class BranchGeoModelGenerator {
 
         BranchGeoModel geographicMap = new BranchGeoModel();

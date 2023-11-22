@@ -5,13 +5,12 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 public class LinearRoute {
-    LinkedList<LinearWayPoint> wayPointLinkedList = new LinkedList<>();
-    LinkedList<Edge> edgeList;
+    LinkedList<LinearWayPoint> wayPointLinkedList;
+
 
     public LinearRoute() {
         this.wayPointLinkedList = new LinkedList<LinearWayPoint>();
     }
-
 
     public LinearWayPoint addWaypoint(LinearWayPoint wayPoint){
         if (!wayPointLinkedList.isEmpty()){
@@ -67,14 +66,12 @@ public class LinearRoute {
     }
 
     public int getWaypointIndex(String s) {
-        ListIterator<LinearWayPoint> wayPointListIterator = (ListIterator<LinearWayPoint>) wayPointLinkedList.iterator();
-        while (wayPointListIterator.hasNext()) {
-            if (wayPointListIterator.next().description.contains(s)) {
-                return wayPointListIterator.previousIndex();
+        for (int i = 0; i < getWaypointListSize(); i++){
+            if (wayPointLinkedList.get(i).getWpDescription().contains(s)) {
+                return i;
             } //TODO Figure out what this means, maybe at an iterator ++
         }   //vertexIterator++;
         return -1; // return -1 if not found
-
     }
 
     public LinearWayPoint getWaypoint(String s) {
@@ -95,33 +92,83 @@ public class LinearRoute {
 
 
 
-    public void addRoute(LinearRoute g) {
+    public void combineRoutes(LinearRoute g) {
 
         // iterate over edges of argument g - adding an edge adds if vertices if they are unique
-        ListIterator<LinearWayPoint> wIterator = (ListIterator<LinearWayPoint>) g.wayPointLinkedList.iterator();
-        while (wIterator.hasNext()) {
-            this.addWaypoint(wIterator.next());
+        // todo correct code to combine head and tail waypoint to make a single route
+
+        // merging tail of first with head of last
+        LinearWayPoint tail = this.wayPointLinkedList.get(this.getWaypointListSize()-1);
+        LinearWayPoint head = g.getWaypoint(0);
+
+        if (tail.getId().equals(head.getId())){
+            if (this.getWaypointListSize() < 2){
+                this.wayPointLinkedList = g.wayPointLinkedList;
+            } else{
+                LinearWayPoint oneBack = this.wayPointLinkedList.get(this.getWaypointListSize()-2);
+                Edge<LinearWayPoint> lastEdge = oneBack.getEdge();
+                lastEdge.setEnd(head);
+                this.wayPointLinkedList.removeLast();
+                for (int i = 0; i < g.getWaypointListSize(); i++){
+                    this.addWaypoint(g.getWaypoint(i));
+                }
+            }
+        } else {
+            System.out.println("Cannot combine routes without metrics at LinearRoute.combineRoutes()");
         }
+//        ListIterator<LinearWayPoint> wIterator = (ListIterator<LinearWayPoint>) g.wayPointLinkedList.iterator();
+//        while (wIterator.hasNext()) {
+//            this.addWaypoint(wIterator.next());
+//        }
     }
+    public void combineRoutes(LinearRoute g,
+                              String mode,
+                              Integer duration,
+                              Double cost,
+                              Integer distance) {
+
+        // merging tail of first with head of last
+        LinearWayPoint tail = this.wayPointLinkedList.get(this.getWaypointListSize()-1);
+        LinearWayPoint head = g.getWaypoint(0);
+        if (tail.getId().equals(head.getId())){
+            combineRoutes(g);
+        } else {
+            Edge<LinearWayPoint> tailToHead = new Edge<>(tail, head, mode, duration, cost, distance);
+            tail.setEdge(tailToHead);
+            for (int i = 0; i < g.getWaypointListSize(); i++) {
+                this.addWaypoint(g.getWaypoint(i));
+            }
+        }
+//        ListIterator<LinearWayPoint> wIterator = (ListIterator<LinearWayPoint>) g.wayPointLinkedList.iterator();
+//        while (wIterator.hasNext()) {
+//            this.addWaypoint(wIterator.next());
+//        }
+    }
+
+
+
+
 //    public void addGraph(Graph graph){}
 
-    public LinearRoute cloneRoute(LinearRoute route){
-
-    //public GeographicModel cloneOfWgAndLists()
-        // Vertices and Edges are NOT cloned //Only route to be cloned here not WeightedGraph
-        // todo - clone of route to be created here
-        /*
-        GeographicModel cloneWG = new GeographicModel();
-        cloneWG.vertexList = new LinkedList<WayPoint>();
-        for (WayPoint vertex : this.wayPointLinkedList) {
-            cloneWG.addJustVertex(vertex);
+    public static LinearRoute cloneRoute(LinearRoute r){
+        LinearRoute clonedRoute = new LinearRoute();
+        for (int i = 0; i < r.getWaypointListSize(); i++){
+            LinearWayPoint currentWP = r.wayPointLinkedList.get(i);
+            LinearWayPoint tempWP = new LinearWayPoint(currentWP.getLocation(), currentWP.getWpDescription());
+            clonedRoute.addWaypoint(tempWP);
         }
-        for (Edge2 edge : this.edgeList) {
-            cloneWG.addJustEdge(edge);
+        for (int i = 0; i < r.getWaypointListSize() - 1; i++){
+            Edge<LinearWayPoint> currentEdge = r.wayPointLinkedList.get(i).getEdge();
+            Edge<LinearWayPoint> tempEdge = new Edge<>(
+                    clonedRoute.getWaypoint(i),
+                    clonedRoute.getWaypoint(i+1),
+                    currentEdge.getMode(),
+                    currentEdge.getDuration(),
+                    currentEdge.getCost(),
+                    currentEdge.getDistance());
+            clonedRoute.getWaypoint(i).setEdge(tempEdge);
         }
-    return cloneWG;
-         */
-        return route;
+        return clonedRoute;
     }
 
     public void removeAdjacentSameModeEdges() {  // considering routes non-branching
@@ -148,106 +195,46 @@ public class LinearRoute {
         return wayPointLinkedList.size();
     }
 
-
-
     public void printGraph(){
         Iterator<LinearWayPoint> waypointIterator = wayPointLinkedList.iterator();
         while (waypointIterator.hasNext()) {
             LinearWayPoint tempWaypoint = waypointIterator.next();
-            System.out.println(tempWaypoint.getLongitude() + "  " + tempWaypoint.getLatitude() + "  " +
-                    tempWaypoint.getDescription());
+            Edge<LinearWayPoint> tempEdge = tempWaypoint.getEdge();
+            System.out.println("\n" + tempWaypoint.getWpDescription() +
+                    "\n     longitude: " + tempWaypoint.getLongitude() + "  latitude: " + tempWaypoint.getLatitude());
+            if (tempEdge != null) {
+                System.out.println("     " + tempEdge.getMode() +
+                    "\n     Dist/Dur/Cost:  " + tempEdge.getDistance() + "   " + tempEdge.getDuration() + "   " + tempEdge.getCost());
+            }
         }
-        Iterator<Edge> edgeIterator = edgeList.iterator();
-        while (edgeIterator.hasNext()) {
-            Edge tempEdge = edgeIterator.next();
-            System.out.println("\n\nFrom: " + tempEdge.getStart().getDescription() + "\nTo " + tempEdge.getEnd().getDescription() +
-                    "\nMode: " + tempEdge.getMode() + "\nDistance: " + tempEdge.getDistance() +
-                    "\nDuration: " + tempEdge.getDuration() +
-                    "\nCost: " + tempEdge.getCost());
+        System.out.println("\n\n");
+//        Iterator<Edge> edgeIterator = edgeList.iterator();
+//        while (edgeIterator.hasNext()) {
+//            Edge tempEdge = edgeIterator.next();
+//            System.out.println("\n\nFrom: " + tempEdge.getStart().getDescription() + "\nTo " + tempEdge.getEnd().getDescription() +
+//                    "\nMode: " + tempEdge.getMode() + "\nDistance: " + tempEdge.getDistance() +
+//                    "\nDuration: " + tempEdge.getDuration() +
+//                    "\nCost: " + tempEdge.getCost());
+//        }
+    }
+
+    public static LinearRoute reverseRoute(LinearRoute r1) {
+        if (r1.getWaypointListSize() < 2) return r1;
+        LinearRoute tempRoute = LinearRoute.cloneRoute(r1);  // so you don't change the original
+        LinearRoute r2 = new LinearRoute();
+        LinearWayPoint wp2 = tempRoute.getWaypoint(tempRoute.getWaypointListSize()-1);
+        for (int i = tempRoute.getWaypointListSize()-1; i > -1; i--) {
+            r2.addWaypoint(tempRoute.getWaypoint(i));  // with edges pointing the wrong direction
         }
+        for (int i = 0; i < r2.getWaypointListSize()-1; i++) {
+            LinearWayPoint currentWp = r2.getWaypoint(i);
+            LinearWayPoint nextWp = r2.getWaypoint(i + 1);
+            Edge<LinearWayPoint> currentEdge = nextWp.getEdge(); //reversing requires reassigning edge
+            currentEdge.setStart(currentWp);
+            currentEdge.setEnd(nextWp);
+            currentWp.setEdge(currentEdge);
+        }
+        r2.getWaypoint(r2.getWaypointListSize()-1).edge = null;
+        return r2;
     }
-
-/*
-    public void loadTestGraph1(WeightedGraph graph){
-
-        // add vertices
-        graph.addVertex(new Vertex(new Location(34.0333005,-84.5788771), "KSU Kennesaw"));
-        graph.addVertex(new Vertex(new Location(33.9211998,-84.3442140), "Dunwoody Marta Station"));
-        graph.addVertex(new Vertex(new Location(33.9518345,-84.5442312), "National Cemetery of Marietta"));
-        graph.addVertex(new Vertex(new Location(33.6323356,-84.4378869), "Hartsfield Jackson Airport"));
-        graph.addVertex(new Vertex(new Location(33.8021506,-84.1539056), "Stone Mountain Park"));
-
-        // add edges
-        // for testing clarity, making each vertex a separate variable
-        Vertex v1 = graph.getVertex("KSU Kennesaw");
-        Vertex v2 = graph.getVertex("Dunwoody Marta Station");
-        graph.addEdge(v1, v2, "WALKING", 23991, 0.00, 31766 );
-        // Fare - CobbLinc route 45 is local, 1-way, $2.50 for adult, free transfer to route 10 and Marta for 3 hours.
-        graph.addEdge(v1, v2, "TRANSIT", 10537, 2.50, 64413);  //this is mixed walk/transit
-        graph.addEdge(v1, v2, "DRIVING", 1466, 14.48, 34286);  //cost is .68*miles
-        // duration is driving plus 10 min pickup
-        // cost is $10 + $1.60/mile
-        graph.addEdge(v1, v2, "RIDESHARE", 2065, 45.20, 34286);
-        graph.addEdge(v1, v2, "BICYCLING", 7124, 0.00, 32629);
-
-        Vertex v3 = graph.getVertex("National Cemetery of Marietta");
-        graph.addEdge(v3, v1, "TRANSIT", 1992, 2.50, 17967);
-        graph.addEdge(v3, v1, "RIDESHARE", 737, 21.36,11467);
-        graph.addEdge(v3, v1, "BICYCLING", 2606, 0.00, 12898);
-
-        graph.printGraph();
-    }
-    public void loadTestGraphDunMacysToPiedmont(WeightedGraph graph){
-
-        // add vertices
-        Vertex v1 = graph.addVertex(new Vertex(new Location(33.9228732,-84.3418493), "Macys - Perimeter Mall"));
-        Vertex v2 = graph.addVertex(new Vertex(new Location(33.921227,-84.344398), "Rail stop - Dunwoody Marta Station"));
-        Vertex v3 = graph.addVertex(new Vertex(new Location(33.789112,-84.387383), "Rail stop - Arts Center Marta Station"));
-        Vertex v4 = graph.addVertex(new Vertex(new Location(33.7892632,-84.3873414), "Bus stop - Arts Center Marta Station"));
-        Vertex v5 = graph.addVertex(new Vertex(new Location(33.8082253,-84.3934548), "Bus stop - Peachtree Rd at Collier Rd"));
-        Vertex v6 = graph.addVertex(new Vertex(new Location(33.8085817,-84.3943387), "Piedmont Hospital - Peachtree Rd"));
-
-
-        // add edges
-        // for testing clarity, making each vertex a separate variable
-
-        Edge e1 = graph.addEdge(v1, v2, "WALKING", 271, 0.00, 347);
-        Edge e2 = graph.addEdge(v2, v3, "TRANSIT", 900, 0.00, 17083);
-        Edge e3 = graph.addEdge(v3, v4, "WALKING", 18, 0.00, 17);
-        Edge e4 = graph.addEdge(v4, v5, "TRANSIT", 699, 0.00, 3083);
-        Edge e5 = graph.addEdge(v5, v6, "WALKING", 103, 0.00, 121);
-    }
-    public void loadTestGraphDunMacysToPiedmont2(){
-
-        // add vertices
-        Vertex v1 = this.addVertex(new Vertex(new Location(33.9228732,-84.3418493), "Macys - Perimeter Mall"));
-        Vertex v2 = this.addVertex(new Vertex(new Location(33.921227,-84.344398), "Rail stop - Dunwoody Marta Station"));
-        Vertex v3 = this.addVertex(new Vertex(new Location(33.789112,-84.387383), "Rail stop - Arts Center Marta Station"));
-        Vertex v4 = this.addVertex(new Vertex(new Location(33.7892632,-84.3873414), "Bus stop - Arts Center Marta Station"));
-        Vertex v5 = this.addVertex(new Vertex(new Location(33.8082253,-84.3934548), "Bus stop - Peachtree Rd at Collier Rd"));
-        Vertex v6 = this.addVertex(new Vertex(new Location(33.8085817,-84.3943387), "Piedmont Hospital - Peachtree Rd"));
-
-
-        // add edges
-        // for testing clarity, making each vertex a separate variable
-
-        Edge e1 = this.addEdge(v1, v2, "WALKING", 271, 0.00, 347);
-        Edge e2 = this.addEdge(v2, v3, "TRANSIT", 900, 0.00, 17083);
-        Edge e3 = this.addEdge(v3, v4, "WALKING", 18, 0.00, 17);
-        Edge e4 = this.addEdge(v4, v5, "WALKING", 699, 0.00, 3083);
-        Edge e5 = this.addEdge(v5, v6, "TRANSIT", 103, 0.00, 121);
-    }
-
-*/
-
-    public static void main(String[] args) {
-
-
-        BranchGeoModel graph = new BranchGeoModel();
-        // graph.loadTestGraph1(graph);
-       // graph.loadTestGraphDunMacysToPiedmont(graph);
-        graph.printGraph();
-    }
-
-
 }

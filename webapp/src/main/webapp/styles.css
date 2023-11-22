@@ -101,3 +101,106 @@ button[type="submit"]:hover {
     overflow: hidden;
     max-height: 50vh;
 }
+
+/*below for temporary placehodler*/
+
+#temporaryPlaceholder {
+    display: none; /* Initially hide the element */
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    color: #666;
+    margin-top: 20px;
+    width: 100%;
+    overflow: hidden;
+    max-height: 50vh;
+}
+
+
+#selectableLines {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#selectableLines ul {
+    list-style: none;
+    padding: 0;
+}
+
+#selectableLines ul li {
+    cursor: pointer;
+    padding: 5px;
+    margin: 5px 0;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#selectableLines ul li:hover {
+    background-color: #ccc;
+}
+
+.dropdown-menu {
+    display: none; /* Hide the dropdown initially */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    margin-top: 20px; /* Adjust the margin as needed to position the dropdown correctly */
+}
+
+.dropdown-menu select {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #f9f9f9;
+    outline: none;
+    font-size: 16px;
+}
+
+.dropdown-menu button {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-menu button:hover {
+    background-color: #555;
+}
+#routeDropdown {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #f9f9f9;
+    outline: none;
+    font-size: 16px;
+}
+#routeDetails {
+     margin-top: 20px;
+     padding: 10px;
+     background-color: #f9f9f9;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     max-width: 400px;
+ }
+#routeDropdown option {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/*  hover effect for dropdown options */
+#routeDropdown option:hover {
+    background-color: #f0f0f0;
+}
+

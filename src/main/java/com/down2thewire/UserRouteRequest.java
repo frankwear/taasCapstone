@@ -106,10 +106,26 @@ public class UserRouteRequest {
     public String getDestination(){
         return this.destination;
     }
+
     public void setDestination(String d){
         this.destination = d;
     }
 
+    public LinearWayPoint getOriginWaypoint() {
+        return originWaypoint;
+    }
+
+    public void setOriginWaypoint(LinearWayPoint originWaypoint) {
+        this.originWaypoint = originWaypoint;
+    }
+
+    public LinearWayPoint getDestinationWaypoint() {
+        return destinationWaypoint;
+    }
+
+    public void setDestinationWaypoint(LinearWayPoint destinationWaypoint) {
+        this.destinationWaypoint = destinationWaypoint;
+    }
 
     public void generateTransitRequestTest2() {
         UserAccount userT = new UserAccount("Thomas");
