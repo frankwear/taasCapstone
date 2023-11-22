@@ -3,11 +3,16 @@ package com.down2thewire;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class RouteIdentifierTest {
+
+    private RouteIdentifier routeIdentifier;
+    private BranchGeoModel geoModel;
+    private UserRouteRequest routeRequest;
 
     @Test
     void getBestRoute() {
@@ -67,15 +72,22 @@ class RouteIdentifierTest {
         v06.addEdge(v06, v02, "TRANSIT", 8634, 14.00, 72481);
 
         UserRouteRequest userRouteRequest = new UserRouteRequest();  //from KSU to ZooAtlanta
-        userRouteRequest.setOrigin(v05);  //check this method.  It need to be coded first.
-        userRouteRequest.setDestination(v03);
+        LinearWayPoint wp05 = new LinearWayPoint(v05.getLocation(), v05.getDescription());
+        userRouteRequest.setOriginWaypoint(wp05);  //check this method.  It needs to be coded first.
+        LinearWayPoint wp03 = new LinearWayPoint(v03.getLocation(), v03.getDescription());
+        userRouteRequest.setDestinationWaypoint(wp03);
 
         RouteIdentifier routeIdentifier = new RouteIdentifier(graph, userRouteRequest);
 
 // duration is measured in seconds, 4500 (75 minutes) is the longest time the person is willing to spend on a transit system
 
-        LinearRoute driveTransitRoute = routeIdentifier.getBestRoute("DRIVING", "TRANSIT", "duration", 4500);
-        assertTrue (driveTransitRoute.getWaypoint(1).getDescription.includes("Kroger"));  // or as appropriate
+        LinearRoute driveTransitRoute = routeIdentifier.getBestRoute("DRIVING", "TRANSIT", "duration", 3000);
+        driveTransitRoute.printGraph();
+        assertTrue (driveTransitRoute.getWaypointListSize() > 2);  // indicator of more than one leg
+        assertTrue (driveTransitRoute.getWaypointIndex("KSU") != -1);  // indicator that KSU (origin) is in route
+        assertTrue(driveTransitRoute.getWaypointIndex("Zoo") != -1);  // indicator that Zoo Atlanta (destination) is in route
+        assertTrue (driveTransitRoute.getWaypointIndex("Saturn") == -1);  // indicator that we aren't getting false positives
+
 
 // check another route using walking with max distance about 1.5 miles
 
@@ -88,9 +100,6 @@ class RouteIdentifierTest {
 //                assertTrue (something);
     }
 
-    private RouteIdentifier routeIdentifier;
-    private BranchGeoModel geoModel;
-    private UserRouteRequest routeRequest;
 
 
     @BeforeEach
@@ -106,11 +115,13 @@ class RouteIdentifierTest {
 
     @Test
     void testAddOperationAndListRetrieval() {
-        DijkstraGraph graph = new DijkstraGraph(geoModel, routeRequest, "mode", "metric");
-        routeIdentifier.addGraph(graph);
-        LinkedList<DijkstraGraph> graphList = routeIdentifier.getGraphList();
-
-        assertTrue(graphList.contains(graph));
+        String mode = "TRANSIT";
+        String metric = "duration";
+        DijkstraGraph graph = new DijkstraGraph(geoModel, routeRequest, mode, metric, routeRequest.getOriginWaypoint().getId());
+        routeIdentifier.addGraph(Boolean.TRUE, mode, metric, graph);
+        HashMap<String, DijkstraGraph> graphList = routeIdentifier.getGraphList();
+        assertFalse(graphList.isEmpty());
+        assertTrue(graphList.containsKey(routeIdentifier.createMapKey(Boolean.TRUE, mode, metric)));
     }
 
     @Test

@@ -6,7 +6,7 @@ import java.util.ListIterator;
 
 public class LinearRoute {
     LinkedList<LinearWayPoint> wayPointLinkedList;
-    LinkedList<Edge> edgeList;
+
 
     public LinearRoute() {
         this.wayPointLinkedList = new LinkedList<LinearWayPoint>();
@@ -66,14 +66,12 @@ public class LinearRoute {
     }
 
     public int getWaypointIndex(String s) {
-        ListIterator<LinearWayPoint> wayPointListIterator = (ListIterator<LinearWayPoint>) wayPointLinkedList.iterator();
-        while (wayPointListIterator.hasNext()) {
-            if (wayPointListIterator.next().description.contains(s)) {
-                return wayPointListIterator.previousIndex();
+        for (int i = 0; i < getWaypointListSize(); i++){
+            if (wayPointLinkedList.get(i).getWpDescription().contains(s)) {
+                return i;
             } //TODO Figure out what this means, maybe at an iterator ++
         }   //vertexIterator++;
         return -1; // return -1 if not found
-
     }
 
     public LinearWayPoint getWaypoint(String s) {
@@ -102,12 +100,18 @@ public class LinearRoute {
         // merging tail of first with head of last
         LinearWayPoint tail = this.wayPointLinkedList.get(this.getWaypointListSize()-1);
         LinearWayPoint head = g.getWaypoint(0);
+
         if (tail.getId().equals(head.getId())){
-            LinearWayPoint oneBack = this.wayPointLinkedList.get(this.getWaypointListSize());
-            Edge<LinearWayPoint> lastEdge = oneBack.getEdge();
-            lastEdge.setEnd(head);
-            for (int i = 1; i < g.getWaypointListSize(); i++){
-                this.addWaypoint(g.getWaypoint(i));
+            if (this.getWaypointListSize() < 2){
+                this.wayPointLinkedList = g.wayPointLinkedList;
+            } else{
+                LinearWayPoint oneBack = this.wayPointLinkedList.get(this.getWaypointListSize()-2);
+                Edge<LinearWayPoint> lastEdge = oneBack.getEdge();
+                lastEdge.setEnd(head);
+                this.wayPointLinkedList.removeLast();
+                for (int i = 0; i < g.getWaypointListSize(); i++){
+                    this.addWaypoint(g.getWaypoint(i));
+                }
             }
         } else {
             System.out.println("Cannot combine routes without metrics at LinearRoute.combineRoutes()");
@@ -150,7 +154,7 @@ public class LinearRoute {
         LinearRoute clonedRoute = new LinearRoute();
         for (int i = 0; i < r.getWaypointListSize(); i++){
             LinearWayPoint currentWP = r.wayPointLinkedList.get(i);
-            LinearWayPoint tempWP = new LinearWayPoint(currentWP.getLocation(), currentWP.getDescription());
+            LinearWayPoint tempWP = new LinearWayPoint(currentWP.getLocation(), currentWP.getWpDescription());
             clonedRoute.addWaypoint(tempWP);
         }
         for (int i = 0; i < r.getWaypointListSize() - 1; i++){
@@ -195,17 +199,23 @@ public class LinearRoute {
         Iterator<LinearWayPoint> waypointIterator = wayPointLinkedList.iterator();
         while (waypointIterator.hasNext()) {
             LinearWayPoint tempWaypoint = waypointIterator.next();
-            System.out.println(tempWaypoint.getLongitude() + "  " + tempWaypoint.getLatitude() + "  " +
-                    tempWaypoint.getDescription());
+            Edge<LinearWayPoint> tempEdge = tempWaypoint.getEdge();
+            System.out.println("\n" + tempWaypoint.getWpDescription() +
+                    "\n     longitude: " + tempWaypoint.getLongitude() + "  latitude: " + tempWaypoint.getLatitude());
+            if (tempEdge != null) {
+                System.out.println("     " + tempEdge.getMode() +
+                    "\n     Dist/Dur/Cost:  " + tempEdge.getDistance() + "   " + tempEdge.getDuration() + "   " + tempEdge.getCost());
+            }
         }
-        Iterator<Edge> edgeIterator = edgeList.iterator();
-        while (edgeIterator.hasNext()) {
-            Edge tempEdge = edgeIterator.next();
-            System.out.println("\n\nFrom: " + tempEdge.getStart().getDescription() + "\nTo " + tempEdge.getEnd().getDescription() +
-                    "\nMode: " + tempEdge.getMode() + "\nDistance: " + tempEdge.getDistance() +
-                    "\nDuration: " + tempEdge.getDuration() +
-                    "\nCost: " + tempEdge.getCost());
-        }
+        System.out.println("\n\n");
+//        Iterator<Edge> edgeIterator = edgeList.iterator();
+//        while (edgeIterator.hasNext()) {
+//            Edge tempEdge = edgeIterator.next();
+//            System.out.println("\n\nFrom: " + tempEdge.getStart().getDescription() + "\nTo " + tempEdge.getEnd().getDescription() +
+//                    "\nMode: " + tempEdge.getMode() + "\nDistance: " + tempEdge.getDistance() +
+//                    "\nDuration: " + tempEdge.getDuration() +
+//                    "\nCost: " + tempEdge.getCost());
+//        }
     }
 
     public static LinearRoute reverseRoute(LinearRoute r1) {
@@ -224,7 +234,7 @@ public class LinearRoute {
             currentEdge.setEnd(nextWp);
             currentWp.setEdge(currentEdge);
         }
-        r2.getWaypoint(r2.getWaypointListSize()-1).setEdge(null);
+        r2.getWaypoint(r2.getWaypointListSize()-1).edge = null;
         return r2;
     }
 }

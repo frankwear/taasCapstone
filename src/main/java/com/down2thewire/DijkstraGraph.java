@@ -7,10 +7,11 @@ public class DijkstraGraph {
     private UserRouteRequest routeRequested;
 
 
-    public DijkstraGraph(BranchGeoModel gm, UserRouteRequest request, String mode, String metric){
+    public DijkstraGraph(BranchGeoModel gm, UserRouteRequest request, String mode, String metric, Long rootNodeId){
         this.routeRequested = request;
         setNodesFromGeoModel(gm, mode, metric);
-        System.out.println("nodes created.");
+//        System.out.println("nodes created.");
+        calculateShortestPathFromSource(rootNodeId);
     }
 
 //    public  LinkedList <DijkstraNode> getNearBy(Long){
@@ -89,30 +90,29 @@ public class DijkstraGraph {
 
     // getters and setters
 
-    public DijkstraGraph calculateShortestPathFromSource(Long nodeId) {
-        DijkstraNode source = getNodeFromID(nodeId);
+    private void calculateShortestPathFromSource(Long rootNodeId) {
+        DijkstraNode source = getNodeFromID(rootNodeId);
         source.setDistance(0);
 
-        Set<DijkstraNode> settleDijkstraNodes = new HashSet<>();
-        Set<DijkstraNode> unsettleDijkstraNodes = new HashSet<>();
+        Set<DijkstraNode> settledDijkstraNodes = new HashSet<>();
+        Set<DijkstraNode> unsettledDijkstraNodes = new HashSet<>();
 
-        unsettleDijkstraNodes.add(source);
+        unsettledDijkstraNodes.add(source);
 
-        while (unsettleDijkstraNodes.size() != 0) {
-            DijkstraNode currentNode = getLowestDistanceNode(unsettleDijkstraNodes);
-            unsettleDijkstraNodes.remove(currentNode);
-            for (Map.Entry< DijkstraNode, Integer> adjacencyPair:
+        while (unsettledDijkstraNodes.size() != 0) {
+            DijkstraNode currentNode = getLowestDistanceNode(unsettledDijkstraNodes);
+            unsettledDijkstraNodes.remove(currentNode);
+            for (Map.Entry<DijkstraNode, Integer> adjacencyPair:
                     currentNode.getNeighbors().entrySet()) {
                 DijkstraNode adjacentNode = adjacencyPair.getKey();
                 Integer edgeWeight = adjacencyPair.getValue();
-                if (!settleDijkstraNodes.contains(adjacentNode)) {
+                if (!settledDijkstraNodes.contains(adjacentNode)) {
                     calculateMinimumDistance(adjacentNode, edgeWeight, currentNode);
-                    unsettleDijkstraNodes.add(adjacentNode);
+                    unsettledDijkstraNodes.add(adjacentNode);
                 }
             }
-            settleDijkstraNodes.add(currentNode);
+            settledDijkstraNodes.add(currentNode);
         }
-        return this;
     }
     private static DijkstraNode getLowestDistanceNode(Set< DijkstraNode > unsettleDijkstraNodes) {
         DijkstraNode lowestDistanceNode = null;

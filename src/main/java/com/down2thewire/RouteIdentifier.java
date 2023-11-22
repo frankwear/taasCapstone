@@ -25,24 +25,24 @@ public class RouteIdentifier {
         graphList.put(graphName,graph);
     }
 
-    private String createMapKey(Boolean fromOrigin, String mode, String metric) {
+    public String createMapKey(Boolean fromOrigin, String mode, String metric) {
         Set<String> validModes = new HashSet<>(Arrays.asList("DRIVING", "WALKING", "BICYCLING", "TRANSIT"));
         Set<String> validMetrics = new HashSet<>(Arrays.asList("duration", "cost", "distance"));
         String tempKey = new String("");
         if (fromOrigin){
-            tempKey.concat("origin");
+            tempKey = "origin";
         } else {
-            tempKey.concat("destination");
+            tempKey = "destination";
         }
         if (validModes.contains(mode)) {
-            tempKey.concat(mode);
+            tempKey = tempKey.concat(mode);
         } else {
-            tempKey.concat("NoMode");
+            tempKey = tempKey.concat("NoMode");
         }
         if (validMetrics.contains(metric)){
-            tempKey.concat(metric);
+            tempKey = tempKey.concat(metric);
         } else {
-            tempKey.concat("NoMetric");
+            tempKey = tempKey.concat("NoMetric");
         }
         return tempKey;
     }
@@ -85,21 +85,8 @@ public class RouteIdentifier {
             LinearRoute toDesination = LinearRoute.reverseRoute(fromDestination);
             // todo check edge handling to combine routes
             route.combineRoutes(toDesination);
+            return route;
         }
-        int shortestDistance = primaryGraph.getNodeFromID(closestNodeId).getDistance();
-
-
-
-
-
-//        for (DijkstraNode node : primaryGraph)
-
-
-
-        //return dijkstraGraph.findBestRoute(routeRequest, primaryMode, secondaryMode, priority, maxDistanceOfSecondaryMode);
- //       LinearRoute combinedRoute = combineRoutes(primaryGraph, secondaryGraph, maxDistanceOfSecondaryMode, nearbyNodes);
-
-        return new LinearRoute();
 
     }
 
@@ -126,8 +113,11 @@ public class RouteIdentifier {
         if (graphList.containsKey(tempKey)){
             graph = graphList.get(tempKey);
         } else {
-            graph = new DijkstraGraph(geoModel, routeRequest, mode, metric);
-            graph = graph.calculateShortestPathFromSource(routeRequest.originWaypoint.getId());
+            if (fromOrigin) {
+                graph = new DijkstraGraph(geoModel, routeRequest, mode, metric, routeRequest.originWaypoint.getId());
+            } else {
+                graph = new DijkstraGraph(geoModel, routeRequest, mode, metric, routeRequest.destinationWaypoint.getId());
+            }
             addGraph(tempKey, graph);
         }
         return graph;
@@ -140,23 +130,45 @@ public class RouteIdentifier {
             // todo handling for no path found - get direct route from API
             return new LinearRoute();
         }
-        LinearRoute shortestRoute = getRouteFromPath(shortestPath, mode);
+        LinearRoute shortestRoute = getRouteFromPath(shortestPath, mode, destinationNode.getNodeId());
         return shortestRoute;
     }
 
-    private LinearRoute getRouteFromPath(List<DijkstraNode> shortestPath, String mode){
+    private LinearRoute getRouteFromPath(List<DijkstraNode> shortestPath, String mode, Long destinationId){
         LinearRoute route = new LinearRoute();
         BranchVertex currentVertex = geoModel.getVertex(shortestPath.get(0).getNodeId());
         LinearWayPoint currentWaypoint = new LinearWayPoint(currentVertex.getLocation(), currentVertex.getDescription());
+        route.addWaypoint(currentWaypoint);
         for (int i = 0; i < shortestPath.size()-1; i++){
             BranchVertex endVertex = geoModel.getVertex(shortestPath.get(i+1).getNodeId());
             LinearWayPoint endWaypoint = new LinearWayPoint(endVertex.getLocation(), endVertex.getDescription());
             Edge<BranchVertex> currentVertexEdge = currentVertex.matchEdge(endVertex, mode);
-            Edge<LinearWayPoint> currenWaypointEdge = new Edge<>(currentWaypoint, endWaypoint, mode,
-                    +currentVertexEdge.getDuration(), currentVertexEdge.getCost(), currentVertexEdge.getDistance());
-            currentWaypoint.setEdge(currenWaypointEdge);
+            Edge<LinearWayPoint> currentWaypointEdge = new Edge<>(
+                    currentWaypoint,
+                    endWaypoint,
+                    mode,
+                    currentVertexEdge.getDuration(),
+                    currentVertexEdge.getCost(),
+                    currentVertexEdge.getDistance());
+            currentWaypoint.setEdge(currentWaypointEdge);
+            currentWaypoint = endWaypoint;
             route.addWaypoint(currentWaypoint);
         }
+
+        // Dijkstra ShortestPath does not include the last vertex, so we have to add it.
+        // current waypoint is the last waypoint before the destination
+        BranchVertex endVertex = geoModel.getVertex(destinationId);
+        LinearWayPoint endWaypoint = new LinearWayPoint(endVertex.getLocation(), endVertex.getDescription());
+        Edge<BranchVertex> currentVertexEdge = currentVertex.matchEdge(endVertex, mode);
+        Edge<LinearWayPoint> currentWaypointEdge = new Edge<>(
+                currentWaypoint,
+                endWaypoint,
+                mode,
+                currentVertexEdge.getDuration(),
+                currentVertexEdge.getCost(),
+                currentVertexEdge.getDistance());
+        currentWaypoint.setEdge(currentWaypointEdge);
+        route.addWaypoint(endWaypoint);
         return route;
     }
 

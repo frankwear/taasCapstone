@@ -114,6 +114,9 @@ public class LinearWayPoint extends Node {
     public void setwPDescription(String name){
         this.wPDescription = name;
     }
+    public String getWpDescription(){
+        return this.wPDescription;
+    }
 
     public void setEdge (Edge edge) {
         Edge newEdge;

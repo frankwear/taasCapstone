@@ -47,11 +47,11 @@ public class DockerTest {
         userRouteRequest.setOrigin("155 Peachtree Ave, Atlanta, GA");
         userRouteRequest.setDestination("Hartsfield Airport");
 
-        DijkstraGraph transitShortestPaths = new DijkstraGraph(graph, userRouteRequest, "TRANSIT", "distance");
-        DijkstraGraph walkingShortestPaths = new DijkstraGraph(graph, userRouteRequest, "WALKING", "distance");
-//        transitShortestPaths = transitShortestPaths.calculateShortestPathFromSource(v01.getId());
-        walkingShortestPaths = walkingShortestPaths.calculateShortestPathFromSource(v06.getId());
+        DijkstraGraph transitShortestPaths = new DijkstraGraph(graph, userRouteRequest, "TRANSIT", "distance", v01.getId());
+        DijkstraGraph walkingShortestPaths = new DijkstraGraph(graph, userRouteRequest, "WALKING", "distance", v06.getId());
+
         graph.printGraph();
+
         System.out.println("done");
     }
 
