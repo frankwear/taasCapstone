@@ -6,9 +6,9 @@ public class ProposedRoute {
 
     public ProposedRoute(LinearRoute pr) {
         Leg summaryLeg = new Leg(new Edge<>());
-        summaryLeg.distance=0;
-        summaryLeg.duration=0;
-        summaryLeg.cost=0.0;
+        summaryLeg.distance = 0;
+        summaryLeg.duration = 0;
+        summaryLeg.cost = 0.0;
         summaryLeg.mode = "Summary";
         if (pr.wayPointLinkedList != null) {
             //LinearWayPoint wayPoint;
@@ -24,6 +24,7 @@ public class ProposedRoute {
             }
             System.out.println("Summary leg distance"+summaryLeg.distance);
         }
+        //System.out.println(summaryLeg.distance);
         legs.addFirst(summaryLeg);
     }
 

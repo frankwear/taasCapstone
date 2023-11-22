@@ -7,17 +7,27 @@ public class DijkstraGraph {
     private UserRouteRequest routeRequested;
 
 
-    public DijkstraGraph(BranchGeoModel gm, UserRouteRequest request, String mode){
+    public DijkstraGraph(BranchGeoModel gm, UserRouteRequest request, String mode, String metric, Long rootNodeId){
         this.routeRequested = request;
-        setNodesFromGeoModel(gm, mode);
-        System.out.println("nodes created.");
+        setNodesFromGeoModel(gm, mode, metric);
+//        System.out.println("nodes created.");
+        calculateShortestPathFromSource(rootNodeId);
     }
-    public void setNodesFromGeoModel(BranchGeoModel gm, String mode) {
+
+//    public  LinkedList <DijkstraNode> getNearBy(Long){
+//        Iterator<DijkstraNode> iterator = nodes.iterator();
+//        while (iterator.hasNext()) {
+//            DijkstraNode node = iterator.next();
+//        }
+//    }
+
+    private void setNodesFromGeoModel(BranchGeoModel gm, String mode, String metric) {
         //***** add nodes without neighbors, use HashMap to associate Nodes with Vertices *****//
         Map<DijkstraNode, BranchVertex> nodeToVertexAssn = new HashMap<>();
         Map<BranchVertex, DijkstraNode> vertexToNodeAssn = new HashMap<>();
         for (int i = 0; i < gm.getVertexListSize(); i++) {
             BranchVertex tempVertex = gm.getVertex(i);
+///// creating new nodes for each instance avoids coupling between Dijkstra Graphs using the same geomodel /////
             DijkstraNode tempNode = new DijkstraNode(tempVertex.getId());
             nodeToVertexAssn.put(tempNode, tempVertex);
             vertexToNodeAssn.put(tempVertex, tempNode);
@@ -36,16 +46,39 @@ public class DijkstraGraph {
                 if(tempEdge.getMode().equals(mode)) {
                     BranchVertex tempNeighborVert = tempEdge.getEnd();
                     DijkstraNode neighborNode = vertexToNodeAssn.get(tempNeighborVert);
-                    int neighborDistance = tempEdge.getDistance();
-                    loopNode.addNeighbor(neighborNode, neighborDistance);
+                    int neighborMetric;
+                    if (metric.equals("distance")){
+                        neighborMetric = tempEdge.getDistance();
+                    } else if (metric.equals("duration")){
+                        neighborMetric = tempEdge.getDuration();
+                    } else if (metric.equals("cost")) {
+                        double dCost = tempEdge.getCost()*100.0;
+                        int iCost = (int) dCost;
+                        neighborMetric = iCost;
+                    } else {
+                        neighborMetric = tempEdge.getDistance();
+                        System.out.println("Error - method DijkstraGraph.setNodesFromGeomodel calls for an invalid\n +" +
+                                "metric.  Metric set to distance.");
+                    }
+                    loopNode.addNeighbor(neighborNode, neighborMetric);
                 }
             }
         }
     }
 
+    public HashMap<Long, Integer> getNearBy(Long destinationId, int maxDistanceOfSecondaryMode) {
+        HashMap<Long, Integer> nearbyNodes = new HashMap<>();
 
+        for (DijkstraNode node : this.nodes) {
+            int distanceToDestination = node.getDistance();
+            if (distanceToDestination <= maxDistanceOfSecondaryMode) {
+                nearbyNodes.put(node.getNodeId(), node.getDistance());
+            }
+        }
+        return nearbyNodes;
+    }
 
-    private DijkstraNode getNodeFromID(Long nodeId) {
+    public DijkstraNode getNodeFromID(Long nodeId) {
         for(DijkstraNode loopNode: nodes){
             if (loopNode.getNodeId().equals(nodeId)){
                 return loopNode;
@@ -57,30 +90,29 @@ public class DijkstraGraph {
 
     // getters and setters
 
-    public DijkstraGraph calculateShortestPathFromSource(Long nodeId) {
-        DijkstraNode source = getNodeFromID(nodeId);
+    private void calculateShortestPathFromSource(Long rootNodeId) {
+        DijkstraNode source = getNodeFromID(rootNodeId);
         source.setDistance(0);
 
-        Set<DijkstraNode> settleDijkstraNodes = new HashSet<>();
-        Set<DijkstraNode> unsettleDijkstraNodes = new HashSet<>();
+        Set<DijkstraNode> settledDijkstraNodes = new HashSet<>();
+        Set<DijkstraNode> unsettledDijkstraNodes = new HashSet<>();
 
-        unsettleDijkstraNodes.add(source);
+        unsettledDijkstraNodes.add(source);
 
-        while (unsettleDijkstraNodes.size() != 0) {
-            DijkstraNode currentNode = getLowestDistanceNode(unsettleDijkstraNodes);
-            unsettleDijkstraNodes.remove(currentNode);
-            for (Map.Entry< DijkstraNode, Integer> adjacencyPair:
+        while (unsettledDijkstraNodes.size() != 0) {
+            DijkstraNode currentNode = getLowestDistanceNode(unsettledDijkstraNodes);
+            unsettledDijkstraNodes.remove(currentNode);
+            for (Map.Entry<DijkstraNode, Integer> adjacencyPair:
                     currentNode.getNeighbors().entrySet()) {
                 DijkstraNode adjacentNode = adjacencyPair.getKey();
                 Integer edgeWeight = adjacencyPair.getValue();
-                if (!settleDijkstraNodes.contains(adjacentNode)) {
+                if (!settledDijkstraNodes.contains(adjacentNode)) {
                     calculateMinimumDistance(adjacentNode, edgeWeight, currentNode);
-                    unsettleDijkstraNodes.add(adjacentNode);
+                    unsettledDijkstraNodes.add(adjacentNode);
                 }
             }
-            settleDijkstraNodes.add(currentNode);
+            settledDijkstraNodes.add(currentNode);
         }
-        return this;
     }
     private static DijkstraNode getLowestDistanceNode(Set< DijkstraNode > unsettleDijkstraNodes) {
         DijkstraNode lowestDistanceNode = null;
@@ -104,4 +136,66 @@ public class DijkstraGraph {
             evaluationNode.setShortestPath(shortestPath);
         }
     }
+
+    // Method to get the LinearRoute from the calculated shortest path
+    public LinearRoute getLinearRoute(Long destinationId) {
+        LinearRoute route = new LinearRoute();
+        DijkstraNode destinationNode = getNodeFromID(destinationId);
+
+        // Traverse the shortest path backwards from destination to source
+        LinkedList<DijkstraNode> path = (LinkedList<DijkstraNode>) destinationNode.getShortestPath();
+        for (DijkstraNode node : path) {
+            // Convert DijkstraNode to LinearWayPoint and add to the route
+            LinearWayPoint wayPoint = convertNodeToWayPoint(node);
+            route.addWaypoint(wayPoint);
+        }
+
+        // Add the destination as the last waypoint
+        route.addWaypoint(convertNodeToWayPoint(destinationNode));
+        return route;
+    }
+
+    // Helper method to convert a DijkstraNode to a LinearWayPoint
+//    public LinearWayPoint convertNodeToWayPoint(DijkstraNode node) {
+//        // Implement the logic to convert a DijkstraNode to a LinearWayPoint
+//        // This might involve fetching more information based on the node's ID or other properties
+//        return new LinearWayPoint(node.getNodeId(), location);
+//    }
+    public LinearWayPoint convertNodeToWayPoint(DijkstraNode node) {
+        // todo DijkstraGraph.convertNodeToWaypoint() may not be functional
+        // Fetch the Location object corresponding to the DijkstraNode
+        Location location = getLocationForNode(node); // Implement this method based on your data model
+
+        // Optional: Determine a waypoint name based on the DijkstraNode
+        String waypointName = getWaypointNameForNode(node); // Implement this method or use a default value
+
+        // Create a LinearWayPoint
+        LinearWayPoint wayPoint = new LinearWayPoint(location, waypointName);
+
+        // Optional: If you need to set an edge to the waypoint
+        Edge edge = getEdgeForNode(node); // Implement this if necessary
+        if (edge != null) {
+            wayPoint.setEdge(edge);
+        }
+
+        return wayPoint;
+    }
+
+    // Placeholder methods for fetching Location, name, and Edge
+    private Location getLocationForNode(DijkstraNode node) {
+        // Implement the logic to get a Location based on the node's ID or properties
+        return new Location(0.0, 0.0);
+    }
+
+    private String getWaypointNameForNode(DijkstraNode node) {
+        // Implement logic to determine waypoint name or return a default value
+        return "Waypoint " + node.getNodeId();
+    }
+
+    private Edge getEdgeForNode(DijkstraNode node) {
+        // todo complete method DijkstraGraph.getEdgeForNode() or delete
+        // Implement logic to get an Edge related to the node, if necessary
+        return null; // or a valid Edge
+    }
+
 }
