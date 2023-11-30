@@ -8,7 +8,7 @@ import java.util.Map;
 public class DijkstraNode {
     private Long nodeId;
     private List<DijkstraNode> shortestPath = new LinkedList<>();
-    private Integer distance = Integer.MAX_VALUE;
+    private Integer distance;
     Map<DijkstraNode, Integer> neighbors = new HashMap<>();
 
 
@@ -16,6 +16,7 @@ public class DijkstraNode {
 
     public DijkstraNode(Long nodeId){
         this.nodeId = nodeId;
+        this.distance = Integer.MAX_VALUE;
     }
 
     public void addNeighbor(DijkstraNode destination, int distance) {

@@ -18,8 +18,7 @@ public class DistanceMatrixApiTest {
 
         DistanceMatrixApi distanceMatrixApi = new DistanceMatrixApi(testGM);
 
-
-        distanceMatrixApi.updateGeoModel("walking");
+        distanceMatrixApi.updateGeoModel("WALKING");
         distanceMatrixApi.getCurrentGeoModel().printGraph();
     }
 
@@ -35,7 +34,7 @@ public class DistanceMatrixApiTest {
         BranchVertex v06 = graph.addVertex(33.8085817,-84.3943387);
 
         DistanceMatrixApi myDM = new DistanceMatrixApi(graph);
-        myDM.updateGeoModel("driving");
+        myDM.updateGeoModel("DRIVING");
         myDM.getCurrentGeoModel().printGraph();
         DataConnection dmdata= new DataConnection();
         dmdata.insertGeomodelData(myDM.getCurrentGeoModel());

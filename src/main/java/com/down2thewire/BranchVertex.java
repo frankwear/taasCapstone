@@ -125,8 +125,8 @@ public class BranchVertex extends Node {
     public void printEdges(){
         Iterator<Edge> edge2Iterator = outgoingEdges.iterator();
         for (Edge edge : outgoingEdges ){
-            System.out.println("Destination: " + edge.getEnd().getId().toString() + "\nMode: " + edge.getMode() +
-                    "\nDistance: " + edge.getDistance());
+            System.out.println("\nDestination: " + edge.getEnd().getDescription() + "  " + edge.getEnd().getId().toString() +
+                    "\nMode: " + edge.getMode() + "  " + edge.getDistance() + " meters");
         }
 //        while (edge2Iterator.hasNext()){
 //            Edge2<Vertex2> tempEdge = edge2Iterator.next();
@@ -207,7 +207,7 @@ public class BranchVertex extends Node {
                 // todo - Set up repetitive lookup to a nexted loop
 
 
-                List<String> modes= Arrays.asList("driving", "bicycling", "transit", "walking");
+                List<String> modes= Arrays.asList("DRIVING", "BICYCLING", "TRANSIT", "WALKING");
 
                 for (String loopMode : modes) {
                     LinearRoute legRoute = tempRequest.getRouteFromApi(legStart, legEnd, loopMode);

@@ -114,9 +114,9 @@ public class RouteIdentifier {
             graph = graphList.get(tempKey);
         } else {
             if (fromOrigin) {
-                graph = new DijkstraGraph(geoModel, routeRequest, mode, metric, routeRequest.originWaypoint.getId());
+                graph = new DijkstraGraph(geoModel, routeRequest, mode, metric, routeRequest.originWaypoint.wayPointID);
             } else {
-                graph = new DijkstraGraph(geoModel, routeRequest, mode, metric, routeRequest.destinationWaypoint.getId());
+                graph = new DijkstraGraph(geoModel, routeRequest, mode, metric, routeRequest.destinationWaypoint.wayPointID);
             }
             addGraph(tempKey, graph);
         }

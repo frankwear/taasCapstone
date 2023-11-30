@@ -2,9 +2,34 @@ package com.down2thewire;
 
 import org.junit.jupiter.api.Test;
 
+
+import java.util.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LinearRouteTest {
+    @Test
+    void treesortTest() {
+        List myTree = new LinkedList<Integer>();
+        myTree.add(4);
+        myTree.add(8);
+        myTree.add(1);
+        myTree.add(5);
+        myTree.add(4);
+//        Comparator comparator = new Comparator() {
+//
+//            public int compare(Integer i1, Integer i2) {
+//                return i1 - i2;
+//            }
+//        };
+        Collections.sort(myTree);
+        System.out.println(myTree.get(0));
+        System.out.println(myTree.get(1));
+        System.out.println(myTree.get(2));
+        System.out.println(myTree.get(3));
+        System.out.println(myTree.get(4));
+    }
+
     @Test
     void AddVertexAndDuplicate(){
     LinearRoute route = new LinearRoute();
