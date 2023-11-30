@@ -2,6 +2,9 @@ package com.down2thewire;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -20,64 +23,70 @@ class TaasApplicationTest {
 
 
     public static void main(String[] args) {
-        TaasApplication userInstance = new TaasApplication();
-        projectDemonstration(userInstance);
+        TaasApplicationTest userInstance = new TaasApplicationTest();
+        System.out.println("Welcome to TaaS" +
+                "\nTransportation as a Service helps you find new ways to get where you want to go.\n\n");
+        int userResponse = userInstance.menu1Input();
+
+        projectDemonstration(userResponse, userInstance);
 //        routesDemo(userInstance);
     }
-    /*    private static RouteRequest userSetup() {  // Todo - remove any usages, then delete
-            UserAccount testUser = new UserAccount("SallyFields");
-            testUser.initializeTransitUser();  // Transit Mode and CHEAP priority
+    public int menu1Input(){
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int userResponse = 0;
+        System.out.println("Welcome to Taas Demonstration Panel.  Select the demonstration mode:\n\n");
+        System.out.println("Options:\n" +
+                "1 - Basic GeoModel From Directions API\n" +
+                "2 - Dijkstra Graph - Basic\n" +
+                "3 - Places API\n" +
+                "4 - Capture User Input in Backend\n" +
+                "5 - Full Places to DistanceMatrix to GeoModel\n" +
+                "ENTER YOUR CHOICE (1-5):  ");
+        try {
+            userResponse = Integer.parseInt(br.readLine());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (NumberFormatException nfe) {
+            System.err.println("Invalid Number.  Enter 1-5");
+        }
+        return userResponse;
+    }
 
-            // Get settings from user account
-            RouteRequest testRR = new RouteRequest();
-            testRR.setModePrefFromAccount(testUser);
-            testRR.setPriority(testUser.getPriority());
-            testRR.setOrigin("Dunwoody Marta Station");
-            testRR.setDestination("Piedmont Atlanta Hospital");
-            return testRR;
-        }  */
     private static UserRouteRequest getUserRequest() {
         UserInterface instanceUI = new UserInterface();
         instanceRR = instanceUI.getRequest();
         return instanceRR;
     }
 
-    private static void projectDemonstration(TaasApplication session){
-        System.out.println("Welcome to Taas Demonstration Panel" +
-                "\nPlease select the demonstration mode:");
-        int selectedDemo = menuDemoOptions();
-        switch(selectedDemo) {
+    private static void projectDemonstration(int userInput, TaasApplicationTest session){
+        switch(userInput) {
 
             // Geomodel From Routes API - original demo
-            case 0:
+            case 1:
                 routesDemo(session);
                 break;
 
                 // Basic Dijkstra Graph
-            case 1:
+            case 2:
                 dijkstraDemo();
                 break;
 
                 // Pulling data from Google APIs for geoModel
-            case 2:
+            case 3:
                 placesDistanceMatrixDemo();
                 break;
 
-                // Identifying a route from a geoModel using Dijkstra
-            case 3:
-//                apiToGeoModelToDijkstraToRouteDemo();
-//                break;
 
                 // Saving and retrieving data from database
-            case 4:
+//            case 4:
 //                databaseDemo();
-                break;
+//                break;
 
                 // User Interface interaction
-            case 5:
+            case 4:
                 captureUserInputInBackend();
                 break;
-            case 6:
+            case 5:
                 fullApiToGeoModelToDijkstraToRouteTest();
                 break;
             default:
@@ -113,7 +122,7 @@ class TaasApplicationTest {
         dTest.myDijkstraTest();
     }
 
-    private static void routesDemo(TaasApplication session){
+    private static void routesDemo(TaasApplicationTest session){
         session.instanceUI = new UserInterface();
         session.instanceRR = session.instanceUI.getRequest();
 
