@@ -182,6 +182,11 @@ button[type="submit"]:hover {
     overflow: hidden;
     z-index: 1;
 }
+#map {
+    height: 400px; /* height  */
+    width: 100%;   /* Using the full width of the  container */
+    margin-top: 20px;
+}
 
 .stylish-dropdown select {
     width: 100%;
