@@ -68,24 +68,12 @@ public class UserInterface {
                 acct.setDrivePref(getIntFromConsole());
 //                System.out.println("\nRideshare");
 //                acct.setRidesharePref(getIntFromConsole());
-                acct.setRidesharePref(0); // todo
-//                System.out.println("\nCar Rental");
-//                acct.setCarRentalPref(getIntFromConsole());
-                acct.setCarRentalPref(0); // todo
-                System.out.println("\nBicycling");
                 acct.setBikePref(getIntFromConsole());
 //                System.out.println("\nScooter");
 //                acct.setScooterPref(getIntFromConsole());
-                acct.setScooterPref(0); // todo
-                System.out.println("\nTransit");
                 acct.setTransitPref(getIntFromConsole());
 //                System.out.println("\nBus");
 //                acct.setBusPref(getIntFromConsole());
-                acct.setBusPref(0); // todo
-//                System.out.println("\nAirplane");
-//                acct.setFlightPref(getIntFromConsole());
-                acct.setFlightPref(0); // todo
-                System.out.println("\n\n");
                 sessionRequest.setModePrefFromAccount(acct);
 
                 // SECTION - Set Enbpoints
@@ -157,7 +145,7 @@ public class UserInterface {
 
         return userAnswer;
     }
-    public int[] loadPreferences(int userOption){
+    public Integer[] loadPreferences(int userOption){
         UserAccount tempUA = new UserAccount();
         switch(userOption) {
             case 1:

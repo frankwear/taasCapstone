@@ -3,6 +3,7 @@ package com.down2thewire;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Objects;
 
 public class LinearRoute {
     LinkedList<LinearWayPoint> wayPointLinkedList;
@@ -14,8 +15,8 @@ public class LinearRoute {
 
     public LinearWayPoint addWaypoint(LinearWayPoint wayPoint){
         if (!wayPointLinkedList.isEmpty()){
-            if (wayPointLinkedList.getLast().getId() == wayPoint.getId()) {
-                wayPointLinkedList.removeLast();
+            if (Objects.equals(wayPointLinkedList.getLast().getWayPointID(), wayPoint.getWayPointID())) {
+                wayPointLinkedList.removeLast();  //todo need to correct prior edge end
             }
         }
         wayPointLinkedList.addLast(wayPoint);
@@ -98,6 +99,12 @@ public class LinearRoute {
         // todo correct code to combine head and tail waypoint to make a single route
 
         // merging tail of first with head of last
+        if (this.wayPointLinkedList.isEmpty()) {
+            this.wayPointLinkedList = g.wayPointLinkedList;
+        }
+        if (g.wayPointLinkedList.isEmpty()) {
+            return;
+        }
         LinearWayPoint tail = this.wayPointLinkedList.get(this.getWaypointListSize()-1);
         LinearWayPoint head = g.getWaypoint(0);
 

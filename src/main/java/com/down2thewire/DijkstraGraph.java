@@ -7,7 +7,7 @@ public class DijkstraGraph {
     private UserRouteRequest routeRequested;
 
 
-    public DijkstraGraph(BranchGeoModel gm, UserRouteRequest request, String mode, String metric, Long rootNodeId){
+    public DijkstraGraph(BranchGeoModel gm, UserRouteRequest request, String mode, String metric, Long rootNodeId) {
         this.routeRequested = request;
         setNodesFromGeoModel(gm, mode, metric);
 //        System.out.println("nodes created.");
@@ -42,17 +42,18 @@ public class DijkstraGraph {
 
             // loop through vertex outgoingEdges and add each to the node
             for (int i = 0; i < edgeListSize; i++) {
-                Edge<BranchVertex> tempEdge = associatedVertex.getEdge(i);
-                if(tempEdge.getMode().equals(mode)) {
+                Edge<BranchVertex> tempEdge = new Edge<>();
+                tempEdge = associatedVertex.getEdge(i);
+                if (tempEdge.getMode().equals(mode)) {
                     BranchVertex tempNeighborVert = tempEdge.getEnd();
                     DijkstraNode neighborNode = vertexToNodeAssn.get(tempNeighborVert);
                     int neighborMetric;
-                    if (metric.equals("distance")){
+                    if (metric.equals("distance")) {
                         neighborMetric = tempEdge.getDistance();
-                    } else if (metric.equals("duration")){
+                    } else if (metric.equals("duration")) {
                         neighborMetric = tempEdge.getDuration();
                     } else if (metric.equals("cost")) {
-                        double dCost = tempEdge.getCost()*100.0;
+                        double dCost = tempEdge.getCost() * 100.0;
                         int iCost = (int) dCost;
                         neighborMetric = iCost;
                     } else {
@@ -79,8 +80,8 @@ public class DijkstraGraph {
     }
 
     public DijkstraNode getNodeFromID(Long nodeId) {
-        for(DijkstraNode loopNode: nodes){
-            if (loopNode.getNodeId().equals(nodeId)){
+        for (DijkstraNode loopNode : nodes) {
+            if (loopNode.getNodeId().equals(nodeId)) {
                 return loopNode;
             }
         }
@@ -102,7 +103,7 @@ public class DijkstraGraph {
         while (unsettledDijkstraNodes.size() != 0) {
             DijkstraNode currentNode = getLowestDistanceNode(unsettledDijkstraNodes);
             unsettledDijkstraNodes.remove(currentNode);
-            for (Map.Entry<DijkstraNode, Integer> adjacencyPair:
+            for (Map.Entry<DijkstraNode, Integer> adjacencyPair :
                     currentNode.getNeighbors().entrySet()) {
                 DijkstraNode adjacentNode = adjacencyPair.getKey();
                 Integer edgeWeight = adjacencyPair.getValue();
@@ -114,10 +115,11 @@ public class DijkstraGraph {
             settledDijkstraNodes.add(currentNode);
         }
     }
-    private static DijkstraNode getLowestDistanceNode(Set< DijkstraNode > unsettleDijkstraNodes) {
+
+    private static DijkstraNode getLowestDistanceNode(Set<DijkstraNode> unsettleDijkstraNodes) {
         DijkstraNode lowestDistanceNode = null;
         int lowestDistance = Integer.MAX_VALUE;
-        for (DijkstraNode node: unsettleDijkstraNodes) {
+        for (DijkstraNode node : unsettleDijkstraNodes) {
             int nodeDistance = node.getDistance();
             if (nodeDistance < lowestDistance) {
                 lowestDistance = nodeDistance;
@@ -126,6 +128,7 @@ public class DijkstraGraph {
         }
         return lowestDistanceNode;
     }
+
     private static void calculateMinimumDistance(DijkstraNode evaluationNode,
                                                  Integer edgeWeight, DijkstraNode sourceNode) {
         Integer sourceDistance = sourceNode.getDistance();
@@ -198,4 +201,14 @@ public class DijkstraGraph {
         return null; // or a valid Edge
     }
 
+    public void printDG() {
+        for (DijkstraNode loopNode : nodes) {
+            System.out.println("\n\nNode ID" + loopNode.getNodeId() + "\n" +
+                    "Path:");
+
+            for (DijkstraNode pointNode : loopNode.getShortestPath()) {
+                System.out.println(pointNode.getNodeId() + "  " + pointNode.getDistance());
+            }
+        }
+    }
 }

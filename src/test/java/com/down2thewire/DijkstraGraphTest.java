@@ -59,7 +59,8 @@ class DijkstraGraphTest {
 //        transitShortestPaths = transitShortestPaths.calculateShortestPathFromSource(v02.getId());
 //        walkingShortestPaths = walkingShortestPaths.calculateShortestPathFromSource(v04.getId());
 
-        graph.printGraph();
+//        graph.printGraph();
+        transitShortestPaths.printDG();
 
         System.out.println("done");
     }

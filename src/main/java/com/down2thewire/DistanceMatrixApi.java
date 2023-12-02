@@ -4,8 +4,6 @@ package com.down2thewire;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.xml.crypto.dsig.keyinfo.KeyValue;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -15,10 +13,8 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class DistanceMatrixApi {
     private BranchGeoModel currentGeography = new BranchGeoModel();
@@ -41,7 +37,7 @@ public class DistanceMatrixApi {
 
         // **** Assume the user wants a complete graph from the Geomodel of 25 or less locations *****//
         this.currentGeography = initialGeography;
-        this.originStrings = initialGeography.getLocationsAsListOfString();
+        this.originStrings = initialGeography.getLocationsAsListOfString();  //todo shouldn't this be by ID?
         this.destinationStrings = this.originStrings;
         this.origin_VertexMap = getHashmap(originStrings);
         this.destination_VertexMap = getHashmap(destinationStrings);
@@ -76,62 +72,81 @@ public class DistanceMatrixApi {
             return;  // end method without continuing.
         }
 
-        // Split the request -small size
-        Integer maxDestinationRows = 100/originStrings.size();
-        if (maxDestinationRows > 25){ maxDestinationRows = 25;}
-        if (maxDestinationRows > destinationStrings.size()) {maxDestinationRows = destinationStrings.size();}
-        for (int i = 0; i < destinationStrings.size(); i = i + maxDestinationRows) {
+        //** Set maximum number of destinations that can be attempted at once **//
+        Integer maxDestinationColsPerCall = destinationStrings.size();  // request limit
+        maxDestinationColsPerCall = Math.min(maxDestinationColsPerCall, 100/originStrings.size());  // Google Limits
+
+
+        // loop through table sections
+        for (int colBlock = 0; colBlock < destinationStrings.size(); colBlock += maxDestinationColsPerCall) {
+
+            //** get a list of destinations for this loop **//
             LinkedList<String> loopDestinations = new LinkedList<>();
-            for (int j = 0; j < maxDestinationRows; j++) {
-                if (i < destinationStrings.size()) {  // to prevent going out of bounds
-                    loopDestinations.addLast(destinationStrings.get(j));
+            for (int colNum = colBlock; colNum < (colBlock+maxDestinationColsPerCall); colNum++) {
+                if (colNum < destinationStrings.size()) {  // to prevent going out of bounds
+                    loopDestinations.addLast(destinationStrings.get(colNum));
                 }
             }
-            String tempOrigins = createStringOfLocations(originStrings);
+
+            //** set up URL and call API **//
+            String tempOriginsString = createStringOfLocations(originStrings);
             String tempDestinationsString = createStringOfLocations(loopDestinations);
-            String urlAsString = createUrlAsString(tempOrigins, tempDestinationsString, mode);
-            URL tempUrl;
+            String urlAsString = createUrlAsString(tempOriginsString, tempDestinationsString, mode);
+            URL loopUrl;
             try {
-                tempUrl = new URL(urlAsString);
+                loopUrl = new URL(urlAsString);
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             }
-            String loopJsonAsString;
+            String loopJsonResultAsString;
 
-
+            //**  Select Data Source and get JSON String  **//
             if(apiKey.isEmpty()){
                 System.out.println("API Key is empty");
-                String tempFileName = "CVSDistanceMatrix" + Integer.toString(i + 1) + ".json";
+                String tempFileName = "CVSDistanceMatrix" + Integer.toString(colBlock + 1) + ".json";
                 try {
-                    loopJsonAsString = readJsonFromFileApi(tempFileName);
+                    loopJsonResultAsString = readJsonFromFileApi(tempFileName);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             } else {
-                loopJsonAsString = getJsonFileAsString(tempUrl);
-
+                loopJsonResultAsString = getJsonFromApiAsString(loopUrl);
             }
-            HashMap<String, Integer>[][] metricsTable = getJsonFileAsTable(loopJsonAsString);
 
-            for (int row = 0; row < originStrings.size(); row++){
-                for (int col = 0; col < destinationStrings.size(); col++) {
-                    Integer edgeDuration = metricsTable[row][col].get("duration");
-                    Integer edgeDistance = metricsTable[row][col].get("distance");
+            //** hashmap of each metricName and value in 2D table **//
+            HashMap<String, Integer>[][] metricsTable = getJsonResultAsTable(loopJsonResultAsString);
+
+            //** loop through table adding edges to each vertex **//
+            int numRows = metricsTable.length;
+            int numCols = metricsTable[0].length;
+
+            for (int row = 0; row < numRows; row++){
+                BranchVertex origVertex = origin_VertexMap.get(originStrings.get(row));
+                for (int col = 0; col < numCols; col++) {
+                    Integer edgeDistance;
+                    Integer edgeDuration;
+                    try {
+                        edgeDuration = metricsTable[row][col].get("duration");
+                        edgeDistance = metricsTable[row][col].get("distance");
+                    } catch (Exception e) {
+                        edgeDuration = Integer.MAX_VALUE;
+                        edgeDistance = Integer.MAX_VALUE;
+                    }
+
                     if (edgeDistance != 0) {
-                        BranchVertex origVertex = origin_VertexMap.get(originStrings.get(col));
                         Edge<BranchVertex> loopEdge = new Edge<>(
                                 origVertex,
-                                destination_VertexMap.get(destinationStrings.get(row)),
+                                destination_VertexMap.get(loopDestinations.get(col)),
                                 mode,
                                 edgeDuration,
                                 0.0d,
                                 edgeDistance);
                         origVertex.addEdge(loopEdge);
                     }
-                  }
                 }
             }
         }
+    }
 
 
 
@@ -165,7 +180,7 @@ public class DistanceMatrixApi {
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             }
-            String loopJsonAsString = getJsonFileAsString(tempUrl);
+            String loopJsonAsString = getJsonFromApiAsString(tempUrl);
             //filename = filename.concat(String.valueOf(k));
             String filename = "src/test/resources/" + baseFilename + k + ".json";
             try {
@@ -244,7 +259,7 @@ public class DistanceMatrixApi {
 //    }
 
 
-    private String getJsonFileAsString(URL url) {
+    private String getJsonFromApiAsString(URL url) {
         URL apiEndpoint = url;
         String jsonText;
         HttpURLConnection connection;
@@ -263,27 +278,29 @@ public class DistanceMatrixApi {
         return jsonText;
     }
 
-    private HashMap<String, Integer>[][] getJsonFileAsTable(String jsonResult) {
-        //GeographicModel apiGm = new GeographicModel();
+    private HashMap<String, Integer>[][] getJsonResultAsTable(String jsonResult) {
+
+        //** Set the size of the table **//
         JSONObject rowsJSONObject = new JSONObject(jsonResult);
         JSONArray rowsJsonArray = rowsJSONObject.getJSONArray("rows");
-        HashMap<String, Integer>[][] metricsTable = new HashMap[25][25];
+        JSONObject tempRow = rowsJsonArray.getJSONObject(0);
+        JSONArray tempRowElements = tempRow.getJSONArray("elements");
+        HashMap<String, Integer>[][] metricsTable = new HashMap[rowsJsonArray.length()][tempRowElements.length()];
+
+
         if (rowsJsonArray.length() > 0) {
+            //** for each row, get the elements **//
             for (int i = 0; i < rowsJsonArray.length(); i++) {
                 JSONObject row = rowsJsonArray.getJSONObject(i);
-                JSONArray elements = row.getJSONArray("elements");
-                for (int j = 0; j < elements.length(); j++) {
-                    metricsTable[i][j] = new HashMap<>();
-                    JSONObject element = elements.getJSONObject(j);
-                    if (element.getJSONObject("distance").getInt("value") > 30) {
-                        metricsTable[i][j].put("distance",element.getJSONObject("distance").getInt("value"));
-                        metricsTable[i][j].put("duration",element.getJSONObject("duration").getInt("value"));
-                    }
-                    else {
-                        metricsTable[i][j].put("distance",0);
-                        metricsTable[i][j].put("duration",0);
-                    }
-                }
+                JSONArray elementArray = row.getJSONArray("elements");
+
+                //** For each element get the metrics **//
+                for (int j = 0; j < elementArray.length(); j++) {
+                    metricsTable[i][j] = new HashMap<>();  //** initialize the element **//
+                    JSONObject element = elementArray.getJSONObject(j);
+                    metricsTable[i][j].put("distance",element.getJSONObject("distance").getInt("value"));
+                    metricsTable[i][j].put("duration",element.getJSONObject("duration").getInt("value"));
+                 }
             }
         }
         return metricsTable;
@@ -297,42 +314,6 @@ public class DistanceMatrixApi {
     }
 
 
-
-
-//****** This is the method working from 9-25 *****//
-//
-//    private void addEdgesToGeoModelFromString(String jsonResult, String mode) {
-//        //GeographicModel apiGm = new GeographicModel();
-//        JSONObject rowsJSONObject = new JSONObject(jsonResult);
-//        JSONArray rowsJsonArray = rowsJSONObject.getJSONArray("rows");
-//
-//        if (rowsJsonArray.length() > 0) {
-//            for (int i = 0; i < rowsJsonArray.length(); i++) {
-//                JSONObject row = rowsJsonArray.getJSONObject(i);
-//                JSONArray elements = row.getJSONArray("elements");
-//                for (int j = 0; j < elements.length(); j++) {
-//                    JSONObject element = elements.getJSONObject(j);
-//                    if (element.getJSONObject("distance").getInt("value") > 30) {
-//                        Edge<BranchVertex> tempEdge = new Edge<>();
-//                        tempEdge.setStart(currentGeography.getVertex(i));
-//                        tempEdge.setEnd(currentGeography.getVertex(j));
-//                        tempEdge.setMode(mode);
-//                        tempEdge.setDuration(element.getJSONObject("duration").getInt("value"));
-//                        tempEdge.setDistance(element.getJSONObject("distance").getInt("value"));
-//                        currentGeography.getVertex(i).addEdge(tempEdge);  //todo - getVertexById or Location
-//
-//                        Edge<BranchVertex> tempEdge1 = new Edge<>();
-//                        tempEdge1.setEnd(currentGeography.getVertex(i));
-//                        tempEdge1.setStart(currentGeography.getVertex(j));
-//                        tempEdge1.setMode(mode);
-//                        tempEdge1.setDuration(element.getJSONObject("duration").getInt("value"));
-//                        tempEdge1.setDistance(element.getJSONObject("distance").getInt("value"));
-//                        currentGeography.getVertex(j).addEdge(tempEdge1);
-//                    }
-//                }
-//            }
-//        }
-//    }
 
     public BranchGeoModel getCurrentGeoModel(){
         return this.currentGeography;
@@ -349,6 +330,9 @@ public class DistanceMatrixApi {
     // reduce coupling
     private String createStringOfLocations(LinkedList<String> locations) {
         String locationString = "";
+        if (locations.size() == 0){
+            return "";
+        }
         for (String loopLocation : locations) {
             locationString = locationString + loopLocation + "|";
         }
@@ -379,14 +363,13 @@ public class DistanceMatrixApi {
             Double latitude = Double.parseDouble(coordinates[0]);
             Double longitude = Double.parseDouble(coordinates[1]);
             Location tempLocation = new Location(latitude, longitude);
-            int vIndex = currentGeography.getVertexIndexById(
-                    tempLocation.generateUniqueID());
+            int vIndex = currentGeography.getVertexIndexById(tempLocation.generateUniqueID());
             if (vIndex == -1){
-                vIndex = currentGeography.getVertexListSize(); //because "index-1"
-                currentGeography.addVertex(latitude, longitude);
+                continue;
+//                vIndex = currentGeography.getVertexListSize();
+//                currentGeography.addVertex(latitude, longitude);
             }
-            BranchVertex loopVertex =
-                    currentGeography.getVertex(vIndex);
+            BranchVertex loopVertex = currentGeography.getVertex(vIndex);
             location_VertexMap.put(loopLocation, loopVertex);
         }
         return location_VertexMap;

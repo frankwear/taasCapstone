@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import com.down2thewire.UserRouteRequest;
 
 @WebServlet(name = "CaptureDataServlet", value = "/CaptureDataServlet")
 public class CaptureDataServlet extends HttpServlet {
@@ -58,6 +59,9 @@ public class CaptureDataServlet extends HttpServlet {
             // Send the JSON response back to the client
             response.setContentType("application/json");
            // response.getWriter().write(json);
+            Integer[] modePref = {walking, bicycling, drive, transit};
+            UserRouteRequest userRouteRequest = new UserRouteRequest(origin, destination, modePref, selectedOption);
+            //todo call userRouteRequest to return the LinkedList<ProposedRoute>
 
         } catch (Exception e) {
             // handle any exception, log an error, or send an error response
