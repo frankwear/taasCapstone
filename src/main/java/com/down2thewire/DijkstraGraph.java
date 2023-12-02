@@ -42,7 +42,8 @@ public class DijkstraGraph {
 
             // loop through vertex outgoingEdges and add each to the node
             for (int i = 0; i < edgeListSize; i++) {
-                Edge<BranchVertex> tempEdge = associatedVertex.getEdge(i);
+                Edge<BranchVertex> tempEdge = new Edge<>();
+                tempEdge = associatedVertex.getEdge(i);
                 if (tempEdge.getMode().equals(mode)) {
                     BranchVertex tempNeighborVert = tempEdge.getEnd();
                     DijkstraNode neighborNode = vertexToNodeAssn.get(tempNeighborVert);

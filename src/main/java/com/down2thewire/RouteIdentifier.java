@@ -82,7 +82,7 @@ public class RouteIdentifier {
         } else {
             LinearRoute route = getRouteToNode(primaryGraph, closestNodeId, primaryMode);
             LinearRoute fromDestination = getRouteToNode(secondaryGraph, closestNodeId, secondaryMode);
-            LinearRoute toDesination = LinearRoute.reverseRoute(fromDestination);
+            LinearRoute toDesination = LinearRoute.reverseRoute(fromDestination);//todo correct spelling
             // todo check edge handling to combine routes
             route.combineRoutes(toDesination);
             return route;
@@ -211,7 +211,7 @@ public class RouteIdentifier {
     }
 
     private int calculateTotalDistance(LinearRoute route) {
-        // Implement the logic to calculate the total distance of a route
+        // todo Implement the logic to calculate the total distance of a route
         // This is a placeholder for the actual calculation
         return 0; // Replace with actual calculation
     }

@@ -77,7 +77,8 @@ public class DistanceMatrixApi {
         maxDestinationColsPerCall = Math.min(maxDestinationColsPerCall, 100/originStrings.size());  // Google Limits
 
 
-        for (int colBlock = 0; colBlock < destinationStrings.size(); colBlock = colBlock + maxDestinationColsPerCall) {
+        // loop through table sections
+        for (int colBlock = 0; colBlock < destinationStrings.size(); colBlock += maxDestinationColsPerCall) {
 
             //** get a list of destinations for this loop **//
             LinkedList<String> loopDestinations = new LinkedList<>();
@@ -88,18 +89,18 @@ public class DistanceMatrixApi {
             }
 
             //** set up URL and call API **//
-            String tempOrigins = createStringOfLocations(originStrings);
+            String tempOriginsString = createStringOfLocations(originStrings);
             String tempDestinationsString = createStringOfLocations(loopDestinations);
-            String urlAsString = createUrlAsString(tempOrigins, tempDestinationsString, mode);
+            String urlAsString = createUrlAsString(tempOriginsString, tempDestinationsString, mode);
             URL loopUrl;
             try {
                 loopUrl = new URL(urlAsString);
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             }
-
             String loopJsonResultAsString;
-            //**  get data as a JSON string  **//
+
+            //**  Select Data Source and get JSON String  **//
             if(apiKey.isEmpty()){
                 System.out.println("API Key is empty");
                 String tempFileName = "CVSDistanceMatrix" + Integer.toString(colBlock + 1) + ".json";
@@ -109,7 +110,7 @@ public class DistanceMatrixApi {
                     throw new RuntimeException(e);
                 }
             } else {
-                loopJsonResultAsString = getJsonFileAsString(loopUrl);
+                loopJsonResultAsString = getJsonFromApiAsString(loopUrl);
             }
 
             //** hashmap of each metricName and value in 2D table **//
@@ -135,17 +136,17 @@ public class DistanceMatrixApi {
                     if (edgeDistance != 0) {
                         Edge<BranchVertex> loopEdge = new Edge<>(
                                 origVertex,
-                                destination_VertexMap.get(destinationStrings.get(col)),
+                                destination_VertexMap.get(loopDestinations.get(col)),
                                 mode,
                                 edgeDuration,
                                 0.0d,
                                 edgeDistance);
                         origVertex.addEdge(loopEdge);
                     }
-                  }
                 }
             }
         }
+    }
 
 
 
@@ -179,7 +180,7 @@ public class DistanceMatrixApi {
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             }
-            String loopJsonAsString = getJsonFileAsString(tempUrl);
+            String loopJsonAsString = getJsonFromApiAsString(tempUrl);
             //filename = filename.concat(String.valueOf(k));
             String filename = "src/test/resources/" + baseFilename + k + ".json";
             try {
@@ -258,7 +259,7 @@ public class DistanceMatrixApi {
 //    }
 
 
-    private String getJsonFileAsString(URL url) {
+    private String getJsonFromApiAsString(URL url) {
         URL apiEndpoint = url;
         String jsonText;
         HttpURLConnection connection;

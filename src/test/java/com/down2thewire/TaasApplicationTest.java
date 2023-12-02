@@ -142,7 +142,7 @@ class TaasApplicationTest {
         HashMap<String, String> myParameters = new HashMap<>();
         myParameters.put("location=", "33.8876001,-84.3142002");
         myParameters.put("&type=", "transit_station");
-        myParameters.put("&radius=", "15840");  //3 miles
+        myParameters.put("&radius=", "13200");  //2.5 miles
 
         // get vertices for nearby transit locations
         BranchGeoModel testGM = PlacesApi.buildPlacesFromApiCall(myParameters);
@@ -169,7 +169,7 @@ class TaasApplicationTest {
 
         // use the RouteIdentifier to find a good route
         RouteIdentifier testRId = new RouteIdentifier(testGM, testRR);
-        LinearRoute testResultingRoute = testRId.getBestRoute("WALKING", "TRANSIT", "distance", 5280);
+        LinearRoute testResultingRoute = testRId.getBestRoute("WALKING", "DRIVING", "distance", 5280);
         System.out.println("\n\n\n\nRESULTING ROUTE\nFROM ORIGIN TO DESTINATION\nUSING TWO MODES OF TRANSPORTATION\n");
         testResultingRoute.printGraph();
     }
