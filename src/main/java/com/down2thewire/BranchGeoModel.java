@@ -187,8 +187,8 @@ public class BranchGeoModel {
         Iterator<BranchVertex> vertexIterator = vertexList.iterator();
         while (vertexIterator.hasNext()) {
             BranchVertex tempVertex = vertexIterator.next();
-            System.out.println("\nName: " + tempVertex.getDescription());
-            System.out.println("Vertex: " + tempVertex.getLongitude() + "  " + tempVertex.getLatitude() + "  " +
+            System.out.println("\n\n     Name: " + tempVertex.getDescription());
+            System.out.println("     Vertex: " + tempVertex.getLongitude() + "  " + tempVertex.getLatitude() + "  " +
                     tempVertex.getId());
             tempVertex.printEdges();
         }

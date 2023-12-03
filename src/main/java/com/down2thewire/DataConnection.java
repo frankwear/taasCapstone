@@ -96,7 +96,7 @@ public class DataConnection {
         }
     }
 
-    public static void retrieveVertexData(Connection connection) {
+    public void retrieveVertexData(Connection connection) {
         try {
             String sql = "SELECT * FROM vertex";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {

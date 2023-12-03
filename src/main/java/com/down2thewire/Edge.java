@@ -42,25 +42,25 @@ public class Edge<T extends Node> {
     static public String getModeFromInt(int i) {
         switch (i) {
             case 0:
-                return "walking";
+                return "WALKING";
             case 1:
-                return "driving";
+                return "BICYCLING";
             case 2:
-                return "rideshare";
+                return "DRIVING";
             case 3:
-                return "carrental";
+                return "TRANSIT";
             case 4:
-                return "bicycling";
+                return "";
             case 5:
-                return "scooter";
+                return "";
             case 6:
-                return "transit";
+                return "";
             case 7:
-                return "bus";
+                return "";
             case 8:
-                return "airplane";
+                return "";
             default:
-                return " ";
+                return "";
         }
     }
 
@@ -108,18 +108,18 @@ public class Edge<T extends Node> {
         }
         switch (this.mode) {
             // Check Google Estimates Duration for Distance give factor of .844 s/m
-            case "walking":
+            case "WALKING":
                 factor = .844D;
                 offset = 0.0D;
                 break;
             // Check Google Estimates Duration for Distance gives factor of .244 s/m
-            case "bicycling":
+            case "BICYCLING":
                 factor = .244D;
                 offset = 250.0D;
                 break;
             // Rough estimate of driving speed varies significantly with traffic, time of day, road type.
             // This is only a rough guideline and has a standard deviation higher than the value.  .06
-            case "driving":
+            case "DRIVING":
                 factor = .06D;
                 offset = 420.0D;
                 break;
@@ -139,11 +139,11 @@ public class Edge<T extends Node> {
         if (this.cost != null && this.cost != 0D) {
             return this.duration;
         }
-        if (this.mode.equals("transit")){
+        if (this.mode.equals("TRANSIT")){
             this.cost = 2.50D;
             return this.cost;
         }
-        if (this.mode.equals("driving")){
+        if (this.mode.equals("DRIVING")){
             // AAA estimates $.64/mile https://newsroom.aaa.com/wp-content/uploads/2021/08/2021-YDC-Brochure-Live.pdf
             // US Tax allows $.655/mile  --> we will use $.65 until updated, or until we find a better way to estimate
             this.cost = .65D * this.distance.doubleValue();
@@ -152,83 +152,6 @@ public class Edge<T extends Node> {
         // walking and bicycling have negligible cash cost
         return 0D;
     }
-
-
-    /*
-    private Double estimateCost() {
-        // Implement your cost estimation logic here
-        return 0.0d;
-    }
-
-}
-
-
-    /*    public <T> Edge2(T start, T end, GNode<T> s, GNode e, String mode, Integer duration, Double cost, Integer distance) {
-        T start1 = new GNode<T>;
-  //      T end = new GNode<T>()
-        this.start = s;
-        this.start = start;
-        this.end = end;
-        this.mode = mode;
-        this.duration = duration;
-        this.distance = distance;
-        this.cost = cost;
-        if (cost == 0.00d) {
-            this.cost = estimateCost(this);
-        }
-    }
-    */
-    /*
-    public <T> GNode getStart() {
-
-        return this.start;
-
-    }
-
-    public T getEnd() {
-
-        return end;
-
-    }
-    public Edge2(){}
-
-    public Vertex getStart() {
-        return start;
-    }
-
-
-
-    public double getCost() {
-        return cost;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public static double estimateCost(Edge e) {
-        switch (e.mode) {
-            case "walking":
-            case "bicycling":
-                return 0.00d;
-            case "driving":
-                return (.90d * e.distance);
-            case "rideshare":
-                return (10.0d + 1.60d * e.distance);
-            case "carrental":
-                return (90.0d + .20 * e.distance);
-            case "scooter":
-                return 1.0d + .39d * e.duration;
-            case "transit":
-            case "bus":
-                return 2.50d;
-            default:
-                return 0.00d;
-        }
-    }
-
-
-*/
 
 
     public Edge clone() {

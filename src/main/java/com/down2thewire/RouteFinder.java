@@ -14,10 +14,10 @@ public class RouteFinder {
         this.localNodes = localNodes;
         this.userRouteRequest = userRouteRequest;
         BranchVertex tempOrigin = new BranchVertex(userRouteRequest.originWaypoint);  //create a vertex from a waypoint
-        tempOrigin = addCloseNeighbors(tempOrigin, 5, "walking");  //todo - loop for all modes?
+        tempOrigin = addCloseNeighbors(tempOrigin, 5, "WALKING");  //todo - loop for all modes?
         this.userRequestOriginVertex = tempOrigin;
         tempOrigin = new BranchVertex(userRouteRequest.destinationWaypoint);
-        tempOrigin = addCloseNeighbors(tempOrigin, 5, "walking");
+        tempOrigin = addCloseNeighbors(tempOrigin, 5, "WALKING");
         this.userRequestDestinationVertex = tempOrigin;
     }
 

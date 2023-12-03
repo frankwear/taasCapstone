@@ -9,16 +9,36 @@ public class UserRouteRequest {
     // 2 means prefer is possible
     // 3 means must - imperative that this mode be used
     // initialize all preferences to "preferred", 2
-    int[] modePref = {2,2,2,2,2,2,2,2,0,0};
+
+    // modePref key:
+    // 0 - walk
+    // 1 - bike
+    // 2 - drive
+    // 3 - transit
+    // todo clean up code in UserRouteRequest
+
+
+    Integer[] modePref = {0,0,0,0};  ///,2,0,2,0,0,0};
     String origin;
     String destination;
     LinearWayPoint originWaypoint;
-
     LinearWayPoint destinationWaypoint;
-
     String priority;  //QUICK, CHEAP, FREE, COMFORTABLE, PERSONALIZED, EASY, EXERCISE
+
     public UserRouteRequest() {
     }
+    public UserRouteRequest(String origin, String destination, Integer[] modePref, String priority){
+        this.origin = origin;
+        this.destination = destination;
+        this.modePref = modePref;
+        this.priority = priority;
+    }
+    public LinkedList<ProposedRoute> submitRequest(){
+        RouteManager routeManager = new RouteManager(this);
+        // todo work with routeManager to start route finding proccess
+        return new LinkedList<ProposedRoute>();
+    }
+
     public void setPriority(String p) {
         this.priority = validatePriority(p);
     }
@@ -39,54 +59,59 @@ public class UserRouteRequest {
     public void setWalkPref(int p) {
         this.modePref[0] = p;
     }
-    public int getDrivePref() {
+
+//    public int getRidesharePref() {
+//        return modePref[2];
+//    }
+//    public void setRidesharePref(int p) {
+//        this.modePref[2] = p;
+//    }
+//    public int getCarRentalPref() {
+//        return modePref[3];
+//    }
+//    public void setCarRentalPref(int p) {
+//        this.modePref[3] = p;
+//    }
+    public int getBikePref() {
         return modePref[1];
     }
-    public void setDrivePref(int p) {
+    public void setBikePref(int p) {
         this.modePref[1] = p;
     }
-    public int getRidesharePref() {
+    public int getDrivePref() {
         return modePref[2];
     }
-    public void setRidesharePref(int p) {
+    public void setDrivePref(int p) {
         this.modePref[2] = p;
     }
-    public int getCarRentalPref() {
+//    public int getScooterPref() {
+//        return modePref[5];
+//    }
+//    public void setScooterPref(int p) {
+//        this.modePref[5] = p;
+//    }
+    public int getTransitPref() {
         return modePref[3];
     }
-    public void setCarRentalPref(int p) {
+    public void setTransitPref(int p) {
         this.modePref[3] = p;
     }
-    public int getBikePref() {
-        return modePref[4];
-    }
-    public void setBikePref(int p) {
-        this.modePref[4] = p;
-    }
-    public int getScooterPref() {
-        return modePref[5];
-    }
-    public void setScooterPref(int p) {
-        this.modePref[5] = p;
-    }
-    public int getTransitPref() {
-        return modePref[6];
-    }
-    public void setTransitPref(int p) {
-        this.modePref[6] = p;
-    }
-    public int getBusPref() {
-        return modePref[7];
-    }
-    public void setBusPref(int p) {
-        this.modePref[7] = p;
-    }
+//    public int getBusPref() {
+//        return modePref[7];
+//    }
+//    public void setBusPref(int p) {
+//        this.modePref[7] = p;
+//    }
     /*
     public void setOriginVertex (Vertex2 v) {this.originWaypoint = v;}
     public Vertex2 getOriginVertex() {return this.originWaypoint;}
     public void setDestinationWaypoint(Vertex2 v) {this.destinationWaypoint = v;}
     public Vertex2 getDestinationWaypoint() {return this.destinationWaypoint;}
 */
+
+    public Integer[] getModePrefAsArray(){
+        return this.modePref;
+    }
     public LinkedList<String> getModePrefAsList(){
 
         LinkedList<String> preferredModes = new LinkedList<>();
@@ -132,8 +157,7 @@ public class UserRouteRequest {
         userT.initializeTransitUser();
         setOrigin("Macys Perimeter Mall Dunwoody");
         setDestination("Piedmont Atlanta Hospital");
-        setBikePref(1);  setBusPref(2);  setDrivePref(0);  setTransitPref(3);  setScooterPref(1);
-        setCarRentalPref(0);  setRidesharePref(0); setWalkPref(1);
+        setBikePref(1); setDrivePref(0); setTransitPref(3); setWalkPref(1);
         setPriority("CHEAP");
     }
     public void setEndsDunwoodyToAmtrak(){

@@ -124,8 +124,11 @@ public class LinearWayPoint extends Node {
         this.edge = newEdge;
     }
 
-    public Long getId() {
+    private Long generateId() {
         return this.location.generateUniqueID();
+    }
+    public Long getWayPointID() {
+        return this.wayPointID;
     }
 
  //   public Edge getOutgoingEdges() {
