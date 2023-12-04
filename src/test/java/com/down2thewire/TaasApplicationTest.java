@@ -38,8 +38,8 @@ class TaasApplicationTest {
         System.out.println("Options:\n" +
                 "1 - Old (Pre-capstone, very different algorithm) Demo from Directions API\n" +
                 "2 - Dijkstra Graph - Basic\n" +
-                "3 - Places API\n" +
-                "4 - Capture User Input in Backend\n" +
+                "3 - Places API\n\n" +
+//                "4 - Capture User Input in Backend\n" +
                 "5 - Full Places to DistanceMatrix to GeoModel\n" +
                 "ENTER YOUR CHOICE (1-5):  ");
         try {
@@ -83,9 +83,9 @@ class TaasApplicationTest {
 //                break;
 
                 // User Interface interaction
-            case 4:
-                captureUserInputInBackend();
-                break;
+//            case 4:
+//                captureUserInputInBackend();
+//                break;
             case 5:
                 fullApiToGeoModelToDijkstraToRouteTest();
                 break;
@@ -100,8 +100,8 @@ class TaasApplicationTest {
         return 0;
     }
 
-    private static void captureUserInputInBackend() {
-    }
+//    private static void captureUserInputInBackend() {
+//    }
 
     private static void databaseDemo() throws SQLException {
         DataConnectionTest dcTest = new DataConnectionTest();
