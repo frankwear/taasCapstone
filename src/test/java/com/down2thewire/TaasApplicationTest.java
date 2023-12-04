@@ -36,10 +36,10 @@ class TaasApplicationTest {
         int userResponse = 0;
         System.out.println("Welcome to Taas Demonstration Panel.  Select the demonstration mode:\n\n");
         System.out.println("Options:\n" +
-                "1 - Basic GeoModel From Directions API\n" +
+                "1 - Old (Pre-capstone, very different algorithm) Demo from Directions API\n" +
                 "2 - Dijkstra Graph - Basic\n" +
-                "3 - Places API\n" +
-                "4 - Capture User Input in Backend\n" +
+                "3 - Places API\n\n" +
+//                "4 - Capture User Input in Backend\n" +
                 "5 - Full Places to DistanceMatrix to GeoModel\n" +
                 "ENTER YOUR CHOICE (1-5):  ");
         try {
@@ -83,9 +83,9 @@ class TaasApplicationTest {
 //                break;
 
                 // User Interface interaction
-            case 4:
-                captureUserInputInBackend();
-                break;
+//            case 4:
+//                captureUserInputInBackend();
+//                break;
             case 5:
                 fullApiToGeoModelToDijkstraToRouteTest();
                 break;
@@ -100,8 +100,8 @@ class TaasApplicationTest {
         return 0;
     }
 
-    private static void captureUserInputInBackend() {
-    }
+//    private static void captureUserInputInBackend() {
+//    }
 
     private static void databaseDemo() throws SQLException {
         DataConnectionTest dcTest = new DataConnectionTest();
@@ -159,7 +159,7 @@ class TaasApplicationTest {
 
         // create a specific request
         BranchVertex originVertex = testGM.getVertex(5);  // for demonstration - no specific reason - at random
-        BranchVertex destinationVertex = testGM.getVertex(13); // at random
+        BranchVertex destinationVertex = testGM.getVertex(1); // at random
         UserRouteRequest testRR = new UserRouteRequest();
         LinearWayPoint originWaypoint = new LinearWayPoint(originVertex.getLocation(), originVertex.getDescription());
         LinearWayPoint destinationWaypoint = new LinearWayPoint(destinationVertex.getLocation(), destinationVertex.getDescription());
@@ -169,7 +169,7 @@ class TaasApplicationTest {
 
         // use the RouteIdentifier to find a good route
         RouteIdentifier testRId = new RouteIdentifier(testGM, testRR);
-        LinearRoute testResultingRoute = testRId.getBestRoute("WALKING", "DRIVING", "distance", 5280);
+        LinearRoute testResultingRoute = testRId.getBestRoute("DRIVING", "WALKING", "distance", 5280);
         System.out.println("\n\n\n\nRESULTING ROUTE\nFROM ORIGIN TO DESTINATION\nUSING TWO MODES OF TRANSPORTATION\n");
         testResultingRoute.printGraph();
     }

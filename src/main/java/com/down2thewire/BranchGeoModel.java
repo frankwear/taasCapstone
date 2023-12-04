@@ -195,40 +195,6 @@ public class BranchGeoModel {
     }
 
 
-    Node addNode(Node node) {
-        return null;
-    }
-
-
-    void removeNode(Node node) {
-
-    }
-
-
-
-    List<Node> find(String s) {
-        return null;
-    }
-
-
-    List<Node> find(Location l) {
-        return null;
-    }
-
-
-    Node findNext(String s) {
-        return null;
-    }
-
-
-    Node findNext(Location l) {
-        return null;
-    }
-
-
-    Node getNextNode(Location l) {
-        return null;
-    }
 
 
 

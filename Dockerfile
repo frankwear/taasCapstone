@@ -1,4 +1,4 @@
-FROM tomcat:latest
+FROM Tomcat:latest
 RUN addgroup taas && adduser --system --ingroup taas taas
 USER taas
 WORKDIR /usr/local/tomcat/webapps

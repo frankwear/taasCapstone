@@ -54,3 +54,5 @@ Application Not Accessible: Verify that Tomcat is running and the WAR file is co
 Additional Notes
 - If you make changes to your Java code, remember to recompile and redeploy the WAR file.
 - For more detailed configuration of your Tomcat server, refer to the official Apache Tomcat documentation.
+- To run the backend demonstration code, go to src/test/java/com/down2thewire/TaasApplicationTest.java and run it.
+- 

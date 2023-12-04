@@ -108,7 +108,7 @@ public class LinearRoute {
         LinearWayPoint tail = this.wayPointLinkedList.get(this.getWaypointListSize()-1);
         LinearWayPoint head = g.getWaypoint(0);
 
-        if (tail.getId().equals(head.getId())){
+        if (tail.getWayPointID().equals(head.getWayPointID())){
             if (this.getWaypointListSize() < 2){
                 this.wayPointLinkedList = g.wayPointLinkedList;
             } else{
