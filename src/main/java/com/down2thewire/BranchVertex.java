@@ -90,7 +90,7 @@ public class BranchVertex extends Node {
 
     static BranchVertex waypointToVertex(LinearWayPoint wayPoint) {
         BranchVertex vertex = new BranchVertex(wayPoint.getLocation());
-        vertex.id = wayPoint.getId();
+        vertex.id = wayPoint.getWayPointID();
         //       vertex.outgoingEdges.add(wayPoint.getEdge());
         vertex.description = wayPoint.getDescription();
         return vertex;
