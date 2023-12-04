@@ -23,6 +23,7 @@ Navigate to the project root directory and run:
 
 mvn clean install
 This command compiles the project and generates a WAR (Web Application Archive) file in the target directory.
+The POM.XML file is included in the project main folder.
 
 Step 3: Configuring Tomcat
 
