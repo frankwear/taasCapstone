@@ -35,7 +35,8 @@ Running the Application
 Starting the Tomcat Server
 
 1) Navigate to the bin directory in your Tomcat installation folder.
-2) Start the Tomcat server:
+2) Start the Tomcat server.
+3) Now add the Tomcat Local to the IDE to create a connection between Frontend and Backend.
 
 For Windows: Run startup.bat.
 For Linux/Mac: Run startup.sh.
