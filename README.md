@@ -56,4 +56,40 @@ Additional Notes
 - If you make changes to your Java code, remember to recompile and redeploy the WAR file.
 - For more detailed configuration of your Tomcat server, refer to the official Apache Tomcat documentation.
 - To run the backend demonstration code, go to src/test/java/com/down2thewire/TaasApplicationTest.java and run it.
-- 
+ 
+#Project README for Postgres
+ 
+##Overview
+ 
+This project involves the development of a JDBC that utilizes a PostgreSQL database. The application manages a graph data structure, comprising vertices and edges, and interacts with the database to store and retrieve graph data.
+
+## Install pgadmin4 to check the database tables records
+
+## Database Setup
+ 
+1. **Database Connection Details:**
+   - JDBC URL: `jdbc:postgresql://localhost:5432/postgres`
+   - Default PostgreSQL port: `5432`
+   - Database name: `postgres`
+ 
+2. **Database Tables:**
+   - `vertex`: Stores information about graph vertices.
+   - `edge`: Stores information about graph edges.
+   - `user_details`: Stores user information.
+   - `user_vertex`: Maps vertices to users.
+ 
+## Running the Application
+ 
+1. **Java Application:**
+   - The Java application connects to the PostgreSQL database to store and retrieve graph data.
+ 
+2. **Vertex and Edge Insertion:**
+   - Vertices and edges are inserted into the database, and duplicates are handled to ensure data integrity.
+ 
+3. **Running the Application:**
+   - The application can be executed to interact with the graph data and PostgreSQL database.
+ 
+## Additional Notes
+ 
+- The project involves testing graph functionality, including adding vertices, edges, and ensuring data consistency.
+- The application is designed to handle unique vertex IDs and prevent duplication of edges.
